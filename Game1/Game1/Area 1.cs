@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
-namespace Game1
+namespace RPGame
 {
     class Area_1
     {
