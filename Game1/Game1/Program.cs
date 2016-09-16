@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Main
+namespace RPGame
 {
 #if WINDOWS || LINUX
     /// <summary>

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
-namespace Main
+namespace RPGame
 {
     /// <summary>
     /// This is the main type for your game.
@@ -28,6 +28,9 @@ namespace Main
             get { return content; }
             set { content = value; }
         }
+
+        GameState theGameState = new GameState();
+        
 
         public Main()
         {
@@ -58,7 +61,7 @@ namespace Main
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            theGameState.LoadContent();
             // TODO: use this.Content to load your game content here
         }
 
@@ -81,6 +84,7 @@ namespace Main
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            theGameState.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
