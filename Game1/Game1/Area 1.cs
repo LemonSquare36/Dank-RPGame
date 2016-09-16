@@ -12,11 +12,9 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
-namespace Main
+namespace Game1
 {
-    class Polygons
+    class Area_1
     {
-       
-        }
     }
 }
