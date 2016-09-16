@@ -64,5 +64,97 @@ namespace RPGame
             get { return collision; }
             set { collision = value; }
         }
+
+        /// <summary>
+        /// Backing Stores for textures.
+        /// </summary>
+        private Texture2D button1, button2;
+
+        /// <summary>
+        /// Set Unpressed Button Texture.
+        /// </summary>
+        public Texture2D UnpressedButton
+        {
+            set { button1 = value; }
+        }
+
+        /// <summary>
+        /// Set Hovered Button Texture.
+        /// </summary>
+        public Texture2D HoveredButton
+        {
+            set { button2 = value; }
+        }
+
+        /// <summary>
+        /// Backing Store for Center of circle.
+        /// </summary>
+        private Vector2 center;
+
+        /// <summary>
+        /// Center of circle.
+        /// </summary>
+        public Vector2 Center
+        {
+            get { return center; }
+            set { center = value; }
+        }
+
+        /// <summary>
+        /// Creates a new button for the menu.
+        /// </summary>
+        /// <param name="position">Position of top left corner.</param>
+        /// <param name="width">Width of button in pixels.</param>
+        /// <param name="height">Height of button in pixels.</param>
+        /// <param name="buttonNum">Number button uses to identify.</param>
+        /// <param name="mouse">Mouse state for detection.</param>
+        /// <param name="buttonNorm">Ordinary button state.</param>
+        /// <param name="buttonHov">Hovered button state.</param>
+        public Button(Vector2 position, int width, int height, int buttonNum, MouseState mouse, Texture2D buttonNorm, Texture2D buttonHov, float windowWidth, float windowHeight) 
+            : this()
+        {
+            center = Vector2.Zero;
+            collision = new Rectangle((int)position.X, (int)position.Y, width, height);
+            mouseState = mouse;
+            button1 = buttonNorm;
+            button2 = buttonHov;
+            bNum = buttonNum;
+            type = ButtonType.Rectangle;
+            this.windowWidth = windowWidth;
+            this.windowHeight = windowHeight;
+        }
+
+        public void Update(MouseState mouse)
+        {
+            mouseState = mouse;
+            switch (type)
+            {
+                case ButtonType.Rectangle:
+                    if (Collision.Contains(mouseState.X, mouseState.Y))
+                    {
+                        button0 = button2;
+                        if (mouseState.LeftButton == ButtonState.Pressed)
+                        {
+                            OnButtonPressed();
+                        }
+                    }
+                    else
+                    {
+                        button0 = button1;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void OnButtonPressed()
+        {
+            if (buttonPressed != null)
+            {
+                buttonPressed(this, EventArgs.Empty);
+            }
+        }
     }
 }
