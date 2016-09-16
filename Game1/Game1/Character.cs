@@ -14,7 +14,8 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    class Character
+    class Character : Polygons
     {
+
     }
 }
