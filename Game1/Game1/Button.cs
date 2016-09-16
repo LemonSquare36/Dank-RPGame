@@ -19,6 +19,7 @@ namespace RPGame
         private enum ButtonType { Rectangle };
         private float diameter { get; set; }
         private float windowWidth { get; set; }
+        private float windowHeight { get; set; }
         private ButtonType type { get; set; }
         private Texture2D button0 { get; set; }
         private event EventHandler buttonPressed;
