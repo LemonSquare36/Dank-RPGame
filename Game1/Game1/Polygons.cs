@@ -17,6 +17,6 @@ namespace RPGame
     class Polygons
     {
        
-        }
+        
     }
 }

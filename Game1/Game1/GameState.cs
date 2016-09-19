@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
+// Loads the Content for the various GameStates and allows the switching between GameStates
 namespace RPGame
 {
     class GameState
@@ -21,7 +22,9 @@ namespace RPGame
         Play GamePlaying;
         Menu menu;
 
+        //The Game States get defined here
         public enum GameStates { Menu, Playing }
+
         private GameStates gameState;
         event EventHandler GameStateChanged;
 
@@ -35,7 +38,7 @@ namespace RPGame
             }
         }
 
-
+        //Loads the Content for The GameStates
         public void LoadContent()
         {
             gameState = GameStates.Menu;
@@ -53,7 +56,7 @@ namespace RPGame
         }
 
 
-
+        //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
             {
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
@@ -71,7 +74,7 @@ namespace RPGame
                     break;
             }
         }
-
+        //Draws the images and textures we use
         public void Draw(SpriteBatch spriteBatch)
         {
 
@@ -85,6 +88,7 @@ namespace RPGame
             }
 
         }
+        //Change the GameState with a button click
         private void ChangeGameState(KeyboardState CurrentKeyBoardState)
         {
             if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
@@ -100,7 +104,7 @@ namespace RPGame
                 }
             }
         }
-
+        //Prevents errors in GameStates
     private void OnGameStateChanged()
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
