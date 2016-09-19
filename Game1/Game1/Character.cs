@@ -16,6 +16,15 @@ namespace RPGame
 {
     class Character : Polygons
     {
+        protected int health;
+        protected int ability;
+        protected int attack;
+        protected int level;
+        protected int xp;
+    }
 
+    private Character(int health, int ability, int attack, int level, int xp)
+    {
+        return (Player1);
     }
 }
