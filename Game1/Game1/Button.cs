@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    class Button
+    /*class Button
     {
         private enum ButtonType { Rectangle };
         private float diameter { get; set; }
@@ -26,7 +26,7 @@ namespace RPGame
 
         public event EventHandler ButtonPressed
         {
-            get
+            add
             {
                 switch (type)
                 {
@@ -36,6 +36,11 @@ namespace RPGame
                         return Vector2.Zero;
                 }
             }
+            remove
+            {
+
+            }
+         
         }
 
         public Texture2D Texture
@@ -50,7 +55,7 @@ namespace RPGame
             get { return bNum; }
         }
 
-        private MouseState mouseState;
+        private MouseState mouseState;    //This figures out what the mouse is doing
 
         /// <summary>
         /// Backing store for Collision.
@@ -125,6 +130,10 @@ namespace RPGame
             this.windowHeight = windowHeight;
         }
 
+        public Button()
+        {
+        }
+
         public void Update(MouseState mouse)
         {
             mouseState = mouse;
@@ -157,5 +166,5 @@ namespace RPGame
                 buttonPressed(this, EventArgs.Empty);
             }
         }
-    }
+    }*/
 }
