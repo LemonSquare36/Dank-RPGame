@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+using System.IO;
+using System.Collections;
 using System.Diagnostics;
 
 // Loads the Content for the various GameStates and allows the switching between GameStates
@@ -17,6 +19,8 @@ namespace RPGame
 {
     class GameState
     {
+        private Hashtable shapeVerts = new Hashtable();
+
         KeyboardState mPreviousKeyboardState;
 
         Play GamePlaying;
@@ -109,6 +113,43 @@ namespace RPGame
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
         }
+
+        //Creates the Shapes of Polygon Class
+        private Polygons CreateShape(string shapeName)
+        {
+            Polygons myPolygon = new Polygons((List<Vector2>)shapeVerts[shapeName]);
+            return myPolygon;
+        }
+
+        private void RetrieveShapes()
+        {
+            StreamReader shapeConfig = new StreamReader("shapeList.txt");
+            string line;
+            string key = null;
+            List<Vector2> verticies = new List<Vector2>();
+            while ((line = shapeConfig.ReadLine()) != null)
+            {
+                try
+                {
+                    string[] VertCords = (line.Split(','));
+                    float xVert = (float)Convert.ToDouble(VertCords[0]);
+                    float yVert = (float)Convert.ToDouble(VertCords[1]);
+                    Vector2 myVector2 = new Vector2(xVert, yVert);
+                    verticies.Add(myVector2);
+
+                }
+                catch
+                {
+                    if (key != null)
+                    {
+                        shapeVerts[key] = verticies;
+                        verticies = new List<Vector2>();
+                    }
+                    key = line;
+                }
+            }
+        }
+
 
     }
 }
