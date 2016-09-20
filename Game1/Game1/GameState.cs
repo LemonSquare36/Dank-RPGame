@@ -53,7 +53,7 @@ namespace RPGame
                     break;
 
                 case GameStates.Menu:
-
+                    MakeShapes();
                     break;
             }
 
@@ -112,6 +112,17 @@ namespace RPGame
     private void OnGameStateChanged()
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        //Make YourShapes Here
+        private void MakeShapes()
+        {
+            RetrieveShapes();
+            Polygons Triangle1 = CreateShape("triangle1");
+            foreach (Vector2 myVector2 in Triangle1.Verticies)
+            {
+                Debug.WriteLine("{0} , {1}", myVector2.X, myVector2.Y);
+            }
         }
 
         //Creates the Shapes of Polygon Class
