@@ -45,15 +45,14 @@ namespace RPGame
         //Loads the Content for The GameStates
         public void LoadContent()
         {
-            gameState = GameStates.Menu;
             switch (gameState)
             {
                 case GameStates.Playing:
-
+                    MakeShapes();
                     break;
 
                 case GameStates.Menu:
-                    MakeShapes();
+                    
                     break;
             }
 
@@ -100,9 +99,10 @@ namespace RPGame
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
+                    LoadContent();
                 }
 
-                if (gameState == GameStates.Playing)
+                else if (gameState == GameStates.Playing)
                 {
                     gameState = GameStates.Menu;
                 }
@@ -119,8 +119,9 @@ namespace RPGame
         {
             RetrieveShapes();
             Polygons Triangle1 = CreateShape("triangle1");
-            foreach (Vector2 myVector2 in Triangle1.Verticies)
+            for (int i = 0; i < Triangle1.getNumVerticies(); i++) 
             {
+                Vector2 myVector2 = Triangle1.getVerticies(i);
                 Debug.WriteLine("{0} , {1}", myVector2.X, myVector2.Y);
             }
         }
@@ -128,7 +129,8 @@ namespace RPGame
         //Creates the Shapes of Polygon Class
         private Polygons CreateShape(string shapeName)
         {
-            Polygons myPolygon = new Polygons((List<Vector2>)shapeVerts[shapeName]);
+            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
+            Polygons myPolygon = new Polygons(NewList);
             return myPolygon;
         }
 
