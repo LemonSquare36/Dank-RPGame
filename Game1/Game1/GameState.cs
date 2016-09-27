@@ -18,14 +18,14 @@ using System.Diagnostics;
 namespace RPGame
 {
     class GameState
-    {
-        private Hashtable shapeVerts = new Hashtable();
+    {    
 
         KeyboardState mPreviousKeyboardState;
-
         Play GamePlaying;
         Menu menu;
+        SpriteBatch spriteBatch;
 
+        Area_1 TriangleLand = new Area_1();
         //The Game States get defined here
         public enum GameStates { Menu, Playing }
 
@@ -43,12 +43,13 @@ namespace RPGame
         }
 
         //Loads the Content for The GameStates
-        public void LoadContent()
+        public void LoadContent(SpriteBatch spriteBatchMain)
         {
+            spriteBatch = spriteBatchMain;
             switch (gameState)
             {
                 case GameStates.Playing:
-                    MakeShapes();
+                    TriangleLand.LoadContent(spriteBatch);
                     break;
 
                 case GameStates.Menu:
@@ -69,7 +70,8 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
-
+                    LoadContent(spriteBatch);
+                    Draw(spriteBatch);
                     break;
 
                 case GameStates.Menu:
@@ -84,6 +86,7 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
+                    TriangleLand.Draw();
                     break;
 
                 case GameStates.Menu:
@@ -99,12 +102,11 @@ namespace RPGame
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
-                    LoadContent();
                 }
 
                 else if (gameState == GameStates.Playing)
                 {
-                    gameState = GameStates.Menu;
+                    gameState = GameStates.Menu;;
                 }
             }
         }
@@ -112,55 +114,6 @@ namespace RPGame
     private void OnGameStateChanged()
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        //Make YourShapes Here
-        private void MakeShapes()
-        {
-            RetrieveShapes();
-            Polygons Triangle1 = CreateShape("triangle1");
-            for (int i = 0; i < Triangle1.getNumVerticies(); i++) 
-            {
-                Vector2 myVector2 = Triangle1.getVerticies(i);
-                Debug.WriteLine("{0} , {1}", myVector2.X, myVector2.Y);
-            }
-        }
-
-        //Creates the Shapes of Polygon Class
-        private Polygons CreateShape(string shapeName)
-        {
-            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
-            Polygons myPolygon = new Polygons(NewList);
-            return myPolygon;
-        }
-
-        private void RetrieveShapes()
-        {
-            StreamReader shapeConfig = new StreamReader("shapeList.txt");
-            string line;
-            string key = null;
-            List<Vector2> verticies = new List<Vector2>();
-            while ((line = shapeConfig.ReadLine()) != null)
-            {
-                try
-                {
-                    string[] VertCords = (line.Split(','));
-                    float xVert = (float)Convert.ToDouble(VertCords[0]);
-                    float yVert = (float)Convert.ToDouble(VertCords[1]);
-                    Vector2 myVector2 = new Vector2(xVert, yVert);
-                    verticies.Add(myVector2);
-
-                }
-                catch
-                {
-                    if (key != null)
-                    {
-                        shapeVerts[key] = verticies;
-                        verticies = new List<Vector2>();
-                    }
-                    key = line;
-                }
-            }
         }
 
 

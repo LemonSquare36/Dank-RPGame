@@ -19,7 +19,7 @@ namespace RPGame
     /// </summary>
     public class Main : Game
     {
-        GraphicsDeviceManager graphics;
+        static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         private static ContentManager content;
@@ -61,7 +61,7 @@ namespace RPGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            theGameState.LoadContent();
+            theGameState.LoadContent(spriteBatch);
             // TODO: use this.Content to load your game content here
         }
 
@@ -96,6 +96,7 @@ namespace RPGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            theGameState.Draw(spriteBatch);
 
             // TODO: Add your drawing code here
 
