@@ -19,19 +19,19 @@ namespace RPGame
         private List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)
         {
-            foreach(Vector2 num in numbers)
-            {
-                Verticies.Add(num);
-            }
+                foreach (Vector2 num in numbers)
+                {
+                    verticies.Add(num);
+                }
         }
-        public List<Vector2> Verticies
-        {
-            get { return Verticies; }
-        }
+
         public Vector2 getVerticies(int vertNumbers)
         {
             return verticies[vertNumbers];
         }
-        
+        public int getNumVerticies()
+        {
+            return verticies.Count;
+        }
     }
 }
