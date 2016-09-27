@@ -57,7 +57,7 @@ namespace RPGame
 
         private MouseState mouseState;    //This figures out what the mouse is doing
 
-        /// <summary>
+        // <summary>
         /// Backing store for Collision.
         /// </summary>
         private Rectangle collision;
