@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    class Menu
+    public class Menu
     {
     }
 }

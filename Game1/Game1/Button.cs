@@ -14,8 +14,65 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    /*class Button
+    class Button
     {
+        private Texture2D buttonImage;
+        private Vector2 position;
+
+
+        public Button(Texture2D texture, Vector2 origin)
+        {
+            buttonImage = texture;
+            position = origin;
+        }
+
+
+        // get x/y lower and upper methods
+       /* public void Update(MouseState mouse)
+        {
+            mouseState = mouse;
+
+
+
+
+
+
+
+
+            switch (type)
+            {
+                case ButtonType.Rectangle:
+                    if (Collision.Contains(mouseState.X, mouseState.Y))
+                    {
+                        button0 = button2;
+                        if (mouseState.LeftButton == ButtonState.Pressed)
+                        {
+                            OnButtonPressed();
+                        }
+                    }
+                    else
+                    {
+                        button0 = button1;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void OnButtonPressed()
+        {
+
+
+
+
+            if (buttonPressed != null)
+            {
+                buttonPressed(this, EventArgs.Empty);
+            }
+        }
+        /*
         private enum ButtonType { Rectangle };
         private float diameter { get; set; }
         private float windowWidth { get; set; }
@@ -129,42 +186,7 @@ namespace RPGame
             this.windowWidth = windowWidth;
             this.windowHeight = windowHeight;
         }
+            */
 
-        public Button()
-        {
-        }
-
-        public void Update(MouseState mouse)
-        {
-            mouseState = mouse;
-            switch (type)
-            {
-                case ButtonType.Rectangle:
-                    if (Collision.Contains(mouseState.X, mouseState.Y))
-                    {
-                        button0 = button2;
-                        if (mouseState.LeftButton == ButtonState.Pressed)
-                        {
-                            OnButtonPressed();
-                        }
-                    }
-                    else
-                    {
-                        button0 = button1;
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        private void OnButtonPressed()
-        {
-            if (buttonPressed != null)
-            {
-                buttonPressed(this, EventArgs.Empty);
-            }
-        }
-    }*/
+    }
 }
