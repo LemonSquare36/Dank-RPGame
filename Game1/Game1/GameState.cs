@@ -70,8 +70,8 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
-                    LoadContent(spriteBatch);
                     Draw(spriteBatch);
+                    TriangleLand.Update();
                     break;
 
                 case GameStates.Menu:
@@ -102,6 +102,7 @@ namespace RPGame
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
+                    LoadContent(spriteBatch);
                 }
 
                 else if (gameState == GameStates.Playing)

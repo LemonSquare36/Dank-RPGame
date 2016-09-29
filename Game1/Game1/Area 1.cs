@@ -25,7 +25,9 @@ namespace RPGame
         Polygons Triangle2;
         Polygons Triangle3;
 
-        
+        Texture2D RedCube;
+        bool Collide;
+
 
         SpriteBatch spriteBatch;
 
@@ -33,22 +35,69 @@ namespace RPGame
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
-            Triangle1.LoadContent();
-            Triangle2.LoadContent();
-            Triangle3.LoadContent();
-            Triangle1.Collision(Triangle2);
+            Triangle1.LoadContent("triangle1");
+            Triangle2.LoadContent("triangle2");
+            Triangle3.LoadContent("triangle3");
+
+            RedCube = Main.GameContent.Load<Texture2D>("Sprites/RedCube");
         }
 
         public void Draw()
         {
             spriteBatch.Begin();
-
-            Triangle1.Draw(spriteBatch, "triangle1");
-            Triangle2.Draw(spriteBatch, "triangle2");
-            Triangle2.Draw(spriteBatch, "triangle3");
+            Triangle1.Draw(spriteBatch);
+            Triangle2.Draw(spriteBatch);
+            Triangle3.Draw(spriteBatch);
+            Triangle1.RealPos();
+            Triangle2.RealPos();
             spriteBatch.End();
         }
+        public void Update()
+        {
+            Triangle1.TriangleMove();
+            Collide = Collision(Triangle1, Triangle2);
+            if (Collide)
+            {
+                Debug.WriteLine("Yes");
+            }
+        }
 
+        public bool Collision(Polygons Shape, Polygons Shape2)
+        {
+            bool collision = true;
+
+            // Y is for the verticies one higher than i; I named it Y since it rhymes with i;
+            int Y = 1;
+            // Z is the same as Y but for Shape2; Named that since it is after Y;
+            int Z = 3;
+
+            for (int i = 3; i < 4/*Shape.getNumVerticies()*/; i++)
+            {
+                if (Y == Shape.getNumVerticies())
+                {
+                    Y = 1;
+                }
+                if (!Shape.Projection(Shape2, new Vector2(Shape.getVerticies(i).X - Shape.getVerticies(Y).X, Shape.getVerticies(i).Y - Shape.getVerticies(Y).Y)))
+                {
+                    collision = false;
+                }
+                Y++;
+            }
+
+          /*  for (int i = 2; i < Shape2.getNumVerticies(); i++)
+            {
+                if (Z == Shape2.getNumVerticies())
+                {
+                    Z = 1;
+                }
+                if (!Shape2.Projection(Shape, new Vector2(Shape2.getVerticies(i).X - Shape2.getVerticies(Z).X, Shape2.getVerticies(i).Y - Shape2.getVerticies(Z).Y)))
+                {
+                    collision = false;
+                }
+                Z++;
+            } */
+            return collision;
+        }
 
         //Make YourShapes Here
         private void MakeShapes()

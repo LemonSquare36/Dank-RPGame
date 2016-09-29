@@ -19,55 +19,116 @@ namespace RPGame
     {
         Texture2D triangle;
 
-        Vector2 Placement;
+        private List<Vector2> realPos = new List<Vector2>();
+
+        private Vector2 Placement;
 
         private List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)
         {
-                foreach (Vector2 num in numbers)
-                {
-                    verticies.Add(num);
-                }
+            foreach (Vector2 num in numbers)
+            {
+                verticies.Add(num);
+            }
+        }
+
+
+        public Vector2 getRealPos(int Index)
+        {
+            Vector2 RP = realPos[Index];
+            return RP;
         }
 
         public List<Vector2> getVerticiesList()
         {
-              return verticies; 
+            return verticies;
         }
-        public Vector2 getVeticies(int vertNumbers)
+        public Vector2 getVerticies(int vertNumber)
         {
-            return verticies[vertNumbers];
+            return verticies[vertNumber];
         }
         public int getNumVerticies()
         {
             return verticies.Count;
         }
 
-        public void LoadContent()
+        public void LoadContent(string ShapeName)
         {
+
+            Placement = SetShapePlacement(ShapeName);
+
             triangle = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
         }
 
-        public void Draw(SpriteBatch spriteBatch, string ShapeName)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            Placement = SetShapePlacement(ShapeName);
             spriteBatch.Draw(triangle, Placement, null, null, verticies[0], 0, null, Color.White);
         }
 
-        public void Collision(Polygons Shape)
+        public void TriangleMove()
         {
-            getRealPos();
+            Placement = new Vector2(Placement.X, Placement.Y + .5f);
         }
-        public void getRealPos()
+
+
+        public bool Projection(Polygons Shape, Vector2 P)
         {
-            int i = 0;
-            List<Vector2> realPos = new List<Vector2>();
+            bool value = true;
+            double minGap = 1;
+            for (int X = 1; X < Shape.getNumVerticies(); X++)
+            {
+                for (int Y = 1; Y < getNumVerticies(); Y++)
+                {
+
+                    Vector2 C = new Vector2();
+                    Vector2 B = new Vector2();
+                    Vector2 A = new Vector2();
+                    float DPa, DPb, DPc;
+                    double gap;
+
+                    RealPos();
+                    Shape.RealPos();
+                    C = new Vector2((getRealPos(0).X - Shape.getRealPos(0).X), (getRealPos(0).Y - Shape.getRealPos(0).Y));
+                    A = new Vector2((getRealPos(0).X - getRealPos(Y).X), (getRealPos(0).Y - Shape.getRealPos(Y).Y));
+                    B = new Vector2((Shape.getRealPos(0).X - Shape.getRealPos(X).X), (Shape.getRealPos(0).Y - Shape.getRealPos(X).Y));
+
+                    P.Normalize();
+
+                    DPa = Vector2.Dot(A, P);
+                    DPb = Vector2.Dot(B, P);
+                    DPc = Vector2.Dot(C, P);
+                    gap = DPc - DPa + DPb;
+                    if (gap < minGap)
+                    {
+                        minGap = gap;
+                    }
+                }
+            }
+
+                if (minGap <= 0)
+                {
+                    value = true;
+                }
+                else if (minGap > 0)
+                {
+                    value = false;
+                }
+                else
+                {
+                    value = false;
+                }
+            return value;
+
+        }
+        public void RealPos()
+        {
+            Vector2 Pos = Placement;
+            List<Vector2> realPosTemp = new List<Vector2>();
             foreach (Vector2 verts in verticies)
             {
-                realPos.Add(Placement += verts);
-                Debug.WriteLine(realPos[i]);
-                i++;
+                realPosTemp.Add(Pos = Placement + verts);
             }
+            realPos = realPosTemp;
         }
 
         private Vector2 SetShapePlacement(string ShapeName)
