@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Sprites\GreenTriangle.png" />
+    <Content Include="Content\Sprites\RedCube.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
