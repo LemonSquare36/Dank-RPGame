@@ -18,7 +18,7 @@ namespace RPGame
     class Polygons
     {
         Texture2D triangle;
-
+        private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
 
         private Vector2 Placement;
@@ -26,6 +26,7 @@ namespace RPGame
         private List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)
         {
+            rotation = 0;
             foreach (Vector2 num in numbers)
             {
                 verticies.Add(num);
@@ -35,8 +36,7 @@ namespace RPGame
 
         public Vector2 getRealPos(int Index)
         {
-            Vector2 RP = realPos[Index];
-            return RP;
+            return realPos[Index];
         }
 
         public List<Vector2> getVerticiesList()
@@ -62,12 +62,17 @@ namespace RPGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(triangle, Placement, null, null, verticies[0], 0, null, Color.White);
+            spriteBatch.Draw(triangle, Placement, null, null, verticies[0], rotation, null, Color.White);
         }
 
         public void TriangleMove()
         {
             Placement = new Vector2(Placement.X, Placement.Y + .5f);
+        }
+
+        public void Rotate(float rotate)
+        {
+            rotation += rotate;
         }
 
 
@@ -89,8 +94,9 @@ namespace RPGame
                     RealPos();
                     Shape.RealPos();
                     C = new Vector2((getRealPos(0).X - Shape.getRealPos(0).X), (getRealPos(0).Y - Shape.getRealPos(0).Y));
-                    A = new Vector2((getRealPos(0).X - getRealPos(Y).X), (getRealPos(0).Y - Shape.getRealPos(Y).Y));
+                    A = new Vector2((getRealPos(0).X - getRealPos(Y).X), (getRealPos(0).Y - getRealPos(Y).Y));
                     B = new Vector2((Shape.getRealPos(0).X - Shape.getRealPos(X).X), (Shape.getRealPos(0).Y - Shape.getRealPos(X).Y));
+
 
                     P.Normalize();
 
@@ -122,11 +128,28 @@ namespace RPGame
         }
         public void RealPos()
         {
-            Vector2 Pos = Placement;
+            Vector2 Pos, vertTemp;
+            float theta = 0;
+            float H, X, Y;
             List<Vector2> realPosTemp = new List<Vector2>();
             foreach (Vector2 verts in verticies)
             {
-                realPosTemp.Add(Pos = Placement + verts);
+                if (verts == getVerticies(0))
+                {
+                    Pos = verts;
+                    realPosTemp.Add(Pos);
+                    continue;
+                }
+                vertTemp.X = verts.X - getVerticies(0).X;
+                vertTemp.Y = verts.Y - getVerticies(0).Y;
+
+                theta = (float)Math.Atan(vertTemp.Y / vertTemp.X);
+                H = (float)(vertTemp.X / Math.Cos(theta));
+                X = (float)(H * Math.Cos(theta + rotation));
+                Y = (float)(H * Math.Sin(theta + rotation));
+                Pos = new Vector2(X + Placement.X, Y + Placement.Y);
+
+                realPosTemp.Add(Pos);
             }
             realPos = realPosTemp;
         }

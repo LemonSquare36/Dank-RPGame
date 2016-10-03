@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
 using System.Collections;
-using System.Diagnostics;
 
 namespace RPGame
 {
@@ -24,10 +23,9 @@ namespace RPGame
         Polygons Triangle1;
         Polygons Triangle2;
         Polygons Triangle3;
-
+        float Rotate = 1;
         Texture2D RedCube;
-        bool Collide;
-
+        
 
         SpriteBatch spriteBatch;
 
@@ -44,21 +42,34 @@ namespace RPGame
 
         public void Draw()
         {
+            Triangle1.RealPos();
+            Triangle2.RealPos();
             spriteBatch.Begin();
             Triangle1.Draw(spriteBatch);
             Triangle2.Draw(spriteBatch);
             Triangle3.Draw(spriteBatch);
-            Triangle1.RealPos();
-            Triangle2.RealPos();
+            spriteBatch.Draw(RedCube, Triangle1.getRealPos(1));
+            spriteBatch.Draw(RedCube, Triangle1.getRealPos(2));
+            spriteBatch.Draw(RedCube, Triangle1.getRealPos(3));
+            spriteBatch.Draw(RedCube, Triangle2.getRealPos(1));
+            spriteBatch.Draw(RedCube, Triangle2.getRealPos(2));
+            spriteBatch.Draw(RedCube, Triangle2.getRealPos(3));
             spriteBatch.End();
         }
         public void Update()
         {
             Triangle1.TriangleMove();
-            Collide = Collision(Triangle1, Triangle2);
+            Triangle1.Rotate(Rotate);
+            Rotate = 0;
+            bool Collide = Collision(Triangle1, Triangle2);
+            //Rotate = Rotate + .01f;
             if (Collide)
             {
                 Debug.WriteLine("Yes");
+            }
+            if (!Collide)
+            {
+                Debug.WriteLine("This makes me anfry");
             }
         }
 
@@ -67,35 +78,36 @@ namespace RPGame
             bool collision = true;
 
             // Y is for the verticies one higher than i; I named it Y since it rhymes with i;
-            int Y = 1;
+            int Y = 2;
             // Z is the same as Y but for Shape2; Named that since it is after Y;
-            int Z = 3;
-
-            for (int i = 3; i < 4/*Shape.getNumVerticies()*/; i++)
+            int Z = 2;
+            Shape.RealPos();
+            Shape2.RealPos();
+            for (int i = 1; i < Shape.getNumVerticies(); i++)
             {
                 if (Y == Shape.getNumVerticies())
                 {
                     Y = 1;
                 }
-                if (!Shape.Projection(Shape2, new Vector2(Shape.getVerticies(i).X - Shape.getVerticies(Y).X, Shape.getVerticies(i).Y - Shape.getVerticies(Y).Y)))
+                if (!Shape.Projection(Shape2, new Vector2(Shape.getRealPos(i).Y - Shape.getRealPos(Y).Y, Shape.getRealPos(Y).X - Shape.getRealPos(i).X)))
                 {
                     collision = false;
                 }
                 Y++;
             }
 
-          /*  for (int i = 2; i < Shape2.getNumVerticies(); i++)
+            for (int i = 1; i < Shape2.getNumVerticies(); i++)
             {
                 if (Z == Shape2.getNumVerticies())
                 {
                     Z = 1;
                 }
-                if (!Shape2.Projection(Shape, new Vector2(Shape2.getVerticies(i).X - Shape2.getVerticies(Z).X, Shape2.getVerticies(i).Y - Shape2.getVerticies(Z).Y)))
+                if (!Shape2.Projection(Shape, new Vector2(Shape2.getRealPos(i).Y - Shape2.getRealPos(Z).Y, Shape2.getRealPos(Z).X - Shape2.getRealPos(i).X)))
                 {
                     collision = false;
                 }
                 Z++;
-            } */
+            } 
             return collision;
         }
 

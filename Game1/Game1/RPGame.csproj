@@ -39,9 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Area 1.cs" />
-    <Compile Include="H:\BPA\Button.cs">
-      <Link>Button.cs</Link>
-    </Compile>
     <Compile Include="Character.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Main.cs" />
