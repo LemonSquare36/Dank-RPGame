@@ -165,7 +165,7 @@ namespace RPGame
 
         private void RetrieveShapes()
         {
-            StreamReader shapeConfig = new StreamReader("shapeList.txt");
+            StreamReader shapeConfig = new StreamReader("Content/shapeList.txt");
             string line;
             string key = null;
             List<Vector2> verticies = new List<Vector2>();

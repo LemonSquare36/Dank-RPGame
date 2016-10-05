@@ -181,7 +181,8 @@ namespace RPGame
 
         private Vector2 SetShapePlacement(string ShapeName)
         {
-            StreamReader PlaceReader = new StreamReader("shapeplace.txt" );
+            StreamReader PlaceReader = new StreamReader("Content/shapeplace.txt");
+
             string line;
             Vector2 Placement = new Vector2();
             while (true)
