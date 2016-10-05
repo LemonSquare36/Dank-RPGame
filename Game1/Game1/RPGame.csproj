@@ -60,8 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\shapeList.txt" />
-    <Content Include="Content\shapeplace.txt" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\RedCube.png" />
