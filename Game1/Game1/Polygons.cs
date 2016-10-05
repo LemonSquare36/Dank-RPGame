@@ -17,6 +17,9 @@ namespace RPGame
 {
     class Polygons
     {
+        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
+
         Texture2D triangle, pentagon;
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
@@ -181,7 +184,7 @@ namespace RPGame
 
         private Vector2 SetShapePlacement(string ShapeName)
         {
-            StreamReader PlaceReader = new StreamReader("Content/shapeplace.txt");
+            var PlaceReader = new StreamReader(filePath);
 
             string line;
             Vector2 Placement = new Vector2();

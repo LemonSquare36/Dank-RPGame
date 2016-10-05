@@ -20,6 +20,9 @@ namespace RPGame
     {
         private static Hashtable shapeVerts = new Hashtable();
 
+        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeList.txt");
+
         Polygons Triangle1;
         Polygons Triangle2;
         Polygons Triangle3;
@@ -165,7 +168,7 @@ namespace RPGame
 
         private void RetrieveShapes()
         {
-            StreamReader shapeConfig = new StreamReader("Content/shapeList.txt");
+            StreamReader shapeConfig = new StreamReader(filePath);
             string line;
             string key = null;
             List<Vector2> verticies = new List<Vector2>();
