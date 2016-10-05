@@ -11,6 +11,6 @@ namespace Game1
     {
         public string LinkType;
         public string LinkID;
-        public Image Image;
+    //    public Image Image;
     }
 }
