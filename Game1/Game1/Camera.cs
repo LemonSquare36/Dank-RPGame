@@ -14,6 +14,7 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 
+
 namespace RPGame
 {
     class Camera
@@ -23,10 +24,11 @@ namespace RPGame
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
         public Vector2 Origin { get; set; }
+        bool Size = true;
 
         public Camera()
         {
-            Zoom = 1;
+            Zoom = 1f;
             Position = Vector2.Zero;
             Rotation = 0;
             Origin = Vector2.Zero;
@@ -61,11 +63,30 @@ namespace RPGame
 
             return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
         }
-        /*public Vector3 GetScreenScale(GraphicsDevice graphicsDevice)
-        {
-            var scaleX = (float)graphicsDevice.Viewport.Width / (float)width;
-            var scaleY = (float)graphicsDevice.Viewport.Height / (float)height;
-            return new Vector3(scaleX, scaleY, 1.0f);
-        }*/
+        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+        { 
+
+            if (CurrentKeyBoardState.IsKeyDown(Keys.F1))
+            {
+                Size = !Size;
+            }
+            if (Size)
+            {
+                graphics.PreferredBackBufferHeight = 600;
+                graphics.PreferredBackBufferWidth = 800;
+            }
+            else if (!Size)
+            {
+                graphics.PreferredBackBufferHeight = graphicsDevice.DisplayMode.Height;
+                graphics.PreferredBackBufferWidth = graphicsDevice.DisplayMode.Width;
+            }
+            graphics.ApplyChanges();
+        }
+        /* public Vector3 GetScreenScale(GraphicsDevice graphicsDevice)
+         {
+             var scaleX = (float)graphicsDevice.Viewport.Width / (float)width;
+             var scaleY = (float)graphicsDevice.Viewport.Height / (float)height;
+             return new Vector3(scaleX, scaleY, 1.0f);
+         }*/
     }
 }

@@ -61,7 +61,7 @@ namespace RPGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            theGameState.LoadContent(spriteBatch, GraphicsDevice);
+            theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics);
             // TODO: use this.Content to load your game content here
         }
 
