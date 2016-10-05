@@ -49,3 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/GreyPentagon.png
 
+#begin shapeList.txt
+/importer:
+/processor:
+/build:shapeList.txt
+
+#begin shapeplace.txt
+/importer:
+/processor:
+/build:shapeplace.txt
+

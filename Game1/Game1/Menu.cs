@@ -16,5 +16,6 @@ namespace RPGame
 {
     public class Menu
     {
+
     }
 }
