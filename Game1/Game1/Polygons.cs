@@ -17,7 +17,7 @@ namespace RPGame
 {
     class Polygons
     {
-        Texture2D triangle;
+        Texture2D triangle, pentagon;
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
 
@@ -52,17 +52,24 @@ namespace RPGame
             return verticies.Count;
         }
 
-        public void LoadContent(string ShapeName)
+        public void LoadContent(string ShapeName, string ShapeImage)
         {
 
             Placement = SetShapePlacement(ShapeName);
-
-            triangle = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
+            if (ShapeImage == "GreenTriangle")
+                triangle = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
+            if (ShapeImage == "GreyPentagon")
+                pentagon = Main.GameContent.Load<Texture2D>("Sprites/GreyPentagon");
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, string ShapeImage)
         {
-            spriteBatch.Draw(triangle, Placement, null, null, verticies[0], rotation, null, Color.White);
+            if (ShapeImage == "GreenTriangle")
+            {
+                spriteBatch.Draw(triangle, Placement, null, null, verticies[0], rotation, null, Color.White);
+            }
+            if (ShapeImage == "GreyPentagon")
+                spriteBatch.Draw(pentagon, Placement, null, null, verticies[0], rotation, null, Color.White);
         }
 
         public void TriangleMove()
@@ -73,6 +80,25 @@ namespace RPGame
         public void Rotate(float rotate)
         {
             rotation += rotate;
+        }
+        public void MoveShape(KeyboardState Key)
+        {
+            if(Key.IsKeyDown(Keys.D))
+            {
+                Placement = new Vector2(Placement.X + 1f, Placement.Y);
+            }
+            if (Key.IsKeyDown(Keys.S))
+            {
+                Placement = new Vector2(Placement.X, Placement.Y + 1f);
+            }
+            if (Key.IsKeyDown(Keys.A))
+            {
+                Placement = new Vector2(Placement.X - 1f, Placement.Y);
+            }
+            if (Key.IsKeyDown(Keys.W))
+            {
+                Placement = new Vector2(Placement.X, Placement.Y - 1f);
+            }
         }
 
 

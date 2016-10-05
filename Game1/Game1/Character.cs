@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-   /* class Character : Polygons
+   /class Character : Polygons
     {
         protected int health;
         protected int ability;
@@ -26,5 +26,5 @@ namespace RPGame
     private Character(int health, int ability, int attack, int level, int xp)
     {
         return (Player1);
-    }*/
+    }
 }

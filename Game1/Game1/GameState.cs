@@ -21,9 +21,10 @@ namespace RPGame
     {    
 
         KeyboardState mPreviousKeyboardState;
-        Play GamePlaying;
-        Menu menu;
         SpriteBatch spriteBatch;
+        GraphicsDevice graphicsDevice;
+
+        Camera camera = new Camera();
 
         Area_1 TriangleLand = new Area_1();
         //The Game States get defined here
@@ -43,9 +44,10 @@ namespace RPGame
         }
 
         //Loads the Content for The GameStates
-        public void LoadContent(SpriteBatch spriteBatchMain)
+        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain)
         {
             spriteBatch = spriteBatchMain;
+            graphicsDevice = graphicsDeviceMain;
             switch (gameState)
             {
                 case GameStates.Playing:
@@ -102,7 +104,7 @@ namespace RPGame
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
-                    LoadContent(spriteBatch);
+                    LoadContent(spriteBatch, graphicsDevice);
                 }
 
                 else if (gameState == GameStates.Playing)

@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Area 1.cs" />
+    <Compile Include="Camera.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Main.cs" />
@@ -60,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Sprites\GreenTriangle.png" />
+    <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\RedCube.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
