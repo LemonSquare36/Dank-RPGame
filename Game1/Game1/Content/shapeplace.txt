@@ -1,0 +1,10 @@
+triangle2
+400,300
+triangle1
+400,-100
+triangle3
+500,600
+pentagon1
+136,39
+pentagon2
+300,300
