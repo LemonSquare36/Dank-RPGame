@@ -150,7 +150,6 @@ namespace RPGame
                     value = false;
                 }
             return value;
-
         }
         public void RealPos()
         {
