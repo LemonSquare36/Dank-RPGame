@@ -17,15 +17,18 @@ namespace RPGame
 {
     class Polygons
     {
+        // FilePath for the ShapeList and ShapePlace
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
-        Texture2D triangle, pentagon;
+        // declaring texture 2D's
+        Texture2D texture;
+
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
 
         private Vector2 Placement;
-
+        //Holds Shapes Verticies
         private List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)
         {
@@ -36,54 +39,50 @@ namespace RPGame
             }
         }
 
-
+        //Get the RealPosition
         public Vector2 getRealPos(int Index)
         {
             return realPos[Index];
         }
-
+        //Gets the list the verticies
         public List<Vector2> getVerticiesList()
         {
             return verticies;
         }
+        //Gets the verticie not in its real position
         public Vector2 getVerticies(int vertNumber)
         {
             return verticies[vertNumber];
         }
+        //Gets how many verticies there are 
         public int getNumVerticies()
         {
             return verticies.Count;
         }
 
+        //Loads the texture 2D's using image name
         public void LoadContent(string ShapeName, string ShapeImage)
         {
 
             Placement = SetShapePlacement(ShapeName);
+
             if (ShapeImage == "GreenTriangle")
-                triangle = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
             if (ShapeImage == "GreyPentagon")
-                pentagon = Main.GameContent.Load<Texture2D>("Sprites/GreyPentagon");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/GreyPentagon");
         }
-
-        public void Draw(SpriteBatch spriteBatch, string ShapeImage)
+        //Draws the Images with current Texture
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (ShapeImage == "GreenTriangle")
-            {
-                spriteBatch.Draw(triangle, Placement, null, null, verticies[0], rotation, null, Color.White);
-            }
-            if (ShapeImage == "GreyPentagon")
-                spriteBatch.Draw(pentagon, Placement, null, null, verticies[0], rotation, null, Color.White);
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
         }
 
-        public void TriangleMove()
-        {
-            Placement = new Vector2(Placement.X, Placement.Y + .5f);
-        }
-
+        //Roatates the Shape
         public void Rotate(float rotate)
         {
             rotation += rotate;
         }
+        //MOve shape with arrow keys
         public void MoveShape(KeyboardState Key)
         {
             if(Key.IsKeyDown(Keys.D))
@@ -104,7 +103,7 @@ namespace RPGame
             }
         }
 
-
+        //Project the shape along its normals to check for gaps (Collision Detection)
         public bool Projection(Polygons Shape, Vector2 P)
         {
             bool value = true;
@@ -154,6 +153,7 @@ namespace RPGame
                 }
             return value;
         }
+        //Find the realPos of the shapes using the images verticies
         public void RealPos()
         {
             Vector2 Pos, vertTemp;
@@ -181,7 +181,7 @@ namespace RPGame
             }
             realPos = realPosTemp;
         }
-
+        //Gets shape Placement from a file
         private Vector2 SetShapePlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(filePath);

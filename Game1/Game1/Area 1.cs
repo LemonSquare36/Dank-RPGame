@@ -53,11 +53,11 @@ namespace RPGame
             Triangle2.RealPos();
             Pentagon1.RealPos();
             Pentagon2.RealPos();
-            Triangle1.Draw(spriteBatch, "GreenTriangle");
-            Triangle2.Draw(spriteBatch, "GreenTriangle");
-            Triangle3.Draw(spriteBatch, "GreenTriangle");
-            Pentagon1.Draw(spriteBatch, "GreyPentagon");
-            Pentagon2.Draw(spriteBatch, "GreyPentagon");
+            Triangle1.Draw(spriteBatch);
+            Triangle2.Draw(spriteBatch);
+            Triangle3.Draw(spriteBatch);
+            Pentagon1.Draw(spriteBatch);
+            Pentagon2.Draw(spriteBatch);
         }
         public void Update()
         {
