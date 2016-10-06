@@ -19,6 +19,7 @@ namespace RPGame
     /// </summary>
     public class Main : Game
     {
+        Menu menu = new Menu();
         static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -49,7 +50,7 @@ namespace RPGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            menu.Initialize();
             base.Initialize();
         }
 
