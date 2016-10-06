@@ -30,7 +30,6 @@ namespace RPGame
         Polygons Pentagon2;
         float Rotate = .02f;
         Texture2D RedCube;
-        Camera camera = new Camera();
         
 
         SpriteBatch spriteBatch;
@@ -54,38 +53,17 @@ namespace RPGame
             Triangle2.RealPos();
             Pentagon1.RealPos();
             Pentagon2.RealPos();
-            var viewMatrix = camera.Transform();
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
             Triangle1.Draw(spriteBatch, "GreenTriangle");
             Triangle2.Draw(spriteBatch, "GreenTriangle");
             Triangle3.Draw(spriteBatch, "GreenTriangle");
             Pentagon1.Draw(spriteBatch, "GreyPentagon");
             Pentagon2.Draw(spriteBatch, "GreyPentagon");
-            /*spriteBatch.Draw(RedCube, Triangle1.getRealPos(1));
-            spriteBatch.Draw(RedCube, Triangle1.getRealPos(2));
-            spriteBatch.Draw(RedCube, Triangle1.getRealPos(3));
-            spriteBatch.Draw(RedCube, Triangle2.getRealPos(1));
-            spriteBatch.Draw(RedCube, Triangle2.getRealPos(2));
-            spriteBatch.Draw(RedCube, Triangle2.getRealPos(3));
-            spriteBatch.Draw(RedCube, Pentagon1.getRealPos(1));
-            spriteBatch.Draw(RedCube, Pentagon1.getRealPos(2));
-            spriteBatch.Draw(RedCube, Pentagon1.getRealPos(3));
-            spriteBatch.Draw(RedCube, Pentagon1.getRealPos(4));
-            spriteBatch.Draw(RedCube, Pentagon1.getRealPos(5));*/
-            spriteBatch.Draw(RedCube, new Vector2(-23, 116));
-            spriteBatch.Draw(RedCube, new Vector2(-38, -45), Color.Black);
-            spriteBatch.Draw(RedCube, new Vector2(0, -143), Color.Gray);
-            spriteBatch.Draw(RedCube, new Vector2(38, -45), Color.DarkBlue);
-            spriteBatch.Draw(RedCube, new Vector2(23, 117), Color.DarkRed);
-            spriteBatch.Draw(RedCube, new Vector2(0, 0));
-            spriteBatch.End();
         }
         public void Update()
         {
             KeyboardState Key = Keyboard.GetState();
             Triangle1.MoveShape(Key);
             Triangle1.Rotate(Rotate);
-            camera.Move(Key);
             bool Collide = Collision(Triangle1, Pentagon1);
             bool Collide2 = Collision(Triangle1, Pentagon2);
             if (Collide)

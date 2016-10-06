@@ -23,8 +23,9 @@ namespace RPGame
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
-
+        GraphicsDeviceManager graphicsManager;
         Camera camera = new Camera();
+
 
         Area_1 TriangleLand = new Area_1();
         //The Game States get defined here
@@ -44,10 +45,11 @@ namespace RPGame
         }
 
         //Loads the Content for The GameStates
-        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain)
+        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain)
         {
             spriteBatch = spriteBatchMain;
             graphicsDevice = graphicsDeviceMain;
+            graphicsManager = graphicsManagerMain;
             switch (gameState)
             {
                 case GameStates.Playing:
@@ -74,6 +76,8 @@ namespace RPGame
                 case GameStates.Playing:
                     Draw(spriteBatch);
                     TriangleLand.Update();
+                    camera.Move(CurrentKeyBoardState);
+                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager, graphicsDevice);
                     break;
 
                 case GameStates.Menu:
@@ -88,7 +92,10 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
+                    var viewMatrix = camera.Transform();
+                    spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
                     TriangleLand.Draw();
+                    spriteBatch.End();
                     break;
 
                 case GameStates.Menu:
@@ -104,7 +111,7 @@ namespace RPGame
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
-                    LoadContent(spriteBatch, graphicsDevice);
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
 
                 else if (gameState == GameStates.Playing)
