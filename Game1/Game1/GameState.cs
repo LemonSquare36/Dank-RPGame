@@ -77,7 +77,7 @@ namespace RPGame
                     Draw(spriteBatch);
                     TriangleLand.Update();
                     camera.Move(CurrentKeyBoardState);
-                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager, graphicsDevice);
+                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
                     break;
 
                 case GameStates.Menu:

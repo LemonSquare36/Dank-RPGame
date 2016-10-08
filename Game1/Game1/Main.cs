@@ -50,7 +50,7 @@ namespace RPGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            menu.Initialize();
+           // menu.Initialize();
             base.Initialize();
         }
 
@@ -86,7 +86,7 @@ namespace RPGame
                 Exit();
             theGameState.Update(gameTime);
             // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 

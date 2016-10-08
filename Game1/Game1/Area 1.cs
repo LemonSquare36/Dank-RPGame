@@ -63,12 +63,13 @@ namespace RPGame
         {
             KeyboardState Key = Keyboard.GetState();
             Triangle1.MoveShape(Key);
-            Triangle1.Rotate(Rotate);
-            bool Collide = Collision(Triangle1, Pentagon1);
-            bool Collide2 = Collision(Triangle1, Pentagon2);
+            //Triangle1.Rotate(Rotate);
+            bool Collide = Collision(Triangle1, Triangle2);
+            bool Collide2 = Collision(Triangle1, Pentagon1);
             if (Collide)
             {
                 Debug.WriteLine("Yes");
+                Triangle1.Rebuff(Rotate, Triangle2);
             }
             else if (!Collide)
             {
@@ -77,6 +78,7 @@ namespace RPGame
             if (Collide2)
             {
                 Debug.WriteLine("Yes");
+                Triangle1.Rebuff(Rotate, Pentagon1);
             }
             else if (!Collide2)
             {

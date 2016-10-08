@@ -67,7 +67,8 @@ namespace RPGame
 
             return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
         }
-        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+
+        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics)
         { 
 
             if (CurrentKeyBoardState.IsKeyDown(Keys.F1))
@@ -77,10 +78,12 @@ namespace RPGame
                 {
                     graphics.PreferredBackBufferHeight = 480;
                     graphics.PreferredBackBufferWidth = 800;
+                    
                 }
                 else if (!Size)
                 {
-                    float aspectRatio = 800f / 480f;
+                    #region Worthless fullscreen code after found the function togglefullscreen. Just showing off my worthless work.
+                    /*float aspectRatio = 800f / 480f;
                     var viewport = graphicsDevice.Viewport;
                     float width = graphicsDevice.DisplayMode.Width;
                     float height = graphicsDevice.DisplayMode.Height;
@@ -92,13 +95,19 @@ namespace RPGame
                         width = (int)(height * aspectRatio + 0.5f);
                     }
                     graphics.PreferredBackBufferHeight = Convert.ToInt32(height);
-                    graphics.PreferredBackBufferWidth = Convert.ToInt32(width);
-                    
+                    graphics.PreferredBackBufferWidth = Convert.ToInt32(width);*/
+                    #endregion
+
+                    graphics.ToggleFullScreen();
                 }
                 graphics.ApplyChanges();
             }
           
         }
 
+        public void Follow()
+        {
+
+        }
     }
 }

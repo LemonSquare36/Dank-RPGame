@@ -26,6 +26,7 @@ namespace RPGame
 
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
+        Vector2 Movement = Vector2.Zero;
 
         private Vector2 Placement;
         //Holds Shapes Verticies
@@ -74,7 +75,7 @@ namespace RPGame
         //Draws the Images with current Texture
         public void Draw(SpriteBatch spriteBatch)
         {
-                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
         }
 
         //Roatates the Shape
@@ -85,22 +86,25 @@ namespace RPGame
         //MOve shape with arrow keys
         public void MoveShape(KeyboardState Key)
         {
-            if(Key.IsKeyDown(Keys.D))
+            Movement = Vector2.Zero;
+
+            if (Key.IsKeyDown(Keys.D))
             {
-                Placement = new Vector2(Placement.X + 1f, Placement.Y);
+                Movement = new Vector2(Movement.X + 1f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.S))
             {
-                Placement = new Vector2(Placement.X, Placement.Y + 1f);
+                Movement = new Vector2(Movement.X, Movement.Y + 1f);
             }
             if (Key.IsKeyDown(Keys.A))
             {
-                Placement = new Vector2(Placement.X - 1f, Placement.Y);
+                Movement = new Vector2(Movement.X - 1f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.W))
             {
-                Placement = new Vector2(Placement.X, Placement.Y - 1f);
+                Movement = new Vector2(Movement.X, Movement.Y - 1f);
             }
+            Placement += Movement;
         }
 
         //Project the shape along its normals to check for gaps (Collision Detection)
@@ -139,18 +143,18 @@ namespace RPGame
                 }
             }
 
-                if (minGap <= 0)
-                {
-                    value = true;
-                }
-                else if (minGap > 0)
-                {
-                    value = false;
-                }
-                else
-                {
-                    value = false;
-                }
+            if (minGap <= 0)
+            {
+                value = true;
+            }
+            else if (minGap > 0)
+            {
+                value = false;
+            }
+            else
+            {
+                value = false;
+            }
             return value;
         }
         //Find the realPos of the shapes using the images verticies
@@ -202,6 +206,32 @@ namespace RPGame
                 }
             }
             return Placement;
+        }
+        //Moves the shape away from collided objects
+        public void Rebuff(float rotate, Polygons Shape)
+        {
+            float Slope;
+            Vector2 Slope1 = new Vector2();
+            Vector2 Slope2 = new Vector2();
+            Vector2 Reflection = new Vector2();
+
+
+            Slope1 = new Vector2(Shape.getVerticies(2).X - Shape.getVerticies(1).X, Shape.getVerticies(2).Y - Shape.getVerticies(1).Y);
+            Slope2 = new Vector2(verticies[2].X - verticies[1].X, verticies[2].Y - verticies[1].Y);
+            Slope = Slope1.Y / Slope1.X;
+            Slope1.Normalize();
+            Reflection = -(Slope1 * Slope2) * (Slope1 - Slope2);
+            Reflection.Normalize();
+            Placement -= Movement;
+
+            if (Slope < 2)
+            {
+                Placement += -(Reflection);
+            }
+            else
+            {
+                Placement += Slope1;
+            }
         }
     }
 }
