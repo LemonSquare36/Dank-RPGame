@@ -224,7 +224,7 @@ namespace RPGame
             Reflection.Normalize();
             Placement -= Movement;
 
-            if (Slope < 2)
+            /*if (Slope < 2)
             {
                 if (Movement )
                 {
@@ -238,7 +238,7 @@ namespace RPGame
             else
             {
                 Placement -= Movement;
-            }
+            }*/
         }
     }
 }
