@@ -226,11 +226,18 @@ namespace RPGame
 
             if (Slope < 2)
             {
-                Placement += -(Reflection);
+                if (Movement )
+                {
+                    Placement -= Slope1;
+                }
+                else if (Key.IsKeyDown(Keys.S))
+                {
+                    Placement += Slope1;
+                }
             }
             else
             {
-                Placement += Slope1;
+                Placement -= Movement;
             }
         }
     }
