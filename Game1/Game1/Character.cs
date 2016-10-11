@@ -16,19 +16,19 @@ namespace RPGame
 {
     class Character
     {
-        KeyboardState charKeyBoardState;
+        List<string> inventory = new List<string> ();
 
-        protected int health = 20;
-        protected int ability = 10;
-        protected int attack = 10;
-        protected int level = 1;
-        protected int xp = 0;
+        public int health = 20;
+        public int ability = 10;
+        public int attack = 10;
+        public int level = 1;
+        public int xp = 0;
 
-        protected Random rand;
+        protected Random rand = new Random();
 
-        private void LevelUp()
+        public void LevelUp()
         {
-            level++;
+            level = level + 1;
             health = health + rand.Next(1, 7);
             ability = ability + rand.Next(1, 7);
             attack = attack + rand.Next(1, 7);
@@ -36,14 +36,17 @@ namespace RPGame
 
         public void Update(GameTime gameTime)
         {
-            if (charKeyBoardState.IsKeyDown(Keys.L))
-            {
-                LevelUp();
-                Debug.WriteLine(health);
-                Debug.WriteLine(ability);
-                Debug.WriteLine(attack);
-                Debug.WriteLine(level);
-            }
+
+        }
+
+        public void Initialize()
+        {
+            inventory.Add("THE MOP");
+            inventory.Add("Spray bottle 1");
+            inventory.Add("Spray bottle 2");
+            inventory.Add("Janitor's armour");
+            inventory.Add("CAUTION: WET FLOOR sign x5");
+            inventory.Add("SUPER SOAP x5");
         }
     }
 }
