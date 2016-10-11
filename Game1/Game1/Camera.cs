@@ -17,9 +17,10 @@ using System.Diagnostics;
 
 namespace RPGame
 {
+
     class Camera
     {
-
+       
         public float Zoom { get; set; }
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
@@ -54,39 +55,59 @@ namespace RPGame
             }
         }
 
-        public Matrix Transform()
+        public Matrix Transform(GraphicsDevice graphicsDevice)
         {
+            var scaleX = (float)graphicsDevice.Viewport.Width / 800;
+            var scaleY = (float)graphicsDevice.Viewport.Height / 480;
+
             var translationMatrix = Matrix.CreateTranslation(new Vector3(Position.X, Position.Y, 0));
             var rotationMatrix = Matrix.CreateRotationZ(Rotation);
-            var scaleMatrix = Matrix.CreateScale(new Vector3(Zoom, Zoom, 1));
+            var scaleMatrix = Matrix.CreateScale(new Vector3(scaleX, scaleY, 1));
             var originMatrix = Matrix.CreateTranslation(new Vector3(Origin.X, Origin.Y, 0));
 
             return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
         }
-        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+
+        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics)
         { 
 
             if (CurrentKeyBoardState.IsKeyDown(Keys.F1))
             {
                 Size = !Size;
+                if (Size)
+                {
+                    graphics.PreferredBackBufferHeight = 480;
+                    graphics.PreferredBackBufferWidth = 800;
+                    
+                }
+                else if (!Size)
+                {
+                    #region Worthless fullscreen code after found the function togglefullscreen. Just showing off my worthless work.
+                    /*float aspectRatio = 800f / 480f;
+                    var viewport = graphicsDevice.Viewport;
+                    float width = graphicsDevice.DisplayMode.Width;
+                    float height = graphicsDevice.DisplayMode.Height;
+
+
+                    if (height > viewport.Height)
+                    {
+                        height = (int)(width / aspectRatio + 0.5f);
+                        width = (int)(height * aspectRatio + 0.5f);
+                    }
+                    graphics.PreferredBackBufferHeight = Convert.ToInt32(height);
+                    graphics.PreferredBackBufferWidth = Convert.ToInt32(width);*/
+                    #endregion
+
+                    graphics.ToggleFullScreen();
+                }
+                graphics.ApplyChanges();
             }
-            if (Size)
-            {
-                graphics.PreferredBackBufferHeight = 600;
-                graphics.PreferredBackBufferWidth = 800;
-            }
-            else if (!Size)
-            {
-                graphics.PreferredBackBufferHeight = graphicsDevice.DisplayMode.Height;
-                graphics.PreferredBackBufferWidth = graphicsDevice.DisplayMode.Width;
-            }
-            graphics.ApplyChanges();
+          
         }
-        /* public Vector3 GetScreenScale(GraphicsDevice graphicsDevice)
-         {
-             var scaleX = (float)graphicsDevice.Viewport.Width / (float)width;
-             var scaleY = (float)graphicsDevice.Viewport.Height / (float)height;
-             return new Vector3(scaleX, scaleY, 1.0f);
-         }*/
+
+        public void Follow()
+        {
+
+        }
     }
 }

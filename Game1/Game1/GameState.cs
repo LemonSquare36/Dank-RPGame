@@ -25,7 +25,7 @@ namespace RPGame
         GraphicsDevice graphicsDevice;
         GraphicsDeviceManager graphicsManager;
         Camera camera = new Camera();
-
+        Vector3 screenScale = Vector3.Zero;
 
         Area_1 TriangleLand = new Area_1();
         //The Game States get defined here
@@ -77,7 +77,7 @@ namespace RPGame
                     Draw(spriteBatch);
                     TriangleLand.Update();
                     camera.Move(CurrentKeyBoardState);
-                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager, graphicsDevice);
+                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
                     break;
 
                 case GameStates.Menu:
@@ -92,12 +92,11 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
-                    var viewMatrix = camera.Transform();
+                    var viewMatrix = camera.Transform(graphicsDevice);
                     spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
                     TriangleLand.Draw();
                     spriteBatch.End();
                     break;
-
                 case GameStates.Menu:
                     break;
             }

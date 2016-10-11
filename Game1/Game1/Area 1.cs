@@ -53,22 +53,23 @@ namespace RPGame
             Triangle2.RealPos();
             Pentagon1.RealPos();
             Pentagon2.RealPos();
-            Triangle1.Draw(spriteBatch, "GreenTriangle");
-            Triangle2.Draw(spriteBatch, "GreenTriangle");
-            Triangle3.Draw(spriteBatch, "GreenTriangle");
-            Pentagon1.Draw(spriteBatch, "GreyPentagon");
-            Pentagon2.Draw(spriteBatch, "GreyPentagon");
+            Triangle1.Draw(spriteBatch);
+            Triangle2.Draw(spriteBatch);
+            Triangle3.Draw(spriteBatch);
+            Pentagon1.Draw(spriteBatch);
+            Pentagon2.Draw(spriteBatch);
         }
         public void Update()
         {
             KeyboardState Key = Keyboard.GetState();
             Triangle1.MoveShape(Key);
-            Triangle1.Rotate(Rotate);
-            bool Collide = Collision(Triangle1, Pentagon1);
-            bool Collide2 = Collision(Triangle1, Pentagon2);
+            //Triangle1.Rotate(Rotate);
+            bool Collide = Collision(Triangle1, Triangle2);
+            bool Collide2 = Collision(Triangle1, Pentagon1);
             if (Collide)
             {
                 Debug.WriteLine("Yes");
+                Triangle1.Rebuff(Rotate, Triangle2);
             }
             else if (!Collide)
             {
@@ -77,6 +78,7 @@ namespace RPGame
             if (Collide2)
             {
                 Debug.WriteLine("Yes");
+                Triangle1.Rebuff(Rotate, Pentagon1);
             }
             else if (!Collide2)
             {
