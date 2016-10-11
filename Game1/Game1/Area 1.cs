@@ -18,6 +18,9 @@ namespace RPGame
 {
     class Area_1
     {
+        Timer levelTimer = new Timer();
+        bool elapsed = true;
+
         private static Hashtable shapeVerts = new Hashtable();
 
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -30,7 +33,9 @@ namespace RPGame
         Polygons Pentagon2;
         float Rotate = .02f;
         Texture2D RedCube;
-        
+
+        Character player1 = new Character();
+
 
         SpriteBatch spriteBatch;
 
@@ -62,6 +67,14 @@ namespace RPGame
         public void Update()
         {
             KeyboardState Key = Keyboard.GetState();
+
+                if (Key.IsKeyDown(Keys.T) == true && elapsed)
+            {
+                levelTimer.Start();
+                levelTimer.Elapsed += levelTimerElapsed;   
+                elapsed = false;  
+            }
+
             Triangle1.MoveShape(Key);
             //Triangle1.Rotate(Rotate);
             bool Collide = Collision(Triangle1, Triangle2);
@@ -82,7 +95,7 @@ namespace RPGame
             }
             else if (!Collide2)
             {
-                Debug.WriteLine("This makes me angry");
+                //Debug.WriteLine("This makes me angry");
             }
         }
 
@@ -96,7 +109,7 @@ namespace RPGame
             int Z = 2;
             Shape.RealPos();
             Shape2.RealPos();
-           for (int i = 1; i < Shape.getNumVerticies(); i++)
+            for (int i = 1; i < Shape.getNumVerticies(); i++)
             {
                 if (Y == Shape.getNumVerticies())
                 {
@@ -120,7 +133,7 @@ namespace RPGame
                     collision = false;
                 }
                 Z++;
-            } 
+            }
             return collision;
         }
 
@@ -173,6 +186,18 @@ namespace RPGame
                     key = line;
                 }
             }
+        }
+
+        private void levelTimerElapsed(object sender, EventArgs e)
+        {
+            elapsed = true;
+            levelTimer.Stop();
+            Debug.WriteLine(player1.health);
+            Debug.WriteLine(player1.ability);
+            Debug.WriteLine(player1.attack);
+            Debug.WriteLine(player1.level);
+            levelTimer.Interval = 10000;
+            levelTimer.Start();
         }
     }
 }
