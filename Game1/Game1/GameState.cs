@@ -62,7 +62,6 @@ namespace RPGame
 
         }
 
-
         //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
             {
