@@ -34,12 +34,7 @@ namespace RPGame
             attack = attack + rand.Next(1, 7);
         }
 
-        public void Update(GameTime gameTime)
-        {
-
-        }
-
-        public void Initialize()
+        public void LoadSave()
         {
             inventory.Add("THE MOP");
             inventory.Add("Spray bottle 1");

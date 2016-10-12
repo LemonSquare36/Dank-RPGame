@@ -42,7 +42,6 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="GameState.cs" />
-    <Compile Include="Inventory.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs" />
