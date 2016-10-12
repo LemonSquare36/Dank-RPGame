@@ -215,7 +215,7 @@ namespace RPGame
             Vector2 Slope2 = new Vector2();
             Vector2 Reflection = new Vector2();
 
-            Slope1 = new Vector2(Shape.getVerticies(2).X - Shape.getVerticies(1).X, Shape.getVerticies(2).Y - Shape.getVerticies(1).X);
+            Slope1 = new Vector2(Shape.getVerticies(2).X - Shape.getVerticies(1).X, Shape.getVerticies(2).Y - Shape.getVerticies(1).X); 
             Slope2 = new Vector2(verticies[2].X - verticies[1].X, verticies[2].Y - verticies[1].Y);
             Slope = Slope1.Y / Slope1.X;
             Slope1.Normalize();
