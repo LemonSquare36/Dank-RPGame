@@ -11,38 +11,50 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
+using System.IO;
 
 namespace RPGame
 {
     class Character
     {
-        KeyboardState charKeyBoardState;
+        List<string> inventory = new List<string> ();
 
-        protected int health = 20;
-        protected int ability = 10;
-        protected int attack = 10;
-        protected int level = 1;
-        protected int xp = 0;
+        public int health = 20;
+        public int ability = 10;
+        public int attack = 10;
+        public int level = 1;
+        public int xp = 0;
 
-        protected Random rand;
+        protected Random rand = new Random();
 
-        private void LevelUp()
+        public void LevelUp()
         {
-            level++;
+            level = level + 1;
             health = health + rand.Next(1, 7);
             ability = ability + rand.Next(1, 7);
             attack = attack + rand.Next(1, 7);
         }
 
-        public void Update(GameTime gameTime)
+        public void LoadSave(string CharacterName)
         {
-            if (charKeyBoardState.IsKeyDown(Keys.L))
+            StreamReader CharacterReader = new StreamReader("CharacterSave.txt");
+            string line;
+
+            while (true)
             {
-                LevelUp();
-                Debug.WriteLine(health);
-                Debug.WriteLine(ability);
-                Debug.WriteLine(attack);
-                Debug.WriteLine(level);
+                line = CharacterReader.ReadLine();
+                inventory.Add(line);
+                Debug.WriteLine(inventory);
+            }
+        }
+
+        public void Save(string ChracterName)
+        {
+            StreamWriter CharacterWriter = new StreamWriter("CharacterSave.txt");
+
+            while (true)
+            {
+                CharacterWriter.WriteLine(inventory);
             }
         }
     }

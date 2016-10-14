@@ -18,8 +18,7 @@ using System.Diagnostics;
 namespace RPGame
 {
     class GameState
-    {    
-
+    {
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
@@ -64,7 +63,6 @@ namespace RPGame
 
         }
 
-
         //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
             {
@@ -105,8 +103,8 @@ namespace RPGame
         }
         //Change the GameState with a button click
         private void ChangeGameState(KeyboardState CurrentKeyBoardState)
-        {
-            if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
+        {   
+                if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
             {
                 if (gameState == GameStates.Menu)
                 {
