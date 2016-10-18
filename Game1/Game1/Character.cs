@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
+using System.IO;
 
 namespace RPGame
 {
@@ -34,14 +35,27 @@ namespace RPGame
             attack = attack + rand.Next(1, 7);
         }
 
-        public void LoadSave()
+        public void LoadSave(string CharacterName)
         {
-            inventory.Add("THE MOP");
-            inventory.Add("Spray bottle 1");
-            inventory.Add("Spray bottle 2");
-            inventory.Add("Janitor's armour");
-            inventory.Add("CAUTION: WET FLOOR sign x5");
-            inventory.Add("SUPER SOAP x5");
+            StreamReader CharacterReader = new StreamReader("CharacterSave.txt");
+            string line;
+
+            while (true)
+            {
+                line = CharacterReader.ReadLine();
+                inventory.Add(line);
+                Debug.WriteLine(inventory);
+            }
+        }
+
+        public void Save(string ChracterName)
+        {
+            StreamWriter CharacterWriter = new StreamWriter("CharacterSave.txt");
+
+            while (true)
+            {
+                CharacterWriter.WriteLine(inventory);
+            }
         }
     }
 }

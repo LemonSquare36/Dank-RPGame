@@ -27,6 +27,7 @@ namespace RPGame
         Vector3 screenScale = Vector3.Zero;
 
         Area_1 TriangleLand = new Area_1();
+        Button ButtonLand = new Button();
         //The Game States get defined here
         public enum GameStates { Menu, Playing }
 
@@ -56,12 +57,11 @@ namespace RPGame
                     break;
 
                 case GameStates.Menu:
-                    
+                    Button.LoadContent(spriteBatch)
                     break;
             }
 
         }
-
 
         //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
