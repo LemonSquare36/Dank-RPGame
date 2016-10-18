@@ -27,6 +27,7 @@ namespace RPGame
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
         Vector2 Movement = Vector2.Zero;
+        Vector2 OldPosition = new Vector2();
 
         private Vector2 Placement;
         //Holds Shapes Verticies
@@ -59,6 +60,10 @@ namespace RPGame
         public int getNumVerticies()
         {
             return verticies.Count;
+        }
+        public List<Vector2> getRealPosList()
+        {
+            return realPos;
         }
 
         //Loads the texture 2D's using image name
@@ -104,11 +109,12 @@ namespace RPGame
             {
                 Movement = new Vector2(Movement.X, Movement.Y - 1f);
             }
+            OldPosition = Placement;
             Placement += Movement;
         }
 
         //Project the shape along its normals to check for gaps (Collision Detection)
-        public bool Projection(Polygons Shape, Vector2 P)
+        public bool Projection(Polygons Shape, Vector2 P, ref double trueGap)
         {
             bool value = true;
             double minGap = 1;
@@ -123,8 +129,7 @@ namespace RPGame
                     float DPa, DPb, DPc;
                     double gap;
 
-                    RealPos();
-                    Shape.RealPos();
+
                     C = new Vector2((getRealPos(0).X - Shape.getRealPos(0).X), (getRealPos(0).Y - Shape.getRealPos(0).Y));
                     A = new Vector2((getRealPos(0).X - getRealPos(Y).X), (getRealPos(0).Y - getRealPos(Y).Y));
                     B = new Vector2((Shape.getRealPos(0).X - Shape.getRealPos(X).X), (Shape.getRealPos(0).Y - Shape.getRealPos(X).Y));
@@ -139,6 +144,10 @@ namespace RPGame
                     if (gap < minGap)
                     {
                         minGap = gap;
+                    }
+                    if (minGap <= 0 && minGap > trueGap)
+                    {
+                        trueGap = minGap;
                     }
                 }
             }
@@ -156,6 +165,11 @@ namespace RPGame
                 value = false;
             }
             return value;
+        }
+        // returns the Normal Vector of a Line
+        public Vector2 NormalVector(int Vert1, int Vert2)
+        {
+            return new Vector2(getRealPos(Vert1).Y - getRealPos(Vert2).Y, -(getRealPos(Vert1).X - getRealPos(Vert2).X));
         }
         //Find the realPos of the shapes using the images verticies
         public void RealPos()
@@ -207,31 +221,123 @@ namespace RPGame
             }
             return Placement;
         }
+
+        public bool CrossProduct(Vector2 A, Vector2 B, Vector2 C)
+        {
+            float crossProduct;
+            float dotProduct;
+            double baSquared;
+
+            crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
+            if (Math.Abs(crossProduct) > 150)
+                return false;
+
+            dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
+            if (dotProduct < -150)
+                return false;
+
+            baSquared = Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2);
+            if (dotProduct > (float)baSquared + 150)
+                return false;
+
+            return true;
+        }
+
         //Moves the shape away from collided objects
-        public void Rebuff(float rotate, Polygons Shape)
+        public void Rebuff(float rotate, Polygons Shape, float trueGap)
         {
             float Slope;
             Vector2 Slope1 = new Vector2();
-            Vector2 Slope2 = new Vector2();
-            Vector2 Reflection = new Vector2();
+            bool Positive = true;
+            bool isBetween = false;
 
-            Slope1 = new Vector2(Shape.getVerticies(2).X - Shape.getVerticies(1).X, Shape.getVerticies(2).Y - Shape.getVerticies(1).X); 
-            Slope2 = new Vector2(verticies[2].X - verticies[1].X, verticies[2].Y - verticies[1].Y);
-            Slope = Slope1.Y / Slope1.X;
-            Slope1.Normalize();
-            Reflection = -(Slope1 * Slope2) * (Slope1 - Slope2);
-            Reflection.Normalize();
-            Placement -= Movement;
+            foreach (Vector2 verts in getRealPosList())
+            {
+                for (int A = 1; A < Shape.getNumVerticies(); A++)
+                {
+                    int B = A + 1;
+                    if (B == Shape.getNumVerticies())
+                    {
+                        B = 1;
+                    }
 
-            if (Slope < 2)
-            {
-                Placement += Reflection;
-            }
-            else
-            {
-                Placement += Slope1;
+                    bool hole = false;
+
+                    if (isBetween)
+                    {
+                        isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
+                        if (isBetween)
+                        {
+                            hole = true;
+                        }
+                    }
+                    isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
+
+                    if (isBetween)
+                    {
+
+                        if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
+                        {
+                            Positive = false;
+                            Placement = OldPosition;
+                        }
+                        else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
+                        {
+                            Positive = false;
+                            Placement = OldPosition;
+                        }
+
+
+                        Slope1 = new Vector2(Shape.getRealPos(B).X - Shape.getRealPos(A).X, Shape.getRealPos(B).Y - Shape.getRealPos(A).Y);
+                        Slope = Slope1.Y / Slope1.X;
+                        Slope1.Normalize();
+
+                        Placement -= Movement;
+                        Placement = OldPosition;
+
+                        if (!hole)
+                        {
+                            if (Slope < 2 && Positive == true)
+                            {
+                                if (Movement.X < 0 && Movement.Y > 0)
+                                {
+                                    Placement = new Vector2(Placement.X + Slope, Placement.Y + Slope);
+                                }
+                                else if (Movement.X < 0)
+                                {
+                                    Placement = new Vector2(Placement.X, Placement.Y - Slope);
+                                }
+
+                                if (Movement.X > 0)
+                                {
+                                    Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
+                                }
+                            }
+
+
+                            if (Slope < 2 && Positive == false)
+                            {
+                                if (Movement.X > 0 && Movement.Y > 0)
+                                {
+                                    Placement = new Vector2(Placement.X + Slope, Placement.Y - Slope);
+                                }
+                                else if (Movement.X > 0)
+                                {
+                                    Placement = new Vector2(Placement.X, Placement.Y + Slope);
+                                }
+                                 if (Movement.X < 0)
+                                {
+
+                                    Placement = new Vector2(Placement.X, Placement.Y - (Slope * 2));
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 }
+
+
 

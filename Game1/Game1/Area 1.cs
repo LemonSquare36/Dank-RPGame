@@ -21,6 +21,8 @@ namespace RPGame
         Timer levelTimer = new Timer();
         bool elapsed = true;
 
+        double trueGap;
+
         private static Hashtable shapeVerts = new Hashtable();
 
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -75,14 +77,14 @@ namespace RPGame
                 elapsed = false;  
             }
 
-            Triangle1.MoveShape(Key);
+            
             //Triangle1.Rotate(Rotate);
             bool Collide = Collision(Triangle1, Triangle2);
             bool Collide2 = Collision(Triangle1, Pentagon1);
             if (Collide)
             {
                 Debug.WriteLine("Yes");
-                Triangle1.Rebuff(Rotate, Triangle2);
+                //Triangle1.Rebuff(Rotate, Triangle2, (float)trueGap);
             }
             else if (!Collide)
             {
@@ -91,12 +93,13 @@ namespace RPGame
             if (Collide2)
             {
                 Debug.WriteLine("Yes");
-                Triangle1.Rebuff(Rotate, Pentagon1);
+                Triangle1.Rebuff(Rotate, Pentagon1, (float)trueGap);
             }
             else if (!Collide2)
             {
                 //Debug.WriteLine("This makes me angry");
             }
+            Triangle1.MoveShape(Key);
         }
 
         public bool Collision(Polygons Shape, Polygons Shape2)
@@ -107,15 +110,14 @@ namespace RPGame
             int Y = 2;
             // Z is the same as Y but for Shape2; Named that since it is after Y;
             int Z = 2;
-            Shape.RealPos();
-            Shape2.RealPos();
+
             for (int i = 1; i < Shape.getNumVerticies(); i++)
             {
                 if (Y == Shape.getNumVerticies())
                 {
                     Y = 1;
                 }
-                if (!Shape.Projection(Shape2, new Vector2(Shape.getRealPos(i).Y - Shape.getRealPos(Y).Y, -(Shape.getRealPos(i).X - Shape.getRealPos(Y).X))))
+                if (!Shape.Projection(Shape2, Shape.NormalVector(i, Y), ref trueGap))
                 {
                     collision = false;
                 }
@@ -128,7 +130,7 @@ namespace RPGame
                 {
                     Z = 1;
                 }
-                if (!Shape2.Projection(Shape, new Vector2(Shape2.getRealPos(i).Y - Shape2.getRealPos(Z).Y, -(Shape2.getRealPos(i).X - Shape2.getRealPos(Z).X))))
+                if (!Shape2.Projection(Shape, Shape2.NormalVector(i, Z), ref trueGap))
                 {
                     collision = false;
                 }
