@@ -8,3 +8,5 @@ pentagon1
 136,39
 pentagon2
 300,300
+floor1
+400, 250

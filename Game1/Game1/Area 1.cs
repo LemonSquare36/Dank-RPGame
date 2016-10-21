@@ -33,6 +33,7 @@ namespace RPGame
         Polygons Triangle3;
         Polygons Pentagon1;
         Polygons Pentagon2;
+        Polygons Floor1;
         float Rotate = .02f;
         Texture2D RedCube;
 
@@ -50,7 +51,7 @@ namespace RPGame
             Triangle3.LoadContent("triangle3", "GreenTriangle");
             Pentagon1.LoadContent("pentagon1", "GreyPentagon");
             Pentagon2.LoadContent("pentagon2", "GreyPentagon");
-
+            Floor1.LoadContent("floor1", "Floor");
             RedCube = Main.GameContent.Load<Texture2D>("Sprites/RedCube");
         }
 
@@ -60,11 +61,13 @@ namespace RPGame
             Triangle2.RealPos();
             Pentagon1.RealPos();
             Pentagon2.RealPos();
+            Floor1.RealPos();
             Triangle1.Draw(spriteBatch);
-            Triangle2.Draw(spriteBatch);
-            Triangle3.Draw(spriteBatch);
+            //Triangle2.Draw(spriteBatch);
+            //Triangle3.Draw(spriteBatch);
             Pentagon1.Draw(spriteBatch);
-            Pentagon2.Draw(spriteBatch);
+            //Pentagon2.Draw(spriteBatch);
+            Floor1.Draw(spriteBatch);
         }
         public void Update()
         {
@@ -84,20 +87,12 @@ namespace RPGame
             if (Collide)
             {
                 Debug.WriteLine("Yes");
-                //Triangle1.Rebuff(Rotate, Triangle2, (float)trueGap);
-            }
-            else if (!Collide)
-            {
-                //Debug.WriteLine("This makes me angry");
+                //Triangle1.Rebuff(Triangle2);
             }
             if (Collide2)
             {
                 Debug.WriteLine("Yes");
-                Triangle1.Rebuff(Rotate, Pentagon1, (float)trueGap);
-            }
-            else if (!Collide2)
-            {
-                //Debug.WriteLine("This makes me angry");
+                Triangle1.Rebuff(Pentagon1);
             }
             Triangle1.MoveShape(Key);
         }
@@ -150,6 +145,7 @@ namespace RPGame
             Triangle3 = CreateShape("triangle3");
             Pentagon1 = CreateShape("pentagon1");
             Pentagon2 = CreateShape("pentagon2");
+            Floor1 = CreateShape("floor1");
 
         }
 

@@ -62,6 +62,7 @@
   <ItemGroup>
     <Content Include="Content\buttons\Play.png" />
     <Content Include="Content\buttons\Play_Hover.png" />
+    <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\RedCube.png" />
