@@ -28,8 +28,10 @@ namespace RPGame
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
 
-        Area_1 TriangleLand = new Area_1();
-        TutorialZone Tutorial = new TutorialZone();
+        Areas CurrentArea;
+        Area_1 TriangleLand;
+        TutorialZone Tutorial;
+
         //Button ButtonLand = new Button();
         //The Game States get defined here
         public enum GameStates { Menu, Playing }
@@ -47,8 +49,18 @@ namespace RPGame
             }
         }
 
+        public void Initialize()
+        {
+            TriangleLand = new Area_1();
+            Tutorial = new TutorialZone();
+            if (CurrentArea != null)
+            {
+                CurrentArea.Initialize();
+            }
+        }
+
         //Loads the Content for The GameStates
-        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain, string LevelName)
+        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain)
         {
             spriteBatch = spriteBatchMain;
             graphicsDevice = graphicsDeviceMain;
@@ -56,10 +68,7 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
-                    if (LevelName == "TriangleLand")
-                    TriangleLand.LoadContent(spriteBatch);
-                    if (LevelName == "Tutorial")
-                    Tutorial.LoadContent(spriteBatch);
+                    CurrentArea.LoadContent(spriteBatch);
                     break;
 
                 case GameStates.Menu:
@@ -71,7 +80,7 @@ namespace RPGame
 
         //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
-            {
+        {
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
             ChangeGameState(CurrentKeyBoardState);
@@ -81,14 +90,7 @@ namespace RPGame
                 case GameStates.Playing:
 
                     Draw(spriteBatch);
-                    if (LevelName == "TriangleLand")
-                    {
-                        TriangleLand.Update();
-                    }
-                    if (LevelName == "Tutorial")
-                    {
-                        Tutorial.Update();
-                    }
+                    CurrentArea.Update();
                     camera.Move(CurrentKeyBoardState);
                     camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
                     break;
@@ -107,15 +109,8 @@ namespace RPGame
                 case GameStates.Playing:
                     var viewMatrix = camera.Transform(graphicsDevice);
                     spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
-                    if (LevelName == "TriangleLand")
-                    {
-                        TriangleLand.Draw();
-                    }
-                    if (LevelName == "Tutorial")
-                    {
-                        Tutorial.Draw();
-                    }
-                    spriteBatch.End();                   
+                    CurrentArea.Draw();
+                    spriteBatch.End();
                     break;
                 case GameStates.Menu:
                     break;
@@ -124,44 +119,41 @@ namespace RPGame
         }
         //Change the GameState with a button click
         private void ChangeGameState(KeyboardState CurrentKeyBoardState)
-        {   
+        {
 
-                if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
+            if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
             {
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
-                    LevelName = "TriangleLand";
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
+                    CurrentArea = TriangleLand;
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
 
                 else if (gameState == GameStates.Playing)
                 {
                     gameState = GameStates.Menu;
-                    LevelName = "";
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
                 else if (gameState != GameStates.Playing || gameState != GameStates.Menu)
                 {
                     gameState = GameStates.Menu;
-                    LevelName = "";
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);                 
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
-                
+
             }
             if (CurrentKeyBoardState.IsKeyDown(Keys.M) == true)
             {
                 gameState = GameStates.Playing;
-                LevelName = "Tutorial";
-                LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
+                CurrentArea = Tutorial;
+                Initialize();
+                LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
         }
         //Prevents errors in GameStates
-    private void OnGameStateChanged()
+        private void OnGameStateChanged()
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
         }
-
-
     }
 }

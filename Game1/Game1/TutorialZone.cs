@@ -16,17 +16,26 @@ namespace RPGame
 {
     class TutorialZone : Areas
     {
+
         Polygons Twall, Twall2, TFloor, TFloor2;
         Texture2D Background;
-        bool Wleft = false;
-        bool Wright = false;
-        bool jump = false;
-        bool attack = false;
+        bool Wleft;
+        bool Wright;
+        bool jump;
+        bool attack;
 
-        public void LoadContent(SpriteBatch spriteBatchMain)
+        public override void Initialize()
+        {
+            Wleft = false;
+            Wright = false;
+            jump = false;
+            attack = false;
+        }
+
+        public override void LoadContent(SpriteBatch spriteBatchMain)
         {
             MakeShapes();
-            LoadFont();
+            base.LoadContent(spriteBatch);
 
             spriteBatch = spriteBatchMain;
             Twall.LoadContent("twall1", "TWall");
@@ -36,7 +45,7 @@ namespace RPGame
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
 
-        public void Draw()
+        public override void Draw()
         {
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
@@ -47,9 +56,9 @@ namespace RPGame
             TutorialCommands();
         }
 
-        public void Update()
+        public override void Update()
         {
-            LoadKey();
+            base.Update();
         }
 
 

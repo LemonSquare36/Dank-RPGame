@@ -17,6 +17,7 @@ namespace RPGame
 {
     class Area_1 : Areas
     {
+
         Timer levelTimer = new Timer();
         bool elapsed = true;
 
@@ -26,11 +27,10 @@ namespace RPGame
         Polygons Pentagon1;
         Polygons Pentagon2;
         Polygons Floor1;
-        float Rotate = .02f;
 
         Character player1 = new Character();
 
-        public void LoadContent(SpriteBatch spriteBatchMain)
+        public override void LoadContent(SpriteBatch spriteBatchMain)
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
@@ -42,7 +42,7 @@ namespace RPGame
             Floor1.LoadContent("floor1", "Floor");
         }
 
-        public void Draw()
+        public override void Draw()
         {
             Triangle1.RealPos();
             Triangle2.RealPos();
@@ -56,9 +56,9 @@ namespace RPGame
             //Pentagon2.Draw(spriteBatch);
             Floor1.Draw(spriteBatch);
         }
-        public void Update()
+        public override void Update()
         {
-            LoadKey();
+            base.Update();
 
             if (Key.IsKeyDown(Keys.T) == true && elapsed)
             {
