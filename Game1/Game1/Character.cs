@@ -35,9 +35,9 @@ namespace RPGame
             attack = attack + rand.Next(1, 7);
         }
 
-        public void LoadSave(string CharacterName)
+        public void LoadInventory(string CharacterName)
         {
-            StreamReader CharacterReader = new StreamReader("CharacterSave.txt");
+            StreamReader CharacterReader = new StreamReader("CharacterInventory.txt");
             string line;
 
             while (true)
@@ -48,9 +48,32 @@ namespace RPGame
             }
         }
 
-        public void Save(string ChracterName)
+        public void SaveInventory(string ChracterName)
         {
-            StreamWriter CharacterWriter = new StreamWriter("CharacterSave.txt");
+            StreamWriter CharacterWriter = new StreamWriter("CharacterInventory.txt");
+
+            while (true)
+            {
+                CharacterWriter.WriteLine(inventory);
+            }
+        }
+
+        public void LoadStats(string CharacterName)
+        {
+            StreamReader CharacterReader = new StreamReader("CharacterStats.txt");
+            string line;
+
+            while (true)
+            {
+                line = CharacterReader.ReadLine();
+                //characterStats.Add(line);
+                Debug.WriteLine(inventory);
+            }
+        }
+
+        public void SaveStats(string ChracterName)
+        {
+            StreamWriter CharacterWriter = new StreamWriter("CharacterStats.txt");
 
             while (true)
             {
