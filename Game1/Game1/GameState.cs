@@ -19,6 +19,8 @@ namespace RPGame
 {
     class GameState
     {
+        String LevelName;
+
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
@@ -27,6 +29,7 @@ namespace RPGame
         Vector3 screenScale = Vector3.Zero;
 
         Area_1 TriangleLand = new Area_1();
+        TutorialZone Tutorial = new TutorialZone();
         //Button ButtonLand = new Button();
         //The Game States get defined here
         public enum GameStates { Menu, Playing }
@@ -45,7 +48,7 @@ namespace RPGame
         }
 
         //Loads the Content for The GameStates
-        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain)
+        public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain, string LevelName)
         {
             spriteBatch = spriteBatchMain;
             graphicsDevice = graphicsDeviceMain;
@@ -53,7 +56,10 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
+                    if (LevelName == "TriangleLand")
                     TriangleLand.LoadContent(spriteBatch);
+                    if (LevelName == "Tutorial")
+                    Tutorial.LoadContent(spriteBatch);
                     break;
 
                 case GameStates.Menu:
@@ -73,8 +79,16 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
+
                     Draw(spriteBatch);
-                    TriangleLand.Update();
+                    if (LevelName == "TriangleLand")
+                    {
+                        TriangleLand.Update();
+                    }
+                    if (LevelName == "Tutorial")
+                    {
+                        Tutorial.Update();
+                    }
                     camera.Move(CurrentKeyBoardState);
                     camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
                     break;
@@ -93,8 +107,15 @@ namespace RPGame
                 case GameStates.Playing:
                     var viewMatrix = camera.Transform(graphicsDevice);
                     spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
-                    TriangleLand.Draw();
-                    spriteBatch.End();
+                    if (LevelName == "TriangleLand")
+                    {
+                        TriangleLand.Draw();
+                    }
+                    if (LevelName == "Tutorial")
+                    {
+                        Tutorial.Draw();
+                    }
+                    spriteBatch.End();                   
                     break;
                 case GameStates.Menu:
                     break;
@@ -104,18 +125,35 @@ namespace RPGame
         //Change the GameState with a button click
         private void ChangeGameState(KeyboardState CurrentKeyBoardState)
         {   
+
                 if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
             {
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
+                    LevelName = "TriangleLand";
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
                 }
 
                 else if (gameState == GameStates.Playing)
                 {
-                    gameState = GameStates.Menu;;
+                    gameState = GameStates.Menu;
+                    LevelName = "";
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
                 }
+                else if (gameState != GameStates.Playing || gameState != GameStates.Menu)
+                {
+                    gameState = GameStates.Menu;
+                    LevelName = "";
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);                 
+                }
+                
+            }
+            if (CurrentKeyBoardState.IsKeyDown(Keys.M) == true)
+            {
+                gameState = GameStates.Playing;
+                LevelName = "Tutorial";
+                LoadContent(spriteBatch, graphicsDevice, graphicsManager, LevelName);
             }
         }
         //Prevents errors in GameStates

@@ -78,11 +78,15 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/GreyPentagon");
             if (ShapeImage == "Floor")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Floor");
+            if (ShapeImage == "TFloor")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TFloor");
+            if (ShapeImage == "TWall")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TWall");
         }
         //Draws the Images with current Texture
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
         }
 
         //Roatates the Shape
@@ -116,7 +120,7 @@ namespace RPGame
         }
 
         //Project the shape along its normals to check for gaps (Collision Detection)
-        public bool Projection(Polygons Shape, Vector2 P, ref double trueGap)
+        public bool Projection(Polygons Shape, Vector2 P)
         {
             bool value = true;
             double minGap = 1;
@@ -146,10 +150,6 @@ namespace RPGame
                     if (gap < minGap)
                     {
                         minGap = gap;
-                    }
-                    if (minGap <= 0 && minGap > trueGap)
-                    {
-                        trueGap = minGap;
                     }
                 }
             }

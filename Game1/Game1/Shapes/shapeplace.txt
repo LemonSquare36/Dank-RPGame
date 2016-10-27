@@ -10,3 +10,11 @@ pentagon2
 300,300
 floor1
 400, 250
+tfloor1
+400,500
+tfloor2
+400,-23
+twall1
+-10,240
+twall2
+810,240

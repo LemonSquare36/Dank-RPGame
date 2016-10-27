@@ -11,22 +11,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
-using System.IO;
-using System.Collections;
+
 
 namespace RPGame
 {
-    class Area_1
+    class Area_1 : Areas
     {
         Timer levelTimer = new Timer();
         bool elapsed = true;
-
-        double trueGap;
-
-        private static Hashtable shapeVerts = new Hashtable();
-
-        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeList.txt");
 
         Polygons Triangle1;
         Polygons Triangle2;
@@ -35,12 +27,8 @@ namespace RPGame
         Polygons Pentagon2;
         Polygons Floor1;
         float Rotate = .02f;
-        Texture2D RedCube;
 
         Character player1 = new Character();
-
-
-        SpriteBatch spriteBatch;
 
         public void LoadContent(SpriteBatch spriteBatchMain)
         {
@@ -52,7 +40,6 @@ namespace RPGame
             Pentagon1.LoadContent("pentagon1", "GreyPentagon");
             Pentagon2.LoadContent("pentagon2", "GreyPentagon");
             Floor1.LoadContent("floor1", "Floor");
-            RedCube = Main.GameContent.Load<Texture2D>("Sprites/RedCube");
         }
 
         public void Draw()
@@ -71,9 +58,9 @@ namespace RPGame
         }
         public void Update()
         {
-            KeyboardState Key = Keyboard.GetState();
+            LoadKey();
 
-                if (Key.IsKeyDown(Keys.T) == true && elapsed)
+            if (Key.IsKeyDown(Keys.T) == true && elapsed)
             {
                 levelTimer.Start();
                 levelTimer.Elapsed += levelTimerElapsed;   
@@ -81,57 +68,13 @@ namespace RPGame
             }
 
             
-            //Triangle1.Rotate(Rotate);
-            bool Collide = Collision(Triangle1, Triangle2);
             bool Collide2 = Collision(Triangle1, Pentagon1);
-            if (Collide)
-            {
-                Debug.WriteLine("Yes");
-                //Triangle1.Rebuff(Triangle2);
-            }
+
             if (Collide2)
             {
-                Debug.WriteLine("Yes");
                 Triangle1.Rebuff(Pentagon1);
             }
             Triangle1.MoveShape(Key);
-        }
-
-        public bool Collision(Polygons Shape, Polygons Shape2)
-        {
-            bool collision = true;
-
-            // Y is for the verticies one higher than i; I named it Y since it rhymes with i;
-            int Y = 2;
-            // Z is the same as Y but for Shape2; Named that since it is after Y;
-            int Z = 2;
-
-            for (int i = 1; i < Shape.getNumVerticies(); i++)
-            {
-                if (Y == Shape.getNumVerticies())
-                {
-                    Y = 1;
-                }
-                if (!Shape.Projection(Shape2, Shape.NormalVector(i, Y), ref trueGap))
-                {
-                    collision = false;
-                }
-                Y++;
-            }
-
-            for (int i = 1; i < Shape2.getNumVerticies(); i++)
-            {
-                if (Z == Shape2.getNumVerticies())
-                {
-                    Z = 1;
-                }
-                if (!Shape2.Projection(Shape, Shape2.NormalVector(i, Z), ref trueGap))
-                {
-                    collision = false;
-                }
-                Z++;
-            }
-            return collision;
         }
 
         //Make YourShapes Here
@@ -147,43 +90,6 @@ namespace RPGame
             Pentagon2 = CreateShape("pentagon2");
             Floor1 = CreateShape("floor1");
 
-        }
-
-        //Creates the Shapes of Polygon Class
-        private static Polygons CreateShape(string shapeName)
-        {
-            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
-            Polygons myPolygon = new Polygons(NewList);
-            return myPolygon;
-        }
-
-        private void RetrieveShapes()
-        {
-            StreamReader shapeConfig = new StreamReader(filePath);
-            string line;
-            string key = null;
-            List<Vector2> verticies = new List<Vector2>();
-            while ((line = shapeConfig.ReadLine()) != null)
-            {
-                try
-                {
-                    string[] VertCords = (line.Split(','));
-                    float xVert = (float)Convert.ToDouble(VertCords[0]);
-                    float yVert = (float)Convert.ToDouble(VertCords[1]);
-                    Vector2 myVector2 = new Vector2(xVert, yVert);
-                    verticies.Add(myVector2);
-
-                }
-                catch
-                {
-                    if (key != null)
-                    {
-                        shapeVerts[key] = verticies;
-                        verticies = new List<Vector2>();
-                    }
-                    key = line;
-                }
-            }
         }
 
         private void levelTimerElapsed(object sender, EventArgs e)
