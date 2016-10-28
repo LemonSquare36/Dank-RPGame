@@ -17,7 +17,7 @@ using System.Diagnostics;
 // Loads the Content for the various GameStates and allows the switching between GameStates
 namespace RPGame
 {
-    class GameState
+    class GameState : Global
     {
         String LevelName;
 

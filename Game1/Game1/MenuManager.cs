@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*namespace RPGame
+namespace RPGame
 {
-    publicclass MenuManager
+    public class MenuManager : Global
     {
     }
-}*/
+}

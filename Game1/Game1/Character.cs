@@ -15,8 +15,9 @@ using System.IO;
 
 namespace RPGame
 {
-    class Character
+    class Character : Polygons 
     {
+        public Character(List<Vector2> numbers):base(numbers) { }
         //meh
         List<string> inventory = new List<string> ();
 

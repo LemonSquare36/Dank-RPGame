@@ -20,7 +20,7 @@ using System.Collections;
 namespace RPGame
 {
 
-    class Areas
+    class Areas : Global
     {
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         protected string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeList.txt");
