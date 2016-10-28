@@ -17,6 +17,7 @@ namespace RPGame
 {
     class Character
     {
+        //meh
         List<string> inventory = new List<string> ();
 
         public int health = 20;
