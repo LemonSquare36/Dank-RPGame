@@ -41,7 +41,7 @@ namespace RPGame
             Twall.LoadContent("twall1", "TWall");
             Twall2.LoadContent("twall2", "TWall");
             TFloor.LoadContent("tfloor1", "TFloor");
-            TFloor2.LoadContent("tfloor2", "TFloor");
+            TFloor.LoadContent("tfloor2", "TFloor");
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
 

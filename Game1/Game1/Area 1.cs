@@ -28,7 +28,7 @@ namespace RPGame
         Polygons Pentagon2;
         Polygons Floor1;
 
-        Character player1 = new Character();
+        Character player1 = new Character(new List<Vector2>());
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
