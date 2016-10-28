@@ -18,7 +18,7 @@ using System.Diagnostics;
 namespace RPGame
 {
 
-    class Camera
+    class Camera : Global
     {
        
         public float Zoom { get; set; }
