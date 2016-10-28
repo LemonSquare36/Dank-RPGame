@@ -22,24 +22,31 @@ namespace RPGame
 
     class Areas
     {
+        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        protected string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeList.txt");
+
         protected SpriteBatch spriteBatch;
         protected SpriteFont font;
-
         protected KeyboardState Key;
 
         protected static Hashtable shapeVerts = new Hashtable();
 
-        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        protected string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeList.txt");
+        public virtual void Initialize()
+        {
 
-        protected void LoadKey()
+        }
+
+        public virtual void LoadContent(SpriteBatch spriteBatchMain)
+        {
+            font = Main.GameContent.Load<SpriteFont>("myFont");
+        }
+        public virtual void Update()
         {
             Key = Keyboard.GetState();
         }
-
-        protected void LoadFont()
+        public virtual void Draw()
         {
-            font = Main.GameContent.Load<SpriteFont>("myFont");
+
         }
 
         //Creates the Shapes of Polygon Class

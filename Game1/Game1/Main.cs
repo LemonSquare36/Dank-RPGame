@@ -50,7 +50,8 @@ namespace RPGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-           // menu.Initialize();
+            // menu.Initialize();
+            theGameState.Initialize();
             base.Initialize();
         }
 
@@ -62,7 +63,7 @@ namespace RPGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics, "");
+            theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics);
             // TODO: use this.Content to load your game content here
         }
 
