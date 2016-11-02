@@ -18,6 +18,12 @@ namespace RPGame
     class Character : Polygons 
     {
         public Character(List<Vector2> numbers):base(numbers) { }
+
+        public Character()
+        {
+
+        }
+
         //meh
         List<string> inventory = new List<string> ();
 
@@ -73,6 +79,11 @@ namespace RPGame
             }
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+        }
+
         public void SaveStats(string ChracterName)
         {
             StreamWriter CharacterWriter = new StreamWriter("CharacterStats.txt");
@@ -81,6 +92,32 @@ namespace RPGame
             {
                 CharacterWriter.WriteLine(inventory);
             }
+        }
+
+        public void MoveChar(KeyboardState Key)
+        {
+            var cMovement = Vector2.Zero;
+            Vector2 cPlacement = new Vector2();
+
+            if (Key.IsKeyDown(Keys.D))
+            {
+                cMovement = new Vector2(cMovement.X + 1f, cMovement.Y);
+            }
+            if (Key.IsKeyDown(Keys.S))
+            {
+                cMovement = new Vector2(cMovement.X, cMovement.Y + 1f);
+            }
+            if (Key.IsKeyDown(Keys.A))
+            {
+                cMovement = new Vector2(cMovement.X - 1f, cMovement.Y);
+            }
+            if (Key.IsKeyDown(Keys.W))
+            {
+                cMovement = new Vector2(cMovement.X, cMovement.Y - 1f);
+            }
+
+            var cOldPosition = cPlacement;
+            cPlacement += cMovement;
         }
     }
 }

@@ -22,14 +22,14 @@ namespace RPGame
         string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
         // declaring texture 2D's
-        Texture2D texture;
+        protected Texture2D texture;
 
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
         Vector2 Movement = Vector2.Zero;
         Vector2 OldPosition = new Vector2();
 
-        private Vector2 Placement;
+        protectedector2 Placement;
         //Holds Shapes Verticies
         private List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)

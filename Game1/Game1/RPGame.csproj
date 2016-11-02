@@ -69,6 +69,7 @@
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\RedCube.png" />
+    <Content Include="Content\Sprites\TestChar.png" />
     <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />
     <Content Include="Content\Sprites\TutorialSprites\TBack.png" />
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
