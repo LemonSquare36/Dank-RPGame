@@ -41,19 +41,24 @@ namespace RPGame
             Twall.LoadContent("twall1", "TWall");
             Twall2.LoadContent("twall2", "TWall");
             TFloor.LoadContent("tfloor1", "TFloor");
-            TFloor.LoadContent("tfloor2", "TFloor");
+            TFloor2.LoadContent("tfloor2", "TFloor");
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
 
         public override void Draw()
         {
+
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
             Twall2.Draw(spriteBatch);
             TFloor.Draw(spriteBatch);
             TFloor2.Draw(spriteBatch);
 
-            TutorialCommands();
+            try
+            {
+                TutorialCommands();
+            }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
         }
 
         public override void Update()

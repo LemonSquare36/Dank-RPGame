@@ -90,7 +90,7 @@ namespace RPGame
             {
                 spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
             }
-            catch(Exception ex) { ErrorHandling(ex.Message); }
+            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
         }
 
         //Roatates the Shape

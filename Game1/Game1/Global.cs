@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -15,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace RPGame
 {
@@ -23,15 +21,53 @@ namespace RPGame
         static string UserFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         static string errorPathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Errors");
         string errorPath = Path.Combine(errorPathFolder, "errors.txt");
+        DirectoryInfo Errors = new DirectoryInfo(errorPathFolder);
 
-        public void ErrorHandling(string logMessage)
+        public void ErrorFileReset()
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(errorPathFolder));
+            File.Delete(errorPath);
+        }
+        public void ErrorHandling(string logMessage, string classname, [CallerLineNumber] int LineNumber = 0)
+        {
+            string line;
+            bool write = true;
+            if (!Errors.Exists)
+            {
+                Errors.Create();
+            }
 
-            var errorWrite = new StreamWriter(errorPath, true);
+            try
+            {
+                var errorReader = new StreamReader(errorPath);
+                while (true)
+                {
+                    line = errorReader.ReadLine();
+                    if (line == classname)
+                    {
+                        line = errorReader.ReadLine();
+                        if (line == "Line " + LineNumber)
+                        {
+                            write = false;
+                            break;
+                        }
+                    }
+                    if (errorReader.EndOfStream)
+                    {
+                        break;
+                    }
+                }
+                errorReader.Close();
+            }
+            catch { }
 
-            errorWrite.Write(logMessage);
-            errorWrite.Close();
+            if (write)
+            {
+                var errorWrite = new StreamWriter(errorPath, true);
+                errorWrite.WriteLine("{0}\r\nLine {2}\r\nError:\r\n{1}\r\n", classname, logMessage, LineNumber);
+                errorWrite.Close();
+            }
+
         }
     }
 }
+
