@@ -19,8 +19,6 @@ namespace RPGame
 {
     class GameState : Global
     {
-        String LevelName;
-
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
@@ -51,6 +49,8 @@ namespace RPGame
 
         public void Initialize()
         {
+            ErrorFileReset();
+
             TriangleLand = new Area_1();
             Tutorial = new TutorialZone();
             if (CurrentArea != null)
@@ -146,7 +146,6 @@ namespace RPGame
             {
                 gameState = GameStates.Playing;
                 CurrentArea = Tutorial;
-                Initialize();
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
         }

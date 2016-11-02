@@ -47,13 +47,18 @@ namespace RPGame
 
         public override void Draw()
         {
+
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
             Twall2.Draw(spriteBatch);
             TFloor.Draw(spriteBatch);
             TFloor2.Draw(spriteBatch);
 
-            TutorialCommands();
+            try
+            {
+                TutorialCommands();
+            }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
         }
 
         public override void Update()
