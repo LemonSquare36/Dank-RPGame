@@ -25,6 +25,7 @@ namespace RPGame
 
         public void ErrorFileReset()
         {
+            if (File.Exists(errorPath))
             File.Delete(errorPath);
         }
         public void ErrorHandling(string logMessage, string classname, [CallerLineNumber] int LineNumber = 0)
