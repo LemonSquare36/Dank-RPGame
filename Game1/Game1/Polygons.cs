@@ -15,22 +15,25 @@ using System.IO;
 
 namespace RPGame
 {
-    class Polygons
+    class Polygons : Global
     {
         // FilePath for the ShapeList and ShapePlace
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
         // declaring texture 2D's
-        Texture2D texture;
+        protected Texture2D texture;
 
         private float rotation;
         private List<Vector2> realPos = new List<Vector2>();
         Vector2 Movement = Vector2.Zero;
+        Vector2 OldPosition = new Vector2();
 
-        private Vector2 Placement;
+        protectedector2 Placement;
         //Holds Shapes Verticies
         private List<Vector2> verticies = new List<Vector2>();
+
+
         public Polygons(List<Vector2> numbers)
         {
             rotation = 0;
@@ -60,6 +63,10 @@ namespace RPGame
         {
             return verticies.Count;
         }
+        public List<Vector2> getRealPosList()
+        {
+            return realPos;
+        }
 
         //Loads the texture 2D's using image name
         public void LoadContent(string ShapeName, string ShapeImage)
@@ -71,11 +78,21 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/GreenTriangle");
             if (ShapeImage == "GreyPentagon")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/GreyPentagon");
+            if (ShapeImage == "Floor")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Floor");
+            if (ShapeImage == "TFloor")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TFloor");
+            if (ShapeImage == "TWall")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TWall");
         }
         //Draws the Images with current Texture
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+            try
+            {
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+            }
+            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
         }
 
         //Roatates the Shape
@@ -104,6 +121,7 @@ namespace RPGame
             {
                 Movement = new Vector2(Movement.X, Movement.Y - 1f);
             }
+            OldPosition = Placement;
             Placement += Movement;
         }
 
@@ -123,8 +141,7 @@ namespace RPGame
                     float DPa, DPb, DPc;
                     double gap;
 
-                    RealPos();
-                    Shape.RealPos();
+
                     C = new Vector2((getRealPos(0).X - Shape.getRealPos(0).X), (getRealPos(0).Y - Shape.getRealPos(0).Y));
                     A = new Vector2((getRealPos(0).X - getRealPos(Y).X), (getRealPos(0).Y - getRealPos(Y).Y));
                     B = new Vector2((Shape.getRealPos(0).X - Shape.getRealPos(X).X), (Shape.getRealPos(0).Y - Shape.getRealPos(X).Y));
@@ -156,6 +173,11 @@ namespace RPGame
                 value = false;
             }
             return value;
+        }
+        // returns the Normal Vector of a Line
+        public Vector2 NormalVector(int Vert1, int Vert2)
+        {
+            return new Vector2(getRealPos(Vert1).Y - getRealPos(Vert2).Y, -(getRealPos(Vert1).X - getRealPos(Vert2).X));
         }
         //Find the realPos of the shapes using the images verticies
         public void RealPos()
@@ -207,31 +229,153 @@ namespace RPGame
             }
             return Placement;
         }
+
+        public bool CrossProduct(Vector2 A, Vector2 B, Vector2 C)
+        {
+            float crossProduct;
+            float dotProduct;
+            double baSquared;
+
+            crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
+            if (Math.Abs(crossProduct) > 150)
+                return false;
+
+            dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
+            if (dotProduct < -150)
+                return false;
+
+            baSquared = Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2);
+            if (dotProduct > (float)baSquared + 150)
+                return false;
+
+            return true;
+        }
+
         //Moves the shape away from collided objects
-        public void Rebuff(float rotate, Polygons Shape)
+        public void Rebuff(Polygons Shape)
         {
             float Slope;
             Vector2 Slope1 = new Vector2();
-            Vector2 Slope2 = new Vector2();
-            Vector2 Reflection = new Vector2();
+            bool check = true;
+            int value = 0;
 
-            Slope1 = new Vector2(Shape.getVerticies(2).X - Shape.getVerticies(1).X, Shape.getVerticies(2).Y - Shape.getVerticies(1).X); 
-            Slope2 = new Vector2(verticies[2].X - verticies[1].X, verticies[2].Y - verticies[1].Y);
-            Slope = Slope1.Y / Slope1.X;
-            Slope1.Normalize();
-            Reflection = -(Slope1 * Slope2) * (Slope1 - Slope2);
-            Reflection.Normalize();
-            Placement -= Movement;
-
-            if (Slope < 2)
+            if (check)
             {
-                Placement += Reflection;
+                foreach (Vector2 verts in getRealPosList())
+                {
+                    for (int A = 1; A < Shape.getNumVerticies(); A++)
+                    {
+
+                        int B = A + 1;
+                        if (B == Shape.getNumVerticies())
+                        {
+                            B = 1;
+                        }
+
+                        bool hole = false;
+                        bool Positive = true;
+                        bool isBetween = false;
+
+                        if (isBetween)
+                        {
+                            isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
+                            if (isBetween)
+                            {
+                                hole = true;
+                            }
+                        }
+
+                        isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
+
+                        if (!isBetween)
+                        {
+                            if (value == getNumVerticies() * (Shape.getNumVerticies() - 1))
+                            {
+                                check = false;
+                            }
+                            if (value == (getNumVerticies() - 1) * (Shape.getNumVerticies() - 1))
+                            {
+                                value++;
+                            }
+                            value++;
+                        }
+
+                        if (isBetween)
+                        {
+
+                            if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
+                            {
+                                Positive = false;
+                                Placement = OldPosition;
+                            }
+                            else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
+                            {
+                                Positive = false;
+                                Placement = OldPosition;
+                            }
+
+
+                            Slope1 = new Vector2(Shape.getRealPos(B).X - Shape.getRealPos(A).X, Shape.getRealPos(B).Y - Shape.getRealPos(A).Y);
+                            Slope = Slope1.Y / Slope1.X;
+                            Slope1.Normalize();
+
+                            Placement -= Movement;
+
+                            if (!hole)
+                            {
+                                if (Slope > -2 && Positive == true)
+                                {
+                                    if (Movement.X < 0 && Movement.Y > 0)
+                                    {
+                                        Placement = new Vector2(Placement.X + Slope, Placement.Y + Slope);
+                                    }
+                                    else if (Movement.X < 0)
+                                    {
+                                        Placement = new Vector2(Placement.X, Placement.Y - Slope);
+                                    }
+                                    if (Movement.X > 0 && Movement.Y < 0)
+                                    {
+                                        Placement = new Vector2(Placement.X + Slope, Placement.Y - (Slope * 2));
+                                    }
+                                    else if (Movement.X > 0)
+                                    {
+                                        Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
+                                    }
+                                }
+
+
+                                if (Slope < 2 && Positive == false)
+                                {
+                                    if (Movement.X > 0 && Movement.Y > 0)
+                                    {
+                                        Placement = new Vector2(Placement.X + Slope, Placement.Y - Slope);
+                                    }
+                                    else if (Movement.X > 0)
+                                    {
+                                        Placement = new Vector2(Placement.X, Placement.Y + Slope);
+                                    }
+                                    
+                                    if (Movement.X < 0 && Movement.Y < 0)
+                                    {
+                                        Placement = new Vector2(Placement.X - Slope, Placement.Y + (Slope * 2));
+                                    }
+                                   else if (Movement.X < 0)
+                                    {
+                                        Placement = new Vector2(Placement.X, Placement.Y - (Slope * 2));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            else
+            if (!check)
             {
-                Placement += Slope1;
+                Placement -= Movement;
             }
         }
     }
 }
+
+
 

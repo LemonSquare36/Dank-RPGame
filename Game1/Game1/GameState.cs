@@ -17,7 +17,7 @@ using System.Diagnostics;
 // Loads the Content for the various GameStates and allows the switching between GameStates
 namespace RPGame
 {
-    class GameState
+    class GameState : Global
     {
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
@@ -26,8 +26,11 @@ namespace RPGame
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
 
-        Area_1 TriangleLand = new Area_1();
-        Button ButtonLand = new Button();
+        Areas CurrentArea;
+        Area_1 TriangleLand;
+        TutorialZone Tutorial;
+
+        //Button ButtonLand = new Button();
         //The Game States get defined here
         public enum GameStates { Menu, Playing }
 
@@ -44,6 +47,18 @@ namespace RPGame
             }
         }
 
+        public void Initialize()
+        {
+            ErrorFileReset();
+
+            TriangleLand = new Area_1();
+            Tutorial = new TutorialZone();
+            if (CurrentArea != null)
+            {
+                CurrentArea.Initialize();
+            }
+        }
+
         //Loads the Content for The GameStates
         public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain)
         {
@@ -53,11 +68,11 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
-                    TriangleLand.LoadContent(spriteBatch);
+                    CurrentArea.LoadContent(spriteBatch);
                     break;
 
                 case GameStates.Menu:
-                    Button.LoadContent(spriteBatch)
+                    //Button.LoadContent(spriteBatch);
                     break;
             }
 
@@ -65,7 +80,7 @@ namespace RPGame
 
         //The update function for changing the GameStates and for using functions of the current GameStates
         public void Update(GameTime gameTime)
-            {
+        {
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
             ChangeGameState(CurrentKeyBoardState);
@@ -73,8 +88,9 @@ namespace RPGame
             switch (gameState)
             {
                 case GameStates.Playing:
+
                     Draw(spriteBatch);
-                    TriangleLand.Update();
+                    CurrentArea.Update();
                     camera.Move(CurrentKeyBoardState);
                     camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
                     break;
@@ -93,7 +109,7 @@ namespace RPGame
                 case GameStates.Playing:
                     var viewMatrix = camera.Transform(graphicsDevice);
                     spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
-                    TriangleLand.Draw();
+                    CurrentArea.Draw();
                     spriteBatch.End();
                     break;
                 case GameStates.Menu:
@@ -103,27 +119,40 @@ namespace RPGame
         }
         //Change the GameState with a button click
         private void ChangeGameState(KeyboardState CurrentKeyBoardState)
-        {   
-                if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
+        {
+
+            if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
             {
                 if (gameState == GameStates.Menu)
                 {
                     gameState = GameStates.Playing;
+                    CurrentArea = TriangleLand;
                     LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
 
                 else if (gameState == GameStates.Playing)
                 {
-                    gameState = GameStates.Menu;;
+                    gameState = GameStates.Menu;
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                 }
+                else if (gameState != GameStates.Playing || gameState != GameStates.Menu)
+                {
+                    gameState = GameStates.Menu;
+                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
+                }
+
+            }
+            if (CurrentKeyBoardState.IsKeyDown(Keys.M) == true)
+            {
+                gameState = GameStates.Playing;
+                CurrentArea = Tutorial;
+                LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
         }
         //Prevents errors in GameStates
-    private void OnGameStateChanged()
+        private void OnGameStateChanged()
         {
             GameStateChanged?.Invoke(this, EventArgs.Empty);
         }
-
-
     }
 }

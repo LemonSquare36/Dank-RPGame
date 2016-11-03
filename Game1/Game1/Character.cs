@@ -15,8 +15,16 @@ using System.IO;
 
 namespace RPGame
 {
-    class Character
+    class Character : Polygons 
     {
+        public Character(List<Vector2> numbers):base(numbers) { }
+
+        public Character()
+        {
+
+        }
+
+        //meh
         List<string> inventory = new List<string> ();
 
         public int health = 20;
@@ -35,9 +43,9 @@ namespace RPGame
             attack = attack + rand.Next(1, 7);
         }
 
-        public void LoadSave(string CharacterName)
+        public void LoadInventory(string CharacterName)
         {
-            StreamReader CharacterReader = new StreamReader("CharacterSave.txt");
+            StreamReader CharacterReader = new StreamReader("CharacterInventory.txt");
             string line;
 
             while (true)
@@ -48,14 +56,68 @@ namespace RPGame
             }
         }
 
-        public void Save(string ChracterName)
+        public void SaveInventory(string ChracterName)
         {
-            StreamWriter CharacterWriter = new StreamWriter("CharacterSave.txt");
+            StreamWriter CharacterWriter = new StreamWriter("CharacterInventory.txt");
 
             while (true)
             {
                 CharacterWriter.WriteLine(inventory);
             }
+        }
+
+        public void LoadStats(string CharacterName)
+        {
+            StreamReader CharacterReader = new StreamReader("CharacterStats.txt");
+            string line;
+
+            while (true)
+            {
+                line = CharacterReader.ReadLine();
+                //characterStats.Add(line);
+                Debug.WriteLine(inventory);
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+        }
+
+        public void SaveStats(string ChracterName)
+        {
+            StreamWriter CharacterWriter = new StreamWriter("CharacterStats.txt");
+
+            while (true)
+            {
+                CharacterWriter.WriteLine(inventory);
+            }
+        }
+
+        public void MoveChar(KeyboardState Key)
+        {
+            var cMovement = Vector2.Zero;
+            Vector2 cPlacement = new Vector2();
+
+            if (Key.IsKeyDown(Keys.D))
+            {
+                cMovement = new Vector2(cMovement.X + 1f, cMovement.Y);
+            }
+            if (Key.IsKeyDown(Keys.S))
+            {
+                cMovement = new Vector2(cMovement.X, cMovement.Y + 1f);
+            }
+            if (Key.IsKeyDown(Keys.A))
+            {
+                cMovement = new Vector2(cMovement.X - 1f, cMovement.Y);
+            }
+            if (Key.IsKeyDown(Keys.W))
+            {
+                cMovement = new Vector2(cMovement.X, cMovement.Y - 1f);
+            }
+
+            var cOldPosition = cPlacement;
+            cPlacement += cMovement;
         }
     }
 }

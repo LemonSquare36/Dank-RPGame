@@ -39,9 +39,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Area 1.cs" />
+    <Compile Include="Areas.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="CrashHandler.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuItem.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Title Screen.cs" />
+    <Compile Include="TutorialZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -62,9 +66,14 @@
   <ItemGroup>
     <Content Include="Content\buttons\Play.png" />
     <Content Include="Content\buttons\Play_Hover.png" />
+    <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\RedCube.png" />
+    <Content Include="Content\Sprites\TestChar.png" />
+    <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />
+    <Content Include="Content\Sprites\TutorialSprites\TBack.png" />
+    <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
