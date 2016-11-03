@@ -16,6 +16,8 @@ namespace RPGame
 {
     public class Button : Polygons
     {
+        public Button(List<Vector2> numbers):base(numbers) { }
+
         int buttonX;
         int buttonY;
         Polygons Play;

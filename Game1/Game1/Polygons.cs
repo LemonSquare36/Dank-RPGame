@@ -15,7 +15,7 @@ using System.IO;
 
 namespace RPGame
 {
-    class Polygons : Global
+    public class Polygons : Global
     {
         // FilePath for the ShapeList and ShapePlace
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
