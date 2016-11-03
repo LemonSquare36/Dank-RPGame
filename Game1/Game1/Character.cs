@@ -15,14 +15,9 @@ using System.IO;
 
 namespace RPGame
 {
-    class Character : Polygons 
+    class Character : Entity 
     {
         public Character(List<Vector2> numbers):base(numbers) { }
-
-        public Character()
-        {
-
-        }
 
         //meh
         List<string> inventory = new List<string> ();
@@ -79,10 +74,6 @@ namespace RPGame
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
-        }
 
         public void SaveStats(string ChracterName)
         {
@@ -99,19 +90,19 @@ namespace RPGame
             var cMovement = Vector2.Zero;
             Vector2 cPlacement = new Vector2();
 
-            if (Key.IsKeyDown(Keys.D))
+            if (Key.IsKeyDown(Keys.Up))
             {
                 cMovement = new Vector2(cMovement.X + 1f, cMovement.Y);
             }
-            if (Key.IsKeyDown(Keys.S))
+            if (Key.IsKeyDown(Keys.Down))
             {
                 cMovement = new Vector2(cMovement.X, cMovement.Y + 1f);
             }
-            if (Key.IsKeyDown(Keys.A))
+            if (Key.IsKeyDown(Keys.Left))
             {
                 cMovement = new Vector2(cMovement.X - 1f, cMovement.Y);
             }
-            if (Key.IsKeyDown(Keys.W))
+            if (Key.IsKeyDown(Keys.Right))
             {
                 cMovement = new Vector2(cMovement.X, cMovement.Y - 1f);
             }

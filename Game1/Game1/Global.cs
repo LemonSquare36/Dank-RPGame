@@ -24,6 +24,7 @@ namespace RPGame
 
         public void ErrorFileReset()
         {
+            if (File.Exists(errorPath))
             File.Delete(errorPath);
         }
 

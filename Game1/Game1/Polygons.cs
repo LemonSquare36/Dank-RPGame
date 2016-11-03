@@ -24,16 +24,14 @@ namespace RPGame
         // declaring texture 2D's
         protected Texture2D texture;
 
-        private float rotation;
+        protected float rotation;
         private List<Vector2> realPos = new List<Vector2>();
         Vector2 Movement = Vector2.Zero;
         Vector2 OldPosition = new Vector2();
 
         protected Vector2 Placement;
         //Holds Shapes Verticies
-        private List<Vector2> verticies = new List<Vector2>();
-
-
+        protected List<Vector2> verticies = new List<Vector2>();
         public Polygons(List<Vector2> numbers)
         {
             rotation = 0;
