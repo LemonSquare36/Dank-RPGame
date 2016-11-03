@@ -21,20 +21,32 @@ namespace RPGame
         static string UserFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         static string errorPathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Errors");
         string errorPath = Path.Combine(errorPathFolder, "errors.txt");
-        DirectoryInfo Errors = new DirectoryInfo(errorPathFolder);
 
         public void ErrorFileReset()
         {
             File.Delete(errorPath);
         }
-        public void ErrorHandling(string logMessage, string classname, [CallerLineNumber] int LineNumber = 0)
+
+        public string getErrorPath()
         {
-            string line;
-            bool write = true;
+            return errorPathFolder;
+        }
+
+        public void createErrorFolder()
+        {
+            DirectoryInfo Errors = new DirectoryInfo(errorPathFolder);
+
             if (!Errors.Exists)
             {
                 Errors.Create();
             }
+        }
+        public void ErrorHandling(string logMessage, string classname, [CallerLineNumber] int LineNumber = 0)
+        {
+            string line;
+            bool write = true;
+
+            createErrorFolder();
 
             try
             {

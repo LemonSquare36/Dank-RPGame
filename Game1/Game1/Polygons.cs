@@ -32,6 +32,8 @@ namespace RPGame
         private Vector2 Placement;
         //Holds Shapes Verticies
         private List<Vector2> verticies = new List<Vector2>();
+
+
         public Polygons(List<Vector2> numbers)
         {
             rotation = 0;
