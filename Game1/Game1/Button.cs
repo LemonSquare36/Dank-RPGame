@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    public class Button
+    public class Button : Polygons
     {
         int buttonX;
         int buttonY;

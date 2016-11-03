@@ -29,7 +29,7 @@ namespace RPGame
         Vector2 Movement = Vector2.Zero;
         Vector2 OldPosition = new Vector2();
 
-        protectedector2 Placement;
+        protected Vector2 Placement;
         //Holds Shapes Verticies
         private List<Vector2> verticies = new List<Vector2>();
 

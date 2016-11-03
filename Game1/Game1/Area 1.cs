@@ -21,6 +21,8 @@ namespace RPGame
         Timer levelTimer = new Timer();
         bool elapsed = true;
 
+        Buttons TestButton = new Buttons();
+
         Polygons Triangle1;
         Polygons Triangle2;
         Polygons Triangle3;
