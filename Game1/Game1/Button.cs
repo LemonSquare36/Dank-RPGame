@@ -54,7 +54,7 @@ namespace RPGame
         {
             if (enterButton() && MouseInput.LastMouseState.LeftButton == ButtonState.Released && MouseInput.MouseState.LeftButton == ButtonState.Pressed)
             {
-                ScreenManager.add("Play", new Vector2(0, 0);
+                ScreenManager.add("Play", new Vector2(0, 0));
             }
         }
 
