@@ -16,7 +16,10 @@ namespace RPGame
 {
     public class Button : Polygons
     {
-        public Button(List<Vector2> numbers):base(numbers) { }
+        public Button(List<Vector2> numbers, Texture2D UnPressed, Texture2D Pressed):base(numbers)
+        {
+
+        }
 
         int buttonX;
         int buttonY;
@@ -35,13 +38,6 @@ namespace RPGame
             {
                 return buttonY;
             }
-        }
-        public Button(string name, Texture2d texture, int buttonX, int buttonY)
-        {
-            this.Name = name;
-            this.Texture = texture;
-            this.buttonX = buttonX;
-            this.buttonY = buttonY;
         }
         public bool enterButton()
         {
