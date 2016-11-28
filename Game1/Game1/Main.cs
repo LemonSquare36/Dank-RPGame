@@ -79,7 +79,6 @@ namespace RPGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             theGameState.Draw(spriteBatch);
-
             base.Draw(gameTime);
         }
     }
