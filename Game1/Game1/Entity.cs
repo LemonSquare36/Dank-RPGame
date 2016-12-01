@@ -21,9 +21,9 @@ namespace RPGame
 
         public Entity(List<Vector2> numbers):base(numbers) { }
 
-        public void LoadContent(ContentManager Content)
+        public void LoadContent()
         {
-            player1 = Content.Load<Texture2D>("TestCharWalk1");
+            player1 = Main.GameContent.Load<Texture2D>("TestCharWalk1");
         }
 
         public void Draw(SpriteBatch spriteBatch)

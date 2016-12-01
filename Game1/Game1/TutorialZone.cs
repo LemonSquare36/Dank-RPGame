@@ -18,6 +18,7 @@ namespace RPGame
     {
 
         Polygons Twall, Twall2, TFloor, TFloor2;
+        Entity Player;
         Texture2D Background;
         bool Wleft;
         bool Wright;
@@ -42,6 +43,9 @@ namespace RPGame
             Twall2.LoadContent("twall2", "TWall");
             TFloor.LoadContent("tfloor1", "TFloor");
             TFloor2.LoadContent("tfloor2", "TFloor");
+
+            Player.LoadContent();
+
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
 
@@ -53,6 +57,8 @@ namespace RPGame
             Twall2.Draw(spriteBatch);
             TFloor.Draw(spriteBatch);
             TFloor2.Draw(spriteBatch);
+
+            Player.Draw(spriteBatch);
 
             try
             {
@@ -76,6 +82,7 @@ namespace RPGame
             Twall2 = CreateShape("twall");
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
+            //Player = CreateShape("player1")
         }
 
         private void TutorialCommands()
