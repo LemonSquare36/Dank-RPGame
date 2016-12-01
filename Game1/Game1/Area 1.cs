@@ -57,7 +57,7 @@ namespace RPGame
             Pentagon1.Draw(spriteBatch);
             //Pentagon2.Draw(spriteBatch);
             Floor1.Draw(spriteBatch);
-            player1.Draw(spriteBatch);
+            //player1.Draw(spriteBatch);
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
