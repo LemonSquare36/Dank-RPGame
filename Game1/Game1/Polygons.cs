@@ -15,7 +15,7 @@ using System.IO;
 
 namespace RPGame
 {
-    public class Polygons : Global
+    public class Polygons : PolygonHolder
     {
         // FilePath for the ShapeList and ShapePlace
         static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -32,6 +32,7 @@ namespace RPGame
         protected Vector2 Placement;
         //Holds Shapes Verticies
         protected List<Vector2> verticies = new List<Vector2>();
+
         public Polygons(List<Vector2> numbers)
         {
             rotation = 0;
@@ -84,13 +85,13 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TWall");
         }
         //Draws the Images with current Texture
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             try
             {
                 spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
             }
-            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
+            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
         //Roatates the Shape
@@ -206,7 +207,7 @@ namespace RPGame
             realPos = realPosTemp;
         }
         //Gets shape Placement from a file
-        private Vector2 SetShapePlacement(string ShapeName)
+        protected Vector2 SetShapePlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(filePath);
 

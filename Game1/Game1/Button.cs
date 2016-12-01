@@ -14,68 +14,60 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    public class Button : Polygons
+    public class Button
     {
-        public Button(List<Vector2> numbers):base(numbers) { }
+        Rectangle rectangle;
+        public Vector2 Pos = new Vector2();
+        private Texture2D unPressed, pressed;
+        public Texture2D Texture;
+        private MouseState mouse;
 
-        int buttonX;
-        int buttonY;
-        Polygons Play;
-
-        public int ButtonX
+        private string Bname;
+        public string bName
         {
-            get
+            get { return Bname; }
+        }
+
+        private event EventHandler buttonClicked;
+        public event EventHandler ButtonClicked
+        {
+            add { buttonClicked += value; }
+            remove { buttonClicked -= value; }
+        }
+
+        public Button(Vector2 pos, int width, int height,Texture2D Unpressed, Texture2D Pressed, string ButtonName)//Button Name is super important becuase it determines what it does
+        {
+            Pos = pos;
+            rectangle = new Rectangle((int)pos.X, (int)pos.Y, width, height);
+            unPressed = Unpressed;
+            pressed = Pressed;
+            Bname = ButtonName;
+            Texture = unPressed;
+        }
+        
+        public void Update(MouseState Mouse)
+        {
+            mouse = Mouse;
+            Texture = unPressed;
+
+            if(rectangle.Contains(mouse.X, mouse.Y))
             {
-                return buttonX;
+                Texture = pressed;
+                if (mouse.LeftButton == ButtonState.Pressed)
+                {
+                    OnButtonClicked();
+                }
             }
         }
-        public int ButtonY
+
+        public void Draw(SpriteBatch spriteBatch)
         {
-            get
-            {
-                return buttonY;
-            }
-        }
-        public Button(string name, Texture2d texture, int buttonX, int buttonY)
-        {
-            this.Name = name;
-            this.Texture = texture;
-            this.buttonX = buttonX;
-            this.buttonY = buttonY;
-        }
-        public bool enterButton()
-        {
-            if (MouseInput.GetMouseX() < buttonX + Texture.width && MouseInput.getMouseX() > buttonX && MouseInput.getMouseY() < buttonY + Texture.Height && MouseInput.getMouseY() > buttonY)
-            {
-                return true;
-            }
-            return false;
+            spriteBatch.Draw(Texture, Pos, null, null, null, 0, null, Color.White);
         }
 
-        public void Update(GameTime gameTime)
+        private void OnButtonClicked()
         {
-            if (enterButton() && MouseInput.LastMouseState.LeftButton == ButtonState.Released && MouseInput.MouseState.LeftButton == ButtonState.Pressed)
-            {
-                ScreenManager.add("Play", new Vector2(0, 0));
-            }
-        }
-
-        public void Draw()
-        {
-            Screens.ScreenManager.Sprites.Draw(Texture, new Rectangle((int)ButtonX, (int)ButtonY, Texture.Width, Texture.Height), Color.White);
-        }
-        SpriteBatch spriteBatch;
-        public void LoadContent(SpriteBatch spriteBatchMain)
-        {
-            MakeShapes();
-            spriteBatch = spriteBatchMain;
-            Play.LoadContent("Play");
-        }
-        private void MakeShapes()
-        {
-            RetrieveShapes();
-            Play1 = CreateShape("Play");
-
+            buttonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }

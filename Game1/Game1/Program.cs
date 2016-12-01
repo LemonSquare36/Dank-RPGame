@@ -8,14 +8,20 @@ namespace RPGame
     /// </summary>
     public static class Program
     {
+        static Global global = new Global();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            using (var game = new Main())
-                game.Run();
+            try
+            {
+                using (var game = new Main())
+                    game.Run();
+            }
+            catch (Exception ex) { global.ErrorHandling(ex.Message, global.GetType().Name, ex); Environment.Exit(0); }
         }
     }
 #endif

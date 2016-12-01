@@ -12,12 +12,12 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace RPGame
 {
     class CrashHandler : Global
     {
-
         //Creates a crash file that if not removed on closing the game will report that it wasnt shut down properly
         public void CrashFileMake()
         {
@@ -25,7 +25,7 @@ namespace RPGame
             CrashWriter.WriteLine("Crash");
             CrashWriter.Close();
         }
-        //Will see if crash file exist. If it does then it will prompt the user on startup about if they want to send a crash report. (From there words and the errors recorded in Errors file)
+        //Will see if crash file exist. If it does then it will prompt the user on startup about if they want to send a crash report. 
         public void CrashCheck()
         {
             createErrorFolder();
@@ -39,10 +39,9 @@ namespace RPGame
 
                 if (line == "Crash")
                 {
-                    //GameWindow.Create()
-
+                    CrashChecker.Close();
+                    CrashForm();
                 }
-                CrashChecker.Close();
             }
         }
         //Removes the Crash File on properly closing the application
@@ -50,5 +49,20 @@ namespace RPGame
         {
             File.Delete(Path.Combine(getErrorPath(), "CrashCheck"));
         }
+
+        private static void CrashForm()
+        {
+            Application.EnableVisualStyles();
+            Application.Run(new CrashForm());
+        }
+        public void MainClose()
+        {
+            Environment.Exit(0);
+        }
+        public void GameRunCrash(string log)
+        {
+
+        }
+
     }
 }

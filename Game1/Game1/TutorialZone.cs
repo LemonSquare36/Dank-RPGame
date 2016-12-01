@@ -58,19 +58,19 @@ namespace RPGame
             {
                 TutorialCommands();
             }
-            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name); }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
-        public override void Update()
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            base.Update();
+            base.Update(camera, graphicsManager);
         }
 
 
         private void MakeShapes()
         {
             //Create the Polygon
-            RetrieveShapes();
+            RetrieveShapes(1);
 
             Twall = CreateShape("twall");
             Twall2 = CreateShape("twall");

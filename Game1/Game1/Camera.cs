@@ -94,8 +94,8 @@ namespace RPGame
                         height = (int)(width / aspectRatio + 0.5f);
                         width = (int)(height * aspectRatio + 0.5f);
                     }
-                    graphics.PreferredBackBufferHeight = Convert.ToInt32(height);
-                    graphics.PreferredBackBufferWidth = Convert.ToInt32(width);*/
+                    Graphics.PreferredBackBufferHeight = Convert.ToInt32(height);
+                    Graphics.PreferredBackBufferWidth = Convert.ToInt32(width);*/
                     #endregion
 
                     graphics.ToggleFullScreen();

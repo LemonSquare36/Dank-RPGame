@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Microsoft.Xna.Framework;
@@ -15,14 +12,16 @@ using System.IO;
 
 namespace RPGame
 {
-
-    class Areas : Screen
+    class OptionsMenu : MenuManager
     {
-      
 
-        public override void LoadContent(SpriteBatch spriteBatchMain)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            font = Main.GameContent.Load<SpriteFont>("myFont");
+
+        }
+        public override void Draw()
+        {
+
         }
     }
 }

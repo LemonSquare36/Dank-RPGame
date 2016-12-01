@@ -19,6 +19,8 @@ namespace RPGame
 {
     class GameState : Global
     {
+        Dictionary<string, int> screens = new Dictionary<string, int>();
+
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
@@ -26,36 +28,42 @@ namespace RPGame
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
 
-        Areas CurrentArea;
+        #region Declaring the Areas and Menus
+        Screen CurrentScreen;
+
         Area_1 TriangleLand;
         TutorialZone Tutorial;
 
-        //Button ButtonLand = new Button();
-        //The Game States get defined here
-        public enum GameStates { Menu, Playing }
+        MainMenu mainMenu;
+        OptionsMenu Options;
+        PuaseScreen Puase;
+        FileSelectScreen fileSelect;
+        #endregion
 
-        private GameStates gameState;
-        event EventHandler GameStateChanged;
-
-        public GameStates Gamestate
-        {
-            get { return gameState; }
-            set
-            {
-                gameState = value;
-                OnGameStateChanged();
-            }
-        }
 
         public void Initialize()
         {
             ErrorFileReset();
 
+            #region Creating the areas
             TriangleLand = new Area_1();
             Tutorial = new TutorialZone();
-            if (CurrentArea != null)
+            #endregion
+            #region Creating the Menus
+            mainMenu = new MainMenu();
+            Options = new OptionsMenu();
+            Puase = new PuaseScreen();
+            fileSelect = new FileSelectScreen();
+            #endregion
+
+            if (CurrentScreen != null)
             {
-                CurrentArea.Initialize();
+                CurrentScreen.Initialize();
+            }
+            else
+            {
+                CurrentScreen = mainMenu;
+                CurrentScreen.Initialize();
             }
         }
 
@@ -65,17 +73,10 @@ namespace RPGame
             spriteBatch = spriteBatchMain;
             graphicsDevice = graphicsDeviceMain;
             graphicsManager = graphicsManagerMain;
-            switch (gameState)
-            {
-                case GameStates.Playing:
-                    CurrentArea.LoadContent(spriteBatch);
-                    break;
 
-                case GameStates.Menu:
-                    //Button.LoadContent(spriteBatch);
-                    break;
-            }
+            mainMenu.ChangeScreen += HandleScreenChanged;
 
+            CurrentScreen.LoadContent(spriteBatch);
         }
 
         //The update function for changing the GameStates and for using functions of the current GameStates
@@ -83,76 +84,33 @@ namespace RPGame
         {
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
-            ChangeGameState(CurrentKeyBoardState);
 
-            switch (gameState)
-            {
-                case GameStates.Playing:
+            Draw(spriteBatch);
+            CurrentScreen.Update(camera, graphicsManager);
 
-                    Draw(spriteBatch);
-                    CurrentArea.Update();
-                    camera.Move(CurrentKeyBoardState);
-                    camera.ChangeScreenSize(CurrentKeyBoardState, graphicsManager);
-                    break;
-
-                case GameStates.Menu:
-
-                    break;
-            }
         }
         //Draws the images and textures we use
         public void Draw(SpriteBatch spriteBatch)
         {
+            var viewMatrix = camera.Transform(graphicsDevice);
 
-            switch (gameState)
-            {
-                case GameStates.Playing:
-                    var viewMatrix = camera.Transform(graphicsDevice);
-                    spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
-                    CurrentArea.Draw();
-                    spriteBatch.End();
-                    break;
-                case GameStates.Menu:
-                    break;
-            }
-
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
+            CurrentScreen.Draw();
+            spriteBatch.End();
         }
-        //Change the GameState with a button click
-        private void ChangeGameState(KeyboardState CurrentKeyBoardState)
+
+        //The Event that Changes the Screens
+        public void HandleScreenChanged(object sender, EventArgs eventArgs)
         {
-
-            if (CurrentKeyBoardState.IsKeyDown(Keys.Z) == true)
+            //Next Screen is Based off the buttons Name
+            switch (CurrentScreen.getNextScreen())
             {
-                if (gameState == GameStates.Menu)
-                {
-                    gameState = GameStates.Playing;
-                    CurrentArea = TriangleLand;
+                case "Play":
+                    CurrentScreen = TriangleLand;
                     LoadContent(spriteBatch, graphicsDevice, graphicsManager);
-                }
-
-                else if (gameState == GameStates.Playing)
-                {
-                    gameState = GameStates.Menu;
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
-                }
-                else if (gameState != GameStates.Playing || gameState != GameStates.Menu)
-                {
-                    gameState = GameStates.Menu;
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
-                }
+                    break;
 
             }
-            if (CurrentKeyBoardState.IsKeyDown(Keys.M) == true)
-            {
-                gameState = GameStates.Playing;
-                CurrentArea = Tutorial;
-                LoadContent(spriteBatch, graphicsDevice, graphicsManager);
-            }
-        }
-        //Prevents errors in GameStates
-        private void OnGameStateChanged()
-        {
-            GameStateChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

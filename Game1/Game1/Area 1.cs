@@ -58,9 +58,9 @@ namespace RPGame
             //Pentagon2.Draw(spriteBatch);
             Floor1.Draw(spriteBatch);
         }
-        public override void Update()
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            base.Update();
+            base.Update(camera, graphicsManager);
 
             if (Key.IsKeyDown(Keys.T) == true && elapsed)
             {
@@ -83,7 +83,7 @@ namespace RPGame
         private void MakeShapes()
         {
             //Create the Polygon
-            RetrieveShapes();
+            RetrieveShapes(1);
 
             Triangle1 = CreateShape("triangle1");
             Triangle2 = CreateShape("triangle2");

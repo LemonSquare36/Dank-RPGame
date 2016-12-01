@@ -11,11 +11,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
 namespace RPGame
 {
-    public class Menu
+    class CrashWindow
     {
-
-    }   
+        
+    }
 }

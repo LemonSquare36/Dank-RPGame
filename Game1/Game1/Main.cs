@@ -16,7 +16,6 @@ namespace RPGame
 {
     public class Main : Game
     {
-        Menu menu = new Menu();
         static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         CrashHandler CrashHandle = new CrashHandler();
@@ -44,7 +43,6 @@ namespace RPGame
             CrashHandle.CrashCheck();
             CrashHandle.CrashFileMake();
 
-            // menu.Initialize();
             theGameState.Initialize();
             base.Initialize();
         }
@@ -64,7 +62,7 @@ namespace RPGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 CrashHandle.CrashFileRemove();
                 Exit();
@@ -77,7 +75,7 @@ namespace RPGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);           
             theGameState.Draw(spriteBatch);
 
             base.Draw(gameTime);
