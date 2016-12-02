@@ -29,8 +29,8 @@ namespace RPGame
         Polygons Pentagon1;
         Polygons Pentagon2;
         Polygons Floor1;
+        Polygons player1;
 
-        Character player1 = new Character(new List<Vector2>());
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
@@ -41,6 +41,7 @@ namespace RPGame
             Triangle3.LoadContent("triangle3", "GreenTriangle");
             Pentagon1.LoadContent("pentagon1", "GreyPentagon");
             Pentagon2.LoadContent("pentagon2", "GreyPentagon");
+            player1.LoadContent("player1", "player1");
             Floor1.LoadContent("floor1", "Floor");
         }
 
@@ -51,26 +52,22 @@ namespace RPGame
             Pentagon1.RealPos();
             Pentagon2.RealPos();
             Floor1.RealPos();
+            player1.RealPos();
             Triangle1.Draw(spriteBatch);
             //Triangle2.Draw(spriteBatch);
             //Triangle3.Draw(spriteBatch);
             Pentagon1.Draw(spriteBatch);
             //Pentagon2.Draw(spriteBatch);
             Floor1.Draw(spriteBatch);
-            //player1.Draw(spriteBatch);
+            player1.Draw(spriteBatch);
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
+            player1.MoveChar();
+
             base.Update(camera, graphicsManager);
 
-            if (Key.IsKeyDown(Keys.T) == true && elapsed)
-            {
-                levelTimer.Start();
-                levelTimer.Elapsed += levelTimerElapsed;   
-                elapsed = false;  
-            }
-
-            
+            bool Collide = Collision(Triangle1, player1);
             bool Collide2 = Collision(Triangle1, Pentagon1);
 
             if (Collide2)
@@ -92,19 +89,9 @@ namespace RPGame
             Pentagon1 = CreateShape("pentagon1");
             Pentagon2 = CreateShape("pentagon2");
             Floor1 = CreateShape("floor1");
+            player1 = CreateChar("player1");
 
-        }
 
-        private void levelTimerElapsed(object sender, EventArgs e)
-        {
-            elapsed = true;
-            levelTimer.Stop();
-            Debug.WriteLine(player1.health);
-            Debug.WriteLine(player1.ability);
-            Debug.WriteLine(player1.attack);
-            Debug.WriteLine(player1.level);
-            levelTimer.Interval = 10000;
-            levelTimer.Start();
         }
     }
 }

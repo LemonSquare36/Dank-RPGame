@@ -15,7 +15,7 @@ using System.IO;
 
 namespace RPGame
 {
-    class Character : Entity 
+    public class Character : Entity
     {
         public Character(List<Vector2> numbers):base(numbers) { }
 
@@ -90,19 +90,19 @@ namespace RPGame
             var cMovement = Vector2.Zero;
             Vector2 cPlacement = new Vector2();
 
-            if (Key.IsKeyDown(Keys.Up))
+            if (Key.IsKeyDown(Keys.I))
             {
                 cMovement = new Vector2(cMovement.X + 1f, cMovement.Y);
             }
-            if (Key.IsKeyDown(Keys.Down))
+            if (Key.IsKeyDown(Keys.K))
             {
                 cMovement = new Vector2(cMovement.X, cMovement.Y + 1f);
             }
-            if (Key.IsKeyDown(Keys.Left))
+            if (Key.IsKeyDown(Keys.J))
             {
                 cMovement = new Vector2(cMovement.X - 1f, cMovement.Y);
             }
-            if (Key.IsKeyDown(Keys.Right))
+            if (Key.IsKeyDown(Keys.L))
             {
                 cMovement = new Vector2(cMovement.X, cMovement.Y - 1f);
             }

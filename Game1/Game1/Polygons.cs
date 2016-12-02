@@ -83,6 +83,8 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TFloor");
             if (ShapeImage == "TWall")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TWall");
+            if (ShapeImage == "player1")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TestCharWalk1");
         }
         //Draws the Images with current Texture
         public override void Draw(SpriteBatch spriteBatch)
@@ -372,6 +374,11 @@ namespace RPGame
             {
                 Placement -= Movement;
             }
+        }
+
+        public void MoveChar()
+        {
+
         }
     }
 }
