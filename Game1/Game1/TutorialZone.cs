@@ -18,7 +18,7 @@ namespace RPGame
     {
 
         Polygons Twall, Twall2, TFloor, TFloor2;
-        Entity Player;
+        Polygons Player;
         Texture2D Background;
         bool Wleft;
         bool Wright;
@@ -44,7 +44,7 @@ namespace RPGame
             TFloor.LoadContent("tfloor1", "TFloor");
             TFloor2.LoadContent("tfloor2", "TFloor");
 
-            Player.LoadContent();
+            Player.LoadContent("player1", "player1");
 
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
@@ -70,6 +70,22 @@ namespace RPGame
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             base.Update(camera, graphicsManager);
+            try
+            {
+                bool PlayerCollision = Collision(Player, TFloor);
+                //bool PlayerCollision1 = Collision(Player, TFloor2);
+               // bool PlayerCollision2 = Collision(Player, Twall);
+               // bool PlayerCollision3 = Collision(Player, Twall2);
+
+                /*if (PlayerCollision || PlayerCollision1 || PlayerCollision2 || PlayerCollision3)
+                {
+                    Player.Rebuff(TFloor);
+                    Player.Rebuff(TFloor2);
+                    Player.Rebuff(Twall);
+                    Player.Rebuff(Twall2);
+                }*/
+            }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
 
@@ -82,7 +98,7 @@ namespace RPGame
             Twall2 = CreateShape("twall");
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
-            //Player = CreateShape("player1")
+            Player = CreateChar("player1");
         }
 
         private void TutorialCommands()
