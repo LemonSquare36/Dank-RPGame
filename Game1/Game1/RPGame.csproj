@@ -123,6 +123,8 @@
     <Content Include="Content\buttons\slot3_hover.png" />
     <Content Include="Content\buttons\sound.png" />
     <Content Include="Content\buttons\sound_checked.png" />
+    <Content Include="Content\buttons\tutorial.png" />
+    <Content Include="Content\buttons\tutorial_hover.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
