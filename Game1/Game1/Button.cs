@@ -41,7 +41,7 @@ namespace RPGame
             rectangle = new Rectangle((int)pos.X, (int)pos.Y, width, height);
             unPressed = Unpressed;
             pressed = Pressed;
-            Bname = ButtonName;
+            Bname = ButtonName; 
             Texture = unPressed;
         }
         
