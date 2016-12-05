@@ -107,8 +107,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\buttons\credits.png" />
+    <Content Include="Content\buttons\credits_hover.png" />
+    <Content Include="Content\buttons\fullscreen.png" />
+    <Content Include="Content\buttons\fullscreen_checked.png" />
+    <Content Include="Content\buttons\options.png" />
+    <Content Include="Content\buttons\options_hover.png" />
     <Content Include="Content\buttons\Play.png" />
     <Content Include="Content\buttons\Play_Hover.png" />
+    <Content Include="Content\buttons\slot1.png" />
+    <Content Include="Content\buttons\slot1_hover.png" />
+    <Content Include="Content\buttons\slot2.png" />
+    <Content Include="Content\buttons\slot2_hover.png" />
+    <Content Include="Content\buttons\slot3.png" />
+    <Content Include="Content\buttons\slot3_hover.png" />
+    <Content Include="Content\buttons\sound.png" />
+    <Content Include="Content\buttons\sound_checked.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
