@@ -74,6 +74,10 @@ namespace RPGame
             {
                 Triangle1.Rebuff(Pentagon1);
             }
+            if (Collide)
+            {
+                Triangle1.Rebuff(player1);
+            }
             Triangle1.MoveShape(Key);
         }
 
