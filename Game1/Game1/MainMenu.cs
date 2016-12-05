@@ -17,8 +17,8 @@ namespace RPGame
 {
     class MainMenu : MenuManager
     {
-        Button Test;
-        Texture2D Play, PlayHover;
+        Button Test, Option;
+        Texture2D Play, PlayHover, Options, OptionsHover;
 
         public override void Initialize()
         {
@@ -33,10 +33,13 @@ namespace RPGame
             #region Texture Load
             Play = Main.GameContent.Load<Texture2D>("buttons/Play");
             PlayHover = Main.GameContent.Load<Texture2D>("buttons/Play_Hover");
+            Options = Main.GameContent.Load<Texture2D>("buttons/options");
+            OptionsHover = Main.GameContent.Load<Texture2D>("buttons/options_hover");
             #endregion
 
             #region Button Load
-            Test = new Button(new Vector2(100, 300), 400, 100, Play, PlayHover, "Play"); 
+            Test = new Button(new Vector2(100, 300), 400, 100, Play, PlayHover, "Play");
+            Option = new Button(new Vector2(100, 100), 400, 100, Options, OptionsHover, "Option");
             #endregion
 
             Test.ButtonClicked += ButtonClicked;
@@ -49,10 +52,12 @@ namespace RPGame
 
             //Update the buttons
             Test.Update(mouse);
+            Option.Update(mouse);
         }
         public override void Draw()
         {
             Test.Draw(spriteBatch);
+            Option.Draw(spriteBatch);
         }
     }
 }

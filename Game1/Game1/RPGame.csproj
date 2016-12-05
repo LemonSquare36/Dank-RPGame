@@ -54,7 +54,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>55A4A8855A642B7D77BE3BCD26F4873C9D75FC60</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>C18EC0DFC70218B96A34707E8B27E563374FF9F5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>RPGame_1_TemporaryKey.pfx</ManifestKeyFile>
@@ -159,6 +159,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="RPGame_1_TemporaryKey.pfx" />
     <None Include="RPGame_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
