@@ -117,6 +117,14 @@ namespace RPGame
             Polygons myPolygon = new Polygons(NewList);
             return myPolygon;
         }
+
+        protected Character CreateChar(string shapeName)
+        {
+
+            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
+            Character myChar = new Character(NewList);
+            return myChar;
+        }
         /// <summary>
         /// </summary>
         /// <param name="AreaVsMenu"></param>

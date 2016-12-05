@@ -15,7 +15,7 @@ using System.IO;
 
 namespace RPGame
 {
-    class Entity : Polygons
+   public class Entity : Polygons
     {
         protected Texture2D player1;
 

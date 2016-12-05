@@ -54,10 +54,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F4AD38471487FF8A04B8D176C51D571D14B498A0</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>55A4A8855A642B7D77BE3BCD26F4873C9D75FC60</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>RPGame_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>RPGame_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
