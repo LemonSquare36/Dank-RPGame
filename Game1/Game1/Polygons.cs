@@ -182,7 +182,7 @@ namespace RPGame
         }
         //Find the realPos of the shapes using the images verticies
         public void RealPos()
-        {
+        { 
             Vector2 Pos, vertTemp;
             float theta = 0;
             float H, X, Y;
