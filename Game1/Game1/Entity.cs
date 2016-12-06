@@ -19,6 +19,14 @@ namespace RPGame
     {
         protected Texture2D player1;
 
+        public void Gravity()
+        {
+            Movement = Vector2.Zero;
+
+            Movement = new Vector2(Movement.X, Movement.Y + 1f);
+
+            Placement += Movement;
+        }
         public Entity(List<Vector2> numbers):base(numbers) { }
 
         public void LoadContent()
