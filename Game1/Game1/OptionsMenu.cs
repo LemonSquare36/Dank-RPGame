@@ -15,6 +15,11 @@ namespace RPGame
     class OptionsMenu : MenuManager
     {
 
+        public override void LoadContent(SpriteBatch spirteBatchMain)
+        {
+            spriteBatch = spirteBatchMain;
+
+        }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
 

@@ -102,15 +102,24 @@ namespace RPGame
         //The Event that Changes the Screens
         public void HandleScreenChanged(object sender, EventArgs eventArgs)
         {
+            bool Load = true;
             //Next Screen is Based off the buttons Name
             switch (CurrentScreen.getNextScreen())
             {
                 case "Play":
                     CurrentScreen = TriangleLand;
-                    LoadContent(spriteBatch, graphicsDevice, graphicsManager);
                     break;
 
+                case "Option":
+                   CurrentScreen = Options;
+                    break;
+                default:
+                    Load = false;
+                    break;
+                        
             }
+            if (Load)
+            LoadContent(spriteBatch, graphicsDevice, graphicsManager);
         }
     }
 }
