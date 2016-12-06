@@ -18,7 +18,7 @@ namespace RPGame
     {
 
         Polygons Twall, Twall2, TFloor, TFloor2;
-        Polygons Player;
+        Character Player;
         Texture2D Background;
         bool Wleft;
         bool Wright;
@@ -75,6 +75,7 @@ namespace RPGame
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
+            Player.Gravity();
             base.Update(camera, graphicsManager);
             try
             {

@@ -107,7 +107,7 @@ namespace RPGame
             switch (CurrentScreen.getNextScreen())
             {
                 case "Play":
-                    CurrentScreen = TriangleLand;
+                    CurrentScreen = Tutorial;
                     break;
 
                 case "Option":
