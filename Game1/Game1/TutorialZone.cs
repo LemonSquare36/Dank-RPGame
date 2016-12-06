@@ -52,6 +52,12 @@ namespace RPGame
         public override void Draw()
         {
 
+            Player.RealPos();
+            Twall.RealPos();
+            Twall2.RealPos();
+            TFloor.RealPos();
+            TFloor2.RealPos();
+
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
             Twall2.Draw(spriteBatch);
@@ -73,17 +79,17 @@ namespace RPGame
             try
             {
                 bool PlayerCollision = Collision(Player, TFloor);
-                //bool PlayerCollision1 = Collision(Player, TFloor2);
-               // bool PlayerCollision2 = Collision(Player, Twall);
-               // bool PlayerCollision3 = Collision(Player, Twall2);
+                bool PlayerCollision1 = Collision(Player, TFloor2);
+                bool PlayerCollision2 = Collision(Player, Twall);
+                bool PlayerCollision3 = Collision(Player, Twall2);
 
-                /*if (PlayerCollision || PlayerCollision1 || PlayerCollision2 || PlayerCollision3)
+                if (PlayerCollision || PlayerCollision1 || PlayerCollision2 || PlayerCollision3)
                 {
                     Player.Rebuff(TFloor);
                     Player.Rebuff(TFloor2);
                     Player.Rebuff(Twall);
                     Player.Rebuff(Twall2);
-                }*/
+                }
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
