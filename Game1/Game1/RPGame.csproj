@@ -64,6 +64,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="CrashHandler.cs" />
     <Compile Include="CrashWindow.cs" />
+    <Compile Include="CreditsMenu.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="CrashForm.cs">
       <SubType>Form</SubType>
