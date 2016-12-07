@@ -93,7 +93,7 @@ namespace RPGame
             {
                 spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
             }
-            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
         //Roatates the Shape
@@ -182,7 +182,7 @@ namespace RPGame
         }
         //Find the realPos of the shapes using the images verticies
         public void RealPos()
-        { 
+        {
             Vector2 Pos, vertTemp;
             float theta = 0;
             float H, X, Y;
@@ -343,6 +343,10 @@ namespace RPGame
                                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                                     }
                                 }
+                                else if (Slope < -2 && Positive == true)
+                                {
+                                    Placement = OldPosition;
+                                }
 
 
                                 if (Slope < 2 && Positive == false)
@@ -355,15 +359,19 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + Slope);
                                     }
-                                    
+
                                     if (Movement.X < 0 && Movement.Y < 0)
                                     {
                                         Placement = new Vector2(Placement.X - Slope, Placement.Y + (Slope * 2));
                                     }
-                                   else if (Movement.X < 0)
+                                    else if (Movement.X < 0)
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y - (Slope * 2));
                                     }
+                                }
+                                else if (Slope > 2 && Positive == true)
+                                {
+                                    Placement = OldPosition;
                                 }
                             }
                         }
