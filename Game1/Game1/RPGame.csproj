@@ -53,6 +53,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Area 1.cs" />
     <Compile Include="Areas.cs" />
