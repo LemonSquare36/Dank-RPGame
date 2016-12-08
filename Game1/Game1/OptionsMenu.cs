@@ -29,14 +29,18 @@ namespace RPGame
             #region Texture Load
             Sounds = Main.GameContent.Load<Texture2D>("buttons/sound");
             SoundChecked = Main.GameContent.Load<Texture2D>("buttons/sound_checked");
+            Fullscreens = Main.GameContent.Load<Texture2D>("buttons/fullscreen");
+            FullscreenChecked = Main.GameContent.Load<Texture2D>("buttons/fullscreen_checked");
             #endregion
 
             #region Button Load
             Sound = new Button(new Vector2(200, 75), 400, 100, Sounds, SoundChecked, "Sound");
+            Fullscreen= new Button(new Vector2(200, 200), 400, 100, Fullscreens, FullscreenChecked, "Fullscreen");
             #endregion
 
             //Important or the event doesnt work
             Sound.ButtonClicked += ButtonClicked;
+            Fullscreen.ButtonClicked += ButtonClicked;
 
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
@@ -46,10 +50,12 @@ namespace RPGame
 
             //Update the buttons
             Sound.Update(mouse);
+            Fullscreen.Update(mouse);
         }
         public override void Draw()
         {
             Sound.Draw(spriteBatch);
+            Fullscreen.Draw(spriteBatch);
         }
     }
 }
