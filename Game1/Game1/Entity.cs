@@ -23,6 +23,7 @@ namespace RPGame
         bool air = false;
         float traveltime = 0;
         float jump = 7f;
+        bool canJump = true;
 
         public void Gravity()
         {
@@ -30,7 +31,7 @@ namespace RPGame
             Movement = new Vector2(Movement.X, Movement.Y + gravity);
             Placement += Movement;
 
-            if (gravity != 2 && gravity < 2)
+            if (gravity != 1.9 && gravity < 1.9)
             {
                 gravity += .05f;
             }
@@ -49,7 +50,9 @@ namespace RPGame
             {
                if (!oldState.IsKeyDown(Keys.Space))
                 {
+                    if (canJump)
                     air = true;
+                    canJump = false;
                     
                 } 
             }
@@ -70,11 +73,25 @@ namespace RPGame
                 jump = 7;
             }
         }
+
+        public void jumpReset()
+        {
+                canJump = true; 
+        }
+
         public Entity(List<Vector2> numbers):base(numbers) { }
 
         public void LoadContent()
         {
             player1 = Main.GameContent.Load<Texture2D>("TestCharWalk1");
+        }
+
+        public void FloorReset()
+        {
+            GravityReset();
+
+            if (!canJump)
+            jumpReset();
         }
     }
 }
