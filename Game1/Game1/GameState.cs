@@ -87,8 +87,9 @@ namespace RPGame
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
 
-            Draw(spriteBatch);
+
             CurrentScreen.Update(camera, graphicsManager);
+            Draw(spriteBatch);
 
         }
         //Draws the images and textures we use

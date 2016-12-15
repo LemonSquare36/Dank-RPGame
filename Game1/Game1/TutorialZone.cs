@@ -87,10 +87,12 @@ namespace RPGame
                 if (PlayerCollision)
                 {
                     Player.Rebuff(TFloor);
+                    Player.GravityReset();
                 }
                 if (PlayerCollision1)
                 {
                     Player.Rebuff(TFloor2);
+                    Player.GravityReset();
                 }
                 if (PlayerCollision2)
                 {
@@ -104,6 +106,7 @@ namespace RPGame
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
             Player.MoveShape(Key);
+            Player.Jump(Key);
         }
 
 

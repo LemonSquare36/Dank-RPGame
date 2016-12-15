@@ -108,7 +108,7 @@ namespace RPGame
 
             if (Key.IsKeyDown(Keys.D))
             {
-                Movement = new Vector2(Movement.X + 1f, Movement.Y);
+                Movement = new Vector2(Movement.X + 2f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.S))
             {
@@ -116,7 +116,7 @@ namespace RPGame
             }
             if (Key.IsKeyDown(Keys.A))
             {
-                Movement = new Vector2(Movement.X - 1f, Movement.Y);
+                Movement = new Vector2(Movement.X - 2f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.W))
             {
@@ -238,7 +238,7 @@ namespace RPGame
             double baSquared;
 
             crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
-            if (Math.Abs(crossProduct) > 150)
+            if (Math.Abs(crossProduct) > 1500)
                 return false;
 
             dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
@@ -384,10 +384,6 @@ namespace RPGame
             }
         }
 
-        public void MoveChar()
-        {
-
-        }
     }
 }
 
