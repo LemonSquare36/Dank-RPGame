@@ -42,7 +42,7 @@ namespace RPGame
             #endregion
 
             #region Button Load
-            Test = new Button(new Vector2(200, 75), 400, 100, Play, PlayHover, "Play");
+            Test = new Button(new Vector2(200, 75), 400, 100, Play, PlayHover, "Sound");
             Option = new Button(new Vector2(200, 200), 400, 100, Options, OptionsHover, "Option");
             Credit = new Button(new Vector2(200, 325), 400, 100, Credits, CreditsHover, "Credit");
             #endregion
