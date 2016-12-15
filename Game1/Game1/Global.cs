@@ -37,7 +37,9 @@ namespace RPGame
 
         protected SpriteFont font;
 
-        //Deletes the file So the errors dont build up.
+        /// <summary>
+        /// Deletes the file So the errors dont build up.
+        /// </summary>
         public void ErrorFileReset()
         {
             if (File.Exists(errorPath))

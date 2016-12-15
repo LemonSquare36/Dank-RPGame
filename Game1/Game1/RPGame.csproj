@@ -53,6 +53,9 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Area 1.cs" />
     <Compile Include="Areas.cs" />
@@ -61,7 +64,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="CrashHandler.cs" />
     <Compile Include="CrashWindow.cs" />
-    <Compile Include="Enemy.cs" />
+    <Compile Include="CreditsMenu.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="CrashForm.cs">
       <SubType>Form</SubType>

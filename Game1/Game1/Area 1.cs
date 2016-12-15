@@ -63,7 +63,6 @@ namespace RPGame
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            player1.MoveChar();
 
             base.Update(camera, graphicsManager);
 

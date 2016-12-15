@@ -84,16 +84,31 @@ namespace RPGame
                 bool PlayerCollision2 = Collision(Player, Twall);
                 bool PlayerCollision3 = Collision(Player, Twall2);
 
-                if (PlayerCollision || PlayerCollision1 || PlayerCollision2 || PlayerCollision3)
+                if (PlayerCollision)
                 {
                     Player.Rebuff(TFloor);
+                    Player.FloorReset();
+                }
+                if (PlayerCollision1)
+                {
                     Player.Rebuff(TFloor2);
+                    Player.FloorReset();
+                }
+                if (PlayerCollision2)
+                {
                     Player.Rebuff(Twall);
+                }
+                if (PlayerCollision3)
+                {
                     Player.Rebuff(Twall2);
                 }
+                
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
+            Player.MoveChar(Key);
+            Player.Jump(Key);
         }
+
 
 
         private void MakeShapes()

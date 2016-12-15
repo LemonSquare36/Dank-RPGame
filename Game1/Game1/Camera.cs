@@ -39,19 +39,19 @@ namespace RPGame
         {
             if (CurrentKeyBoardState.IsKeyDown(Keys.Right))
             {
-                Position = new Vector2(Position.X - 1, Position.Y);
+                Position = new Vector2(Position.X - 2, Position.Y);
             }
             if (CurrentKeyBoardState.IsKeyDown(Keys.Left))
             {
-                Position = new Vector2(Position.X + 1, Position.Y);
+                Position = new Vector2(Position.X + 2, Position.Y);
             }
             if (CurrentKeyBoardState.IsKeyDown(Keys.Up))
             {
-                Position = new Vector2(Position.X, Position.Y + 1);
+                Position = new Vector2(Position.X, Position.Y + 2);
             }
             if (CurrentKeyBoardState.IsKeyDown(Keys.Down))
             {
-                Position = new Vector2(Position.X, Position.Y - 1);
+                Position = new Vector2(Position.X, Position.Y - 2);
             }
         }
 

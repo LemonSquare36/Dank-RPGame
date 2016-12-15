@@ -27,7 +27,7 @@ namespace RPGame
         protected float rotation;
         private List<Vector2> realPos = new List<Vector2>();
         public Vector2 Movement = Vector2.Zero;
-        Vector2 OldPosition = new Vector2();
+        protected Vector2 OldPosition = new Vector2();
 
         protected Vector2 Placement;
         //Holds Shapes Verticies
@@ -93,7 +93,7 @@ namespace RPGame
             {
                 spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
             }
-            catch(Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
         //Roatates the Shape
@@ -108,7 +108,7 @@ namespace RPGame
 
             if (Key.IsKeyDown(Keys.D))
             {
-                Movement = new Vector2(Movement.X + 1f, Movement.Y);
+                Movement = new Vector2(Movement.X + 2f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.S))
             {
@@ -116,7 +116,7 @@ namespace RPGame
             }
             if (Key.IsKeyDown(Keys.A))
             {
-                Movement = new Vector2(Movement.X - 1f, Movement.Y);
+                Movement = new Vector2(Movement.X - 2f, Movement.Y);
             }
             if (Key.IsKeyDown(Keys.W))
             {
@@ -182,7 +182,7 @@ namespace RPGame
         }
         //Find the realPos of the shapes using the images verticies
         public void RealPos()
-        { 
+        {
             Vector2 Pos, vertTemp;
             float theta = 0;
             float H, X, Y;
@@ -238,7 +238,7 @@ namespace RPGame
             double baSquared;
 
             crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
-            if (Math.Abs(crossProduct) > 150)
+            if (Math.Abs(crossProduct) > 1500)
                 return false;
 
             dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
@@ -343,6 +343,10 @@ namespace RPGame
                                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                                     }
                                 }
+                                else if (Slope < -2 && Positive == true)
+                                {
+                                    Placement = OldPosition;
+                                }
 
 
                                 if (Slope < 2 && Positive == false)
@@ -355,15 +359,19 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + Slope);
                                     }
-                                    
+
                                     if (Movement.X < 0 && Movement.Y < 0)
                                     {
                                         Placement = new Vector2(Placement.X - Slope, Placement.Y + (Slope * 2));
                                     }
-                                   else if (Movement.X < 0)
+                                    else if (Movement.X < 0)
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y - (Slope * 2));
                                     }
+                                }
+                                else if (Slope > 2 && Positive == true)
+                                {
+                                    Placement = OldPosition;
                                 }
                             }
                         }
@@ -376,10 +384,6 @@ namespace RPGame
             }
         }
 
-        public void MoveChar()
-        {
-
-        }
     }
 }
 

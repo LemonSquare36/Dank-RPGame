@@ -37,6 +37,7 @@ namespace RPGame
         MainMenu mainMenu;
         OptionsMenu Options;
         PuaseScreen Puase;
+        CreditsMenu Credits;
         FileSelectScreen fileSelect;
         #endregion
 
@@ -54,6 +55,7 @@ namespace RPGame
             Options = new OptionsMenu();
             Puase = new PuaseScreen();
             fileSelect = new FileSelectScreen();
+            Credits = new CreditsMenu();
             #endregion
 
             if (CurrentScreen != null)
@@ -85,8 +87,9 @@ namespace RPGame
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
 
-            Draw(spriteBatch);
+
             CurrentScreen.Update(camera, graphicsManager);
+            Draw(spriteBatch);
 
         }
         //Draws the images and textures we use
@@ -112,6 +115,10 @@ namespace RPGame
 
                 case "Option":
                    CurrentScreen = Options;
+                    break;
+
+                case "Credit":
+                    CurrentScreen = Credits;
                     break;
                 default:
                     Load = false;
