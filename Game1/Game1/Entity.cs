@@ -31,7 +31,7 @@ namespace RPGame
             Movement = new Vector2(Movement.X, Movement.Y + gravity);
             Placement += Movement;
 
-            if (gravity != 1.9 && gravity < 1.9)
+            if (gravity != 3 && gravity < 3)
             {
                 gravity += .05f;
             }
@@ -71,7 +71,7 @@ namespace RPGame
             if (jump < 0)
             {
                 air = false;
-                jump = 7;
+                jump = 10;
             }
         }
 

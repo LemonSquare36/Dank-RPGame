@@ -371,7 +371,7 @@ namespace RPGame
                                 }
                                 else if (Slope > 2 && Positive == true)
                                 {
-                                    Placement = OldPosition;
+                                    Placement = OldPosition; 
                                     Placement.X += 2;
                                 }
                             }
