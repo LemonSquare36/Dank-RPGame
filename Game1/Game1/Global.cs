@@ -36,6 +36,7 @@ namespace RPGame
         protected static Hashtable shapeVerts = new Hashtable();
 
         protected SpriteFont font;
+        protected SpriteFont font1;
 
         /// <summary>
         /// Deletes the file So the errors dont build up.
