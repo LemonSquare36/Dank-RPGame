@@ -89,7 +89,6 @@ namespace RPGame
 
 
             CurrentScreen.Update(camera, graphicsManager);
-            Draw(spriteBatch);
 
         }
         //Draws the images and textures we use

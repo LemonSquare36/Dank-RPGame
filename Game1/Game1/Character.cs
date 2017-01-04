@@ -26,64 +26,31 @@ namespace RPGame
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
-        public int xp = 0;
 
         protected Random rand = new Random();
 
         public void LevelUp()
         {
-            level = level + 1;
-            health = health + rand.Next(1, 7);
-            ability = ability + rand.Next(1, 7);
-            attack = attack + rand.Next(1, 7);
+
         }
 
-        public void LoadInventory(string CharacterName)
+        public void LoadItems()
         {
-            StreamReader CharacterReader = new StreamReader("CharacterInventory.txt");
-            string line;
-
-            while (true)
-            {
-                line = CharacterReader.ReadLine();
-                inventory.Add(line);
-                Debug.WriteLine(inventory);
-            }
+ 
         }
-
-        public void SaveInventory(string ChracterName)
+        public void SaveItems()
         {
-            StreamWriter CharacterWriter = new StreamWriter("CharacterInventory.txt");
-
-            while (true)
-            {
-                CharacterWriter.WriteLine(inventory);
-            }
         }
 
-        public void LoadStats(string CharacterName)
+        public void LoadCharacter()
         {
-            StreamReader CharacterReader = new StreamReader("CharacterStats.txt");
-            string line;
 
-            while (true)
-            {
-                line = CharacterReader.ReadLine();
-                //characterStats.Add(line);
-                Debug.WriteLine(inventory);
-            }
         }
-
-
-        public void SaveStats(string ChracterName)
+        public void SaveCharacter()
         {
-            StreamWriter CharacterWriter = new StreamWriter("CharacterStats.txt");
 
-            while (true)
-            {
-                CharacterWriter.WriteLine(inventory);
-            }
         }
+
 
         public void MoveChar(KeyboardState Key)
         {

@@ -63,6 +63,7 @@ namespace RPGame
             oldState = newState;
             if (air)
             {
+                Movement = Vector2.Zero;
                 Movement = new Vector2(Movement.X, Movement.Y - jump);
                 jump -= .5f;
                 Placement += Movement;

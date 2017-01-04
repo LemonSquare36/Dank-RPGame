@@ -91,7 +91,7 @@ namespace RPGame
         {
             try
             {
-                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, null, Color.White);
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, new Vector2(1,1) , Color.White);
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
@@ -238,7 +238,7 @@ namespace RPGame
             double baSquared;
 
             crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
-            if (Math.Abs(crossProduct) > 1500)
+            if (Math.Abs(crossProduct) > 150)
                 return false;
 
             dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
@@ -346,6 +346,7 @@ namespace RPGame
                                 else if (Slope < -2 && Positive == true)
                                 {
                                     Placement = OldPosition;
+                                    Placement.X -=  2;                            
                                 }
 
 
@@ -359,7 +360,6 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + Slope);
                                     }
-
                                     if (Movement.X < 0 && Movement.Y < 0)
                                     {
                                         Placement = new Vector2(Placement.X - Slope, Placement.Y + (Slope * 2));
@@ -372,6 +372,7 @@ namespace RPGame
                                 else if (Slope > 2 && Positive == true)
                                 {
                                     Placement = OldPosition;
+                                    Placement.X += 2;
                                 }
                             }
                         }
