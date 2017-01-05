@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.Xna.Framework.Storage;
 
 namespace RPGame
 {
@@ -19,7 +20,6 @@ namespace RPGame
     {
         public Character(List<Vector2> numbers):base(numbers) { }
 
-        //meh
         List<string> inventory = new List<string> ();
 
         KeyboardState Key;
@@ -51,23 +51,15 @@ namespace RPGame
             }
         }
 
-        public void LoadItems()
-        {
- 
-        }
-        public void SaveItems()
-        {
-        }
-
-        public void LoadCharacter()
-        {
-
-        }
-        public void SaveCharacter()
+        public void Load()
         {
 
         }
 
+        public void Save()
+        {
+
+        }
 
         public void MoveChar(KeyboardState Key)
         {
