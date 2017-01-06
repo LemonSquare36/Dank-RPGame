@@ -101,19 +101,16 @@ namespace RPGame
                 if (PlayerCollision3)
                 {
                     Player.Rebuff(Twall2);
-                }
-                
+                }                
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
             Player.MoveChar(Key);
             Player.Jump(Key);
         }
 
-
-
         private void MakeShapes()
         {
-            //Create the Polygon
+            //Create the Polygon 
             RetrieveShapes(1);
 
             Twall = CreateShape("twall");
@@ -121,7 +118,7 @@ namespace RPGame
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
             Player = CreateChar("player1");
-        }
+        }    
 
         private void TutorialCommands()
         {
@@ -164,6 +161,5 @@ namespace RPGame
                 }
             }
         }
-
     }
 }

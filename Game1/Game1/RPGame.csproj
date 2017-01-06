@@ -129,6 +129,7 @@
     <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\RedCube.png" />
     <Content Include="Content\Sprites\TestCharWalk1.png" />
+    <Content Include="Content\Sprites\Cake.png" />
     <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />
     <Content Include="Content\Sprites\TutorialSprites\TBack.png" />
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
