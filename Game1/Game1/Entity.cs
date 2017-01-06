@@ -44,7 +44,6 @@ namespace RPGame
         public void Jump(KeyboardState key)
         {
             KeyboardState newState = Keyboard.GetState();
-
             
             if (newState.IsKeyDown(Keys.Space))
             {
