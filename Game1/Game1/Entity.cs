@@ -52,8 +52,7 @@ namespace RPGame
                 {
                     if (canJump)
                     air = true;
-                    canJump = false;
-                    
+                    canJump = false;                  
                 } 
             }
             else if (oldState.IsKeyDown(Keys.Space))
