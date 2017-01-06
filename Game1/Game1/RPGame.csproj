@@ -121,6 +121,12 @@
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\FloorByTheDoor.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\FloorHump.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\Janitor Door.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\LongFloor.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\RedCube.png" />
     <Content Include="Content\Sprites\TestCharWalk1.png" />
     <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />

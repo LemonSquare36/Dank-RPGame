@@ -10,7 +10,9 @@ namespace RPGame
 {
     class Habitation : Areas
     {
-
+        Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp;
+        Texture2D StairsDoor, JanitorDoor;
+        Character Player;
 
         public override void Initialize()
         {
@@ -21,11 +23,21 @@ namespace RPGame
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
+
+            FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
+            FloorHump.LoadContent("floorhump", "floorhump");
+            LongFloor1.LoadContent("longfloor1", "longfloor");
+            LongFloor2.LoadContent("longfloor2", "longfloor");
+            Mramp.LoadContent("mramp", "mramp");
         }
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            
+            Player.Gravity();
+            base.Update(camera, graphicsManager);
+
+            Player.MoveChar(Key);
+            Player.Jump(Key);
         }
 
         public override void Draw()
@@ -34,7 +46,15 @@ namespace RPGame
         }
         private void MakeShapes()
         {
+            RetrieveShapes(1);
 
+            FloorbytheDoor = CreateShape("floorbythedoor");
+            FloorHump = CreateShape("floorhump");
+            LongFloor1 = CreateShape("longfloor");
+            LongFloor2 = CreateShape("longfloor");
+            Mramp = CreateShape("mramp");
+
+            Player = CreateChar("player1");
         }
     }
 }
