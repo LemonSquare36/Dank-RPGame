@@ -66,7 +66,7 @@ namespace RPGame
 
         public void Load()
         {
-            //Character.SetShapePlacement();
+            
         }
 
         public void MoveChar(KeyboardState Key)

@@ -18,7 +18,7 @@ namespace RPGame
     public class Polygons : PolygonHolder
     {
         // FilePath for the ShapeList and ShapePlace
-        static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        protected static string SourceFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         string filePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
         // declaring texture 2D's
