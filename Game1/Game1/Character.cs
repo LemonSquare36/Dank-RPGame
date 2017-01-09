@@ -12,15 +12,37 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Xna.Framework.Storage;
+//using Microsoft.Xna.Framework.Storage;
 
 namespace RPGame
 {
     public class Character : Entity
     {
-        public Character(List<Vector2> numbers):base(numbers) { }
+        public Character(List<Vector2> numbers) : base(numbers) { }
 
-        List<string> inventory = new List<string> ();
+        private class Keycard{ }
+        private class Mop { }
+        private class KeyChain { }
+        private class Plungers { }
+
+        public struct Save
+        {
+            public string Name;
+            public Vector2 position;
+            public int Level;
+            public List<string> Inventory;
+        }
+
+        enum SaveState
+        {
+            NotSaving,
+            ReadyStorageDevice,
+            SelectingStorageDevice,
+
+            ReadyToOpenStorageDevice,
+            OpenStorageDevice,
+            ReadyToSave
+        }
 
         KeyboardState Key;
 
@@ -31,7 +53,55 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
+
+        StorageDevice storageDevice;
+        SaveState save = SaveState.NotSaving;
+        IAsyncResult aSyncResult;
+        PlayerIndex playerIndex = PlayerIndex.One;
+        StorageContainer storageContainer;
+        string fileName = "Janitor.sav";
+
+
+        Save newSave = new Save()
+        {
+            position = new Vector2(400, 100),
+            Level = 1,
+            Inventory = new List<string>()
+        {
+
+        }
+    };
+
+        private void UpdateSave()
+        {
+            switch (save)
+            {
+                //case SaveState.ReadyToOpenStorageDevice:
+
+                    //if (!Guid.IsVisible)
+                    {
+
+                    }
+            }
+        }
+      
+
         protected Random rand = new Random();
+
+        /// <summary>
+        /// The Area in which you are trying to load the character into and the place; Please use clear names
+        /// </summary>
+        /// <param name="area"></param>
+        public void LoadCharacter(string area)
+        {
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TestCharWalk1");
+
+            if (area == "HabitationJanitorDoor")
+                Placement = new Vector2(400,100);
+            if (area == "TutorialSpawn")
+                Placement = new Vector2(400, 300);
+
+        }
 
         public void LevelUp()
         {
@@ -52,11 +122,6 @@ namespace RPGame
         }
 
         public void Load()
-        {
-
-        }
-
-        public void Save()
         {
 
         }

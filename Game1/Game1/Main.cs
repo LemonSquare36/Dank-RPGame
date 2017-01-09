@@ -40,7 +40,7 @@ namespace RPGame
 
         protected override void Initialize()
         {
-            CrashHandle.CrashCheck();
+           // CrashHandle.CrashCheck();
             CrashHandle.CrashFileMake();
 
             theGameState.Initialize();

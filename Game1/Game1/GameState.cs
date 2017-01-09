@@ -33,6 +33,7 @@ namespace RPGame
 
         Area_1 TriangleLand;
         TutorialZone Tutorial;
+        Habitation habitation;
 
         MainMenu mainMenu;
         OptionsMenu Options;
@@ -49,6 +50,7 @@ namespace RPGame
             #region Creating the areas
             TriangleLand = new Area_1();
             Tutorial = new TutorialZone();
+            habitation = new Habitation();
             #endregion
             #region Creating the Menus
             mainMenu = new MainMenu();
@@ -109,7 +111,7 @@ namespace RPGame
             switch (CurrentScreen.getNextScreen())
             {
                 case "Play":
-                    CurrentScreen = Tutorial;
+                    CurrentScreen = habitation;
                     break;
 
                 case "Option":
