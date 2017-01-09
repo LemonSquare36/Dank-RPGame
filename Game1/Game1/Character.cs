@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Xna.Framework.Storage;
+//using Microsoft.Xna.Framework.Storage;
 
 namespace RPGame
 {
@@ -66,7 +66,7 @@ namespace RPGame
 
         public void Load()
         {
-            //Character.SetShapePlacement();
+            
         }
 
         public void MoveChar(KeyboardState Key)

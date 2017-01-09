@@ -25,6 +25,8 @@ namespace RPGame
         float jump = 7f;
         bool canJump = true;
 
+        string savePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
+
         public void Gravity()
         {
             Movement = Vector2.Zero;
@@ -92,5 +94,25 @@ namespace RPGame
             if (!canJump)
             jumpReset();
         }
+
+        /*protected new Vector2 SetShapePlacement(string ShapeName)
+        {
+            var PlaceReader = new StreamReader(savePath);
+
+            string line;
+            Vector2 Placement = new Vector2();
+            while (true)
+            {
+                line = PlaceReader.ReadLine();
+                if (line == ShapeName)
+                {
+                    line = PlaceReader.ReadLine();
+                    string[] VertCords = (line.Split(','));
+                    float xVert = (float)Convert.ToDouble(VertCords[0]);
+                    float yVert = (float)Convert.ToDouble(VertCords[1]);
+                    Placement = new Vector2(xVert, yVert);
+                    break;
+                }
+            }*/
+        }
     }
-}

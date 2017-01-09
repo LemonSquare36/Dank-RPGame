@@ -127,7 +127,10 @@ namespace RPGame
                         
             }
             if (Load)
-            LoadContent(spriteBatch, graphicsDevice, graphicsManager);
+            {
+                Initialize();
+                LoadContent(spriteBatch, graphicsDevice, graphicsManager);
+            }
         }
     }
 }
