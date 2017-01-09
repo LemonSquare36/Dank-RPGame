@@ -24,7 +24,7 @@ namespace RPGame
         bool Wright;
         bool jump;
         bool attack;
-
+        
         public override void Initialize()
         {
             Wleft = false;
