@@ -74,6 +74,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FileSelectScreen.cs" />
+    <Compile Include="FloatingAlien.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Habitation.cs" />
