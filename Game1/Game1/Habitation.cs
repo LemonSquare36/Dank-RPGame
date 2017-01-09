@@ -25,7 +25,7 @@ namespace RPGame
             spriteBatch = spriteBatchMain;
 
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
-            //FloorHump.LoadContent("floorhump", "floorhump");
+            FloorHump.LoadContent("floorhump", "floorhump");
             //LongFloor1.LoadContent("longfloor1", "longfloor");
             //LongFloor2.LoadContent("longfloor2", "longfloor");
             //Mramp.LoadContent("mramp", "mramp");
@@ -57,7 +57,11 @@ namespace RPGame
 
         public override void Draw()
         {
-            FloorbytheDoor.RealPos();
+            foreach (Polygons poly in PolyList)
+            {
+                poly.RealPos();
+            }
+            Player.RealPos();
 
             FloorbytheDoor.Draw(spriteBatch);
             FloorHump.Draw(spriteBatch);
@@ -71,18 +75,18 @@ namespace RPGame
         {
             RetrieveShapes(1);
 
-                FloorbytheDoor = CreateShape("floorbythedoor");
-                FloorHump = CreateShape("floorhump");
-                LongFloor1 = CreateShape("longfloor");
-                LongFloor2 = CreateShape("longfloor");
-                Mramp = CreateShape("mramp");
+            FloorbytheDoor = CreateShape("floorbythedoor");
+            FloorHump = CreateShape("floorhump");
+            LongFloor1 = CreateShape("longfloor");
+            LongFloor2 = CreateShape("longfloor");
+            Mramp = CreateShape("mramp");
 
             Player = CreateChar("janitor");
         }
         private void ListAdd()
         {
             PolyList.Add(FloorbytheDoor);
-            //PolyList.Add(FloorHump);
+            PolyList.Add(FloorHump);
             //PolyList.Add(LongFloor1);
             //PolyList.Add(LongFloor2);
             //PolyList.Add(Mramp);
