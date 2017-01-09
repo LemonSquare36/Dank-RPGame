@@ -29,7 +29,7 @@ namespace RPGame
         Polygons Pentagon1;
         Polygons Pentagon2;
         Polygons Floor1;
-        Polygons player1;
+        Polygons janitor;
 
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -41,7 +41,7 @@ namespace RPGame
             Triangle3.LoadContent("triangle3", "GreenTriangle");
             Pentagon1.LoadContent("pentagon1", "GreyPentagon");
             Pentagon2.LoadContent("pentagon2", "GreyPentagon");
-            player1.LoadContent("player1", "player1");
+            janitor.LoadContent("janitor", "janitor");
             Floor1.LoadContent("floor1", "Floor");
         }
 
@@ -52,21 +52,21 @@ namespace RPGame
             Pentagon1.RealPos();
             Pentagon2.RealPos();
             Floor1.RealPos();
-            player1.RealPos();
+            janitor.RealPos();
             Triangle1.Draw(spriteBatch);
             //Triangle2.Draw(spriteBatch);
             //Triangle3.Draw(spriteBatch);
             Pentagon1.Draw(spriteBatch);
             //Pentagon2.Draw(spriteBatch);
             Floor1.Draw(spriteBatch);
-            player1.Draw(spriteBatch);
+            janitor.Draw(spriteBatch);
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
 
             base.Update(camera, graphicsManager);
 
-            bool Collide = Collision(Triangle1, player1);
+            bool Collide = Collision(Triangle1, janitor);
             bool Collide2 = Collision(Triangle1, Pentagon1);
 
             if (Collide2)
@@ -75,7 +75,7 @@ namespace RPGame
             }
             if (Collide)
             {
-                Triangle1.Rebuff(player1);
+                Triangle1.Rebuff(janitor);
             }
             Triangle1.MoveShape(Key);
         }
@@ -92,7 +92,7 @@ namespace RPGame
             Pentagon1 = CreateShape("pentagon1");
             Pentagon2 = CreateShape("pentagon2");
             Floor1 = CreateShape("floor1");
-            player1 = CreateChar("player1");
+            janitor = CreateChar("janitor");
 
 
         }

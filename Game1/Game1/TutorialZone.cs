@@ -117,7 +117,7 @@ namespace RPGame
             Twall2 = CreateShape("twall");
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
-            Player = CreateChar("player1");
+            Player = CreateChar("janitor");
         }    
 
         private void TutorialCommands()

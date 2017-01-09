@@ -17,7 +17,7 @@ namespace RPGame
 {
    public class Entity : Polygons
     {
-        protected Texture2D player1;
+        protected Texture2D janitor;
         KeyboardState oldState;
         float gravity = 0f;
         bool air = false;
@@ -82,7 +82,7 @@ namespace RPGame
 
         public void LoadContent()
         {
-            player1 = Main.GameContent.Load<Texture2D>("TestCharWalk1");
+            janitor = Main.GameContent.Load<Texture2D>("TestCharWalk1");
         }
 
         public void FloorReset()

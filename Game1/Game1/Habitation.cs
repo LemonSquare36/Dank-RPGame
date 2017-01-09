@@ -76,7 +76,7 @@ namespace RPGame
                 LongFloor2 = CreateShape("longfloor");
                 Mramp = CreateShape("mramp");
 
-            Player = CreateChar("player1");
+            Player = CreateChar("janitor");
         }
         private void ListAdd()
         {
