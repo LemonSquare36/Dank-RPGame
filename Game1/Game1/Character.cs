@@ -18,9 +18,31 @@ namespace RPGame
 {
     public class Character : Entity
     {
-        public Character(List<Vector2> numbers):base(numbers) { }
+        public Character(List<Vector2> numbers) : base(numbers) { }
 
-        List<string> inventory = new List<string> ();
+        private class Keycard{ }
+        private class Mop { }
+        private class KeyChain { }
+        private class Plungers { }
+
+        public struct Save
+        {
+            public string Name;
+            public Vector2 position;
+            public int Level;
+            public List<string> Inventory;
+        }
+
+        enum SaveState
+        {
+            NotSaving,
+            ReadyStorageDevice,
+            SelectingStorageDevice,
+
+            ReadyToOpenStorageDevice,
+            OpenStorageDevice,
+            ReadyToSave
+        }
 
         KeyboardState Key;
 
@@ -30,6 +52,39 @@ namespace RPGame
         public int level = 1;
 
         SpriteBatch spriteBatch;
+
+
+        StorageDevice storageDevice;
+        SaveState save = SaveState.NotSaving;
+        IAsyncResult aSyncResult;
+        PlayerIndex playerIndex = PlayerIndex.One;
+        StorageContainer storageContainer;
+        string fileName = "Janitor.sav";
+
+
+        Save newSave = new Save()
+        {
+            position = new Vector2(400, 100),
+            Level = 1,
+            Inventory = new List<string>()
+        {
+
+        }
+    };
+
+        private void UpdateSave()
+        {
+            switch (save)
+            {
+                //case SaveState.ReadyToOpenStorageDevice:
+
+                    //if (!Guid.IsVisible)
+                    {
+
+                    }
+            }
+        }
+      
 
         protected Random rand = new Random();
 
@@ -52,11 +107,6 @@ namespace RPGame
         }
 
         public void Load()
-        {
-
-        }
-
-        public void Save()
         {
 
         }
