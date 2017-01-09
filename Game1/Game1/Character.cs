@@ -20,7 +20,7 @@ namespace RPGame
     {
         public Character(List<Vector2> numbers) : base(numbers) { }
 
-        private class Keycard{ }
+        private class Keycard { }
         private class Mop { }
         private class KeyChain { }
         private class Plungers { }
@@ -54,11 +54,11 @@ namespace RPGame
         SpriteBatch spriteBatch;
 
 
-        StorageDevice storageDevice;
+       // StorageDevice storageDevice;
         SaveState save = SaveState.NotSaving;
         IAsyncResult aSyncResult;
         PlayerIndex playerIndex = PlayerIndex.One;
-        StorageContainer storageContainer;
+        //StorageContainer storageContainer;
         string fileName = "Janitor.sav";
 
 
@@ -67,26 +67,26 @@ namespace RPGame
             position = new Vector2(400, 100),
             Level = 1,
             Inventory = new List<string>()
-        {
+            {
 
-        }
-    };
+            }
+        };
 
         private void UpdateSave()
         {
-            switch (save)
+           switch (save)
             {
                 //case SaveState.ReadyToOpenStorageDevice:
 
-                    //if (!Guid.IsVisible)
-                    {
+                //if (!Guid.IsVisible)
+            {
 
-                    }
             }
         }
+    }
       
 
-        protected Random rand = new Random();
+        //protected Random rand = new Random();
 
         /// <summary>
         /// The Area in which you are trying to load the character into and the place; Please use clear names

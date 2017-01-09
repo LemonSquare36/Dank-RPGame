@@ -17,15 +17,12 @@ namespace RPGame
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
-            ListAdd();
         }
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
-
-            
 
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
             //FloorHump.LoadContent("floorhump", "floorhump");
@@ -34,6 +31,8 @@ namespace RPGame
             //Mramp.LoadContent("mramp", "mramp");
 
             Player.LoadCharacter("HabitationJanitorDoor");
+
+            ListAdd();
         }
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
@@ -58,6 +57,8 @@ namespace RPGame
 
         public override void Draw()
         {
+            FloorbytheDoor.RealPos();
+
             FloorbytheDoor.Draw(spriteBatch);
             FloorHump.Draw(spriteBatch);
             LongFloor1.Draw(spriteBatch);
