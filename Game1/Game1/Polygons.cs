@@ -83,16 +83,14 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TFloor");
             if (ShapeImage == "TWall")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TWall");
-            if (ShapeImage == "player1")
-                texture = Main.GameContent.Load<Texture2D>("Sprites/TestCharWalk1");
             if (ShapeImage == "floorbythedoor")
-                texture = Main.GameContent.Load<Texture2D>("Sprites/FloorByTheDoor");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
             if (ShapeImage == "floorhump")
-                texture = Main.GameContent.Load<Texture2D>("Sprites/FloorHump");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorHump");
             if (ShapeImage == "longfloor")
-                texture = Main.GameContent.Load<Texture2D>("Sprites/LongFloor");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             if (ShapeImage == "mramp")
-                texture = Main.GameContent.Load<Texture2D>("Sprites/Mramp");
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
 
         }
         //Draws the Images with current Texture

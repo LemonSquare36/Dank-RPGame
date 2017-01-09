@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Xna.Framework.Storage;
+//using Microsoft.Xna.Framework.Storage;
 
 namespace RPGame
 {
@@ -32,6 +32,21 @@ namespace RPGame
         SpriteBatch spriteBatch;
 
         protected Random rand = new Random();
+
+        /// <summary>
+        /// The Area in which you are trying to load the character into and the place; Please use clear names
+        /// </summary>
+        /// <param name="area"></param>
+        public void LoadCharacter(string area)
+        {
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TestCharWalk1");
+
+            if (area == "HabitationJanitorDoor")
+                Placement = new Vector2(400,100);
+            if (area == "TutorialSpawn")
+                Placement = new Vector2(400, 300);
+
+        }
 
         public void LevelUp()
         {

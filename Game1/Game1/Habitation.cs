@@ -13,10 +13,11 @@ namespace RPGame
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp;
         Texture2D StairsDoor, JanitorDoor;
         Character Player;
-
+        List<Polygons> PolyList;
         public override void Initialize()
         {
-            
+            PolyList = new List<Polygons>();
+            ListAdd();
         }
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -24,11 +25,15 @@ namespace RPGame
             MakeShapes();
             spriteBatch = spriteBatchMain;
 
+            
+
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
-            FloorHump.LoadContent("floorhump", "floorhump");
-            LongFloor1.LoadContent("longfloor1", "longfloor");
-            LongFloor2.LoadContent("longfloor2", "longfloor");
-            Mramp.LoadContent("mramp", "mramp");
+            //FloorHump.LoadContent("floorhump", "floorhump");
+            //LongFloor1.LoadContent("longfloor1", "longfloor");
+            //LongFloor2.LoadContent("longfloor2", "longfloor");
+            //Mramp.LoadContent("mramp", "mramp");
+
+            Player.LoadCharacter("HabitationJanitorDoor");
         }
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
@@ -36,25 +41,50 @@ namespace RPGame
             Player.Gravity();
             base.Update(camera, graphicsManager);
 
+            bool PlayerCollision;
+            foreach (Polygons poly in PolyList)
+            {
+                PlayerCollision = Collision(Player, poly);
+                if (PlayerCollision)
+                {
+                    Player.Rebuff(poly);
+                    Player.FloorReset();
+                }
+            }
+
             Player.MoveChar(Key);
             Player.Jump(Key);
         }
 
         public override void Draw()
         {
-            
+            FloorbytheDoor.Draw(spriteBatch);
+            FloorHump.Draw(spriteBatch);
+            LongFloor1.Draw(spriteBatch);
+            LongFloor2.Draw(spriteBatch);
+            Mramp.Draw(spriteBatch);
+
+            Player.Draw(spriteBatch);
         }
         private void MakeShapes()
         {
             RetrieveShapes(1);
 
-            FloorbytheDoor = CreateShape("floorbythedoor");
-            FloorHump = CreateShape("floorhump");
-            LongFloor1 = CreateShape("longfloor");
-            LongFloor2 = CreateShape("longfloor");
-            Mramp = CreateShape("mramp");
+                FloorbytheDoor = CreateShape("floorbythedoor");
+                FloorHump = CreateShape("floorhump");
+                LongFloor1 = CreateShape("longfloor");
+                LongFloor2 = CreateShape("longfloor");
+                Mramp = CreateShape("mramp");
 
             Player = CreateChar("player1");
+        }
+        private void ListAdd()
+        {
+            PolyList.Add(FloorbytheDoor);
+            //PolyList.Add(FloorHump);
+            //PolyList.Add(LongFloor1);
+            //PolyList.Add(LongFloor2);
+            //PolyList.Add(Mramp);
         }
     }
 }

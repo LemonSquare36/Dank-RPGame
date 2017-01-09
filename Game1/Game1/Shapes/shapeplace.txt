@@ -18,5 +18,13 @@ twall1
 -10,240
 twall2
 810,240
-player1
-400, 100
+floorbythedoor
+300,200
+floorhump
+200,0
+longfloor1
+0,200
+longfloor2
+-500,100
+mramp
+-400,200
