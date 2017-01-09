@@ -1,6 +1,0 @@
-Polygons
-Line 103
-Error:
-Value cannot be null.
-Parameter name: texture
-
