@@ -14,8 +14,8 @@ namespace RPGame
 {
     class OptionsMenu : MenuManager
     {
-        Button Sound, Fullscreen;
-        Texture2D Sounds, SoundChecked, Fullscreens, FullscreenChecked;
+        Button Sound, Fullscreen, Back;
+        Texture2D Sounds, SoundChecked, Fullscreens, FullscreenChecked, Backs, BackHover;
 
         public override void Initialize()
         {
@@ -31,16 +31,20 @@ namespace RPGame
             SoundChecked = Main.GameContent.Load<Texture2D>("buttons/sound_checked");
             Fullscreens = Main.GameContent.Load<Texture2D>("buttons/fullscreen");
             FullscreenChecked = Main.GameContent.Load<Texture2D>("buttons/fullscreen_checked");
+            Backs = Main.GameContent.Load<Texture2D>("buttons/back");
+            BackHover = Main.GameContent.Load<Texture2D>("buttons/back_hover");
             #endregion
 
             #region Button Load
             Sound = new Button(new Vector2(200, 75), 400, 100, Sounds, SoundChecked, "Sound");
             Fullscreen= new Button(new Vector2(200, 200), 400, 100, Fullscreens, FullscreenChecked, "Fullscreen");
+            Back = new Button(new Vector2(200, 325), 400, 100, Backs, BackHover, "Back");
             #endregion
 
             //Important or the event doesnt work
             Sound.ButtonClicked += ButtonClicked;
             Fullscreen.ButtonClicked += ButtonClicked;
+            Back.ButtonClicked += ButtonClicked;
 
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
@@ -51,11 +55,13 @@ namespace RPGame
             //Update the buttons
             Sound.Update(mouse);
             Fullscreen.Update(mouse);
+            Back.Update(mouse);
         }
         public override void Draw()
         {
             Sound.Draw(spriteBatch);
             Fullscreen.Draw(spriteBatch);
+            Back.Draw(spriteBatch);
         }
     }
 }

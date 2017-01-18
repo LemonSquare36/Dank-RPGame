@@ -58,6 +58,7 @@ namespace RPGame
             Puase = new PuaseScreen();
             fileSelect = new FileSelectScreen();
             Credits = new CreditsMenu();
+
             #endregion
 
             if (CurrentScreen != null)
@@ -120,6 +121,10 @@ namespace RPGame
 
                 case "Credit":
                     CurrentScreen = Credits;
+                    break;
+
+                case "Back":
+                    CurrentScreen = mainMenu;
                     break;
                 default:
                     Load = false;
