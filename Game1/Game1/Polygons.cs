@@ -30,6 +30,7 @@ namespace RPGame
         protected Vector2 OldPosition = new Vector2();
 
         protected Vector2 Placement;
+        
         //Holds Shapes Verticies
         protected List<Vector2> verticies = new List<Vector2>();
 
@@ -98,7 +99,7 @@ namespace RPGame
         {
             try
             {
-                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, new Vector2(1,1) , Color.White);
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, new Vector2(1, 1), Color.White);
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
@@ -266,6 +267,8 @@ namespace RPGame
             Vector2 Slope1 = new Vector2();
             bool check = true;
             int value = 0;
+            int X = 0;
+            int Y = 0;
 
             if (check)
             {
@@ -273,13 +276,13 @@ namespace RPGame
                 {
                     for (int A = 1; A < Shape.getNumVerticies(); A++)
                     {
-
                         int B = A + 1;
                         if (B == Shape.getNumVerticies())
                         {
                             B = 1;
                         }
-
+                        X = A;
+                        Y = B;
                         bool hole = false;
                         bool Positive = true;
                         bool isBetween = false;
@@ -300,6 +303,7 @@ namespace RPGame
                             if (value == getNumVerticies() * (Shape.getNumVerticies() - 1))
                             {
                                 check = false;
+                                break;
                             }
                             if (value == (getNumVerticies() - 1) * (Shape.getNumVerticies() - 1))
                             {
@@ -343,7 +347,7 @@ namespace RPGame
                                     }
                                     if (Movement.X > 0 && Movement.Y < 0)
                                     {
-                                        Placement = new Vector2(Placement.X + Slope, Placement.Y - (Slope * 2));
+                                        Placement = new Vector2(Placement.X, Placement.Y - (Slope * 2));
                                     }
                                     else if (Movement.X > 0)
                                     {
@@ -353,7 +357,7 @@ namespace RPGame
                                 else if (Slope < -2 && Positive == true)
                                 {
                                     Placement = OldPosition;
-                                    Placement.X -=  2;                            
+                                    Placement.X -= 2;
                                 }
 
 
@@ -378,7 +382,7 @@ namespace RPGame
                                 }
                                 else if (Slope > 2 && Positive == true)
                                 {
-                                    Placement = OldPosition; 
+                                    Placement = OldPosition;
                                     Placement.X += 2;
                                 }
                             }
@@ -388,12 +392,25 @@ namespace RPGame
             }
             if (!check)
             {
+                
+
+                        Slope1 = new Vector2(Shape.getRealPos(Y).X - Shape.getRealPos(X).X, Shape.getRealPos(Y).Y - Shape.getRealPos(X).Y);
+                        Slope = Slope1.Y / Slope1.X;
+                        if (Slope == 0)
+                        {
+
+                        }
+
+                        else if (Slope > -2 && Slope < 0)
+                        {
+                            Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
+                        }
                 Placement -= Movement;
+                }
             }
         }
 
     }
-}
 
 
 

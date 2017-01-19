@@ -43,7 +43,7 @@ namespace RPGame
             gravity = 0.5f;
         }
 
-        public void Jump(KeyboardState key)
+        public void Jump()
         {
             KeyboardState newState = Keyboard.GetState();
             

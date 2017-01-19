@@ -35,13 +35,20 @@ namespace RPGame
         }
         public virtual void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-            Key = Keyboard.GetState();
-            camera.Move(Key);
-            camera.ChangeScreenSize(Key, graphicsManager);
+
         }
         public virtual void Draw()
         {
 
+        }
+        public void CameraMove(Camera camera, GraphicsDeviceManager graphicsManager)
+        {         
+            camera.Move(Key);
+            camera.ChangeScreenSize(Key, graphicsManager);
+        }
+        public void getKey()
+        {
+            Key = Keyboard.GetState();
         }
     }
 
