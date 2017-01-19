@@ -139,11 +139,11 @@ namespace RPGame
             }
             else
             {
-                // Press Space to continue
+                // Press W to continue
                 if (!jump)
                 {
-                    spriteBatch.DrawString(font, "Press Space to Jump", new Vector2(300, 200), Color.Red);
-                    if (Key.IsKeyDown(Keys.Space))
+                    spriteBatch.DrawString(font, "Press W to Jump", new Vector2(300, 200), Color.Red);
+                    if (Key.IsKeyDown(Keys.W))
                     {
                         jump = true;
                     }
