@@ -63,6 +63,7 @@ namespace RPGame
             Option.Update(mouse);
             Credit.Update(mouse);
         }
+        //Draws the Buttons
         public override void Draw()
         {
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
@@ -70,5 +71,14 @@ namespace RPGame
             Option.Draw(spriteBatch);
             Credit.Draw(spriteBatch);
         }
+        //Used for edge detection
+        public override void ButtonReset()
+        {
+            Test.ButtonReset();
+            Option.ButtonReset();
+            Credit.ButtonReset();
+
+        }
+
     }
 }

@@ -50,6 +50,11 @@ namespace RPGame
         {
             Key = Keyboard.GetState();
         }
+
+        public virtual void ButtonReset()
+        {
+
+        }
     }
 
 }

@@ -35,5 +35,10 @@ namespace RPGame
             ChangeScreen?.Invoke(this, EventArgs.Empty);
         }
 
+        public virtual void ButtonReset()
+        {
+
+        }
+
     }
 }

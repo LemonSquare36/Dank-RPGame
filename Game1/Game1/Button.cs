@@ -21,7 +21,8 @@ namespace RPGame
         private Texture2D unPressed, pressed;
         public Texture2D Texture;
         private MouseState mouse;
-
+        private ButtonState oldClick;
+        private ButtonState curClick;
         private string Bname;
         public string bName
         {
@@ -35,25 +36,34 @@ namespace RPGame
             remove { buttonClicked -= value; }
         }
 
-        public Button(Vector2 pos, int width, int height,Texture2D Unpressed, Texture2D Pressed, string ButtonName)//Button Name is super important becuase it determines what it does
+        public void ButtonReset()
         {
+            curClick = ButtonState.Pressed;
+            oldClick = ButtonState.Pressed;
+        }
+
+        public Button(Vector2 pos, int width, int height, Texture2D Unpressed, Texture2D Pressed, string ButtonName)//Button Name is super important becuase it determines what it does
+        {
+            curClick = ButtonState.Pressed;
+            oldClick = ButtonState.Pressed;
             Pos = pos;
             rectangle = new Rectangle((int)pos.X, (int)pos.Y, width, height);
             unPressed = Unpressed;
             pressed = Pressed;
-            Bname = ButtonName; 
+            Bname = ButtonName;
             Texture = unPressed;
         }
-        
+
         public void Update(MouseState Mouse)
         {
             mouse = Mouse;
             Texture = unPressed;
-
-            if(rectangle.Contains(mouse.X, mouse.Y))
+            oldClick = curClick;
+            curClick = mouse.LeftButton;
+            if (rectangle.Contains(mouse.X, mouse.Y))
             {
                 Texture = pressed;
-                if (mouse.LeftButton == ButtonState.Pressed)
+                if (curClick == ButtonState.Pressed && oldClick == ButtonState.Released)
                 {
                     OnButtonClicked();
                 }

@@ -57,11 +57,20 @@ namespace RPGame
             Fullscreen.Update(mouse);
             Back.Update(mouse);
         }
+        //Draws the buttons
         public override void Draw()
         {
             Sound.Draw(spriteBatch);
             Fullscreen.Draw(spriteBatch);
             Back.Draw(spriteBatch);
+        }
+        //Used for edge detection
+        public override void ButtonReset()
+        {
+            Sound.ButtonReset();
+            Fullscreen.ButtonReset();
+            Back.ButtonReset();
+
         }
     }
 }

@@ -80,6 +80,7 @@ namespace RPGame
             graphicsManager = graphicsManagerMain;
 
             mainMenu.ChangeScreen += HandleScreenChanged;
+            Options.ChangeScreen += HandleScreenChanged;
 
             CurrentScreen.LoadContent(spriteBatch);
         }
@@ -113,6 +114,7 @@ namespace RPGame
             {
                 case "Play":
                     CurrentScreen = habitation;
+                    
                     break;
 
                 case "Option":
@@ -128,9 +130,10 @@ namespace RPGame
                     break;
                 default:
                     Load = false;
-                    break;
-                        
+                    break;      
             }
+
+            CurrentScreen.ButtonReset();
             if (Load)
             {
                 Initialize();
