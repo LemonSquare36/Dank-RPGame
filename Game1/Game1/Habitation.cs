@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace RPGame
 {
@@ -38,7 +39,8 @@ namespace RPGame
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             Player.Gravity();
-            camera.Follow(Player.getRealPos(0));
+            camera.Follow(-Player.getRealPos(0));
+            Debug.WriteLine(Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
             foreach (Polygons poly in PolyList)
@@ -52,6 +54,8 @@ namespace RPGame
             }
             Player.MoveChar(Key);
             Player.Jump();
+
+            camera.ChangeScreenSize(Key, graphicsManager);
         }
 
         public override void Draw()

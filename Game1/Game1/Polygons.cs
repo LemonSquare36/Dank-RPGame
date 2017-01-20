@@ -30,7 +30,10 @@ namespace RPGame
         protected Vector2 OldPosition = new Vector2();
 
         protected Vector2 Placement;
-        
+        public Vector2 getPlacement()
+        {
+            return Placement;
+        }
         //Holds Shapes Verticies
         protected List<Vector2> verticies = new List<Vector2>();
 
@@ -199,7 +202,8 @@ namespace RPGame
             {
                 if (verts == getVerticies(0))
                 {
-                    Pos = verts;
+                    Pos.X = verts.X + Placement.X;
+                    Pos.Y = verts.Y + Placement.Y;
                     realPosTemp.Add(Pos);
                     continue;
                 }
