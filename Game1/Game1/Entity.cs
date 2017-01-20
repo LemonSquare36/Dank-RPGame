@@ -43,7 +43,7 @@ namespace RPGame
             gravity = 0.5f;
         }
 
-        public void Jump(KeyboardState key)
+        public void Jump()
         {
             KeyboardState newState = Keyboard.GetState();
 
@@ -95,7 +95,7 @@ namespace RPGame
                 jumpReset();
         }
 
-        protected new Vector2 SetShapePlacement(string ShapeName)
+        /*protected new Vector2 SetShapePlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(savePath);
 
@@ -114,6 +114,6 @@ namespace RPGame
                     break;
                 }
             }
-        }
+        }*/
     }
 }

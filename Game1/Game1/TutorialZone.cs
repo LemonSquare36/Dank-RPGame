@@ -76,7 +76,8 @@ namespace RPGame
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             Player.Gravity();
-            base.Update(camera, graphicsManager);
+            getKey();
+            CameraMove(camera, graphicsManager);
             try
             {
                 bool PlayerCollision = Collision(Player, TFloor);
@@ -105,7 +106,7 @@ namespace RPGame
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
             Player.MoveChar(Key);
-            Player.Jump(Key);
+            Player.Jump();
         }
 
         private void MakeShapes()

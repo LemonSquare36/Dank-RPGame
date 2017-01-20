@@ -105,9 +105,9 @@ namespace RPGame
           
         }
 
-        public void Follow()
+        public void Follow(Vector2 characterPosition)
         {
-
+            Position = characterPosition;
         }
     }
 }

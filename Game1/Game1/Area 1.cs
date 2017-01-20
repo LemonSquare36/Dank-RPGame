@@ -63,8 +63,8 @@ namespace RPGame
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
-
-            base.Update(camera, graphicsManager);
+            getKey();
+            CameraMove(camera, graphicsManager);
 
             bool Collide = Collision(Triangle1, janitor);
             bool Collide2 = Collision(Triangle1, Pentagon1);

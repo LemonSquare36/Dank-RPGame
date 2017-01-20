@@ -26,9 +26,9 @@ namespace RPGame
 
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
             FloorHump.LoadContent("floorhump", "floorhump");
-            //LongFloor1.LoadContent("longfloor1", "longfloor");
-            //LongFloor2.LoadContent("longfloor2", "longfloor");
-            //Mramp.LoadContent("mramp", "mramp");
+            LongFloor1.LoadContent("longfloor1", "longfloor");
+            LongFloor2.LoadContent("longfloor2", "longfloor");
+            Mramp.LoadContent("mramp", "mramp");
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
@@ -38,8 +38,8 @@ namespace RPGame
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             Player.Gravity();
-            base.Update(camera, graphicsManager);
-
+            camera.Follow(Player.getRealPos(0));
+            getKey();
             bool PlayerCollision;
             foreach (Polygons poly in PolyList)
             {
@@ -50,9 +50,8 @@ namespace RPGame
                     Player.FloorReset();
                 }
             }
-
             Player.MoveChar(Key);
-            Player.Jump(Key);
+            Player.Jump();
         }
 
         public override void Draw()
@@ -87,9 +86,9 @@ namespace RPGame
         {
             PolyList.Add(FloorbytheDoor);
             PolyList.Add(FloorHump);
-            //PolyList.Add(LongFloor1);
-            //PolyList.Add(LongFloor2);
-            //PolyList.Add(Mramp);
+            PolyList.Add(LongFloor1);
+            PolyList.Add(LongFloor2);
+            PolyList.Add(Mramp);
         }
     }
 }

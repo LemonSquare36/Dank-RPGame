@@ -19,14 +19,12 @@ twall1
 twall2
 810,240
 floorbythedoor
-300,200
+500,200
 floorhump
-200,0
+50,150
 longfloor1
-0,200
+-710,200
 longfloor2
--500,100
+-1800,380
 mramp
--400,200
-janitor
-400, 200
+-1350,300
