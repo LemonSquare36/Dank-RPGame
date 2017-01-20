@@ -15,7 +15,7 @@ using System.IO;
 
 namespace RPGame
 {
-   public class Entity : Polygons
+    public class Entity : Polygons
     {
         protected Texture2D janitor;
         KeyboardState oldState;
@@ -46,17 +46,17 @@ namespace RPGame
         public void Jump(KeyboardState key)
         {
             KeyboardState newState = Keyboard.GetState();
-            
-            if (newState.IsKeyDown(Keys.Space))
+
+            if (newState.IsKeyDown(Keys.W))
             {
-               if (!oldState.IsKeyDown(Keys.Space))
+                if (!oldState.IsKeyDown(Keys.W))
                 {
                     if (canJump)
-                    air = true;
-                    canJump = false;                  
-                } 
+                        air = true;
+                    canJump = false;
+                }
             }
-            else if (oldState.IsKeyDown(Keys.Space))
+            else if (oldState.IsKeyDown(Keys.W))
             {
 
             }
@@ -77,10 +77,10 @@ namespace RPGame
 
         public void jumpReset()
         {
-                canJump = true; 
+            canJump = true;
         }
 
-        public Entity(List<Vector2> numbers):base(numbers) { }
+        public Entity(List<Vector2> numbers) : base(numbers) { }
 
         public void LoadContent()
         {
@@ -92,10 +92,10 @@ namespace RPGame
             GravityReset();
 
             if (!canJump)
-            jumpReset();
+                jumpReset();
         }
 
-        /*protected new Vector2 SetShapePlacement(string ShapeName)
+        protected new Vector2 SetShapePlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(savePath);
 
@@ -113,6 +113,7 @@ namespace RPGame
                     Placement = new Vector2(xVert, yVert);
                     break;
                 }
-            }*/
+            }
         }
     }
+}
