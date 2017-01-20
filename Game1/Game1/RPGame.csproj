@@ -101,6 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\buttons\back.png" />
+    <Content Include="Content\buttons\back_hover.png" />
     <Content Include="Content\buttons\credits.png" />
     <Content Include="Content\buttons\credits_hover.png" />
     <Content Include="Content\buttons\fullscreen.png" />

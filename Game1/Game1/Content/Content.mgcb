@@ -103,6 +103,18 @@
 /processorParam:TextureFormat=Compressed
 /build:myFont.spritefont
 
+#begin Sprites/TestCharWalk1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/TestCharWalk1.png
+
 #begin buttons/credits.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -391,7 +403,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Habitation Sprites/Stairs Door.png
 
-#begin Sprites/Janitor.png
+#begin buttons/back.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -401,5 +413,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Janitor.png
+/build:buttons/back.png
+
+#begin buttons/back_hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:buttons/back_hover.png
 
