@@ -17,7 +17,7 @@ namespace RPGame
     class CreditsMenu : MenuManager
     {
         Button Back;
-        Texture2D Backs, BackHover;
+        Texture2D Backs, BackHover, Background;
 
         public override void Initialize()
         {
@@ -26,6 +26,7 @@ namespace RPGame
         public override void LoadContent(SpriteBatch spirteBatchMain)
         {
             spriteBatch = spirteBatchMain;
+            Background = Main.GameContent.Load<Texture2D>("Sprites/credits_Background");
 
             //Load textures before buttons
             #region Texture Load
@@ -54,8 +55,11 @@ namespace RPGame
         //Draws the buttons
         public override void Draw()
         {
+            spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
             Back.Draw(spriteBatch);
             spriteBatch.DrawString(font, "Made By: Josh Glover, Isaac Allen, Michael Maher", new Vector2(150, 200), Color.Red);
+            spriteBatch.DrawString(font, "Studio:wSilentwStudios", new Vector2(250, 100), Color.Red);
+            spriteBatch.DrawString(font, "Cognitive thought media", new Vector2(250, 0), Color.Red);
         }
         //Used for edge detection
         public override void ButtonReset()

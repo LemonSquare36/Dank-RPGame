@@ -121,6 +121,7 @@
     <Content Include="Content\buttons\sound_checked.png" />
     <Content Include="Content\buttons\tutorial.png" />
     <Content Include="Content\buttons\tutorial_hover.png" />
+    <Content Include="Content\Sprites\credits_Background.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
@@ -132,6 +133,7 @@
     <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\Janitor.png" />
+    <Content Include="Content\Sprites\main_Menu_Background.png" />
     <Content Include="Content\Sprites\RedCube.png" />
     <Content Include="Content\Sprites\Cake.png" />
     <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />

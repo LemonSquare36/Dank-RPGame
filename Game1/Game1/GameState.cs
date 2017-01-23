@@ -68,7 +68,7 @@ namespace RPGame
             }
             else
             {
-                CurrentScreen = mainMenu;
+                CurrentScreen = Credits;
                 CurrentScreen.Initialize();
             }
         }
