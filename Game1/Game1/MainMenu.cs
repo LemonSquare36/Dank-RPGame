@@ -17,8 +17,8 @@ namespace RPGame
 {
     class MainMenu : MenuManager
     {
-        Button Test, Option, Credit;
-        Texture2D Play, PlayHover, Options, OptionsHover, Background, Credits, CreditsHover;
+        Button Test, Option, Tutorials;
+        Texture2D Play, PlayHover, Options, OptionsHover, Background, Tutorial, TutorialHover;
 
         public override void Initialize()
         {
@@ -35,8 +35,8 @@ namespace RPGame
             PlayHover = Main.GameContent.Load<Texture2D>("buttons/Play_Hover");
             Options = Main.GameContent.Load<Texture2D>("buttons/options");
             OptionsHover = Main.GameContent.Load<Texture2D>("buttons/options_hover");
-            Credits = Main.GameContent.Load<Texture2D>("buttons/credits");
-            CreditsHover = Main.GameContent.Load<Texture2D>("buttons/credits_hover");
+            Tutorial = Main.GameContent.Load<Texture2D>("buttons/tutorial");
+            TutorialHover = Main.GameContent.Load<Texture2D>("buttons/tutorial_hover");
 
             Background = Main.GameContent.Load<Texture2D>("Sprites/main_Menu_Background");
             #endregion
@@ -44,13 +44,13 @@ namespace RPGame
             #region Button Load
             Test = new Button(new Vector2(200, 75), 400, 100, Play, PlayHover, "Play");
             Option = new Button(new Vector2(200, 200), 400, 100, Options, OptionsHover, "Option");
-            Credit = new Button(new Vector2(200, 325), 400, 100, Credits, CreditsHover, "Credit");
+            Tutorials = new Button(new Vector2(200, 325), 400, 100, Tutorial, TutorialHover, "Tutorial");
             #endregion
 
             //Important or the event doesnt work
             Test.ButtonClicked += ButtonClicked;
             Option.ButtonClicked += ButtonClicked;
-            Credit.ButtonClicked += ButtonClicked;
+            Tutorials.ButtonClicked += ButtonClicked;
         }
         //Updates the Buttons and other things for the menu
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
@@ -61,7 +61,7 @@ namespace RPGame
             //Update the buttons
             Test.Update(mouse);
             Option.Update(mouse);
-            Credit.Update(mouse);
+            Tutorials.Update(mouse);
         }
         //Draws the Buttons
         public override void Draw()
@@ -69,14 +69,14 @@ namespace RPGame
             spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
             Test.Draw(spriteBatch);
             Option.Draw(spriteBatch);
-            Credit.Draw(spriteBatch);
+            Tutorials.Draw(spriteBatch);
         }
         //Used for edge detection
         public override void ButtonReset()
         {
             Test.ButtonReset();
             Option.ButtonReset();
-            Credit.ButtonReset();
+            Tutorials.ButtonReset();
 
         }
 
