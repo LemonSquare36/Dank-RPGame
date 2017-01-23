@@ -16,8 +16,8 @@ namespace RPGame
 {
     class CreditsMenu : MenuManager
     {
-        Button Back;
-        Texture2D Backs, BackHover, Background;
+        Button Mains;
+        Texture2D MainMenu, MainMenuHover, Background;
 
         public override void Initialize()
         {
@@ -30,16 +30,16 @@ namespace RPGame
 
             //Load textures before buttons
             #region Texture Load
-            Backs = Main.GameContent.Load<Texture2D>("buttons/back");
-            BackHover = Main.GameContent.Load<Texture2D>("buttons/back_hover");
+            MainMenu = Main.GameContent.Load<Texture2D>("buttons/mainmenu");
+            MainMenuHover = Main.GameContent.Load<Texture2D>("buttons/mainmenu_hover");
             #endregion
 
             #region Button Load
-            Back = new Button(new Vector2(200, 325), 400, 100, Backs, BackHover, "Back");
+            Mains = new Button(new Vector2(200, 325), 400, 100, MainMenu, MainMenuHover, "Mains");
             #endregion
 
             //Important or the event doesnt work
-            Back.ButtonClicked += ButtonClicked;
+            Mains.ButtonClicked += ButtonClicked;
 
             base.LoadContent(spriteBatch);
 
@@ -50,13 +50,13 @@ namespace RPGame
             mouse = Mouse.GetState();
 
             //Update the buttons
-            Back.Update(mouse);
+            Mains.Update(mouse);
         }
         //Draws the buttons
         public override void Draw()
         {
             spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
-            Back.Draw(spriteBatch);
+            Mains.Draw(spriteBatch);
             spriteBatch.DrawString(font, "Made By: Josh Glover, Isaac Allen, Michael Maher", new Vector2(150, 200), Color.Red);
             spriteBatch.DrawString(font, "Studio:wSilentwStudios", new Vector2(250, 100), Color.Red);
             spriteBatch.DrawString(font, "Cognitive thought media", new Vector2(250, 0), Color.Red);
@@ -64,7 +64,7 @@ namespace RPGame
         //Used for edge detection
         public override void ButtonReset()
         {
-            Back.ButtonReset();
+            Mains.ButtonReset();
 
         }
     }

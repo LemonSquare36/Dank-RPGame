@@ -131,6 +131,14 @@ namespace RPGame
                 case "Back":
                     CurrentScreen = mainMenu;
                     break;
+
+                case "Mains":
+                    CurrentScreen = mainMenu;
+                    break;
+
+                case "Tutorial":
+                    CurrentScreen = Tutorial;
+                    break;
                 default:
                     Load = false;
                     break;      
