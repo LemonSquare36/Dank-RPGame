@@ -20,10 +20,5 @@ namespace RPGame
     {
       
 
-        public override void LoadContent(SpriteBatch spriteBatchMain)
-        {
-            font = Main.GameContent.Load<SpriteFont>("myFont");
-            //font1 = Main.GameContent.Load<SpriteFont>("font1");
-        }
     }
 }

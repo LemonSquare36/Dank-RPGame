@@ -40,6 +40,8 @@ namespace RPGame
             //Important or the event doesnt work
             Back.ButtonClicked += ButtonClicked;
 
+            base.LoadContent(spriteBatch);
+
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
@@ -53,6 +55,7 @@ namespace RPGame
         public override void Draw()
         {
             Back.Draw(spriteBatch);
+            spriteBatch.DrawString(font, "Made By: Josh Glover, Isaac Allen, Michael Maher", new Vector2(150, 200), Color.Red);
         }
         //Used for edge detection
         public override void ButtonReset()

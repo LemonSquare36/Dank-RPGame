@@ -31,7 +31,7 @@ namespace RPGame
         }
         public virtual void LoadContent(SpriteBatch spriteBatchmain)
         {
-
+            font = Main.GameContent.Load<SpriteFont>("myFont");
         }
         public virtual void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
