@@ -12,7 +12,7 @@ namespace RPGame
     class Habitation : Areas
     {
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp;
-        Texture2D StairsDoor, JanitorDoor;
+        Texture2D StairsDoor, JanitorDoor, CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp;
         Character Player;
         List<Polygons> PolyList;
         public override void Initialize()
@@ -32,6 +32,12 @@ namespace RPGame
             Mramp.LoadContent("mramp", "mramp");
 
             Player.LoadCharacter("HabitationJanitorDoor");
+
+            CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
+            CeilingHump = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorHump");
+            CeilingFloor1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
+            CeilingFloor2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
+            CeilingMramp = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
 
             ListAdd();
         }
@@ -68,9 +74,15 @@ namespace RPGame
 
             FloorbytheDoor.Draw(spriteBatch);
             FloorHump.Draw(spriteBatch);
+            Mramp.Draw(spriteBatch);
             LongFloor1.Draw(spriteBatch);
             LongFloor2.Draw(spriteBatch);
-            Mramp.Draw(spriteBatch);
+
+            spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
+            spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
+            spriteBatch.Draw(CeilingFloor1, new Vector2(-1200, -60), null);
+            spriteBatch.Draw(CeilingFloor2, new Vector2(-2170, 0), null);
+            spriteBatch.Draw(CeilingMramp, new Vector2(-1480, -60), null);
 
             Player.Draw(spriteBatch);
         }
