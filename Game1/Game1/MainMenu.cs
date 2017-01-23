@@ -38,7 +38,7 @@ namespace RPGame
             Credits = Main.GameContent.Load<Texture2D>("buttons/credits");
             CreditsHover = Main.GameContent.Load<Texture2D>("buttons/credits_hover");
 
-            Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
+            Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/main_Menu_Background");
             #endregion
 
             #region Button Load
@@ -66,7 +66,7 @@ namespace RPGame
         //Draws the Buttons
         public override void Draw()
         {
-            spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
+            spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
             Test.Draw(spriteBatch);
             Option.Draw(spriteBatch);
             Credit.Draw(spriteBatch);
