@@ -126,6 +126,7 @@
     <Content Include="Content\Sprites\GreyPentagon.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorByTheDoor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorHump.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\HWall.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Janitor Door.png" />
     <Content Include="Content\Sprites\Habitation Sprites\LongFloor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
