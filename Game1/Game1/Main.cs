@@ -75,7 +75,7 @@ namespace RPGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);           
+            //GraphicsDevice.Clear(Color.CornflowerBlue);           
             theGameState.Draw(spriteBatch);
             base.Draw(gameTime);
         }

@@ -27,6 +27,7 @@ namespace RPGame
         GraphicsDeviceManager graphicsManager;
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
+        Color color = Color.Blue;
 
         #region Declaring the Areas and Menus
         Screen CurrentScreen;
@@ -98,6 +99,7 @@ namespace RPGame
         //Draws the images and textures we use
         public void Draw(SpriteBatch spriteBatch)
         {
+            graphicsDevice.Clear(color);
             var viewMatrix = camera.Transform(graphicsDevice);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
@@ -114,7 +116,7 @@ namespace RPGame
             {
                 case "Play":
                     CurrentScreen = habitation;
-                    
+                    color = Color.LightSlateGray;
                     break;
 
                 case "Option":

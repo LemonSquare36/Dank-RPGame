@@ -25,6 +25,6 @@ floorhump
 longfloor1
 -710,200
 longfloor2
--1800,380
+-1700,330
 mramp
--1350,300
+-1330,265
