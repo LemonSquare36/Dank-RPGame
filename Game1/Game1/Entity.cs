@@ -112,8 +112,8 @@ namespace RPGame
                     float yVert = (float)Convert.ToDouble(VertCords[1]);
                     Placement = new Vector2(xVert, yVert);
                     break;
-                }
-            }
-        }*/
+                 }
+             }
+         }*/
     }
 }

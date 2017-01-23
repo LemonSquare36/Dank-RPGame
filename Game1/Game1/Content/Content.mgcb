@@ -415,6 +415,18 @@
 /processorParam:TextureFormat=Color
 /build:buttons/back_hover.png
 
+#begin Sprites/TutorialSprites/main_Menu_Background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/TutorialSprites/main_Menu_Background.png
+
 #begin Sprites/Janitor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -427,7 +439,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Janitor.png
 
-#begin Sprites/Habitation Sprites/HWall.png
+#begin Sprites/WalkCycle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -437,5 +449,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Habitation Sprites/HWall.png
+/build:Sprites/WalkCycle.png
 

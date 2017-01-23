@@ -193,6 +193,7 @@
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">AlsoWalk.png</key>
             <key type="filename">FinalWalk.png</key>
+            <key type="filename">Janitor.png</key>
             <key type="filename">Walk.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -212,6 +213,7 @@
             <filename>Walk.png</filename>
             <filename>AlsoWalk.png</filename>
             <filename>FinalWalk.png</filename>
+            <filename>Janitor.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
