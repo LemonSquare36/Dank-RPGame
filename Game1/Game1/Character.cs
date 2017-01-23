@@ -22,6 +22,16 @@ namespace RPGame
 
         KeyboardState Key;
 
+        public Texture2D Texture { get; set; }
+        public int Rows { get; set; }
+        public int Cols { get; set; }
+        private int currentFrame;
+        private int totalFrames;
+
+        //slow framerate
+        private int timeSinceLastFrame = 0;
+        private int millisecondsPerFrame = 50;
+
         public int health = 20;
         public int ability = 10;
         public int attack = 10;
@@ -67,6 +77,29 @@ namespace RPGame
         public void Load()
         {
             
+        }
+
+        public void Move(Texture2D texture, int rows, int cols)
+        {
+            Texture = texture;
+            Rows = rows;
+            Cols = cols;
+            currentFrame = 0;
+            totalFrames = Rows * Cols;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastFrame > millisecondsPerFrame)
+            {
+                timeSinceLastFrame -= millisecondsPerFrame;
+                //increment current frame
+                currentFrame++;
+                timeSinceLastFrame = 0;
+                if (currentFrame == totalFrames)
+                    currentFrame = 0;
+            }
         }
 
         public void MoveChar(KeyboardState Key)
