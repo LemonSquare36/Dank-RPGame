@@ -14,8 +14,51 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    class CreditsMenu : Areas
+    class CreditsMenu : MenuManager
     {
+        Button Back;
+        Texture2D Backs, BackHover;
 
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+        public override void LoadContent(SpriteBatch spirteBatchMain)
+        {
+            spriteBatch = spirteBatchMain;
+
+            //Load textures before buttons
+            #region Texture Load
+            Backs = Main.GameContent.Load<Texture2D>("buttons/back");
+            BackHover = Main.GameContent.Load<Texture2D>("buttons/back_hover");
+            #endregion
+
+            #region Button Load
+            Back = new Button(new Vector2(200, 325), 400, 100, Backs, BackHover, "Back");
+            #endregion
+
+            //Important or the event doesnt work
+            Back.ButtonClicked += ButtonClicked;
+
+        }
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        {
+            //Get current mouse state
+            mouse = Mouse.GetState();
+
+            //Update the buttons
+            Back.Update(mouse);
+        }
+        //Draws the buttons
+        public override void Draw()
+        {
+            Back.Draw(spriteBatch);
+        }
+        //Used for edge detection
+        public override void ButtonReset()
+        {
+            Back.ButtonReset();
+
+        }
     }
 }
