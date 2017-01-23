@@ -37,7 +37,7 @@ namespace RPGame
         /// <param name="area"></param>
         public void LoadCharacter(string area)
         {
-            texture = Main.GameContent.Load<Texture2D>("Sprites/Janitor");
+            texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycle");
 
             if (area == "HabitationJanitorDoor")
                 Placement = new Vector2(400, 100);
