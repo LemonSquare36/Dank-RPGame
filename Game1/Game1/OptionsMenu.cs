@@ -15,7 +15,7 @@ namespace RPGame
     class OptionsMenu : MenuManager
     {
         Button Sound, Fullscreen, Back;
-        Texture2D Sounds, SoundChecked, Fullscreens, FullscreenChecked, Backs, BackHover;
+        Texture2D Sounds, SoundChecked, Fullscreens, FullscreenChecked, Backs, BackHover, Background;
 
         public override void Initialize()
         {
@@ -24,6 +24,7 @@ namespace RPGame
         public override void LoadContent(SpriteBatch spirteBatchMain)
         {
             spriteBatch = spirteBatchMain;
+            Background = Main.GameContent.Load<Texture2D>("Sprites/credits_Background");
 
             //Load textures before buttons
             #region Texture Load
@@ -46,6 +47,7 @@ namespace RPGame
             Fullscreen.ButtonClicked += ButtonClicked;
             Back.ButtonClicked += ButtonClicked;
 
+
         }
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
@@ -60,9 +62,13 @@ namespace RPGame
         //Draws the buttons
         public override void Draw()
         {
+            spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
+
             Sound.Draw(spriteBatch);
             Fullscreen.Draw(spriteBatch);
             Back.Draw(spriteBatch);
+
+            
         }
         //Used for edge detection
         public override void ButtonReset()

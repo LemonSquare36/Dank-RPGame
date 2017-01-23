@@ -38,7 +38,7 @@ namespace RPGame
             Credits = Main.GameContent.Load<Texture2D>("buttons/credits");
             CreditsHover = Main.GameContent.Load<Texture2D>("buttons/credits_hover");
 
-            Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/main_Menu_Background");
+            Background = Main.GameContent.Load<Texture2D>("Sprites/main_Menu_Background");
             #endregion
 
             #region Button Load
