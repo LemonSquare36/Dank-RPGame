@@ -58,6 +58,8 @@ namespace RPGame
             spriteBatch.Draw(Background, new Vector2(0, 0), null, null);
             Back.Draw(spriteBatch);
             spriteBatch.DrawString(font, "Made By: Josh Glover, Isaac Allen, Michael Maher", new Vector2(150, 200), Color.Red);
+            spriteBatch.DrawString(font, "Studio:wSilentwStudios", new Vector2(250, 100), Color.Red);
+            spriteBatch.DrawString(font, "Cognitive thought media", new Vector2(250, 0), Color.Red);
         }
         //Used for edge detection
         public override void ButtonReset()
