@@ -11,7 +11,7 @@ namespace RPGame
 {
     class Habitation : Areas
     {
-        Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp;
+        Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D StairsDoor, JanitorDoor, CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp;
         Character Player;
         List<Polygons> PolyList;
@@ -30,6 +30,8 @@ namespace RPGame
             LongFloor1.LoadContent("longfloor1", "longfloor");
             LongFloor2.LoadContent("longfloor2", "longfloor");
             Mramp.LoadContent("mramp", "mramp");
+            HWall1.LoadContent("hwall1", "hwall");
+            HWall2.LoadContent("hwall2", "hwall");
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
@@ -77,6 +79,8 @@ namespace RPGame
             Mramp.Draw(spriteBatch);
             LongFloor1.Draw(spriteBatch);
             LongFloor2.Draw(spriteBatch);
+            HWall1.Draw(spriteBatch);
+            HWall2.Draw(spriteBatch);
 
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
@@ -95,6 +99,8 @@ namespace RPGame
             LongFloor1 = CreateShape("longfloor");
             LongFloor2 = CreateShape("longfloor");
             Mramp = CreateShape("mramp");
+            HWall1 = CreateShape("hwall");
+            HWall2 = CreateShape("hwall");
 
             Player = CreateChar("janitor");
         }
@@ -105,6 +111,8 @@ namespace RPGame
             PolyList.Add(LongFloor1);
             PolyList.Add(LongFloor2);
             PolyList.Add(Mramp);
+            PolyList.Add(HWall1);
+            PolyList.Add(HWall2);
         }
     }
 }

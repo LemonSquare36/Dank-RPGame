@@ -28,3 +28,7 @@ longfloor2
 -1700,330
 mramp
 -1330,265
+hwall1
+700,75
+hwall2
+-2000,330

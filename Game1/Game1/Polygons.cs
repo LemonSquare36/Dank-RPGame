@@ -95,6 +95,8 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             if (ShapeImage == "mramp")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
+            if (ShapeImage == "hwall")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/HWall");
 
         }
         //Draws the Images with current Texture
