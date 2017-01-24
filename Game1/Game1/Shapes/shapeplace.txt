@@ -25,10 +25,10 @@ floorhump
 longfloor1
 -710,200
 longfloor2
--1700,330
+-1880,330
 mramp
 -1330,265
 hwall1
-700,75
+665,90
 hwall2
--2000,330
+-2380,230

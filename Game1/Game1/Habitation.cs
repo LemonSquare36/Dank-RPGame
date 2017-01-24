@@ -12,7 +12,7 @@ namespace RPGame
     class Habitation : Areas
     {
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
-        Texture2D StairsDoor, JanitorDoor, CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp;
+        Texture2D StairsDoor, JanitorDoor, CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor;
         Character Player;
         List<Polygons> PolyList;
         public override void Initialize()
@@ -24,6 +24,8 @@ namespace RPGame
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
+
+            base.LoadContent(spriteBatch);
 
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
             FloorHump.LoadContent("floorhump", "floorhump");
@@ -40,7 +42,8 @@ namespace RPGame
             CeilingFloor1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             CeilingFloor2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             CeilingMramp = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
-
+            jDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Janitor Door");
+            sDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Stairs Door");
             ListAdd();
         }
 
@@ -85,8 +88,12 @@ namespace RPGame
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
             spriteBatch.Draw(CeilingFloor1, new Vector2(-1200, -60), null);
-            spriteBatch.Draw(CeilingFloor2, new Vector2(-2170, 0), null);
             spriteBatch.Draw(CeilingMramp, new Vector2(-1480, -60), null);
+            spriteBatch.Draw(CeilingFloor2, new Vector2(-2370, 80), null);
+            spriteBatch.Draw(jDoor, new Vector2(400, 100), null);
+
+            spriteBatch.DrawString(font, "Hanger\n <----", new Vector2(-2100, 150), Color.White);
+            spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
         }
