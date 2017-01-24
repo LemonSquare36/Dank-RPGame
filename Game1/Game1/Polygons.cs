@@ -415,8 +415,4 @@ namespace RPGame
                 }
             }
         }
-
     }
-
-
-

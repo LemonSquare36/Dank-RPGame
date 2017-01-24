@@ -17,8 +17,22 @@ namespace RPGame
 {
     public class Entity : Polygons
     {
-        protected Texture2D janitor;
+
         KeyboardState oldState;
+
+        SpriteBatch spriteBatch;
+
+        public int Rows { get; set; }
+        public int Cols { get; set; }
+        private int currentFrame;
+        private int totalFrames;
+
+        //slow framerate
+        private int timeSinceLastFrame = 0;
+        private int millisecondsPerFrame = 50;
+        private int v1;
+        private int v2;
+
         float gravity = 0f;
         bool air = false;
         float traveltime = 0;
@@ -26,6 +40,43 @@ namespace RPGame
         bool canJump = true;
 
         string savePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
+
+        public void SpriteMove(Texture2D texture, int rows, int cols)
+        {
+            Rows = rows;
+            Cols = cols;
+            currentFrame = 0;
+            totalFrames = Rows * Cols;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastFrame > millisecondsPerFrame)
+            {
+                timeSinceLastFrame -= millisecondsPerFrame;
+                //increment current frame
+                currentFrame++;
+                timeSinceLastFrame = 0;
+                if (currentFrame == totalFrames)
+                    currentFrame = 0;
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            int width = texture.Width / Cols;
+            int height = texture.Height / Rows;
+            int row = (int)((float)currentFrame / Cols);
+            int cols = currentFrame % Cols;
+
+            Rectangle sourceRectangle = new Rectangle(width * cols, height * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)Placement.X, (int)Placement.Y, width, height);
+
+            //spriteBatch.Begin();
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            //spriteBatch.End();
+        }
 
         public void Gravity()
         {
@@ -84,7 +135,7 @@ namespace RPGame
 
         public void LoadContent()
         {
-            janitor = Main.GameContent.Load<Texture2D>("TestCharWalk1");
+            
         }
 
         public void FloorReset()
