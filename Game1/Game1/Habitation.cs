@@ -12,7 +12,7 @@ namespace RPGame
     class Habitation : Areas
     {
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
-        Texture2D StairsDoor, JanitorDoor, CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp;
+        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
         Character Player;
         List<Polygons> PolyList;
         public override void Initialize()
@@ -24,6 +24,8 @@ namespace RPGame
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
+
+            base.LoadContent(spriteBatch);
 
             FloorbytheDoor.LoadContent("floorbythedoor", "floorbythedoor");
             FloorHump.LoadContent("floorhump", "floorhump");
@@ -40,6 +42,12 @@ namespace RPGame
             CeilingFloor1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             CeilingFloor2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
             CeilingMramp = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
+            jDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Janitor Door");
+            sDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Stairs Door");
+            cCounter = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FoodCounter");
+            cTable1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
+            cTable2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
+            cTable3 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
 
             ListAdd();
         }
@@ -51,6 +59,7 @@ namespace RPGame
             Debug.WriteLine(Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
+
             foreach (Polygons poly in PolyList)
             {
                 PlayerCollision = Collision(Player, poly);
@@ -85,8 +94,17 @@ namespace RPGame
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
             spriteBatch.Draw(CeilingFloor1, new Vector2(-1200, -60), null);
-            spriteBatch.Draw(CeilingFloor2, new Vector2(-2170, 0), null);
             spriteBatch.Draw(CeilingMramp, new Vector2(-1480, -60), null);
+            spriteBatch.Draw(CeilingFloor2, new Vector2(-2370, 80), null);
+            spriteBatch.Draw(jDoor, new Vector2(400, 100), null);
+            spriteBatch.Draw(sDoor, new Vector2(-1000, 100), null);
+            spriteBatch.Draw(cCounter, new Vector2(-1850, 200), null);
+            spriteBatch.Draw(cTable1, new Vector2(-1800, 280), null);
+            spriteBatch.Draw(cTable2, new Vector2(-1650, 280), null);
+            spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
+
+            spriteBatch.DrawString(font, "Hanger\n <----", new Vector2(-2100, 150), Color.White);
+            spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
         }
