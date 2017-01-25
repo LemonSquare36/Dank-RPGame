@@ -25,7 +25,7 @@ namespace RPGame
         public int Rows { get; set; }
         public int Cols { get; set; }
         protected int currentFrame;
-        protected int totalFrames = 3;
+        int totalFrames;
 
         //slow framerate
         protected int timeSinceLastFrame = 0;
@@ -41,10 +41,10 @@ namespace RPGame
 
         string savePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
-        public void SpriteMove(Texture2D texture, int rows, int cols)
+        public void SpriteMove(int rows, int cols)
         {
-            Rows = 1;
-            Cols = 3;
+            Rows = rows;
+            Cols = cols;
             currentFrame = 0;
             totalFrames = Rows * Cols; 
         }
@@ -66,10 +66,10 @@ namespace RPGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int width = texture.Width / 3;
+            int width = texture.Width / Cols;
             int height = texture.Height / 1;
-            int row = (int)((float)currentFrame / 3);
-            int cols = currentFrame % 3;
+            int row = (int)((float)currentFrame / Cols);
+            int cols = currentFrame % Cols;
 
             Rectangle sourceRectangle = new Rectangle(width * cols, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)Placement.X, (int)Placement.Y, width, height);
