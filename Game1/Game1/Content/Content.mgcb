@@ -403,18 +403,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Janitor.png
 
-#begin Sprites/WalkCycle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/WalkCycle.png
-
 #begin Sprites/main_Menu_Background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -498,4 +486,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Habitation Sprites/Table with Chairs.png
+
+#begin Sprites/WalkCycle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/WalkCycle.png
 
