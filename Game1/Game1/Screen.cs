@@ -19,6 +19,7 @@ namespace RPGame
         protected SpriteBatch spriteBatch;
         protected string nextScreen;
         protected KeyboardState Key;
+        protected GameTime time;
 
         public string getNextScreen()
         {
@@ -54,6 +55,11 @@ namespace RPGame
         public virtual void ButtonReset()
         {
 
+        }
+
+        public void getGameTimePrime(GameTime gameTime)
+        {
+            time = gameTime;
         }
     }
 

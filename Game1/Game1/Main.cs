@@ -53,6 +53,7 @@ namespace RPGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics);
+            
         }
 
         protected override void UnloadContent()
@@ -70,6 +71,7 @@ namespace RPGame
 
             theGameState.Update(gameTime);
             base.Update(gameTime);
+            theGameState.getGameTime(gameTime);
         }
 
 

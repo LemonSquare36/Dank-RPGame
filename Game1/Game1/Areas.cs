@@ -18,7 +18,6 @@ namespace RPGame
 
     class Areas : Screen
     {
-      
 
     }
 }

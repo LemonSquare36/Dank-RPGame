@@ -24,14 +24,14 @@ namespace RPGame
 
         public int Rows { get; set; }
         public int Cols { get; set; }
-        private int currentFrame;
-        private int totalFrames;
+        protected int currentFrame;
+        protected int totalFrames = 3;
 
         //slow framerate
-        private int timeSinceLastFrame = 0;
-        private int millisecondsPerFrame = 50;
-        private int v1;
-        private int v2;
+        protected int timeSinceLastFrame = 0;
+        protected int millisecondsPerFrame = 100;
+        protected int v1;
+        protected int v2;
 
         float gravity = 0f;
         bool air = false;
@@ -43,10 +43,10 @@ namespace RPGame
 
         public void SpriteMove(Texture2D texture, int rows, int cols)
         {
-            Rows = rows;
-            Cols = cols;
+            Rows = 1;
+            Cols = 3;
             currentFrame = 0;
-            totalFrames = Rows * Cols;
+            totalFrames = Rows * Cols; 
         }
 
         public void Update(GameTime gameTime)
@@ -55,6 +55,7 @@ namespace RPGame
             if (timeSinceLastFrame > millisecondsPerFrame)
             {
                 timeSinceLastFrame -= millisecondsPerFrame;
+
                 //increment current frame
                 currentFrame++;
                 timeSinceLastFrame = 0;
@@ -65,17 +66,15 @@ namespace RPGame
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            int width = texture.Width / Cols;
-            int height = texture.Height / Rows;
-            int row = (int)((float)currentFrame / Cols);
-            int cols = currentFrame % Cols;
+            int width = texture.Width / 3;
+            int height = texture.Height / 1;
+            int row = (int)((float)currentFrame / 3);
+            int cols = currentFrame % 3;
 
             Rectangle sourceRectangle = new Rectangle(width * cols, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)Placement.X, (int)Placement.Y, width, height);
 
-            //spriteBatch.Begin();
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
-            //spriteBatch.End();
         }
 
         public void Gravity()

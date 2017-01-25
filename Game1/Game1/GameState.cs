@@ -29,6 +29,8 @@ namespace RPGame
         Vector3 screenScale = Vector3.Zero;
         Color color = Color.Blue;
 
+        GameTime time;
+
         #region Declaring the Areas and Menus
         Screen CurrentScreen;
 
@@ -95,6 +97,7 @@ namespace RPGame
 
 
             CurrentScreen.Update(camera, graphicsManager);
+            CurrentScreen.getGameTimePrime(time);
 
         }
         //Draws the images and textures we use
@@ -118,6 +121,7 @@ namespace RPGame
                 case "Play":
                     CurrentScreen = habitation;
                     color = Color.LightSlateGray;
+                    
                     break;
 
                 case "Option":
@@ -150,6 +154,11 @@ namespace RPGame
                 Initialize();
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
+        }
+
+        public void getGameTime(GameTime gameTime)
+        {
+            time = gameTime;
         }
     }
 }

@@ -22,15 +22,13 @@ namespace RPGame
 
         KeyboardState Key;
 
+        public bool IsMoving = false;
         SpriteBatch spriteBatch;
 
         public int health = 20;
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
-
-
-        protected Random rand = new Random();
 
         /// <summary>
         /// The Area in which you are trying to load the character into and the place; Please use clear names
@@ -49,15 +47,18 @@ namespace RPGame
 
         public void MoveChar(KeyboardState Key)
         {
+            IsMoving = false;
             Movement = Vector2.Zero;
 
             if (Key.IsKeyDown(Keys.D))
             {
                 Movement = new Vector2(Movement.X + 2f, Movement.Y);
+                IsMoving = true;
             }
             if (Key.IsKeyDown(Keys.A))
             {
                 Movement = new Vector2(Movement.X - 2f, Movement.Y);
+                IsMoving = true;
             }
             OldPosition = Placement;
             Placement += Movement;

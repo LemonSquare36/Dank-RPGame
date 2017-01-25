@@ -38,6 +38,7 @@ namespace RPGame
         protected SpriteFont font;
         protected SpriteFont font1;
 
+
         /// <summary>
         /// Deletes the file So the errors dont build up.
         /// </summary>
@@ -207,6 +208,7 @@ namespace RPGame
             }
             return collision;
         }
+
     }
 }
 
