@@ -49,6 +49,8 @@ namespace RPGame
             cTable2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
             cTable3 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
 
+            Player.SpriteMove(1, 3);
+
             ListAdd();
         }
 
