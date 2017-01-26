@@ -141,6 +141,7 @@
     <Content Include="Content\Sprites\TutorialSprites\TFloor.png" />
     <Content Include="Content\Sprites\TutorialSprites\TBack.png" />
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
+    <Content Include="Content\Sprites\WalkCycle.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
