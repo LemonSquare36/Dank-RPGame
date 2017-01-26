@@ -84,7 +84,7 @@ namespace RPGame
         private void MakeShapes()
         {
             //Create the Polygon
-            RetrieveShapes(1);
+            RetrieveShapes();
 
             Triangle1 = CreateShape("triangle1");
             Triangle2 = CreateShape("triangle2");

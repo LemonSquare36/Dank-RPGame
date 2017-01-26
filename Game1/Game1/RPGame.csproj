@@ -9,8 +9,8 @@
     <ProjectGuid>{CE0883ED-1449-45EE-8E81-3ACA8CC2B1BB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game1</RootNamespace>
-    <AssemblyName>Game1</AssemblyName>
+    <RootNamespace>RPGame</RootNamespace>
+    <AssemblyName>RPGame</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -64,6 +64,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="CrashHandler.cs" />
     <Compile Include="CrashWindow.cs" />
+    <Compile Include="CrawlerAlien.cs" />
     <Compile Include="CreditsMenu.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="CrashForm.cs">
@@ -86,6 +87,11 @@
     <Compile Include="Polygons.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="PuaseScreen.cs" />
     <Compile Include="Screen.cs" />
     <Compile Include="TutorialZone.cs" />
@@ -143,16 +149,21 @@
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
     <Content Include="Content\Sprites\WalkCycle.png" />
     <Content Include="Icon.ico" />
+    <EmbeddedResource Include="Shapes\shapeplace.txt" />
+    <EmbeddedResource Include="Shapes\shapeList.txt" />
+    <EmbeddedResource Include="Shapes\EnemyList.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shapes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="CrashForm.resx">
       <DependentUpon>CrashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

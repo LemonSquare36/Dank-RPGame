@@ -37,6 +37,7 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
+            #region LoadSprites
             CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
             CeilingHump = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorHump");
             CeilingFloor1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/LongFloor");
@@ -48,6 +49,8 @@ namespace RPGame
             cTable1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
             cTable2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
             cTable3 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
+
+            #endregion
 
             Player.SpriteMove(1, 3);
 
@@ -96,6 +99,7 @@ namespace RPGame
             HWall1.Draw(spriteBatch);
             HWall2.Draw(spriteBatch);
 
+            #region DrawSprites
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
             spriteBatch.Draw(CeilingFloor1, new Vector2(-1200, -60), null);
@@ -107,6 +111,7 @@ namespace RPGame
             spriteBatch.Draw(cTable1, new Vector2(-1800, 280), null);
             spriteBatch.Draw(cTable2, new Vector2(-1650, 280), null);
             spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
+            #endregion
 
             spriteBatch.DrawString(font, "Hanger\n <----", new Vector2(-2100, 150), Color.White);
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
@@ -115,7 +120,7 @@ namespace RPGame
         }
         private void MakeShapes()
         {
-            RetrieveShapes(1);
+            RetrieveShapes();
 
             FloorbytheDoor = CreateShape("floorbythedoor");
             FloorHump = CreateShape("floorhump");

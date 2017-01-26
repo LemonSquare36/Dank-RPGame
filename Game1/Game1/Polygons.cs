@@ -222,7 +222,7 @@ namespace RPGame
             }
             realPos = realPosTemp;
         }
-        //Gets shape Placement from a file
+        //Gets the shape Placement from a file
         protected Vector2 SetShapePlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(filePath);
@@ -244,7 +244,7 @@ namespace RPGame
             }
             return Placement;
         }
-
+        //Find the cross product used in the Physics section of my collision code
         public bool CrossProduct(Vector2 A, Vector2 B, Vector2 C)
         {
             float crossProduct;
