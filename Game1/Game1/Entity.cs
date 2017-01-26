@@ -22,8 +22,11 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
+        public bool IsMoving = true;
+
         public int Rows { get; set; }
         public int Cols { get; set; }
+
         protected int currentFrame;
         protected int totalFrames;
 
@@ -99,6 +102,7 @@ namespace RPGame
                 {
                     if (canJump)
                         air = true;
+
                     canJump = false;
                 }
             }
