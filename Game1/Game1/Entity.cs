@@ -25,21 +25,17 @@ namespace RPGame
         public int Rows { get; set; }
         public int Cols { get; set; }
         protected int currentFrame;
-        int totalFrames;
+        protected int totalFrames;
 
         //slow framerate
         protected int timeSinceLastFrame = 0;
         protected int millisecondsPerFrame = 100;
-        protected int v1;
-        protected int v2;
 
         float gravity = 0f;
         bool air = false;
         float traveltime = 0;
         float jump = 7f;
         bool canJump = true;
-
-        string savePath = Path.Combine(SourceFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/shapeplace.txt");
 
         public void SpriteMove(int rows, int cols)
         {
@@ -74,7 +70,7 @@ namespace RPGame
             Rectangle sourceRectangle = new Rectangle(width * cols, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)Placement.X, (int)Placement.Y, width, height);
 
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation, verticies[0], SpriteEffects.None, 0);
         }
 
         public void Gravity()
@@ -145,26 +141,5 @@ namespace RPGame
                 jumpReset();
         }
 
-        protected Vector2 SetEntityPlacement(string ShapeName)
-        {
-            var PlaceReader = new StreamReader(savePath);
-
-            string line;
-            Vector2 Placement = new Vector2();
-            while (true)
-            {
-                line = PlaceReader.ReadLine();
-                if (line == ShapeName)
-                {
-                    line = PlaceReader.ReadLine();
-                    string[] VertCords = (line.Split(','));
-                    float xVert = (float)Convert.ToDouble(VertCords[0]);
-                    float yVert = (float)Convert.ToDouble(VertCords[1]);
-                    Placement = new Vector2(xVert, yVert);
-                    break;
-                 }
-             }
-             return Placement;
-         }
     }
 }
