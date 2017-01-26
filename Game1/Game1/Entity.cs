@@ -145,7 +145,7 @@ namespace RPGame
                 jumpReset();
         }
 
-        protected new Vector2 SetShapePlacement(string ShapeName)
+        protected Vector2 SetEntityPlacement(string ShapeName)
         {
             var PlaceReader = new StreamReader(savePath);
 
