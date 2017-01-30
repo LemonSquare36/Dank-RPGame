@@ -77,6 +77,7 @@ namespace RPGame
             if (Player.IsMoving)
                 Player.Update(time);
 
+
             camera.ChangeScreenSize(Key, graphicsManager);
         }
 

@@ -26,7 +26,7 @@ namespace RPGame
 
         public int health = 20;
         public int ability = 10;
-        public int attack = 10;
+        public int attack = 10; 
         public int level = 1;
 
         /// <summary>
@@ -35,6 +35,7 @@ namespace RPGame
         /// <param name="area"></param>
         public void LoadCharacter(string area)
         {
+
             texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
 
             if (area == "HabitationJanitorDoor")
@@ -51,11 +52,13 @@ namespace RPGame
 
             if (Key.IsKeyDown(Keys.D))
             {
+                texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleRight");
                 Movement = new Vector2(Movement.X + 2f, Movement.Y);
                 IsMoving = true;
             }
             if (Key.IsKeyDown(Keys.A))
             {
+                texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
                 Movement = new Vector2(Movement.X - 2f, Movement.Y);
                 IsMoving = true;
             }

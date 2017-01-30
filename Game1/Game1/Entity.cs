@@ -23,6 +23,7 @@ namespace RPGame
         SpriteBatch spriteBatch;
 
         public bool IsMoving = true;
+        public bool IsJumping = false;
 
         public int Rows { get; set; }
         public int Cols { get; set; }
@@ -50,16 +51,19 @@ namespace RPGame
 
         public void Update(GameTime gameTime)
         {
-            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame > millisecondsPerFrame)
+            if (IsJumping == false)
             {
-                timeSinceLastFrame -= millisecondsPerFrame;
+                timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+                if (timeSinceLastFrame > millisecondsPerFrame)
+                {
+                    timeSinceLastFrame -= millisecondsPerFrame;
 
-                //increment current frame
-                currentFrame++;
-                timeSinceLastFrame = 0;
-                if (currentFrame == totalFrames)
-                    currentFrame = 0;
+                    //increment current frame
+                    currentFrame++;
+                    timeSinceLastFrame = 0;
+                    if (currentFrame == totalFrames)
+                        currentFrame = 0;
+                }
             }
         }
 
@@ -98,6 +102,7 @@ namespace RPGame
 
             if (newState.IsKeyDown(Keys.W))
             {
+                IsJumping = true;
                 if (!oldState.IsKeyDown(Keys.W))
                 {
                     if (canJump)
