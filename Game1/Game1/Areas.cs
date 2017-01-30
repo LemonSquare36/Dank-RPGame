@@ -32,10 +32,11 @@ namespace RPGame
         }
         //Creates the Character like CreateShape
         protected Character CreateChar(string shapeName)
+            //FUCK THIS
 
 
         {
-
+            bool bullshit;
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
             Character myChar = new Character(NewList);
             return myChar;
