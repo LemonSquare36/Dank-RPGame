@@ -53,6 +53,7 @@ namespace RPGame
         {
             if (IsJumping == false)
             {
+                //increments frames
                 timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
                 if (timeSinceLastFrame > millisecondsPerFrame)
                 {
