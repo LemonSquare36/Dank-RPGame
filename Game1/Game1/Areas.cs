@@ -106,7 +106,7 @@ namespace RPGame
                     collision = false;
                 }
                 Y++;
-            }
+            } 
 
             for (int i = 1; i < Shape2.getNumVerticies(); i++)
             {
