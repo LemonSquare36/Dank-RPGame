@@ -32,6 +32,8 @@ namespace RPGame
         }
         //Creates the Character like CreateShape
         protected Character CreateChar(string shapeName)
+
+
         {
 
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
