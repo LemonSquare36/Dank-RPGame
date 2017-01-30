@@ -499,7 +499,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/WalkCycleLeft.png
 
-#begin H:/BPA/pic/main_Menu_Background.png
+#begin Sprites/main_Menu_Background.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -509,5 +509,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:H:/BPA/pic/main_Menu_Background.png
+/build:Sprites/main_Menu_Background.png
 
