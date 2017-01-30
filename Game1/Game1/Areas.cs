@@ -32,7 +32,6 @@ namespace RPGame
         //Creates the Character like CreateShape
         protected Character CreateChar(string shapeName)
         {
-
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
             Character myChar = new Character(NewList);
             return myChar;
@@ -44,18 +43,17 @@ namespace RPGame
             while (true)
             {
 
-
-                if (Resource == "Shapes/EnemyList")
+                if (Resource == "EnemyList.txt")
                 {
                     break;
                 }
-                if (Resource == "Shapes/shapeList")
+                if (Resource == "shapeList.txt")
                 {
-                    Resource = "Shapes/EnemyList";
+                    Resource = "EnemyList.txt";
                 }
                 else
                 {
-                    Resource = "Shapes/shapeList";
+                    Resource = "shapeList.txt";
                 }
 
                 StreamReader shapeConfig = new StreamReader(Path.Combine(filePathFolder, Resource));
@@ -86,6 +84,8 @@ namespace RPGame
                 }
             }
         }
+
+
         //Uses the Positions from Shape list to make collision
         protected bool Collision(Polygons Shape, Polygons Shape2)
         {
@@ -125,3 +125,4 @@ namespace RPGame
         }
     }
 }
+
