@@ -22,6 +22,8 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
+        public bool IsMoving = true;
+
         private int Rows;
         private int Cols;
         private int currentFrame;

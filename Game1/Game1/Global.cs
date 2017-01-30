@@ -20,14 +20,16 @@ namespace RPGame
     // Global is my class that lets code go between Menus and Areas
     public class Global
     {
-
+        //gets the folders for the project
         static string UserFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         static string errorPathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Errors");
         string errorPath = Path.Combine(errorPathFolder, "errors.txt");
-        protected string filePathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes");
+        protected string filePathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes/");
 
+        //Hashtable for storing the verticies
         protected static Hashtable shapeVerts = new Hashtable();
 
+        //Holds the fonts
         protected SpriteFont font;
         protected SpriteFont font1;
 
