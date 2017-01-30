@@ -51,7 +51,7 @@ namespace RPGame
 
         public void Update(GameTime gameTime)
         {
-            if (IsJumping == false)
+            if (!IsJumping)
             {
                 //increments frames
                 timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
@@ -134,6 +134,7 @@ namespace RPGame
         public void jumpReset()
         {
             canJump = true;
+            IsJumping = false;
         }
 
         public Entity(List<Vector2> numbers) : base(numbers) { }
