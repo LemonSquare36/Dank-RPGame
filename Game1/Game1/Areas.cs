@@ -21,7 +21,7 @@ namespace RPGame
     {
         /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
 
-        //Creates the Shapes of Polygon Clas
+        //Creates the Shapes of Polygon Class
         protected Polygons CreateShape(string shapeName)
         {
 
