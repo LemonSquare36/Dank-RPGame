@@ -42,7 +42,9 @@ namespace RPGame
         {
             string Resource = "";
             while (true)
-            
+            {
+
+
                 if (Resource == "Shapes/EnemyList")
                 {
                     break;
@@ -83,7 +85,7 @@ namespace RPGame
                     }
                 }
             }
-        
+        }
         //Uses the Positions from Shape list to make collision
         protected bool Collision(Polygons Shape, Polygons Shape2)
         {
@@ -105,7 +107,7 @@ namespace RPGame
                     collision = false;
                 }
                 Y++;
-            } 
+            }
 
             for (int i = 1; i < Shape2.getNumVerticies(); i++)
             {
