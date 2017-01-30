@@ -225,7 +225,7 @@ namespace RPGame
         //Gets the shape Placement from a file
         protected Vector2 SetShapePlacement(string ShapeName)
         {
-            var PlaceReader = new StreamReader(filePath);
+            var PlaceReader = new StreamReader(Path.Combine(Main.GameContent.RootDirectory, "Shapes/shapeplace.txt"));
 
             string line;
             Vector2 Placement = new Vector2();

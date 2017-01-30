@@ -122,6 +122,9 @@
     <Content Include="Content\buttons\sound_checked.png" />
     <Content Include="Content\buttons\tutorial.png" />
     <Content Include="Content\buttons\tutorial_hover.png" />
+    <Content Include="Content\Shapes\EnemyList.txt" />
+    <Content Include="Content\Shapes\shapeList.txt" />
+    <Content Include="Content\Shapes\shapeplace.txt" />
     <Content Include="Content\Sprites\credits_Background.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
@@ -145,9 +148,6 @@
     <Content Include="Content\Sprites\WalkCycleLeft.png" />
     <Content Include="Content\Sprites\WalkCycleRight.png" />
     <Content Include="Icon.ico" />
-    <None Include="Shapes\shapeplace.txt" />
-    <None Include="Shapes\shapeList.txt" />
-    <None Include="Shapes\EnemyList.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />

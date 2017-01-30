@@ -43,20 +43,20 @@ namespace RPGame
             while (true)
             {
 
-                if (Resource == "EnemyList.txt")
+                if (Resource == "Shapes/EnemyList.txt")
                 {
                     break;
                 }
-                if (Resource == "shapeList.txt")
+                if (Resource == "Shapes/shapeList.txt")
                 {
-                    Resource = "EnemyList.txt";
+                    Resource = "Shapes/EnemyList.txt";
                 }
                 else
                 {
-                    Resource = "shapeList.txt";
+                    Resource = "Shapes/shapeList.txt";
                 }
 
-                StreamReader shapeConfig = new StreamReader(Path.Combine(filePathFolder, Resource));
+                StreamReader shapeConfig = new StreamReader(Path.Combine(Main.GameContent.RootDirectory, Resource));
 
                 string line;
                 string key = null;
