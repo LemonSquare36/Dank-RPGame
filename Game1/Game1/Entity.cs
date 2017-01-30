@@ -22,14 +22,18 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
-        private int Rows;
-        private int Cols;
-        private int currentFrame;
-        private int totalFrames;
+        public bool IsMoving = true;
+        public bool IsJumping = false;
+
+        public int Rows { get; set; }
+        public int Cols { get; set; }
+
+        protected int currentFrame;
+        protected int totalFrames;
 
         //slow framerate
-        private int timeSinceLastFrame = 0;
-        private int millisecondsPerFrame = 100;
+        protected int timeSinceLastFrame = 0;
+        protected int millisecondsPerFrame = 100;
 
         float gravity = 0f;
         bool air = false;
@@ -47,16 +51,19 @@ namespace RPGame
 
         public void Update(GameTime gameTime)
         {
-            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame > millisecondsPerFrame)
+            if (IsJumping == false)
             {
-                timeSinceLastFrame -= millisecondsPerFrame;
+                timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+                if (timeSinceLastFrame > millisecondsPerFrame)
+                {
+                    timeSinceLastFrame -= millisecondsPerFrame;
 
-                //increment current frame
-                currentFrame++;
-                timeSinceLastFrame = 0;
-                if (currentFrame == totalFrames)
-                    currentFrame = 0;
+                    //increment current frame
+                    currentFrame++;
+                    timeSinceLastFrame = 0;
+                    if (currentFrame == totalFrames)
+                        currentFrame = 0;
+                }
             }
         }
 
@@ -95,10 +102,12 @@ namespace RPGame
 
             if (newState.IsKeyDown(Keys.W))
             {
+                IsJumping = true;
                 if (!oldState.IsKeyDown(Keys.W))
                 {
                     if (canJump)
                         air = true;
+
                     canJump = false;
                 }
             }
