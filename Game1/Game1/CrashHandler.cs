@@ -21,6 +21,7 @@ namespace RPGame
         //Creates a crash file that if not removed on closing the game will report that it wasnt shut down properly
         public void CrashFileMake()
         {
+            createErrorFolder();
             var CrashWriter = new StreamWriter(Path.Combine(getErrorPath(), "CrashCheck"));
             CrashWriter.WriteLine("Crash");
             CrashWriter.Close();

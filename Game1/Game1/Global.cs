@@ -21,13 +21,6 @@ namespace RPGame
     public class Global
     {
 
-
-        //The Game States get defined here
-        public enum GameStates { Menu, Playing }
-
-        public GameStates gameState;
-
-
         static string UserFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         static string errorPathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Errors");
         string errorPath = Path.Combine(errorPathFolder, "errors.txt");
@@ -109,104 +102,6 @@ namespace RPGame
                 }
                 errorWrite.Close();
             }
-        }
-
-        /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
-
-        //Creates the Shapes of Polygon Clas
-        protected Polygons CreateShape(string shapeName)
-        {
-
-            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
-            Polygons myPolygon = new Polygons(NewList);
-            return myPolygon;
-        }
-
-        protected Character CreateChar(string shapeName)
-        {
-
-            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
-            Character myChar = new Character(NewList);
-            return myChar;
-        }
-        /// <summary>
-        /// </summary>
-        /// <param name="AreaVsMenu"></param>
-        /// Set to 2 if its for the Menu Classes and set to anything else for the Area Classes
-        /// <returns></returns>
-        protected void RetrieveShapes(int AreaVsMenu)
-        {
-            string filePath = "";
-            if (AreaVsMenu != 2)
-            {
-                filePath = Path.Combine(filePathFolder, "shapeList.txt");
-            }
-            else
-            {
-                filePath = Path.Combine(filePathFolder, "MenusList.txt");
-            }
-            StreamReader shapeConfig = new StreamReader(filePath);
-            string line;
-            string key = null;
-            List<Vector2> verticies = new List<Vector2>();
-            while ((line = shapeConfig.ReadLine()) != null)
-            {
-                try
-                {
-                    string[] VertCords = (line.Split(','));
-                    float xVert = (float)Convert.ToDouble(VertCords[0]);
-                    float yVert = (float)Convert.ToDouble(VertCords[1]);
-                    Vector2 myVector2 = new Vector2(xVert, yVert);
-                    verticies.Add(myVector2);
-
-                }
-                catch
-                {
-                    if (key != null)
-                    {
-                        shapeVerts[key] = verticies;
-                        verticies = new List<Vector2>();
-                    }
-                    key = line;
-                }
-            }
-        }
-
-        protected bool Collision(Polygons Shape, Polygons Shape2)
-        {
-            bool collision = true;
-            
-            // Y is for the verticies one higher than i; I named it Y since it rhymes with i;
-            int Y = 2;
-            // Z is the same as Y but for Shape2; Named that since it is after Y;
-            int Z = 2;
-
-            for (int i = 1; i < Shape.getNumVerticies(); i++)
-            {
-                if (Y == Shape.getNumVerticies())
-                {
-                    Y = 1;
-                }
-                if (!Shape.Projection(Shape2, Shape.NormalVector(i, Y)))
-                {
-                    collision = false;
-                }
-                Y++;
-            }
-
-            for (int i = 1; i < Shape2.getNumVerticies(); i++)
-            {
-                if (Z == Shape2.getNumVerticies())
-                {
-                    Z = 1;
-                }
-                if (!Shape2.Projection(Shape, Shape2.NormalVector(i, Z)))
-                {
-                    collision = false;
-                }
-                Z++;
-            }
-            return collision;
         }
 
     }
