@@ -19,7 +19,7 @@ namespace RPGame
 
     class Areas : Screen
     {
-
+        public bool isBullshit = true;
         /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
 
         //Creates the Shapes of Polygon Clas
@@ -32,8 +32,6 @@ namespace RPGame
         }
         //Creates the Character like CreateShape
         protected Character CreateChar(string shapeName)
-
-
         {
 
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
