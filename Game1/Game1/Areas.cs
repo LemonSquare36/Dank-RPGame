@@ -45,21 +45,21 @@ namespace RPGame
         {
             string Resource = "";
             while (true)
-            {
-                if (Resource == "EnemyList")
+            
+                if (Resource == "Shapes/EnemyList")
                 {
                     break;
                 }
-                if (Resource == "shapeList")
+                if (Resource == "Shapes/shapeList")
                 {
-                    Resource = "EnemyList";
+                    Resource = "Shapes/EnemyList";
                 }
                 else
                 {
-                    Resource = "shapeList";
+                    Resource = "Shapes/shapeList";
                 }
 
-                StreamReader shapeConfig = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("RPGame" + Resource));
+                StreamReader shapeConfig = new StreamReader(Path.Combine(filePathFolder, Resource));
 
                 string line;
                 string key = null;
@@ -86,7 +86,7 @@ namespace RPGame
                     }
                 }
             }
-        }
+        
         //Uses the Positions from Shape list to make collision
         protected bool Collision(Polygons Shape, Polygons Shape2)
         {
