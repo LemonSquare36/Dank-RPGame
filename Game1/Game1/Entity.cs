@@ -22,17 +22,14 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
-        public bool IsMoving = true;
-
-        public int Rows { get; set; }
-        public int Cols { get; set; }
-
-        protected int currentFrame;
-        protected int totalFrames;
+        private int Rows;
+        private int Cols;
+        private int currentFrame;
+        private int totalFrames;
 
         //slow framerate
-        protected int timeSinceLastFrame = 0;
-        protected int millisecondsPerFrame = 100;
+        private int timeSinceLastFrame = 0;
+        private int millisecondsPerFrame = 100;
 
         float gravity = 0f;
         bool air = false;
@@ -102,7 +99,6 @@ namespace RPGame
                 {
                     if (canJump)
                         air = true;
-
                     canJump = false;
                 }
             }

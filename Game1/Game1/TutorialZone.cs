@@ -45,6 +45,7 @@ namespace RPGame
             TFloor2.LoadContent("tfloor2", "TFloor");
 
             Player.LoadCharacter("TutorialSpawn");
+            Player.SpriteMove(1, 3);
 
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
@@ -107,12 +108,15 @@ namespace RPGame
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
             Player.MoveChar(Key);
             Player.Jump();
+
+            if (Player.IsMoving)
+                Player.Update(time);
         }
 
         private void MakeShapes()
         {
             //Create the Polygon 
-            RetrieveShapes(1);
+            RetrieveShapes();
 
             Twall = CreateShape("twall");
             Twall2 = CreateShape("twall");
