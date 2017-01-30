@@ -22,7 +22,6 @@ namespace RPGame
 
         KeyboardState Key;
 
-        public bool IsMoving = false;
         SpriteBatch spriteBatch;
 
         public int health = 20;
@@ -36,7 +35,7 @@ namespace RPGame
         /// <param name="area"></param>
         public void LoadCharacter(string area)
         {
-            texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycle");
+            texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
 
             if (area == "HabitationJanitorDoor")
                 Placement = new Vector2(400, 100);

@@ -148,6 +148,8 @@
     <Content Include="Content\Sprites\TutorialSprites\TBack.png" />
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
     <Content Include="Content\Sprites\WalkCycle.png" />
+    <Content Include="Content\Sprites\WalkCycleLeft.png" />
+    <Content Include="Content\Sprites\WalkCycleRight.png" />
     <Content Include="Icon.ico" />
     <EmbeddedResource Include="Shapes\shapeplace.txt" />
     <EmbeddedResource Include="Shapes\shapeList.txt" />
