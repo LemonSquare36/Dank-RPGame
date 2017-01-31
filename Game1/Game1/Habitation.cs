@@ -14,6 +14,7 @@ namespace RPGame
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
         Character Player;
+        CrawlerAlien Crawler1;
         List<Polygons> PolyList;
         public override void Initialize()
         {
@@ -37,6 +38,8 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
+            Crawler1.Load(-300, 100);
+
             #region LoadSprites
             CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
             CeilingHump = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorHump");
@@ -53,6 +56,7 @@ namespace RPGame
             #endregion
 
             Player.SpriteMove(1, 3);
+            Crawler1.SpriteMove(1, 4);
 
             ListAdd();
         }
