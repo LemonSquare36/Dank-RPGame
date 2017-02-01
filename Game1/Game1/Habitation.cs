@@ -40,7 +40,7 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
-            Crawler1.Load(-300, 100);
+            Crawler1.Load(500, 100);
 
             #region LoadSprites
             CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
@@ -84,6 +84,25 @@ namespace RPGame
 
             foreach (Entity enemy in Enemies)
             {
+                enemy.Gravity();
+                if (enemy.IsMoving)
+                {
+                    enemy.Update(time);
+                }
+                foreach (Polygons poly in PolyList)
+                {
+                    CrawlerCollision = Collision(enemy, poly);
+                    if (CrawlerCollision)
+                    {
+                        enemy.Rebuff(poly);
+                        enemy.GravityReset();
+                    }
+                }
+            }
+
+
+            foreach (Entity enemy in Enemies)
+            {
                 enemy.IsMoving = false;
 
                 double distance = Distance(enemy.getRealPos(0), Player.getRealPos(0));
@@ -103,32 +122,9 @@ namespace RPGame
                     Player.FloorReset();
                 }
             }
-            CrawlerCollision = Collision(Crawler1, Mramp);
-            if (CrawlerCollision)
-            {
-                Crawler1.Rebuff(Mramp);
-            }
 
             //Update Textures Here
             Crawler1.UpdateTexture();
-
-            foreach (Entity enemy in Enemies)
-            {
-
-                enemy.Gravity();
-                if (enemy.IsMoving)
-                {
-                    enemy.Update(time);
-                }
-                foreach (Polygons poly in PolyList)
-                {
-                    CrawlerCollision = Collision(enemy, poly);
-                    if (CrawlerCollision)
-                    {
-                        enemy.Rebuff(poly);
-                    }
-                }
-            }
 
 
             Player.MoveChar(Key);
@@ -151,9 +147,9 @@ namespace RPGame
 
             FloorbytheDoor.Draw(spriteBatch);
             FloorHump.Draw(spriteBatch);
-            Mramp.Draw(spriteBatch);
             LongFloor1.Draw(spriteBatch);
             LongFloor2.Draw(spriteBatch);
+            Mramp.Draw(spriteBatch);
             HWall1.Draw(spriteBatch);
             HWall2.Draw(spriteBatch);
 

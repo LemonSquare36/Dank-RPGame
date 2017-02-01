@@ -324,12 +324,10 @@ namespace RPGame
                             if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
                             {
                                 Positive = false;
-                                Placement = OldPosition;
                             }
                             else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
                             {
                                 Positive = false;
-                                Placement = OldPosition;
                             }
 
 
@@ -341,7 +339,7 @@ namespace RPGame
 
                             if (!hole)
                             {
-                                if (Slope > -2 && Positive == true)
+                                if (Slope > -2 && Positive == true && Slope <0)
                                 {
                                     if (Movement.X < 0 && Movement.Y > 0)
                                     {
@@ -359,10 +357,11 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                                     }
+                                   
                                 }
                                 else if (Slope < -2 && Positive == true)
                                 {
-                                    Placement = OldPosition;
+                                    
                                     Placement.X -= 2;
                                 }
 
@@ -388,7 +387,7 @@ namespace RPGame
                                 }
                                 else if (Slope > 2 && Positive == true)
                                 {
-                                    Placement = OldPosition;
+                                    
                                     Placement.X += 2;
                                 }
                             }
