@@ -124,7 +124,7 @@ namespace RPGame
                     
                     break;
 
-                case "Option":
+                case "Option": 
                    CurrentScreen = Options;
                     break;
 
