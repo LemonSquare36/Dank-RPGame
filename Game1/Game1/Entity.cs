@@ -36,7 +36,7 @@ namespace RPGame
         protected int millisecondsPerFrame = 100;
 
         float gravity = 0f;
-        bool air = false;
+        bool air = false; 
         float traveltime = 0;
         float jump = 7f;
         bool canJump = true;
@@ -157,7 +157,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += -2f;
+            Movement.X += -1.5f;
 
             Placement += Movement;
         }
@@ -167,7 +167,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += 2f;
+            Movement.X += 1.5f;
 
             Placement += Movement;
         }

@@ -83,5 +83,13 @@ namespace RPGame
                 ability += 5;
             }
         }
+
+        public void CheckIfBeDead()
+        {
+            if (health <= 0)
+            {
+                spriteBatch.DrawString(font, "YOU DIED", new Vector2(200, 200), Color.Red);
+            }
+        }
     }
 }
