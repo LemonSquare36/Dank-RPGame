@@ -16,9 +16,11 @@ namespace RPGame
         Character Player;
         CrawlerAlien Crawler1;
         List<Polygons> PolyList;
+        List<Entity> Enemies;
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
+            Enemies = new List<Entity>();
         }
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -59,15 +61,16 @@ namespace RPGame
             Crawler1.SpriteMove(1, 4);
 
             ListAdd();
+            AlienListAdd();
         }
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             Player.Gravity();
             camera.Follow(-Player.getRealPos(0));
-            Debug.WriteLine(Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
+            bool CrawlerCollision;
 
             foreach (Polygons poly in PolyList)
             {
@@ -78,12 +81,61 @@ namespace RPGame
                     Player.FloorReset();
                 }
             }
+
+            foreach (Entity enemy in Enemies)
+            {
+                enemy.IsMoving = false;
+
+                double distance = Distance(enemy.getRealPos(0), Player.getRealPos(0));
+                if (distance <= 150 && distance > 0)
+                {
+                    enemy.MoveRight();
+                }
+                if (distance >= -210 && distance < -50)
+                {
+                    enemy.MoveLeft();
+                }
+
+                PlayerCollision = Collision(Player, enemy);
+                if (PlayerCollision)
+                {
+                    Player.Rebuff(enemy);
+                    Player.FloorReset();
+                }
+            }
+            CrawlerCollision = Collision(Crawler1, Mramp);
+            if (CrawlerCollision)
+            {
+                Crawler1.Rebuff(Mramp);
+            }
+
+            //Update Textures Here
+            Crawler1.UpdateTexture();
+
+            foreach (Entity enemy in Enemies)
+            {
+
+                enemy.Gravity();
+                if (enemy.IsMoving)
+                {
+                    enemy.Update(time);
+                }
+                foreach (Polygons poly in PolyList)
+                {
+                    CrawlerCollision = Collision(enemy, poly);
+                    if (CrawlerCollision)
+                    {
+                        enemy.Rebuff(poly);
+                    }
+                }
+            }
+
+
             Player.MoveChar(Key);
             Player.Jump();
 
             if (Player.IsMoving)
                 Player.Update(time);
-
 
             camera.ChangeScreenSize(Key, graphicsManager);
         }
@@ -95,6 +147,7 @@ namespace RPGame
                 poly.RealPos();
             }
             Player.RealPos();
+            Crawler1.RealPos();
 
             FloorbytheDoor.Draw(spriteBatch);
             FloorHump.Draw(spriteBatch);
@@ -122,6 +175,7 @@ namespace RPGame
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
+            Crawler1.Draw(spriteBatch);
         }
         private void MakeShapes()
         {
@@ -136,6 +190,8 @@ namespace RPGame
             HWall2 = CreateShape("hwall");
 
             Player = CreateChar("janitor");
+
+            Crawler1 = CreateCrawler("Crawler");
         }
         private void ListAdd()
         {
@@ -146,6 +202,33 @@ namespace RPGame
             PolyList.Add(Mramp);
             PolyList.Add(HWall1);
             PolyList.Add(HWall2);
+        }
+
+        private void AlienListAdd()
+        {
+            Enemies.Add(Crawler1);
+        }
+
+
+
+        private double Distance(Vector2 point1, Vector2 point2)
+        {
+            double D = point2.X - point1.X;
+
+            double X = Math.Pow((point2.X - point1.X), 2);
+            double Y = Math.Pow((point2.Y - point1.Y), 2);
+
+            double unit = Math.Sqrt(X + Y);
+
+            if (D < 0)
+            {
+                return -unit;
+            }
+            else if (D > 0)
+            {
+                return unit;
+            }
+            return 0;
         }
     }
 }
