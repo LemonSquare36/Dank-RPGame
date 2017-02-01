@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Collections;
 
 namespace RPGame
 {
@@ -20,6 +21,10 @@ namespace RPGame
     class Areas : Screen
     {
         /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
+
+
+        //Hashtable for storing the verticies
+        protected static Hashtable shapeVerts = new Hashtable();
 
         //Creates the Shapes of Polygon Class
         protected Polygons CreateShape(string shapeName)
@@ -35,6 +40,13 @@ namespace RPGame
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
             Character myChar = new Character(NewList);
             return myChar;
+        }
+
+        protected CrawlerAlien CreateCrawler(string shapeName)
+        {
+            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
+            CrawlerAlien myAlien = new CrawlerAlien(NewList);
+            return myAlien;
         }
         //Gets the Hit boxes from Shape List
         protected void RetrieveShapes()

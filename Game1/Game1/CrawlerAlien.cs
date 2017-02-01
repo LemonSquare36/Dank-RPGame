@@ -38,19 +38,17 @@ namespace RPGame
             texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet");
         }
 
-        public void Update()
+        public void UpdateTexture()
         {
 
-        }
-
-        private void MoveLeft()
-        {
-
-        }
-
-        private void MoveRight()
-        {
-
+            if (Movement.X > 0)
+            {
+                texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet");
+            }
+            if (Movement.X < 0)
+            {
+                texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet2");
+            }
         }
     }
 }

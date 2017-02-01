@@ -152,5 +152,25 @@ namespace RPGame
                 jumpReset();
         }
 
+        public void MoveLeft()
+        {
+            Movement = Vector2.Zero;
+
+            IsMoving = true;
+            Movement.X += -2f;
+
+            Placement += Movement;
+        }
+
+        public void MoveRight()
+        {
+            Movement = Vector2.Zero;
+
+            IsMoving = true;
+            Movement.X += 2f;
+
+            Placement += Movement;
+        }
+
     }
 }
