@@ -163,7 +163,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += -1.5f;
+            Movement.X += -1.8f;
 
             Placement += Movement;
         }
@@ -173,7 +173,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += 1.5f;
+            Movement.X += 1.8f;
 
             Placement += Movement;
         }
