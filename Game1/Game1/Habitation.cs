@@ -13,6 +13,7 @@ namespace RPGame
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
         Character Player;
+        Goop goop;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
@@ -46,6 +47,7 @@ namespace RPGame
             Crawler5.Load(-2000, 100);
             Crawler6.Load(-1900, 100);
             Crawler7.Load(-2100, 100);
+
 
             #region LoadSprites
             CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
@@ -221,7 +223,7 @@ namespace RPGame
             FloorbytheDoor = CreateShape("floorbythedoor");
             FloorHump = CreateShape("floorhump");
             Mramp = CreateShape("mramp");
-            LongFloor1 = CreateShape("longfloor");
+            LongFloor1 = CreateShape("longfloor2");
             LongFloor2 = CreateShape("longfloor");
             HWall1 = CreateShape("hwall");
             HWall2 = CreateShape("hwall");
