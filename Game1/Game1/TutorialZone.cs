@@ -39,10 +39,10 @@ namespace RPGame
             base.LoadContent(spriteBatch);
 
             spriteBatch = spriteBatchMain;
-            Twall.LoadContent("twall1", "TWall");
-            Twall2.LoadContent("twall2", "TWall");
-            TFloor.LoadContent("tfloor1", "TFloor");
-            TFloor2.LoadContent("tfloor2", "TFloor");
+            Twall.LoadContent("twall1", "TWall", true);
+            Twall2.LoadContent("twall2", "TWall", true);
+            TFloor.LoadContent("tfloor1", "TFloor", false);
+            TFloor2.LoadContent("tfloor2", "TFloor", false);
 
             Player.LoadCharacter("TutorialSpawn");
             Player.SpriteMove(1, 3);
@@ -89,12 +89,12 @@ namespace RPGame
                 if (PlayerCollision)
                 {
                     Player.Rebuff(TFloor);
-                    Player.FloorReset();
+                    Player.FloorReset(TFloor.getisWall());
                 }
                 if (PlayerCollision1)
                 {
                     Player.Rebuff(TFloor2);
-                    Player.FloorReset();
+                    Player.FloorReset(TFloor.getisWall());
                 }
                 if (PlayerCollision2)
                 {

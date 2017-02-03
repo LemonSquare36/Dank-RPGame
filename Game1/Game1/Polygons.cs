@@ -29,6 +29,13 @@ namespace RPGame
         public Vector2 Movement = Vector2.Zero;
         protected Vector2 OldPosition = new Vector2();
 
+        private bool isWall;
+        public bool getisWall()
+        {
+            return isWall;
+        }
+
+
         protected Vector2 Placement;
         public Vector2 getPlacement()
         {
@@ -72,7 +79,7 @@ namespace RPGame
         }
 
         //Loads the texture 2D's using image name
-        public void LoadContent(string ShapeName, string ShapeImage)
+        public void LoadContent(string ShapeName, string ShapeImage, bool iswall)
         {
 
             Placement = SetShapePlacement(ShapeName);
@@ -98,6 +105,7 @@ namespace RPGame
             if (ShapeImage == "hwall")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/HWall");
 
+            isWall = iswall;
         }
         //Draws the Images with current Texture
         public override void Draw(SpriteBatch spriteBatch)

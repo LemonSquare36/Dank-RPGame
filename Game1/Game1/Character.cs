@@ -24,7 +24,9 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
-        public int health = 20;
+        
+
+        public int health = 50;
         public int ability = 10;
         public int attack = 10; 
         public int level = 1;
@@ -84,11 +86,12 @@ namespace RPGame
             }
         }
 
-        public void CheckIfBeDead()
+        public void CheckIfBeDead(SpriteBatch spriteBatch)
         {
+            font = Main.GameContent.Load<SpriteFont>("myFont");
             if (health <= 0)
             {
-                spriteBatch.DrawString(font, "YOU DIED", new Vector2(200, 200), Color.Red);
+                spriteBatch.DrawString(font, "YOU DIED", Placement + new Vector2(-52, -50), Color.Red);
             }
         }
     }
