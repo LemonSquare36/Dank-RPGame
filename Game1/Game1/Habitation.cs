@@ -172,25 +172,6 @@ namespace RPGame
 
         public override void Draw()
         {
-            foreach (Polygons poly in PolyList)
-            {
-                poly.RealPos();
-            }
-            Player.RealPos();
-
-            foreach (Entity enemy in Enemies)
-            {
-                enemy.RealPos();
-                enemy.Draw(spriteBatch);
-            }
-
-            FloorbytheDoor.Draw(spriteBatch);
-            FloorHump.Draw(spriteBatch);
-            LongFloor1.Draw(spriteBatch);
-            LongFloor2.Draw(spriteBatch);
-            Mramp.Draw(spriteBatch);
-            HWall1.Draw(spriteBatch);
-            HWall2.Draw(spriteBatch);
 
             #region DrawSprites
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
@@ -206,11 +187,23 @@ namespace RPGame
             spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
             #endregion
 
+            foreach (Polygons poly in PolyList)
+            {
+                poly.RealPos();
+                poly.Draw(spriteBatch);
+            }
+            Player.RealPos();
+
+            foreach (Entity enemy in Enemies)
+            {
+                enemy.RealPos();
+                enemy.Draw(spriteBatch);
+            }
+
             spriteBatch.DrawString(font, "Hanger\n <----", new Vector2(-2100, 150), Color.White);
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
-            Crawler1.Draw(spriteBatch);
 
             Player.CheckIfBeDead(spriteBatch);
         }
@@ -221,7 +214,7 @@ namespace RPGame
             FloorbytheDoor = CreateShape("floorbythedoor");
             FloorHump = CreateShape("floorhump");
             Mramp = CreateShape("mramp");
-            LongFloor1 = CreateShape("longfloor");
+            LongFloor1 = CreateShape("longfloor2");
             LongFloor2 = CreateShape("longfloor");
             HWall1 = CreateShape("hwall");
             HWall2 = CreateShape("hwall");
