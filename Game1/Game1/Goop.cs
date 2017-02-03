@@ -23,6 +23,6 @@ namespace RPGame
         public void LoadGoop()
         {
             texture = Main.GameContent.Load<Texture2D>("Sprites/TheBlob");
-        }
+        }m
     }
 }
