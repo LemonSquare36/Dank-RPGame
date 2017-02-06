@@ -68,6 +68,7 @@ namespace RPGame
 
             try
             {
+                //Checks to see if the error was already there
                 var errorReader = new StreamReader(errorPath);
                 while (true)
                 {
@@ -89,7 +90,7 @@ namespace RPGame
                 errorReader.Close();
             }
             catch { }
-
+            //Writes the Error to the File
             if (write)
             {
                 var errorWrite = new StreamWriter(errorPath, true);

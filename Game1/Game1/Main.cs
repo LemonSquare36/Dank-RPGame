@@ -20,16 +20,17 @@ namespace RPGame
         SpriteBatch spriteBatch;
         CrashHandler CrashHandle = new CrashHandler();
 
+        //Allows other classes to load code from content manager - Convient
         private static ContentManager content;
         public static ContentManager GameContent
         {
             get { return content; }
             set { content = value; }
         }
-
+        //The class that basically runs the game
         GameState theGameState = new GameState();
         
-
+        //Constructor
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -37,7 +38,7 @@ namespace RPGame
             content = Content;
             IsMouseVisible = true;
         }
-
+        //Utilizes the crash manager (Cancer) and Initializes GameState
         protected override void Initialize()
         {
            // CrashHandle.CrashCheck();
@@ -47,7 +48,7 @@ namespace RPGame
             base.Initialize();
         }
 
-
+        //Loads Everything
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -55,12 +56,12 @@ namespace RPGame
             theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics);
             
         }
-
+        //NOt used but create when the prject was made. Kept in case a use apeared
         protected override void UnloadContent()
         {
             //Unload any non ContentManager content here
         }
-
+        //Updates the Game
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -74,10 +75,9 @@ namespace RPGame
             theGameState.getGameTime(gameTime);
         }
 
-
+        //Draws the Game
         protected override void Draw(GameTime gameTime)
-        {
-            //GraphicsDevice.Clear(Color.CornflowerBlue);           
+        {          
             theGameState.Draw(spriteBatch);
             base.Draw(gameTime);
         }

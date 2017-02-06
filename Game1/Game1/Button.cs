@@ -23,25 +23,28 @@ namespace RPGame
         private MouseState mouse;
         private ButtonState oldClick;
         private ButtonState curClick;
+
+        //Holds the Name or Function the button does
         private string Bname;
         public string bName
         {
             get { return Bname; }
         }
-
+        //Event for when you click the button
         private event EventHandler buttonClicked;
         public event EventHandler ButtonClicked
         {
             add { buttonClicked += value; }
             remove { buttonClicked -= value; }
         }
-
+        //Resets the Current and Old Click for the buttons
         public void ButtonReset()
         {
             curClick = ButtonState.Pressed;
             oldClick = ButtonState.Pressed;
         }
 
+        //Create the Image and HitBox when calling the button in this Constructer
         public Button(Vector2 pos, int width, int height, Texture2D Unpressed, Texture2D Pressed, string ButtonName)//Button Name is super important becuase it determines what it does
         {
             curClick = ButtonState.Pressed;
@@ -53,7 +56,7 @@ namespace RPGame
             Bname = ButtonName;
             Texture = unPressed;
         }
-
+        //Reads for inputs of the mouse in correspondence for the button
         public void Update(MouseState Mouse)
         {
             mouse = Mouse;
@@ -63,18 +66,19 @@ namespace RPGame
             if (rectangle.Contains(mouse.X, mouse.Y))
             {
                 Texture = pressed;
+                //Edge Detection
                 if (curClick == ButtonState.Pressed && oldClick == ButtonState.Released)
                 {
                     OnButtonClicked();
                 }
             }
         }
-
+        //Draws the Buttons
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Pos, null, null, null, 0, null, Color.White);
         }
-
+        //Button Event
         private void OnButtonClicked()
         {
             buttonClicked?.Invoke(this, EventArgs.Empty);

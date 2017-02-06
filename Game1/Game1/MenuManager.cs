@@ -21,20 +21,20 @@ namespace RPGame
       
         protected MouseState mouse;
 
-
+        //ButtonCLicked leads Here
         protected void ButtonClicked(object sender, EventArgs e)
         {
             //Sets next screen to button name and calls the event.
             nextScreen = ((Button)sender).bName;
             OnScreenChanged();
         }
-
+        //Event for Changing the Screen
         public event EventHandler ChangeScreen;
         public void OnScreenChanged()
         {
             ChangeScreen?.Invoke(this, EventArgs.Empty);
         }
-
+        //Holds the Function
         public virtual void ButtonReset()
         {
 

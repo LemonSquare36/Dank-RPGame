@@ -50,19 +50,16 @@ namespace RPGame
         {
             File.Delete(Path.Combine(getErrorPath(), "CrashCheck"));
         }
-
+        //Creates the winform
         private static void CrashForm()
         {
             Application.EnableVisualStyles();
             Application.Run(new CrashForm());
         }
+        //Closes the application out
         public void MainClose()
         {
             Environment.Exit(0);
-        }
-        public void GameRunCrash(string log)
-        {
-
         }
 
     }

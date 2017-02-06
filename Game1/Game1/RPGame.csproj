@@ -66,7 +66,6 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="CrashHandler.cs" />
-    <Compile Include="CrashWindow.cs" />
     <Compile Include="CrawlerAlien.cs" />
     <Compile Include="CreditsMenu.cs" />
     <Compile Include="Entity.cs" />
@@ -78,7 +77,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FileSelectScreen.cs" />
-    <Compile Include="FloatingAlien.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Habitation.cs" />
@@ -143,6 +141,7 @@
     <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Table with Chairs.png" />
+    <Content Include="Content\Sprites\HPTexture.png" />
     <Content Include="Content\Sprites\Janitor.png" />
     <Content Include="Content\Sprites\main_Menu_Background.png" />
     <Content Include="Content\Sprites\RedCube.png" />
