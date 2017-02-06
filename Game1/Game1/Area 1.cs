@@ -18,6 +18,11 @@ namespace RPGame
     class Area_1 : Areas
     {
 
+        public Area_1(bool isArea) : base(isArea)
+        {
+            isarea = isArea;
+        }
+
         Timer levelTimer = new Timer();
         bool elapsed = true;
 

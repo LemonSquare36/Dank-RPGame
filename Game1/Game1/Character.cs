@@ -40,7 +40,7 @@ namespace RPGame
             texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
 
             if (area == "HabitationJanitorDoor")
-                Placement = new Vector2(400, 100);
+                Placement = new Vector2(400, 140);
             if (area == "TutorialSpawn")
                 Placement = new Vector2(400, 300);
 

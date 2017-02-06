@@ -10,13 +10,21 @@ namespace RPGame
 {
     class Habitation : Areas
     {
+
+        public Habitation(bool isArea) : base(isArea)
+        {
+            isarea = isArea;
+        }
+
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
         Character Player;
-        Polygons goop;
+        Goop goop;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
+
+
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
@@ -25,6 +33,7 @@ namespace RPGame
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
+
             MakeShapes();
             spriteBatch = spriteBatchMain;
 
@@ -40,9 +49,7 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
-            goop.LoadGoop();
-
-            Crawler1.Load(500, 100);
+            Crawler1.Load(-500, 100);
             Crawler2.Load(-1800, 100);
             Crawler3.Load(-1700, 100);
             Crawler4.Load(-1600, 100);
@@ -71,6 +78,8 @@ namespace RPGame
             ListAdd();
             AlienListAdd();
 
+
+
             foreach (Entity enemy in Enemies)
             {
                 enemy.SpriteMove(1, 4);
@@ -79,6 +88,9 @@ namespace RPGame
 
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
+
+            Player.RealPos();
+
             Player.Gravity();
             camera.Follow(-Player.getRealPos(0));
             getKey();
@@ -89,6 +101,8 @@ namespace RPGame
 
             foreach (Polygons poly in PolyList)
             {
+                poly.RealPos();
+
                 PlayerCollision = Collision(Player, poly);
                 if (PlayerCollision)
                 {
@@ -100,6 +114,8 @@ namespace RPGame
             foreach (Entity enemy in Enemies)
             {
                 enemy.Gravity();
+                enemy.RealPos();
+
                 if (enemy.IsMoving)
                 {
                     enemy.Update(time);
@@ -193,14 +209,11 @@ namespace RPGame
 
             foreach (Polygons poly in PolyList)
             {
-                poly.RealPos();
                 poly.Draw(spriteBatch);
             }
-            Player.RealPos();
 
             foreach (Entity enemy in Enemies)
             {
-                enemy.RealPos();
                 enemy.Draw(spriteBatch);
             }
 
@@ -208,7 +221,7 @@ namespace RPGame
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
-            goop.Draw(spriteBatch);
+
             Player.CheckIfBeDead(spriteBatch);
         }
         private void MakeShapes()

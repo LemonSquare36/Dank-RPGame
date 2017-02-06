@@ -22,6 +22,10 @@ namespace RPGame
     {
         /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
 
+         public Areas(bool isArea)
+        {
+            isarea = isArea;
+        }
 
         //Hashtable for storing the verticies
         protected static Hashtable shapeVerts = new Hashtable();
