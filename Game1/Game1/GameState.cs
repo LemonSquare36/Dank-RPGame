@@ -21,6 +21,10 @@ namespace RPGame
     {
         Dictionary<string, int> screens = new Dictionary<string, int>();
 
+        public enum gameState { Playing, Loading, Puased }
+
+        gameState game = new gameState();
+
         KeyboardState mPreviousKeyboardState;
         SpriteBatch spriteBatch;
         GraphicsDevice graphicsDevice;
@@ -28,8 +32,9 @@ namespace RPGame
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
         Color color = Color.Blue;
-
         GameTime time;
+
+        int loadingInterval;
 
         #region Declaring the Areas and Menus
         Screen CurrentScreen;
@@ -50,10 +55,16 @@ namespace RPGame
         {
             ErrorFileReset();
 
+            if (game == gameState.Loading && CurrentScreen.getisarea() == true)
+            {
+                loadingInterval = 10;
+            }
+            else { loadingInterval = 1; }
+
             #region Creating the areas
-            TriangleLand = new Area_1();
-            Tutorial = new TutorialZone();
-            habitation = new Habitation();
+            TriangleLand = new Area_1(true);
+            Tutorial = new TutorialZone(true);
+            habitation = new Habitation(true);
             #endregion
             #region Creating the Menus
             mainMenu = new MainMenu();
@@ -87,6 +98,7 @@ namespace RPGame
             Credits.ChangeScreen += HandleScreenChanged;
 
             CurrentScreen.LoadContent(spriteBatch);
+
         }
 
         //The update function for changing the GameStates and for using functions of the current GameStates
@@ -95,8 +107,15 @@ namespace RPGame
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
 
+            if (game == gameState.Playing)
+            {
+                CurrentScreen.Update(camera, graphicsManager);
+            }
+            else if (game == gameState.Puased)
+            {
 
-            CurrentScreen.Update(camera, graphicsManager);
+            }
+
             CurrentScreen.getGameTimePrime(time);
 
         }
@@ -104,11 +123,33 @@ namespace RPGame
         public void Draw(SpriteBatch spriteBatch)
         {
             graphicsDevice.Clear(color);
-            var viewMatrix = camera.Transform(graphicsDevice);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
-            CurrentScreen.Draw();
-            spriteBatch.End();
+            if (game == gameState.Playing)
+            {
+                var viewMatrix = camera.Transform(graphicsDevice);
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
+                CurrentScreen.Draw();
+                spriteBatch.End();
+            }
+
+            if (game == gameState.Loading)
+            {
+                if (font == null)
+                {
+                    font = Main.GameContent.Load<SpriteFont>("myFont");
+                }
+                loadingInterval--;
+                spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Loading", new Vector2(600, 400), Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
+                spriteBatch.End();
+            }
+
+            if (loadingInterval == 0)
+            {
+                if (game == gameState.Loading)
+                    game = gameState.Playing;
+            }
         }
 
         //The Event that Changes the Screens
@@ -121,11 +162,11 @@ namespace RPGame
                 case "Play":
                     CurrentScreen = habitation;
                     color = Color.LightSlateGray;
-                    
+
                     break;
 
-                case "Option": 
-                   CurrentScreen = Options;
+                case "Option":
+                    CurrentScreen = Options;
                     break;
 
                 case "Credit":
@@ -145,12 +186,13 @@ namespace RPGame
                     break;
                 default:
                     Load = false;
-                    break;      
+                    break;
             }
 
             CurrentScreen.ButtonReset();
             if (Load)
             {
+                game = gameState.Loading;
                 Initialize();
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }

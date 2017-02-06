@@ -17,6 +17,11 @@ namespace RPGame
     class TutorialZone : Areas
     {
 
+        public TutorialZone(bool isArea) : base(isArea)
+        {
+            isarea = isArea;
+        }
+
         Polygons Twall, Twall2, TFloor, TFloor2;
         Character Player;
         Texture2D Background;

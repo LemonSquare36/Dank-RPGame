@@ -21,6 +21,12 @@ namespace RPGame
         protected KeyboardState Key;
         protected GameTime time;
 
+        protected bool isarea;
+        public bool getisarea()
+        {
+            return isarea;
+        }
+
         public string getNextScreen()
         {
             return nextScreen;
