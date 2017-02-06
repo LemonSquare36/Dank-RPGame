@@ -40,6 +40,8 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
+            goop.LoadGoop();
+
             Crawler1.Load(500, 100);
             Crawler2.Load(-1800, 100);
             Crawler3.Load(-1700, 100);
@@ -206,7 +208,7 @@ namespace RPGame
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
-
+            goop.Draw(spriteBatch);
             Player.CheckIfBeDead(spriteBatch);
         }
         private void MakeShapes()
