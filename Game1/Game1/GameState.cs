@@ -133,6 +133,7 @@ namespace RPGame
                 spriteBatch.End();
             }
 
+
             if (game == gameState.Loading)
             {
                 if (font == null)
