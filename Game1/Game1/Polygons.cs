@@ -29,6 +29,13 @@ namespace RPGame
         public Vector2 Movement = Vector2.Zero;
         protected Vector2 OldPosition = new Vector2();
 
+        private bool isWall;
+        public bool getisWall()
+        {
+            return isWall;
+        }
+
+
         protected Vector2 Placement;
         public Vector2 getPlacement()
         {
@@ -72,7 +79,7 @@ namespace RPGame
         }
 
         //Loads the texture 2D's using image name
-        public void LoadContent(string ShapeName, string ShapeImage)
+        public void LoadContent(string ShapeName, string ShapeImage, bool iswall)
         {
 
             Placement = SetShapePlacement(ShapeName);
@@ -98,6 +105,7 @@ namespace RPGame
             if (ShapeImage == "hwall")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/HWall");
 
+            isWall = iswall;
         }
         //Draws the Images with current Texture
         public override void Draw(SpriteBatch spriteBatch)
@@ -324,12 +332,10 @@ namespace RPGame
                             if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
                             {
                                 Positive = false;
-                                Placement = OldPosition;
                             }
                             else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
                             {
                                 Positive = false;
-                                Placement = OldPosition;
                             }
 
 
@@ -341,7 +347,7 @@ namespace RPGame
 
                             if (!hole)
                             {
-                                if (Slope > -2 && Positive == true)
+                                if (Slope > -2 && Positive == true && Slope <0)
                                 {
                                     if (Movement.X < 0 && Movement.Y > 0)
                                     {
@@ -359,10 +365,11 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                                     }
+                                   
                                 }
                                 else if (Slope < -2 && Positive == true)
                                 {
-                                    Placement = OldPosition;
+                                    
                                     Placement.X -= 2;
                                 }
 
@@ -388,7 +395,7 @@ namespace RPGame
                                 }
                                 else if (Slope > 2 && Positive == true)
                                 {
-                                    Placement = OldPosition;
+                                    
                                     Placement.X += 2;
                                 }
                             }

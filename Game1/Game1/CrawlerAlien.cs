@@ -19,18 +19,6 @@ namespace RPGame
     {
         public CrawlerAlien(List<Vector2> numbers) : base(numbers) { }
 
-        double ElapsedTime = 1.5;
-        double InitialTime = 1.4;
-        double StartTime = 0;
-
-        public void Attack(Character ch, GameTime gameTime)
-        {
-            StartTime += gameTime.ElapsedGameTime.Seconds;
-
-            if (StartTime >= ElapsedTime)
-            ch.health -= 2;
-        }
-
         public void Load(int Xposition, int Yposition)
         {
             Placement = new Vector2(Xposition, Yposition);
@@ -38,19 +26,17 @@ namespace RPGame
             texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet");
         }
 
-        public void Update()
+        public void UpdateTexture()
         {
 
-        }
-
-        private void MoveLeft()
-        {
-
-        }
-
-        private void MoveRight()
-        {
-
+            if (Movement.X > 0)
+            {
+                texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet");
+            }
+            if (Movement.X < 0)
+            {
+                texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet2");
+            }
         }
     }
 }

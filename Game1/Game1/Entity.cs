@@ -34,6 +34,8 @@ namespace RPGame
         //slow framerate
         protected int timeSinceLastFrame = 0;
         protected int millisecondsPerFrame = 100;
+        double ElapsedTime = .5f;
+        double StartTime = 0;
 
         float gravity = 0f;
         bool air = false;
@@ -46,7 +48,7 @@ namespace RPGame
             Rows = rows;
             Cols = cols;
             currentFrame = 0;
-            totalFrames = Rows * Cols; 
+            totalFrames = Rows * Cols;
         }
 
         public void Update(GameTime gameTime)
@@ -131,26 +133,59 @@ namespace RPGame
             }
         }
 
-        public void jumpReset()
+        public void jumpReset(bool isWall)
         {
-            canJump = true;
-            IsJumping = false;
+            if (!isWall)
+            {
+                canJump = true;
+                IsJumping = false;
+            }
+            
         }
 
         public Entity(List<Vector2> numbers) : base(numbers) { }
 
         public void LoadContent()
         {
-            
+
         }
 
-        public void FloorReset()
+        public void FloorReset(bool isWall)
         {
             GravityReset();
 
             if (!canJump)
-                jumpReset();
+                jumpReset(isWall);
         }
+
+        public void MoveLeft()
+        {
+            Movement = Vector2.Zero;
+
+            IsMoving = true;
+            Movement.X += -1.8f;
+
+            Placement += Movement;
+        }
+
+        public void MoveRight()
+        {
+            Movement = Vector2.Zero;
+
+            IsMoving = true;
+            Movement.X += 1.8f;
+
+            Placement += Movement;
+        }
+
+        public void Attack(ref Character ch, GameTime gameTime)
+        {
+            StartTime += gameTime.ElapsedGameTime.Seconds;
+
+            if (StartTime >= ElapsedTime)
+                ch.health -= 2;
+        }
+
 
     }
 }

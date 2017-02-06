@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Collections;
 
 namespace RPGame
 {
@@ -26,8 +25,6 @@ namespace RPGame
         string errorPath = Path.Combine(errorPathFolder, "errors.txt");
         protected string filePathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes");
 
-        //Hashtable for storing the verticies
-        protected static Hashtable shapeVerts = new Hashtable();
 
         //Holds the fonts
         protected SpriteFont font;

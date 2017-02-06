@@ -36,13 +36,13 @@ namespace RPGame
         {
             MakeShapes();
             spriteBatch = spriteBatchMain;
-            Triangle1.LoadContent("triangle1", "GreenTriangle");
-            Triangle2.LoadContent("triangle2", "GreenTriangle");
-            Triangle3.LoadContent("triangle3", "GreenTriangle");
-            Pentagon1.LoadContent("pentagon1", "GreyPentagon");
-            Pentagon2.LoadContent("pentagon2", "GreyPentagon");
-            janitor.LoadContent("janitor", "janitor");
-            Floor1.LoadContent("floor1", "Floor");
+            Triangle1.LoadContent("triangle1", "GreenTriangle", false);
+            Triangle2.LoadContent("triangle2", "GreenTriangle", false);
+            Triangle3.LoadContent("triangle3", "GreenTriangle", false);
+            Pentagon1.LoadContent("pentagon1", "GreyPentagon", false);
+            Pentagon2.LoadContent("pentagon2", "GreyPentagon", false);
+            janitor.LoadContent("janitor", "janitor", false);
+            Floor1.LoadContent("floor1", "Floor", false);
         }
 
         public override void Draw()
