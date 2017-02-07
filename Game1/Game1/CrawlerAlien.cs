@@ -17,15 +17,16 @@ namespace RPGame
 {
     class CrawlerAlien : Entity
     {
+       
         public CrawlerAlien(List<Vector2> numbers) : base(numbers) { }
-
+        //Loads Placement and texture
         public void Load(int Xposition, int Yposition)
         {
             Placement = new Vector2(Xposition, Yposition);
 
             texture = Main.GameContent.Load<Texture2D>("Enemies/CrawlerAlienSheet");
         }
-
+        //Updates the texture when it walks
         public void UpdateTexture()
         {
 

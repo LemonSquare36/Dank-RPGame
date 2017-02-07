@@ -26,7 +26,7 @@ namespace RPGame
         public float Rotation { get; set; }
         public Vector2 Origin { get; set; }
         bool Size = true;
-
+        //Constructor
         public Camera()
         {
             Zoom = 1f;
@@ -34,7 +34,7 @@ namespace RPGame
             Rotation = 0;
             Origin = Vector2.Zero;
         }
-
+        //MOves the Camera with arrow keys
         public void Move(KeyboardState CurrentKeyBoardState)
         {
             if (CurrentKeyBoardState.IsKeyDown(Keys.Right))
@@ -54,9 +54,10 @@ namespace RPGame
                 Position = new Vector2(Position.X, Position.Y - 2);
             }
         }
-
+        //Cerates what the camera actaully sees. This inculdes scale,zoom, rotaion. Done in a matrix
         public Matrix Transform(GraphicsDevice graphicsDevice)
         {
+            //game is scaled to these amounts yo
             var scaleX = (float)graphicsDevice.Viewport.Width / 800;
             var scaleY = (float)graphicsDevice.Viewport.Height / 480;
 
@@ -67,7 +68,7 @@ namespace RPGame
 
             return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
         }
-
+        //Toggle full screen or not
         public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics)
         { 
 
@@ -82,29 +83,14 @@ namespace RPGame
                 }
                 else if (!Size)
                 {
-                    #region Worthless fullscreen code after found the function togglefullscreen. Just showing off my worthless work.
-                    /*float aspectRatio = 800f / 480f;
-                    var viewport = graphicsDevice.Viewport;
-                    float width = graphicsDevice.DisplayMode.Width;
-                    float height = graphicsDevice.DisplayMode.Height;
-
-
-                    if (height > viewport.Height)
-                    {
-                        height = (int)(width / aspectRatio + 0.5f);
-                        width = (int)(height * aspectRatio + 0.5f);
-                    }
-                    Graphics.PreferredBackBufferHeight = Convert.ToInt32(height);
-                    Graphics.PreferredBackBufferWidth = Convert.ToInt32(width);*/
-                    #endregion
-
+                    //Super nice funtion :D
                     graphics.ToggleFullScreen();
                 }
                 graphics.ApplyChanges();
             }
           
         }
-
+        //Camera Follows the position provide (inteneded for character)
         public void Follow(Vector2 characterPosition)
         {
             Position = new Vector2(characterPosition.X + 400f, characterPosition.Y + 240f);

@@ -16,7 +16,7 @@ namespace RPGame
 {
     class TutorialZone : Areas
     {
-
+        //Tells the Game wether or not if its an Area
         public TutorialZone(bool isArea) : base(isArea)
         {
             isarea = isArea;
@@ -29,7 +29,7 @@ namespace RPGame
         bool Wright;
         bool jump;
         bool attack;
-        
+        //For starting the Tutorial
         public override void Initialize()
         {
             Wleft = false;
@@ -37,7 +37,7 @@ namespace RPGame
             jump = false;
             attack = false;
         }
-
+        //Load
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
             MakeShapes();
@@ -54,7 +54,7 @@ namespace RPGame
 
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
         }
-
+        //Draw
         public override void Draw()
         {
 
@@ -78,7 +78,7 @@ namespace RPGame
             }
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
-
+        //Updates the area/Game
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             Player.Gravity();
@@ -117,7 +117,7 @@ namespace RPGame
             if (Player.IsMoving)
                 Player.Update(time);
         }
-
+        //Create your objects here
         private void MakeShapes()
         {
             //Create the Polygon 
@@ -129,7 +129,7 @@ namespace RPGame
             TFloor2 = CreateShape("tfloor");
             Player = CreateChar("janitor");
         }    
-
+        //Runs the Tutrial
         private void TutorialCommands()
         {
             // Press A and D to continue

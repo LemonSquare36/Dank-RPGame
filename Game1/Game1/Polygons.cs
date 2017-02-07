@@ -286,6 +286,7 @@ namespace RPGame
 
             if (check)
             {
+                //Checks the verts of both polygons to find where the collision was made and with what verticies
                 foreach (Vector2 verts in getRealPosList())
                 {
                     for (int A = 1; A < Shape.getNumVerticies(); A++)
@@ -297,21 +298,13 @@ namespace RPGame
                         }
                         X = A;
                         Y = B;
-                        bool hole = false;
                         bool Positive = true;
                         bool isBetween = false;
-
-                        if (isBetween)
-                        {
-                            isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
-                            if (isBetween)
-                            {
-                                hole = true;
-                            }
-                        }
-
+                       
+                        //Checks if the Vert is inbetween two other verts or not
                         isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
 
+                        //Dont remember what this does but it is needed - I think its for when they are parallel
                         if (!isBetween)
                         {
                             if (value == getNumVerticies() * (Shape.getNumVerticies() - 1))
@@ -326,6 +319,7 @@ namespace RPGame
                             value++;
                         }
 
+                        //If it is Inbetween then GET THE SLOPE
                         if (isBetween)
                         {
 
@@ -345,8 +339,7 @@ namespace RPGame
 
                             Placement -= Movement;
 
-                            if (!hole)
-                            {
+                            //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for Positive slopes)
                                 if (Slope > -2 && Positive == true && Slope <0)
                                 {
                                     if (Movement.X < 0 && Movement.Y > 0)
@@ -373,8 +366,8 @@ namespace RPGame
                                     Placement.X -= 2;
                                 }
 
-
-                                if (Slope < 2 && Positive == false)
+                            //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for negative slopes)
+                            if (Slope < 2 && Positive == false)
                                 {
                                     if (Movement.X > 0 && Movement.Y > 0)
                                     {
@@ -402,7 +395,7 @@ namespace RPGame
                         }
                     }
                 }
-            }
+            //If check is flase then use these functions instead
             if (!check)
             {
                 

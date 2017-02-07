@@ -14,7 +14,7 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 
-// Loads the Content for the various GameStates and allows the switching between GameStates
+// Holds the Screens and most of the game
 namespace RPGame
 {
     class GameState : Global
@@ -50,7 +50,9 @@ namespace RPGame
         FileSelectScreen fileSelect;
         #endregion
 
-
+        /// <summary>
+        /// Called each time a screen is changed. Initializes them
+        /// </summary>
         public void Initialize()
         {
             ErrorFileReset();
@@ -86,7 +88,7 @@ namespace RPGame
             }
         }
 
-        //Loads the Content for The GameStates
+        //Loads the Content for The screens
         public void LoadContent(SpriteBatch spriteBatchMain, GraphicsDevice graphicsDeviceMain, GraphicsDeviceManager graphicsManagerMain)
         {
             spriteBatch = spriteBatchMain;
@@ -101,21 +103,22 @@ namespace RPGame
 
         }
 
-        //The update function for changing the GameStates and for using functions of the current GameStates
+        //The update function for changing the screen and for using functions of the current screens
         public void Update(GameTime gameTime)
         {
             KeyboardState CurrentKeyBoardState = Keyboard.GetState();
             mPreviousKeyboardState = CurrentKeyBoardState;
-
+            //Update if its playing
             if (game == gameState.Playing)
             {
                 CurrentScreen.Update(camera, graphicsManager);
             }
+            //Update if its puased
             else if (game == gameState.Puased)
             {
 
             }
-
+            //get that game time
             CurrentScreen.getGameTimePrime(time);
 
         }
@@ -123,7 +126,7 @@ namespace RPGame
         public void Draw(SpriteBatch spriteBatch)
         {
             graphicsDevice.Clear(color);
-
+            //Draws the game when its playing
             if (game == gameState.Playing)
             {
                 var viewMatrix = camera.Transform(graphicsDevice);
@@ -133,19 +136,21 @@ namespace RPGame
                 spriteBatch.End();
             }
 
-
+            //Runs if the game is loading
             if (game == gameState.Loading)
             {
                 if (font == null)
                 {
                     font = Main.GameContent.Load<SpriteFont>("myFont");
                 }
+                //Loading screen time
                 loadingInterval--;
+                //Draws loading screen items
                 spriteBatch.Begin();
                 spriteBatch.DrawString(font, "Loading", new Vector2(600, 400), Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0);
                 spriteBatch.End();
             }
-
+            //Changes it from loading to playing
             if (loadingInterval == 0)
             {
                 if (game == gameState.Loading)
@@ -157,7 +162,7 @@ namespace RPGame
         public void HandleScreenChanged(object sender, EventArgs eventArgs)
         {
             bool Load = true;
-            //Next Screen is Based off the buttons Name
+            //Next Screen is Based off the buttons Name (not garenteed to even load a new screen)
             switch (CurrentScreen.getNextScreen())
             {
                 case "Play":
@@ -189,8 +194,9 @@ namespace RPGame
                     Load = false;
                     break;
             }
-
+            //Resets the button on the screen
             CurrentScreen.ButtonReset();
+            //Loads if a new screen is activated
             if (Load)
             {
                 game = gameState.Loading;
@@ -198,7 +204,7 @@ namespace RPGame
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
         }
-
+        //Gets the gametime
         public void getGameTime(GameTime gameTime)
         {
             time = gameTime;

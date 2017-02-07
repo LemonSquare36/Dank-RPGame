@@ -52,7 +52,7 @@ namespace RPGame
             CrawlerAlien myAlien = new CrawlerAlien(NewList);
             return myAlien;
         }
-        //Gets the Hit boxes from Shape List
+        //Gets the Hit boxes from Shape List or Enemy List
         protected void RetrieveShapes()
         {
             string Resource = "";

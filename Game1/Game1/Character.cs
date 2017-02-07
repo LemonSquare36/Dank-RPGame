@@ -23,20 +23,23 @@ namespace RPGame
 
         SpriteBatch spriteBatch;
 
-        
+        private Texture2D Htex;
 
         public int health = 50;
         public int ability = 10;
-        public int attack = 10; 
+        public int attack = 10;
         public int level = 1;
+
+        Rectangle HPbar = new Rectangle();
 
         /// <summary>
         /// The Area in which you are trying to load the character into and the place; Please use clear names
         /// </summary>
         /// <param name="area"></param>
+        // Loads the Texture and Placement based on his area.
         public void LoadCharacter(string area)
         {
-
+            Htex = Main.GameContent.Load<Texture2D>("Sprites/HPTexture");
             texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
 
             if (area == "HabitationJanitorDoor")
@@ -45,7 +48,7 @@ namespace RPGame
                 Placement = new Vector2(400, 300);
 
         }
-
+        //Move him around with WASD
         public void MoveChar(KeyboardState Key)
         {
             IsMoving = false;
@@ -66,7 +69,7 @@ namespace RPGame
             OldPosition = Placement;
             Placement += Movement;
         }
-
+        //Framework for a levelup function that isnt used at the time of me commenting this.
         public void LevelUp()
         {
             spriteBatch.DrawString(font, "Congratulations! You have leveled up! Press X to upgrade attack. Press C to upgrade health. Press V to upgrade ability", new Vector2(200, 200), Color.Red);
@@ -84,7 +87,7 @@ namespace RPGame
                 ability += 5;
             }
         }
-
+        //Checks if is HP is 0 and the does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)
         {
             font = Main.GameContent.Load<SpriteFont>("myFont");
@@ -92,6 +95,12 @@ namespace RPGame
             {
                 spriteBatch.DrawString(font, "YOU DIED", Placement + new Vector2(-52, -50), Color.Red);
             }
+        }
+        //Draws the Hud
+        public void DrawHud()
+        {
+            HPbar.Width = health;
+            spriteBatch.Draw(Htex, new Vector2(20, 20) + Placement, HPbar, Color.White);
         }
     }
 }

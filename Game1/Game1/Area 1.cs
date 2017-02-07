@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
-
+//The Test area fot the game. Never used in gameplay but stll kept becuase it was once used.
 namespace RPGame
 {
     class Area_1 : Areas
@@ -24,9 +24,6 @@ namespace RPGame
         }
 
         Timer levelTimer = new Timer();
-        bool elapsed = true;
-
-        Buttons TestButton = new Buttons();
 
         Polygons Triangle1;
         Polygons Triangle2;
@@ -36,7 +33,7 @@ namespace RPGame
         Polygons Floor1;
         Polygons janitor;
 
-
+        //Load
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
             MakeShapes();
@@ -49,7 +46,7 @@ namespace RPGame
             janitor.LoadContent("janitor", "janitor", false);
             Floor1.LoadContent("floor1", "Floor", false);
         }
-
+        //Draw
         public override void Draw()
         {
             Triangle1.RealPos();
@@ -66,6 +63,7 @@ namespace RPGame
             Floor1.Draw(spriteBatch);
             janitor.Draw(spriteBatch);
         }
+        //Update
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
             getKey();
