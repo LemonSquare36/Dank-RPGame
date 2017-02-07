@@ -21,13 +21,16 @@ namespace RPGame
         List<Entity> Enemies;
        // List<Entity> goops;
         Polygons goop;
+        int[,] spawnPoints;
 
 
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
-           // goops = new List<Entity>();
+            // goops = new List<Entity>();
+            spawnPoints = new int[300, 100];
+
         }
         //loads assets
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -210,6 +213,8 @@ namespace RPGame
             spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
             #endregion
 
+
+            //goop.Draw(spawnPoints);
             foreach (Polygons poly in PolyList)
             {
                 poly.Draw(spriteBatch);
