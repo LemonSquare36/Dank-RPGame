@@ -29,6 +29,7 @@ namespace RPGame
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
+        private int score = 0;
 
         Rectangle HPbar = new Rectangle();
 
@@ -103,6 +104,12 @@ namespace RPGame
             HPbar.Width = health * 2;
             spritebatch.Draw(Htex, new Vector2(-350, -180) + Placement, HPbar, Color.White);
             spritebatch.DrawString(font, "HP", Placement + new Vector2(-384, -180), Color.Green);
+            spritebatch.DrawString(font, "Score : " + score, Placement + new Vector2(-384, -150), Color.Blue);
+        }
+
+        public void AddScore()
+        {
+            score++;
         }
     }
 }
