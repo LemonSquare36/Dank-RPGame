@@ -25,7 +25,7 @@ namespace RPGame
 
         private Texture2D Htex;
 
-        public int health = 50;
+        public int health = 60;
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
@@ -41,6 +41,8 @@ namespace RPGame
         {
             Htex = Main.GameContent.Load<Texture2D>("Sprites/HPTexture");
             texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
+            HPbar.Height = 30;
+            font = Main.GameContent.Load<SpriteFont>("myFont");
 
             if (area == "HabitationJanitorDoor")
                 Placement = new Vector2(400, 140);
@@ -90,17 +92,17 @@ namespace RPGame
         //Checks if is HP is 0 and the does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)
         {
-            font = Main.GameContent.Load<SpriteFont>("myFont");
             if (health <= 0)
             {
                 spriteBatch.DrawString(font, "YOU DIED", Placement + new Vector2(-52, -50), Color.Red);
             }
         }
         //Draws the Hud
-        public void DrawHud()
+        public void DrawHud(SpriteBatch spritebatch)
         {
-            HPbar.Width = health;
-            spriteBatch.Draw(Htex, new Vector2(20, 20) + Placement, HPbar, Color.White);
+            HPbar.Width = health * 2;
+            spritebatch.Draw(Htex, new Vector2(-350, -180) + Placement, HPbar, Color.White);
+            spritebatch.DrawString(font, "HP", Placement + new Vector2(-384, -180), Color.Green);
         }
     }
 }
