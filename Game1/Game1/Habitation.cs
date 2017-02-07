@@ -22,12 +22,15 @@ namespace RPGame
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
+        List<Entity> goops;
+        Polygons goop;
 
 
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
+            goops = new List<Entity>();
         }
 
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -48,6 +51,8 @@ namespace RPGame
 
             Player.LoadCharacter("HabitationJanitorDoor");
 
+            goop.LoadContent("goop", "goop", false);
+
             Crawler1.Load(-500, 100);
             Crawler2.Load(-1800, 100);
             Crawler3.Load(-1700, 100);
@@ -55,6 +60,8 @@ namespace RPGame
             Crawler5.Load(-2000, 100);
             Crawler6.Load(-1900, 100);
             Crawler7.Load(-2100, 100);
+
+            
 
 
             #region LoadSprites
@@ -223,6 +230,9 @@ namespace RPGame
 
             Player.CheckIfBeDead(spriteBatch);
         }
+
+
+
         private void MakeShapes()
         {
             RetrieveShapes();
@@ -234,6 +244,8 @@ namespace RPGame
             LongFloor2 = CreateShape("longfloor");
             HWall1 = CreateShape("hwall");
             HWall2 = CreateShape("hwall");
+
+            goop = CreateShape("goop");
 
             Player = CreateChar("janitor");
 

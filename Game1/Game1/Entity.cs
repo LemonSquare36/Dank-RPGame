@@ -145,11 +145,6 @@ namespace RPGame
 
         public Entity(List<Vector2> numbers) : base(numbers) { }
 
-        public void LoadContent()
-        {
-
-        }
-
         public void FloorReset(bool isWall)
         {
             GravityReset();
