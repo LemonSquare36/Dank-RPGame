@@ -10,11 +10,8 @@ namespace RPGame
 {
     class Habitation : Areas
     {
-
-        public Habitation(bool isArea) : base(isArea)
-        {
-            isarea = isArea;
-        }
+        //sets Habitation to be an "Area"
+        public Habitation(bool isArea) : base(isArea){ isarea = isArea; }
 
         Polygons FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
@@ -32,7 +29,7 @@ namespace RPGame
             Enemies = new List<Entity>();
            // goops = new List<Entity>();
         }
-
+        //loads assets
         public override void LoadContent(SpriteBatch spriteBatchMain)
         {
 
@@ -85,13 +82,13 @@ namespace RPGame
             AlienListAdd();
 
 
-
+            //movement for enemies
             foreach (Entity enemy in Enemies)
             {
                 enemy.SpriteMove(1, 4);
             }
         }
-
+        //allows the camera to follow the player
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
         {
 
@@ -116,7 +113,7 @@ namespace RPGame
                     Player.FloorReset(poly.getisWall());
                 }
             }
-
+            //gravity and collision for enemies
             foreach (Entity enemy in Enemies)
             {
                 enemy.Gravity();
@@ -136,8 +133,7 @@ namespace RPGame
                     }
                 }
             }
-
-
+            //collision for enemies
             foreach (Entity enemy in Enemies)
             {
                 enemy.IsMoving = false;
@@ -160,6 +156,7 @@ namespace RPGame
                     Player.FloorReset(enemy.getisWall());
                 }
             }
+            //collision for enemies
             foreach (Entity enemy in Enemies)
             {
                 foreach (Entity Enemy in Enemies)
@@ -195,7 +192,7 @@ namespace RPGame
                 camera.ChangeScreenSize(Key, graphicsManager);
             
         }
-
+        //draw assets
         public override void Draw()
         {
 
@@ -231,9 +228,7 @@ namespace RPGame
 
             Player.CheckIfBeDead(spriteBatch);
         }
-
-
-
+        //draws the environment
         private void MakeShapes()
         {
             RetrieveShapes();
@@ -258,6 +253,7 @@ namespace RPGame
             Crawler6 = CreateCrawler("Crawler");
             Crawler7 = CreateCrawler("Crawler");
         }
+        //adds assets to the list of polygons that need to be drawn
         private void ListAdd()
         {
             PolyList.Add(FloorbytheDoor);
@@ -268,7 +264,7 @@ namespace RPGame
             PolyList.Add(HWall1);
             PolyList.Add(HWall2);
         }
-
+        //adds aliens to the list of enemies to be drawn
         private void AlienListAdd()
         {
             Enemies.Add(Crawler1);
@@ -279,9 +275,7 @@ namespace RPGame
             Enemies.Add(Crawler6);
             Enemies.Add(Crawler7);
         }
-
-
-
+        //allows the enemies to chase the player
         private double Distance(Vector2 point1, Vector2 point2)
         {
             double D = point2.X - point1.X;
