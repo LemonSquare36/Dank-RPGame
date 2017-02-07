@@ -18,6 +18,8 @@ namespace RPGame
     public class Entity : Polygons
     {
 
+        public Entity(List<Vector2> numbers) : base(numbers) { }
+
         KeyboardState oldState;
 
         SpriteBatch spriteBatch;
@@ -43,6 +45,7 @@ namespace RPGame
         float jump = 7f;
         bool canJump = true;
 
+        //sets up variables necessary to allow sprites to be animated
         public void SpriteMove(int rows, int cols)
         {
             Rows = rows;
@@ -50,7 +53,7 @@ namespace RPGame
             currentFrame = 0;
             totalFrames = Rows * Cols;
         }
-
+        //allows sprites to be animated 
         public void Update(GameTime gameTime)
         {
             if (!IsJumping)
@@ -69,7 +72,7 @@ namespace RPGame
                 }
             }
         }
-
+        //draws assets
         public override void Draw(SpriteBatch spriteBatch)
         {
             int width = texture.Width / Cols;
@@ -82,7 +85,7 @@ namespace RPGame
 
             spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White, rotation, verticies[0], SpriteEffects.None, 0);
         }
-
+        //pulls the asset back to the ground
         public void Gravity()
         {
             Movement = Vector2.Zero;
@@ -94,11 +97,12 @@ namespace RPGame
                 gravity += .05f;
             }
         }
+        //resets gravity
         public void GravityReset()
         {
             gravity = 0.5f;
         }
-
+        //allows the player to perform a jump
         public void Jump()
         {
             KeyboardState newState = Keyboard.GetState();
@@ -132,7 +136,7 @@ namespace RPGame
                 jump = 10;
             }
         }
-
+        //resets the jump
         public void jumpReset(bool isWall)
         {
             if (!isWall)
@@ -143,8 +147,6 @@ namespace RPGame
             
         }
 
-        public Entity(List<Vector2> numbers) : base(numbers) { }
-
         public void FloorReset(bool isWall)
         {
             GravityReset();
@@ -152,7 +154,7 @@ namespace RPGame
             if (!canJump)
                 jumpReset(isWall);
         }
-
+        //movement for the enemies
         public void MoveLeft()
         {
             Movement = Vector2.Zero;
@@ -162,7 +164,7 @@ namespace RPGame
 
             Placement += Movement;
         }
-
+        //movement for the enemies
         public void MoveRight()
         {
             Movement = Vector2.Zero;
@@ -172,7 +174,7 @@ namespace RPGame
 
             Placement += Movement;
         }
-
+        //damages the player based on number of frames that the player is touching an enemy
         public void Attack(ref Character ch, GameTime gameTime)
         {
             StartTime += gameTime.ElapsedGameTime.Seconds;
