@@ -32,6 +32,7 @@ namespace RPGame
         Camera camera = new Camera();
         Vector3 screenScale = Vector3.Zero;
         Color color = Color.Blue;
+        Color prevColor;
         GameTime time;
 
         int loadingInterval;
@@ -60,6 +61,8 @@ namespace RPGame
             if (game == gameState.Loading && CurrentScreen.getisarea() == true)
             {
                 loadingInterval = 10;
+                prevColor = color;
+                color = Color.LightSeaGreen;
             }
             else { loadingInterval = 1; }
 
@@ -154,6 +157,7 @@ namespace RPGame
             if (loadingInterval == 0)
             {
                 if (game == gameState.Loading)
+                    color = prevColor;
                     game = gameState.Playing;
             }
         }
