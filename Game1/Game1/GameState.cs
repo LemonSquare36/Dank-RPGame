@@ -137,6 +137,7 @@ namespace RPGame
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, viewMatrix * Matrix.CreateScale(1));
                 CurrentScreen.Draw();
                 spriteBatch.End();
+                
             }
 
             //Runs if the game is loading
