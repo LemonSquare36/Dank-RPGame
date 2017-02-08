@@ -104,6 +104,8 @@ namespace RPGame
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Mramp");
             if (ShapeImage == "hwall")
                 texture = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/HWall");
+            if (ShapeImage == "goop")
+                texture = Main.GameContent.Load<Texture2D>("Sprites/TheBlob");
 
             isWall = iswall;
         }
