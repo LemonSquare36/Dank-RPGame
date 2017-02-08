@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace RPGame
 {
-    public class Button
+    public class Button : Global
     {
         Rectangle rectangle;
         public Vector2 Pos = new Vector2();

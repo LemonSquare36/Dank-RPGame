@@ -38,6 +38,7 @@ namespace RPGame
         {
             if (File.Exists(errorPath))
                 File.Delete(errorPath);
+
         }
 
         //access to the errorPath folder for classes unable to derive from global
