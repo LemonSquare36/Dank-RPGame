@@ -51,6 +51,8 @@ namespace RPGame
         FileSelectScreen fileSelect;
         #endregion
 
+        HighScores highscores;
+
         /// <summary>
         /// Called each time a screen is changed. Initializes them
         /// </summary>
@@ -89,6 +91,7 @@ namespace RPGame
                 CurrentScreen = Credits;
                 CurrentScreen.Initialize();
             }
+            highscores = new HighScores();
         }
 
         //Loads the Content for The screens

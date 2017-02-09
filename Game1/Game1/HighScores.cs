@@ -20,8 +20,9 @@ namespace RPGame
     class HighScores : Global
     {
         DirectoryInfo Highscores = new DirectoryInfo(Path.Combine((Main.GameContent.RootDirectory), "HighScores"));
-        StreamReader readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
-
+        StreamReader readScores;
+        StreamWriter createHighscores = new StreamWriter(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
+        string line;
         //Constructor - Creates the Highscores Filepath
         public HighScores()
         {
@@ -29,8 +30,17 @@ namespace RPGame
             {
                 Highscores.Create();
             }
+            createHighscores.Close();
+            readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
+            readScores.Close();
         }
+        public void writeScore()
+        {
+            while ((line = readScores.ReadLine()) != null)
+            {
 
+            }
+        }
 
     }
 }
