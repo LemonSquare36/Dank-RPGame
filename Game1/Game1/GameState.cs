@@ -52,7 +52,6 @@ namespace RPGame
         #endregion
 
         HighScores highscores;
-
         /// <summary>
         /// Called each time a screen is changed. Initializes them
         /// </summary>

@@ -21,8 +21,9 @@ namespace RPGame
     {
         DirectoryInfo Highscores = new DirectoryInfo(Path.Combine((Main.GameContent.RootDirectory), "HighScores"));
         StreamReader readScores;
-        StreamWriter createHighscores = new StreamWriter(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
+        StreamWriter createHighscores;
         string line;
+
         //Constructor - Creates the Highscores Filepath
         public HighScores()
         {
@@ -30,9 +31,8 @@ namespace RPGame
             {
                 Highscores.Create();
             }
+            createHighscores = new StreamWriter(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
             createHighscores.Close();
-            readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
-            readScores.Close();
         }
         public void writeScore()
         {
