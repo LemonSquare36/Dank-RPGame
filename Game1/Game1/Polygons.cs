@@ -23,6 +23,19 @@ namespace RPGame
 
         // declaring texture 2D's
         protected Texture2D texture;
+        
+        //sets up points for the goop to be drawn
+        List<Vector2> spawnPoints = new List<Vector2>();
+        Vector2 point1 = new Vector2(300, 100);
+        Vector2 point2 = new Vector2(-100, 100);
+        Vector2 point3 = new Vector2(-300, 100);
+        Vector2 point4 = new Vector2(-500, 100);
+        Vector2 point5 = new Vector2(-900, 100);
+        Vector2 point6 = new Vector2(-1100, 100);
+        Vector2 point7 = new Vector2(-1300, 100);
+        Vector2 point8 = new Vector2(-1400, 100);
+        Vector2 point9 = new Vector2(-1700, 100);
+        Vector2 point10 = new Vector2(-1800, 100);
 
         protected float rotation;
         private List<Vector2> realPos = new List<Vector2>();
@@ -51,6 +64,16 @@ namespace RPGame
             {
                 verticies.Add(num);
             }
+            spawnPoints.Add(point1);
+            spawnPoints.Add(point2);
+            spawnPoints.Add(point3);
+            spawnPoints.Add(point4);
+            spawnPoints.Add(point5);
+            spawnPoints.Add(point6);
+            spawnPoints.Add(point7);
+            spawnPoints.Add(point8);
+            spawnPoints.Add(point9);
+            spawnPoints.Add(point10);
         }
 
         //Get the RealPosition
@@ -109,6 +132,14 @@ namespace RPGame
 
             isWall = iswall;
         }
+
+        public void SetGoopPlacement()
+        {
+            Random rand = new Random();
+            int goopIndex = rand.Next(spawnPoints.Count);
+            Placement = spawnPoints[goopIndex];
+        }
+
         //Draws the Images with current Texture
         public override void Draw(SpriteBatch spriteBatch)
         {
