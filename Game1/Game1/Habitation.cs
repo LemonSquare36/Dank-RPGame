@@ -182,6 +182,12 @@ namespace RPGame
                 }
             }
 
+            PlayerCollision = Collision(Player, goop);
+            if (PlayerCollision)
+            {
+                //score++
+                //remove goop texture
+            }
                 //Update Textures Here
                 Crawler1.UpdateTexture();
                 Crawler2.UpdateTexture();
