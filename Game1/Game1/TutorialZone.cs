@@ -79,7 +79,7 @@ namespace RPGame
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
         //Updates the area/Game
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
             Player.Gravity();
             getKey();

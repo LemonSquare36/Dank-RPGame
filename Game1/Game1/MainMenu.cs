@@ -53,15 +53,18 @@ namespace RPGame
             Tutorials.ButtonClicked += ButtonClicked;
         }
         //Updates the Buttons and other things for the menu
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
             //Get current mouse state
             mouse = Mouse.GetState();
+            Vector2 worldPosition;
+            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
+            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
 
             //Update the buttons
-            Test.Update(mouse);
-            Option.Update(mouse);
-            Tutorials.Update(mouse);
+            Test.Update(mouse,worldPosition);
+            Option.Update(mouse,worldPosition);
+            Tutorials.Update(mouse,worldPosition);
         }
         //Draws the Buttons
         public override void Draw()

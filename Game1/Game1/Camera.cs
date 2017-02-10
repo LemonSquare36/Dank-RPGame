@@ -69,11 +69,9 @@ namespace RPGame
             return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
         }
         //Toggle full screen or not
-        public void ChangeScreenSize(KeyboardState CurrentKeyBoardState, GraphicsDeviceManager graphics)
+        public void ChangeScreenSize(GraphicsDeviceManager graphics)
         { 
 
-            if (CurrentKeyBoardState.IsKeyDown(Keys.F1))
-            {
                 Size = !Size;
                 if (Size)
                 {
@@ -85,9 +83,9 @@ namespace RPGame
                 {
                     //Super nice funtion :D
                     graphics.ToggleFullScreen();
+                    
                 }
                 graphics.ApplyChanges();
-            }
           
         }
         //Camera Follows the position provide (inteneded for character)

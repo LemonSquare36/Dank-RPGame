@@ -15,7 +15,7 @@ namespace RPGame
 {
     class FileSelectScreen : MenuManager
     {
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
 
         }

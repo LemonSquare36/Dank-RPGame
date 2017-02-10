@@ -57,13 +57,14 @@ namespace RPGame
             Texture = unPressed;
         }
         //Reads for inputs of the mouse in correspondence for the button
-        public void Update(MouseState Mouse)
+
+        public void Update(MouseState Mouse,Vector2 worldMousePosition)
         {
             mouse = Mouse;
             Texture = unPressed;
             oldClick = curClick;
             curClick = mouse.LeftButton;
-            if (rectangle.Contains(mouse.X, mouse.Y))
+            if (rectangle.Contains(worldMousePosition.X, worldMousePosition.Y))
             {
                 Texture = pressed;
                 //Edge Detection

@@ -89,7 +89,7 @@ namespace RPGame
             }
         }
         //allows the camera to follow the player
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
 
             Player.RealPos();
@@ -189,7 +189,7 @@ namespace RPGame
                 if (Player.IsMoving)
                     Player.Update(time);
 
-                camera.ChangeScreenSize(Key, graphicsManager);
+
             
         }
         //draw assets

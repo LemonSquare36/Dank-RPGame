@@ -27,6 +27,14 @@ namespace RPGame
             get { return content; }
             set { content = value; }
         }
+        //
+        private static GameWindow window;
+        public static GameWindow gameWindow
+        {
+            get { return window; }
+            set { window = value; }
+        }
+
         //The class that basically runs the game
         GameState theGameState = new GameState();
         
@@ -36,6 +44,7 @@ namespace RPGame
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             content = Content;
+            window = Window;
             IsMouseVisible = true;
         }
         //Utilizes the crash manager (Cancer) and Initializes GameState
