@@ -43,7 +43,7 @@ namespace RPGame
             font = Main.GameContent.Load<SpriteFont>("myFont");
         }
         //Holds Update
-        public virtual void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public virtual void Update(Camera camera, GraphicsDeviceManager graphicsManager,GraphicsDevice graphicsDevice)
         {
 
         }
@@ -56,7 +56,6 @@ namespace RPGame
         public void CameraMove(Camera camera, GraphicsDeviceManager graphicsManager)
         {         
             camera.Move(Key);
-            camera.ChangeScreenSize(Key, graphicsManager);
         }
         //Used for keybaord state
         public void getKey()

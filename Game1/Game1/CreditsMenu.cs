@@ -45,13 +45,16 @@ namespace RPGame
             base.LoadContent(spriteBatch);
 
         }
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
             //Get current mouse state
             mouse = Mouse.GetState();
+            Vector2 worldPosition;
+            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
+            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
 
             //Update the buttons
-            Mains.Update(mouse);
+            Mains.Update(mouse,worldPosition);
         }
         //Draws the buttons
         public override void Draw()

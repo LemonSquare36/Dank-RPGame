@@ -117,7 +117,7 @@ namespace RPGame
             //Update if its playing
             if (game == gameState.Playing)
             {
-                CurrentScreen.Update(camera, graphicsManager);
+                CurrentScreen.Update(camera, graphicsManager,graphicsDevice);
             }
             //Update if its puased
             else if (game == gameState.Puased)
@@ -198,6 +198,11 @@ namespace RPGame
                 case "Tutorial":
                     CurrentScreen = Tutorial;
                     break;
+                case "OptionsFullscreen":
+                    Load = false;
+                    camera.ChangeScreenSize(graphicsManager);
+                    break; 
+
                 default:
                     Load = false;
                     break;

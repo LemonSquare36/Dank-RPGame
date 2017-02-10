@@ -64,7 +64,7 @@ namespace RPGame
             janitor.Draw(spriteBatch);
         }
         //Update
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
             getKey();
             CameraMove(camera, graphicsManager);

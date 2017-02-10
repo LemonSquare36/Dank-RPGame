@@ -13,24 +13,12 @@ namespace RPGame
         //sets Habitation to be an "Area"
         public Habitation(bool isArea) : base(isArea){ isarea = isArea; }
 
-        Vector2 point1 = new Vector2(300, 100);
-        Vector2 point2 = new Vector2(-100, 100);
-        Vector2 point3 = new Vector2(-300, 100);
-        Vector2 point4 = new Vector2(-500, 100);
-        Vector2 point5 = new Vector2(-900, 100);
-        Vector2 point6 = new Vector2(-1100, 100);
-        Vector2 point7 = new Vector2(-1300, 100);
-        Vector2 point8 = new Vector2(-1400, 100);
-        Vector2 point9 = new Vector2(-1700, 100);
-        Vector2 point10 = new Vector2(-1800, 100);
-
         Polygons goop, FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
         Character Player;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
-        List<Vector2> spawnPoints = new List<Vector2>();
         Vector2 goopPlace = new Vector2(300, 100);
 
 
@@ -182,6 +170,14 @@ namespace RPGame
                 }
             }
 
+            PlayerCollision = Collision(Player, goop);
+            if (PlayerCollision)
+            {
+
+                Player.AddScore();
+                //move goop texture
+                goop.SetGoopPlacement();
+            }
                 //Update Textures Here
                 Crawler1.UpdateTexture();
                 Crawler2.UpdateTexture();
@@ -283,29 +279,6 @@ namespace RPGame
             Enemies.Add(Crawler5);
             Enemies.Add(Crawler6);
             Enemies.Add(Crawler7);
-        }
-        //adds points for the goop to be drawn
-        private void AddSpawnPoints()
-        {
-            spawnPoints.Add(point1);
-            spawnPoints.Add(point2);
-            spawnPoints.Add(point3);
-            spawnPoints.Add(point4);
-            spawnPoints.Add(point5);
-            spawnPoints.Add(point6);
-            spawnPoints.Add(point7);
-            spawnPoints.Add(point8);
-            spawnPoints.Add(point9);
-            spawnPoints.Add(point10);
-        }
-        //gets the points for the goop to be drawn from
-        private void GetSpawnPoint()
-        {
-            Random rand = new Random();
-            int selectedPoint = rand.Next(1, 10);
-
-            if (selectedPoint == 1)
-                spawnPoints[0] = point1;
         }
         //allows the enemies to chase the player
         private double Distance(Vector2 point1, Vector2 point2)

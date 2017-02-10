@@ -38,7 +38,7 @@ namespace RPGame
 
             #region Button Load
             Sound = new Button(new Vector2(200, 75), 400, 100, Sounds, SoundChecked, "Sound");
-            Fullscreen= new Button(new Vector2(200, 200), 400, 100, Fullscreens, FullscreenChecked, "Fullscreen");
+            Fullscreen= new Button(new Vector2(200, 200), 400, 100, Fullscreens, FullscreenChecked, "OptionsFullscreen");
             Back = new Button(new Vector2(200, 325), 400, 100, Backs, BackHover, "Back");
             #endregion
 
@@ -49,15 +49,17 @@ namespace RPGame
 
 
         }
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager,GraphicsDevice graphicsDevice)
         {
             //Get current mouse state
             mouse = Mouse.GetState();
+            Vector2 worldPosition;
+            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
+            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
 
-            //Update the buttons
-            Sound.Update(mouse);
-            Fullscreen.Update(mouse);
-            Back.Update(mouse);
+            Sound.Update(mouse,worldPosition);
+            Fullscreen.Update(mouse,worldPosition);
+            Back.Update(mouse,worldPosition);
         }
         //Draws the buttons
         public override void Draw()
