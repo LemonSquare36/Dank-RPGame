@@ -49,6 +49,7 @@ namespace RPGame
         PuaseScreen Puase;
         CreditsMenu Credits;
         FileSelectScreen fileSelect;
+        HighscoreScreen scorescreen;
         #endregion
 
         HighScores highscores;
@@ -78,7 +79,7 @@ namespace RPGame
             Puase = new PuaseScreen();
             fileSelect = new FileSelectScreen();
             Credits = new CreditsMenu();
-
+            scorescreen = new HighscoreScreen();
             #endregion
 
             if (CurrentScreen != null)
@@ -87,7 +88,7 @@ namespace RPGame
             }
             else
             {
-                CurrentScreen = Credits;
+                CurrentScreen = scorescreen;
                 CurrentScreen.Initialize();
             }
             highscores = new HighScores();
