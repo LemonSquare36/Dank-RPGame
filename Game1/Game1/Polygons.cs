@@ -26,16 +26,16 @@ namespace RPGame
         
         //sets up points for the goop to be drawn
         List<Vector2> spawnPoints = new List<Vector2>();
-        Vector2 point1 = new Vector2(300, 100);
-        Vector2 point2 = new Vector2(-100, 100);
-        Vector2 point3 = new Vector2(-300, 100);
-        Vector2 point4 = new Vector2(-500, 100);
-        Vector2 point5 = new Vector2(-900, 100);
-        Vector2 point6 = new Vector2(-1100, 100);
-        Vector2 point7 = new Vector2(-1300, 100);
-        Vector2 point8 = new Vector2(-1400, 100);
-        Vector2 point9 = new Vector2(-1700, 100);
-        Vector2 point10 = new Vector2(-1800, 100);
+        Vector2 point1 = new Vector2(300, 75);
+        Vector2 point2 = new Vector2(-100, 150);
+        Vector2 point3 = new Vector2(-300, 150);
+        Vector2 point4 = new Vector2(-500, 150);
+        Vector2 point5 = new Vector2(-900, 150);
+        Vector2 point6 = new Vector2(-1100, 150);
+        Vector2 point7 = new Vector2(-1300, 150);
+        Vector2 point8 = new Vector2(-1400, 150);
+        Vector2 point9 = new Vector2(-1700, 150);
+        Vector2 point10 = new Vector2(-1800, 150);
 
         protected float rotation;
         private List<Vector2> realPos = new List<Vector2>();

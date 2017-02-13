@@ -87,7 +87,7 @@ namespace RPGame
             }
         }
         //allows the camera to follow the player
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager,GraphicsDevice graphicsDevice)
         {
 
             Player.RealPos();
@@ -173,10 +173,19 @@ namespace RPGame
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {
+                int levelKeeper = 0;
 
                 Player.AddScore();
                 //move goop texture
                 goop.SetGoopPlacement();
+
+                levelKeeper++;
+
+                if (levelKeeper >= 5)
+                {
+                    Player.LevelUp();
+                    levelKeeper = 5;
+                }
             }
                 //Update Textures Here
                 Crawler1.UpdateTexture();
