@@ -20,7 +20,7 @@ namespace RPGame
 
     class Camera : Global
     {
-       
+
         public float Zoom { get; set; }
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
@@ -70,23 +70,12 @@ namespace RPGame
         }
         //Toggle full screen or not
         public void ChangeScreenSize(GraphicsDeviceManager graphics)
-        { 
+        {
+            //Super nice funtion :D
+            graphics.ToggleFullScreen();
 
-                Size = !Size;
-                if (Size)
-                {
-                    graphics.PreferredBackBufferHeight = 480;
-                    graphics.PreferredBackBufferWidth = 800;
-                    
-                }
-                else if (!Size)
-                {
-                    //Super nice funtion :D
-                    graphics.ToggleFullScreen();
-                    
-                }
-                graphics.ApplyChanges();
-          
+            graphics.ApplyChanges();
+
         }
         //Camera Follows the position provide (inteneded for character)
         public void Follow(Vector2 characterPosition)

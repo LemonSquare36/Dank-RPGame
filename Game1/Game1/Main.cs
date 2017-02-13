@@ -46,6 +46,7 @@ namespace RPGame
             content = Content;
             window = Window;
             IsMouseVisible = true;
+            //Window.IsBorderless = true;
         }
         //Utilizes the crash manager (Cancer) and Initializes GameState
         protected override void Initialize()
