@@ -23,6 +23,7 @@ namespace RPGame
         {
             base.Initialize();
         }
+        //Loads the BUttons and Textures
         public override void LoadContent(SpriteBatch spirteBatchMain)
         {
             spriteBatch = spirteBatchMain;
