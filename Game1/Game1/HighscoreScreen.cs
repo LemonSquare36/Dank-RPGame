@@ -29,7 +29,7 @@ namespace RPGame
             base.LoadContent(spriteBatch);
         }
         //Updates the Highscores
-        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager)
+        public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
             highscores.ChangeScores();
         }
