@@ -32,6 +32,9 @@ namespace RPGame
         private int score = 0;
 
         Rectangle HPbar = new Rectangle();
+        HighScores heyscores = new HighScores();
+
+        bool written = false;
 
         /// <summary>
         /// The Area in which you are trying to load the character into and the place; Please use clear names
@@ -83,6 +86,11 @@ namespace RPGame
             if (health <= 0)
             {
                 spriteBatch.DrawString(font, "YOU DIED", Placement + new Vector2(-52, -50), Color.Red);
+                if (!written)
+                {
+                    heyscores.ChangeScores(score);
+                    written = true;
+                }
             }
         }
         //Draws the Hud

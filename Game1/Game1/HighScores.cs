@@ -21,10 +21,8 @@ namespace RPGame
     {
         DirectoryInfo Highscores = new DirectoryInfo(Path.Combine((Main.GameContent.RootDirectory), "HighScores"));
         StreamReader readScores;
-        StreamWriter createHighscores;
         string line;
         int num = 0;
-        int score;
 
         //Constructor - Creates the Highscores Filepath
         public HighScores()
@@ -32,41 +30,45 @@ namespace RPGame
             if (!Highscores.Exists)
             {
                 Highscores.Create();
+
+            }
+            if (!File.Exists(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt")))
+            {
+                File.Create(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
             }
         }
 
-        public void ChangeScores()
+        public void ChangeScores(int score)
         {
-            score = 45;
             bool written = false;
             using (StreamReader readStream = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt")))
             {
                 using (StreamWriter writeStream = new StreamWriter(Path.Combine((Main.GameContent.RootDirectory), "HighScores/temp.txt")))
                 {
-                    int maxcount = 10;
+                    int maxcount = 9;
                     string line;
                     while ((line = readStream.ReadLine()) != null && maxcount > 0)
                     {
 
-                            maxcount--;
+                        maxcount--;
 
-                            if (!written)
+                        if (!written)
+                        {
+                            if (Convert.ToInt64(line) < score)
                             {
-                                if (Convert.ToInt64(line) < score)
-                                {
-                                    writeStream.WriteLine(score);
-                                    written = true;
-                                    if (maxcount > 0)
-                                    {
-                                        writeStream.WriteLine(line);
-                                        maxcount--;
-                                    }
-                                }
+                                writeStream.WriteLine(score);
+                                written = true;
                             }
-                                writeStream.WriteLine(line);
                         }
+                        writeStream.WriteLine(line);
                     }
-                }           
+                    if (maxcount > 0 && line == null && !written)
+                    {
+                        writeStream.WriteLine(score);
+                        written = true;
+                    }
+                }
+            }
             File.Delete(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
             File.Move(Path.Combine((Main.GameContent.RootDirectory), "HighScores/temp.txt"), Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
         }
@@ -80,24 +82,25 @@ namespace RPGame
             }
 
             Vector2 position = new Vector2(20, 20);
-            readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
-
-            num = 0;
-            while (true)
+            using (readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt")))
             {
-                line = readScores.ReadLine();
-
-                if (line == null)
+                num = 0;
+                while (true)
                 {
-                    readScores.Close();
-                    break;
+                    line = readScores.ReadLine();
+
+                    if (line == null)
+                    {
+                        readScores.Close();
+                        break;
+                    }
+
+                    num++;
+
+                    spriteBatch.DrawString(font, num + "   " + line, position, Color.Red);
+                    position.Y += 40;
+
                 }
-
-                num++;
-
-                spriteBatch.DrawString(font, num + "   " + line, position, Color.Red);
-                position.Y += 40;
-
             }
         }
 

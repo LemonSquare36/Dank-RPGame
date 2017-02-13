@@ -37,13 +37,11 @@ namespace RPGame
             spriteBatch = spirteBatchMain;
 
             goToMain.ButtonClicked += ButtonClicked;
-
             base.LoadContent(spriteBatch);
         }
         //Updates the Highscores
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
-        {
-            highscores.ChangeScores();
+        { 
 
             //Get current mouse state
             mouse = Mouse.GetState();
