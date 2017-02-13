@@ -104,6 +104,7 @@ namespace RPGame
             mainMenu.ChangeScreen += HandleScreenChanged;
             Options.ChangeScreen += HandleScreenChanged;
             Credits.ChangeScreen += HandleScreenChanged;
+            scorescreen.ChangeScreen += HandleScreenChanged;
 
             CurrentScreen.LoadContent(spriteBatch);
 
