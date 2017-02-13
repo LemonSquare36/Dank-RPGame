@@ -62,9 +62,10 @@ namespace RPGame
                         }
                         writeStream.WriteLine(line);
                     }
-                    if (maxcount == 9 && line == null)
+                    if (maxcount > 0 && line == null && !written)
                     {
                         writeStream.WriteLine(score);
+                        written = true;
                     }
                 }
             }
