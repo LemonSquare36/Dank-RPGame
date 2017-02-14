@@ -78,7 +78,7 @@ namespace RPGame
         //Framework for a levelup function that isnt used at the time of me commenting this.
         public void LevelUp()
         {
-            spriteBatch.DrawString(font, "Congratulations! You have leveled up! Health increased", new Vector2(200, 200), Color.Fuchsia);
+            //spriteBatch.DrawString(font, "Congratulations! You have leveled up! Health increased", new Vector2(200, 200), Color.Fuchsia);
         }
         //Checks if is HP is 0 and the does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)

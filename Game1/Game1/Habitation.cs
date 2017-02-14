@@ -19,13 +19,28 @@ namespace RPGame
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
-        Vector2 goopPlace = new Vector2(300, 100);
+
+        int levelKeeper = 0;
+
+        //sets up points for the goop to be drawn
+        List<Vector2> spawnPoints = new List<Vector2>();
+        Vector2 point1 = new Vector2(100, 100);
+        Vector2 point2 = new Vector2(-75, 100);
+        Vector2 point3 = new Vector2(-300, 185);
+        Vector2 point4 = new Vector2(-500, 185);
+        Vector2 point5 = new Vector2(-900, 185);
+        Vector2 point6 = new Vector2(-1100, 185);
+        Vector2 point7 = new Vector2(-2300, 315);
+        Vector2 point8 = new Vector2(-1700, 315);
+        Vector2 point9 = new Vector2(-1900, 315);
+        Vector2 point10 = new Vector2(-2000, 315);
 
 
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
+            SpawnPointsAdd();
         }
         //loads assets
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -96,9 +111,7 @@ namespace RPGame
             camera.Follow(-Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
-            bool CrawlerCollision;
-
-            Debug.WriteLine(Player.health);
+            bool CrawlerCollision;           
 
             foreach (Polygons poly in PolyList)
             {
@@ -130,7 +143,7 @@ namespace RPGame
                     }
                 }
             }
-            //collision for enemies
+            //collision for enemies with player
             foreach (Entity enemy in Enemies)
             {
                 enemy.IsMoving = false;
@@ -145,15 +158,15 @@ namespace RPGame
                     enemy.MoveLeft();
                 }
 
-                PlayerCollision = Collision(Player, enemy);
-                if (PlayerCollision)
+                //PlayerCollision = Collision(Player, enemy);
+                /*if (PlayerCollision)
                 {
                     Player.health--;
                     Player.Rebuff(enemy);
                     Player.FloorReset(enemy.getisWall());
-                }
+                }*/
             }
-            //collision for enemies
+            //collides the enemies with each other
             foreach (Entity enemy in Enemies)
             {
                 foreach (Entity Enemy in Enemies)
@@ -173,15 +186,14 @@ namespace RPGame
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {
-                int levelKeeper = 0;
 
                 Player.AddScore();
                 //move goop texture
-                goop.SetGoopPlacement();
+                SetGoopPlacement();
 
                 levelKeeper++;
 
-                if (levelKeeper >= 5)
+                if (levelKeeper == 5)
                 {
                     Player.LevelUp();
                     levelKeeper = 5;
@@ -308,6 +320,28 @@ namespace RPGame
                 return unit;
             }
             return 0;
+        }
+
+        public void SetGoopPlacement()
+        {
+            Random rand = new Random();
+            int goopIndex = rand.Next(spawnPoints.Count);
+            goop.Placement = spawnPoints[goopIndex];
+            Debug.WriteLine(goop.Placement);
+        }
+
+        private void SpawnPointsAdd()
+        {
+            spawnPoints.Add(point1);
+            spawnPoints.Add(point2);
+            spawnPoints.Add(point3);
+            spawnPoints.Add(point4);
+            spawnPoints.Add(point5);
+            spawnPoints.Add(point6);
+            spawnPoints.Add(point7);
+            spawnPoints.Add(point8);
+            spawnPoints.Add(point9);
+            spawnPoints.Add(point10);
         }
     }
 }
