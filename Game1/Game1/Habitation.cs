@@ -15,7 +15,6 @@ namespace RPGame
 
         Polygons goop, FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
         Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
-        Character Player;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
@@ -47,6 +46,9 @@ namespace RPGame
         {
 
             MakeShapes();
+
+            Player.ChangeScreen += OnScreenChanged;
+
             spriteBatch = spriteBatchMain;
 
             base.LoadContent(spriteBatch);
@@ -195,7 +197,7 @@ namespace RPGame
 
                 if (levelKeeper == 5)
                 {
-                    Player.LevelUp();
+                   // Player.LevelUp();
                     levelKeeper = 5;
                 }
             }

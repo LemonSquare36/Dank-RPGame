@@ -53,6 +53,30 @@ namespace RPGame
         #endregion
 
         HighScores highscores;
+        public GameState()
+         {
+            #region Creating the areas
+            TriangleLand = new Area_1(true);
+            Tutorial = new TutorialZone(true);
+            habitation = new Habitation(true);
+            #endregion
+            #region Creating the Menus
+            mainMenu = new MainMenu();
+            Options = new OptionsMenu();
+            Puase = new PuaseScreen();
+            fileSelect = new FileSelectScreen();
+            Credits = new CreditsMenu();
+            scorescreen = new HighscoreScreen();
+            #endregion
+
+            mainMenu.ChangeScreen += HandleScreenChanged;
+            Options.ChangeScreen += HandleScreenChanged;
+            Credits.ChangeScreen += HandleScreenChanged;
+            scorescreen.ChangeScreen += HandleScreenChanged;
+            habitation.changeScreen += PlayerChangeScreen;
+            Tutorial.changeScreen += PlayerChangeScreen;
+        }
+
         /// <summary>
         /// Called each time a screen is changed. Initializes them
         /// </summary>
@@ -67,20 +91,6 @@ namespace RPGame
                 color = Color.LightSeaGreen;
             }
             else { loadingInterval = 1; }
-
-            #region Creating the areas
-            TriangleLand = new Area_1(true);
-            Tutorial = new TutorialZone(true);
-            habitation = new Habitation(true);
-            #endregion
-            #region Creating the Menus
-            mainMenu = new MainMenu();
-            Options = new OptionsMenu();
-            Puase = new PuaseScreen();
-            fileSelect = new FileSelectScreen();
-            Credits = new CreditsMenu();
-            scorescreen = new HighscoreScreen();
-            #endregion
 
             if (CurrentScreen != null)
             {
@@ -101,10 +111,6 @@ namespace RPGame
             graphicsDevice = graphicsDeviceMain;
             graphicsManager = graphicsManagerMain;
 
-            mainMenu.ChangeScreen += HandleScreenChanged;
-            Options.ChangeScreen += HandleScreenChanged;
-            Credits.ChangeScreen += HandleScreenChanged;
-            scorescreen.ChangeScreen += HandleScreenChanged;
 
             CurrentScreen.LoadContent(spriteBatch);
 
@@ -217,6 +223,15 @@ namespace RPGame
                 Initialize();
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
+        }
+
+        public void PlayerChangeScreen(object sender, EventArgs eventArgs)
+        {
+            CurrentScreen = scorescreen;
+            color = Color.Blue;
+            camera.posReset();
+            Initialize();
+            LoadContent(spriteBatch, graphicsDevice, graphicsManager);
         }
         //Gets the gametime
         public void getGameTime(GameTime gameTime)

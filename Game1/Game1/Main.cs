@@ -35,9 +35,8 @@ namespace RPGame
             set { window = value; }
         }
 
-        //The class that basically runs the game
-        GameState theGameState = new GameState();
-        
+        GameState theGameState;
+
         //Constructor
         public Main()
         {
@@ -47,6 +46,9 @@ namespace RPGame
             window = Window;
             IsMouseVisible = true;
             //Window.IsBorderless = true;
+
+            //The class that basically runs the game
+            theGameState = new GameState();
         }
         //Utilizes the crash manager (Cancer) and Initializes GameState
         protected override void Initialize()
