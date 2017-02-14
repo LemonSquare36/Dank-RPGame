@@ -82,6 +82,7 @@ namespace RPGame
             }
 
             Vector2 position = new Vector2(20, 20);
+            spriteBatch.DrawString(font, "HIGHSCORES", new Vector2(370,100), Color.Red, .1f, Vector2.Zero, 2, SpriteEffects.None, 0);
             using (readScores = new StreamReader(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt")))
             {
                 num = 0;
@@ -97,7 +98,7 @@ namespace RPGame
 
                     num++;
 
-                    spriteBatch.DrawString(font, num + "   " + line, position, Color.Red);
+                    spriteBatch.DrawString(font, num + ")   " + line, position, Color.Red);
                     position.Y += 40;
 
                 }

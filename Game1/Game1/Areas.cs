@@ -22,7 +22,9 @@ namespace RPGame
     {
         /*! This Polygon based code is used by polygons in the Areas and Buttons in the Menus. !*/
 
-         public Areas(bool isArea)
+        protected Character Player;
+
+        public Areas(bool isArea)
         {
             isarea = isArea;
         }
@@ -139,6 +141,13 @@ namespace RPGame
             }
             return collision;
         }
+
+        public event EventHandler changeScreen;
+        protected void OnScreenChanged(object sender, EventArgs eventArgs)
+        {
+            changeScreen?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }
 

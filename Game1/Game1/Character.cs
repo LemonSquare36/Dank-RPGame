@@ -17,22 +17,27 @@ namespace RPGame
 {
     public class Character : Entity
     {
-        public Character(List<Vector2> numbers) : base(numbers) { }
+        public Character(List<Vector2> numbers) : base(numbers)
+        {
+            deadTime.Elapsed += deadTimeEvent;
+            deadTime.Interval = 1000;
+        }
 
-        KeyboardState Key;
-
-        SpriteBatch spriteBatch;
-
-        private Texture2D Htex;
+        Texture2D Htex;
 
         public int health = 60;
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
         private int score = 0;
+        public int getscore()
+        {
+            return score;
+        }
 
         Rectangle HPbar = new Rectangle();
         HighScores heyscores = new HighScores();
+        Timer deadTime = new Timer();
 
         bool written = false;
 
@@ -46,7 +51,7 @@ namespace RPGame
             Htex = Main.GameContent.Load<Texture2D>("Sprites/HPTexture");
             texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
             HPbar.Height = 30;
-            font = Main.GameContent.Load<SpriteFont>("myFont");
+            font = Main.GameContent.Load<SpriteFont>("myFont");  
 
             if (area == "HabitationJanitorDoor")
                 Placement = new Vector2(400, 140);
@@ -57,39 +62,39 @@ namespace RPGame
         //Move him around with WASD
         public void MoveChar(KeyboardState Key)
         {
-            IsMoving = false;
-            Movement = Vector2.Zero;
+            if (alive)
+            {
+                IsMoving = false;
+                Movement = Vector2.Zero;
 
-            if (Key.IsKeyDown(Keys.D))
-            {
-                texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleRight");
-                Movement = new Vector2(Movement.X + 2f, Movement.Y);
-                IsMoving = true;
+                if (Key.IsKeyDown(Keys.D))
+                {
+                    texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleRight");
+                    Movement = new Vector2(Movement.X + 2f, Movement.Y);
+                    IsMoving = true;
+                }
+                if (Key.IsKeyDown(Keys.A))
+                {
+                    texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
+                    Movement = new Vector2(Movement.X - 2f, Movement.Y);
+                    IsMoving = true;
+                }
+                OldPosition = Placement;
+                Placement += Movement;
             }
-            if (Key.IsKeyDown(Keys.A))
-            {
-                texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
-                Movement = new Vector2(Movement.X - 2f, Movement.Y);
-                IsMoving = true;
-            }
-            OldPosition = Placement;
-            Placement += Movement;
-        }
-        //Framework for a levelup function that isnt used at the time of me commenting this.
-        public void LevelUp()
-        {
-            spriteBatch.DrawString(font, "Congratulations! You have leveled up! Health increased", new Vector2(200, 200), Color.Fuchsia);
         }
         //Checks if is HP is 0 and the does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)
         {
             if (health <= 0)
             {
+                alive = false;
                 spriteBatch.DrawString(font, "YOU DIED", Placement + new Vector2(-52, -50), Color.Red);
                 if (!written)
                 {
                     heyscores.ChangeScores(score);
                     written = true;
+                    deadTime.Start();
                 }
             }
         }
@@ -105,6 +110,12 @@ namespace RPGame
         public void AddScore()
         {
             score++;
+        }
+        public event EventHandler ChangeScreen;
+        private  void deadTimeEvent(object source, ElapsedEventArgs e)
+        {
+            deadTime.Stop();
+            ChangeScreen?.Invoke(this, EventArgs.Empty);
         }
     }
 }

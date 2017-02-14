@@ -23,19 +23,20 @@ namespace RPGame
         }
 
         Polygons Twall, Twall2, TFloor, TFloor2;
-        Character Player;
+        
         Texture2D Background;
         bool Wleft;
         bool Wright;
         bool jump;
-        bool attack;
+        bool colected;
         //For starting the Tutorial
         public override void Initialize()
         {
             Wleft = false;
             Wright = false;
             jump = false;
-            attack = false;
+            colected = false;
+            
         }
         //Load
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -83,7 +84,6 @@ namespace RPGame
         {
             Player.Gravity();
             getKey();
-            CameraMove(camera, graphicsManager);
             try
             {
                 bool PlayerCollision = Collision(Player, TFloor);
@@ -157,19 +157,25 @@ namespace RPGame
                         jump = true;
                     }
                 }
+                //Collect the goop
                 else
                 {
-                    // Press F to continue
-                    if (!attack)
+                    if (!colected)
                     {
-                        spriteBatch.DrawString(font, "Press F to Attack", new Vector2(300, 200), Color.Red);
-                        if (Key.IsKeyDown(Keys.F))
+                        spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(300, 200), Color.Red);
+                        if (Player.getscore() >= 1)
                         {
-                            attack = true;
+                            colected = true;
                         }
+                    }
+                    else
+                    {
+
                     }
                 }
             }
         }
+
+
     }
 }

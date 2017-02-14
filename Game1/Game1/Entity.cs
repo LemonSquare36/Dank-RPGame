@@ -44,6 +44,7 @@ namespace RPGame
         float traveltime = 0;
         float jump = 7f;
         bool canJump = true;
+        protected bool alive = true;
 
         //sets up variables necessary to allow sprites to be animated
         public void SpriteMove(int rows, int cols)
@@ -105,35 +106,38 @@ namespace RPGame
         //allows the player to perform a jump
         public void Jump()
         {
-            KeyboardState newState = Keyboard.GetState();
-
-            if (newState.IsKeyDown(Keys.W))
+            if (alive)
             {
-                IsJumping = true;
-                if (!oldState.IsKeyDown(Keys.W))
+                KeyboardState newState = Keyboard.GetState();
+
+                if (newState.IsKeyDown(Keys.W))
                 {
-                    if (canJump)
-                        air = true;
+                    IsJumping = true;
+                    if (!oldState.IsKeyDown(Keys.W))
+                    {
+                        if (canJump)
+                            air = true;
 
-                    canJump = false;
+                        canJump = false;
+                    }
                 }
-            }
-            else if (oldState.IsKeyDown(Keys.W))
-            {
+                else if (oldState.IsKeyDown(Keys.W))
+                {
 
-            }
-            oldState = newState;
-            if (air)
-            {
-                Movement = Vector2.Zero;
-                Movement = new Vector2(Movement.X, Movement.Y - jump);
-                jump -= .5f;
-                Placement += Movement;
-            }
-            if (jump < 0)
-            {
-                air = false;
-                jump = 10;
+                }
+                oldState = newState;
+                if (air)
+                {
+                    Movement = Vector2.Zero;
+                    Movement = new Vector2(Movement.X, Movement.Y - jump);
+                    jump -= .5f;
+                    Placement += Movement;
+                }
+                if (jump < 0)
+                {
+                    air = false;
+                    jump = 10;
+                }
             }
         }
         //resets the jump

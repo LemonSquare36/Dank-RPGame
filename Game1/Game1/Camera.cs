@@ -82,5 +82,9 @@ namespace RPGame
         {
             Position = new Vector2(characterPosition.X + 400f, characterPosition.Y + 240f);
         }
+        public void posReset()
+        {
+            Position = Vector2.Zero;
+        }
     }
 }
