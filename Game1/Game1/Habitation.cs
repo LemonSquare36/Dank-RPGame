@@ -197,7 +197,7 @@ namespace RPGame
 
                 if (levelKeeper == 5)
                 {
-                   // Player.LevelUp();
+                   //Player.LevelUp();
                     levelKeeper = 5;
                 }
             }
@@ -329,7 +329,6 @@ namespace RPGame
             Random rand = new Random();
             int goopIndex = rand.Next(spawnPoints.Count);
             goop.Placement = spawnPoints[goopIndex];
-            Debug.WriteLine(goop.Placement);
         }
 
         private void SpawnPointsAdd()
