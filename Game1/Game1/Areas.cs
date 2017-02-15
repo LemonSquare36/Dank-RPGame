@@ -142,6 +142,27 @@ namespace RPGame
             return collision;
         }
 
+        //allows the enemies to chase the player
+        protected double Distance(Vector2 point1, Vector2 point2)
+        {
+            double D = point2.X - point1.X;
+
+            double X = Math.Pow((point2.X - point1.X), 2);
+            double Y = Math.Pow((point2.Y - point1.Y), 2);
+
+            double unit = Math.Sqrt(X + Y);
+
+            if (D < 0)
+            {
+                return -unit;
+            }
+            else if (D > 0)
+            {
+                return unit;
+            }
+            return 0;
+        }
+
         public event EventHandler changeScreen;
         protected void OnScreenChanged(object sender, EventArgs eventArgs)
         {
