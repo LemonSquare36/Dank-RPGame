@@ -25,11 +25,12 @@ namespace RPGame
 
         Texture2D Htex;
 
+        int levelKeeper = 0;
         public int health = 60;
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
-        private int score = 0;
+        private int score = 4;//0
         public int getscore()
         {
             return score;
@@ -83,7 +84,7 @@ namespace RPGame
                 Placement += Movement;
             }
         }
-        //Checks if is HP is 0 and the does stuff if it is.
+        //Checks if is HP is 0 and then does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)
         {
             if (health <= 0)
@@ -116,6 +117,17 @@ namespace RPGame
         {
             deadTime.Stop();
             ChangeScreen?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void CheckLevelUp(SpriteBatch spriteBatch)
+        {
+
+            if (score == 5 || score == 10 || score == 15 || score == 20 || score == 25 || score == 30)
+            {
+                spriteBatch.Begin();
+                spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);
+                spriteBatch.End();
+            }            
         }
     }
 }

@@ -22,7 +22,6 @@ namespace RPGame
 
         KeyboardState oldState;
 
-        SpriteBatch spriteBatch;
 
         public bool IsMoving = true;
         public bool IsJumping = false;
@@ -45,6 +44,8 @@ namespace RPGame
         float jump = 7f;
         bool canJump = true;
         protected bool alive = true;
+        protected bool levelAllowed = false;
+
 
         //sets up variables necessary to allow sprites to be animated
         public void SpriteMove(int rows, int cols)
