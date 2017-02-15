@@ -20,7 +20,7 @@ namespace RPGame
         public Character(List<Vector2> numbers) : base(numbers)
         {
             deadTime.Elapsed += deadTimeEvent;
-            deadTime.Interval = 1000;
+            deadTime.Interval = 1500;
         }
 
         Texture2D Htex;

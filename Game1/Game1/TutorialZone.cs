@@ -22,21 +22,35 @@ namespace RPGame
             isarea = isArea;
         }
 
-        Polygons Twall, Twall2, TFloor, TFloor2;
-        
+        Polygons Twall, Twall2, TFloor, TFloor2, goop;
+        CrawlerAlien Crawler1;
+        List<Entity> Enemies;
+
         Texture2D Background;
         bool Wleft;
         bool Wright;
         bool jump;
         bool colected;
+        bool goopCollision;
+        bool SpawnEnemy;
+        bool enemyCollision;
+        bool start;
+
+        List<Polygons> PolyList;
         //For starting the Tutorial
         public override void Initialize()
         {
+            Enemies = new List<Entity>();
+            PolyList = new List<Polygons>();
+
             Wleft = false;
             Wright = false;
             jump = false;
             colected = false;
-            
+            goopCollision = false;
+            SpawnEnemy = false;
+            enemyCollision = false;
+            start = false;
         }
         //Load
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -44,16 +58,31 @@ namespace RPGame
             MakeShapes();
             base.LoadContent(spriteBatch);
 
+            Player.ChangeScreen += OnScreenChanged;
+
             spriteBatch = spriteBatchMain;
             Twall.LoadContent("twall1", "TWall", true);
             Twall2.LoadContent("twall2", "TWall", true);
             TFloor.LoadContent("tfloor1", "TFloor", false);
             TFloor2.LoadContent("tfloor2", "TFloor", false);
+            goop.LoadContent("goop", "goop", false);
+            goop.Placement = new Vector2(500, 400);
+
+            Crawler1.Load(100, 400);
 
             Player.LoadCharacter("TutorialSpawn");
             Player.SpriteMove(1, 3);
 
             Background = Main.GameContent.Load<Texture2D>("Sprites/TutorialSprites/TBack");
+
+            ListAdd();
+            AlienListAdd();
+
+            //movement for enemies
+            foreach (Entity enemy in Enemies)
+            {
+                enemy.SpriteMove(1, 4);
+            }
         }
         //Draw
         public override void Draw()
@@ -64,14 +93,32 @@ namespace RPGame
             Twall2.RealPos();
             TFloor.RealPos();
             TFloor2.RealPos();
+            goop.RealPos();
 
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
             Twall2.Draw(spriteBatch);
             TFloor.Draw(spriteBatch);
             TFloor2.Draw(spriteBatch);
+            if (goopCollision)
+            {
+                goop.Draw(spriteBatch);
+            }
 
             Player.Draw(spriteBatch);
+            Player.DrawHud(spriteBatch);
+
+
+            foreach (Entity enemy in Enemies)
+            {
+                if (enemyCollision)
+                {
+                    enemy.Draw(spriteBatch);
+                }
+                enemy.RealPos();
+            }
+
+            Player.CheckIfBeDead(spriteBatch);
 
             try
             {
@@ -82,37 +129,90 @@ namespace RPGame
         //Updates the area/Game
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager, GraphicsDevice graphicsDevice)
         {
+            bool PlayerCollision;
+            bool EnemyCollision;
+
             Player.Gravity();
             getKey();
             try
             {
-                bool PlayerCollision = Collision(Player, TFloor);
-                bool PlayerCollision1 = Collision(Player, TFloor2);
-                bool PlayerCollision2 = Collision(Player, Twall);
-                bool PlayerCollision3 = Collision(Player, Twall2);
 
-                if (PlayerCollision)
+
+                if (goopCollision)
                 {
-                    Player.Rebuff(TFloor);
-                    Player.FloorReset(TFloor.getisWall());
+                    bool goopCollide = Collision(Player, goop);
+                    if (goopCollide)
+                    {
+                        Player.AddScore();
+                        colected = true;
+                        goopCollision = false;
+                    }
                 }
-                if (PlayerCollision1)
+
+                if (enemyCollision)
                 {
-                    Player.Rebuff(TFloor2);
-                    Player.FloorReset(TFloor.getisWall());
+                    //Collion with enemys nd polygons
+                    foreach (Entity enemy in Enemies)
+                    {
+                        enemy.Gravity();
+
+                        foreach (Polygons poly in PolyList)
+                        {
+                            EnemyCollision = Collision(enemy, poly);
+                            if (EnemyCollision)
+                            {
+                                enemy.Rebuff(poly);
+                            }
+                        }
+                        if (enemy.IsMoving)
+                        {
+                            enemy.Update(time);
+                        }
+                    }
+
+                    //collision for enemies with player
+                    foreach (Entity enemy in Enemies)
+                    {
+                        enemy.IsMoving = false;
+
+                        double distance = Distance(enemy.getRealPos(0), Player.getRealPos(0));
+                        if (distance <= 150 && distance > 0)
+                        {
+                            enemy.MoveRight();
+                        }
+                        if (distance >= -205 && distance < -45)
+                        {
+                            enemy.MoveLeft();
+                        }
+
+                        PlayerCollision = Collision(Player, enemy);
+                        if (PlayerCollision)
+                        {
+                            Player.health--;
+                            Player.Rebuff(enemy);
+                            Player.FloorReset(enemy.getisWall());
+                        }
+                    }
                 }
-                if (PlayerCollision2)
+                //Collision with the player and polygons
+                foreach (Polygons poly in PolyList)
                 {
-                    Player.Rebuff(Twall);
+                    PlayerCollision = Collision(Player, poly);
+                    if (PlayerCollision)
+                    {
+                        Player.Rebuff(poly);
+                        Player.FloorReset(poly.getisWall());
+                    }
                 }
-                if (PlayerCollision3)
-                {
-                    Player.Rebuff(Twall2);
-                }                
             }
+
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
+
             Player.MoveChar(Key);
             Player.Jump();
+
+            //Update Textures Here
+            Crawler1.UpdateTexture();
 
             if (Player.IsMoving)
                 Player.Update(time);
@@ -127,55 +227,90 @@ namespace RPGame
             Twall2 = CreateShape("twall");
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
+            goop = CreateShape("goop");
+
             Player = CreateChar("janitor");
-        }    
+
+            Crawler1 = CreateCrawler("Crawler");
+        }
+        //Adds the aliens to a list
+        private void AlienListAdd()
+        {
+            Enemies.Add(Crawler1);
+        }
+
+        //adds polygons to a list
+        private void ListAdd()
+        {
+            PolyList.Add(Twall);
+            PolyList.Add(Twall2);
+            PolyList.Add(TFloor);
+            PolyList.Add(TFloor2);
+        }
         //Runs the Tutrial
         private void TutorialCommands()
         {
-            // Press A and D to continue
-            if (!Wleft || !Wright)
+            if (!start)
             {
-                spriteBatch.DrawString(font, "Press A to Left", new Vector2(200, 200), Color.Red);
-                spriteBatch.DrawString(font, "Press D to Right", new Vector2(400, 200), Color.Red);
-                if (Key.IsKeyDown(Keys.A))
+                spriteBatch.DrawString(font, "The green bar is your HP", new Vector2(280, 150), Color.Red);
+                spriteBatch.DrawString(font, "I know it looks funny but it wont after the tutorial is over", new Vector2(100, 200), Color.Red);
+                spriteBatch.DrawString(font, "Press S to continue", new Vector2(300 ,250), Color.Red);
+                if (Key.IsKeyDown(Keys.S))
                 {
-                    Wleft = true;
-                }
-                else if (Key.IsKeyDown(Keys.D))
-                {
-                    Wright = true;
+                    start = true;
                 }
             }
             else
             {
-                // Press W to continue
-                if (!jump)
+                // Press A and D to continue
+                if (!Wleft || !Wright)
                 {
-                    spriteBatch.DrawString(font, "Press W to Jump", new Vector2(300, 200), Color.Red);
-                    if (Key.IsKeyDown(Keys.W))
+                    spriteBatch.DrawString(font, "Press A to Left", new Vector2(200, 200), Color.Red);
+                    spriteBatch.DrawString(font, "Press D to Right", new Vector2(400, 200), Color.Red);
+                    if (Key.IsKeyDown(Keys.A))
                     {
-                        jump = true;
+                        Wleft = true;
+                    }
+                    else if (Key.IsKeyDown(Keys.D))
+                    {
+                        Wright = true;
                     }
                 }
-                //Collect the goop
                 else
                 {
-                    if (!colected)
+                    // Press W to continue
+                    if (!jump)
                     {
-                        spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(300, 200), Color.Red);
-                        if (Player.getscore() >= 1)
+                        spriteBatch.DrawString(font, "Press W to Jump", new Vector2(300, 200), Color.Red);
+                        if (Key.IsKeyDown(Keys.W))
                         {
-                            colected = true;
+                            jump = true;
+                            goopCollision = true;
                         }
                     }
+                    //Collect the goop
                     else
                     {
+                        if (!colected)
+                        {
+                            spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(200, 200), Color.Red);
 
+                        }
+                        //Enemy Spawns - Die to continue
+                        else
+                        {
+                            if (!SpawnEnemy)
+                            {
+                                enemyCollision = true;
+                                spriteBatch.DrawString(font, "The Aliens have Invaded!", new Vector2(250, 150), Color.Red);
+                                spriteBatch.DrawString(font, "Don't Let them stop you from you Janitorial duties", new Vector2(140, 200), Color.Red);
+                                spriteBatch.DrawString(font, "(Die to Continue)", new Vector2(300, 250), Color.Red);
+
+                            }
+                        }
                     }
                 }
             }
         }
-
-
     }
 }
