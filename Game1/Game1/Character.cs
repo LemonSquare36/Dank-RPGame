@@ -30,7 +30,7 @@ namespace RPGame
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
-        private int score = 4;//0
+        private int score = 5;//0
         public int getscore()
         {
             return score;
@@ -124,9 +124,7 @@ namespace RPGame
 
             if (score == 5 || score == 10 || score == 15 || score == 20 || score == 25 || score == 30)
             {
-                spriteBatch.Begin();
                 spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);
-                spriteBatch.End();
             }            
         }
     }
