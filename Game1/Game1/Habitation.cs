@@ -19,8 +19,6 @@ namespace RPGame
         List<Polygons> PolyList;
         List<Entity> Enemies;
 
-        int levelKeeper = 0;
-
         //sets up points for the goop to be drawn
         List<Vector2> spawnPoints = new List<Vector2>();
         Vector2 point1 = new Vector2(100, 100);
@@ -188,18 +186,10 @@ namespace RPGame
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {
-
                 Player.AddScore();
+                Player.CheckLevelUp(spriteBatch);
                 //move goop texture
                 SetGoopPlacement();
-
-                levelKeeper++;
-
-                if (levelKeeper == 5)
-                {
-                   //Player.LevelUp();
-                    levelKeeper = 5;
-                }
             }
                 //Update Textures Here
                 Crawler1.UpdateTexture();
