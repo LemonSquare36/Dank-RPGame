@@ -31,6 +31,7 @@ namespace RPGame
         public int attack = 10;
         public int level = 1;
         private int score = 0;
+        public bool levelAllowed = false;
         public int getscore()
         {
             return score;
@@ -121,7 +122,8 @@ namespace RPGame
 
         public void CheckLevelUp(SpriteBatch spriteBatch)
         {
-
+            levelKeeper = score % 5;
+            if ()
             //if (levelAllowed)
             //{
                 spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);.
