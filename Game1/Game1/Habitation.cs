@@ -186,7 +186,7 @@ namespace RPGame
             if (PlayerCollision)
             {
                 Player.AddScore();
-                //Player.CheckLevelUp(spriteBatch);
+                Player.CheckLevelUp();
                 //move goop texture
                 SetGoopPlacement();
                 //gets a color for the goop
@@ -244,7 +244,9 @@ namespace RPGame
             Player.DrawHud(spriteBatch);
 
             Player.CheckIfBeDead(spriteBatch);
-           // Player.CheckLevelUp(spriteBatch);
+
+            if (Player.levelAllowed)
+                Player.LevelUp(spriteBatch);
         }
         //draws the environment
         private void MakeShapes()

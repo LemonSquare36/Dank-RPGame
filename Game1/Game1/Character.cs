@@ -30,8 +30,9 @@ namespace RPGame
 
         int levelKeeper = 0;
         public int health = 60;
-        private int score = 4;
+        private int score = 0;
         public bool levelAllowed = false;
+        private bool hpincrease = false;
         public int getscore()
         {
             return score;
@@ -137,10 +138,12 @@ namespace RPGame
         {
             if (levelAllowed)
             {
-                spriteBatch.Begin();
                 spriteBatch.DrawString(font, "Level up! HP increased by 20", Placement + new Vector2(-52, -50), Color.Red);
-                spriteBatch.End();
-                health += 100;
+                if (hpincrease)
+                {
+                    health += 20;
+                    hpincrease = false;
+                }
             }            
         }
 
@@ -149,8 +152,11 @@ namespace RPGame
             levelKeeper = score % 5;
             Debug.WriteLine(levelKeeper);
             if (levelKeeper == 0)
+            {
                 levelAllowed = true;
-            levelTimer.Start();
+                hpincrease = true;
+                levelTimer.Start();
+            }
         }
     }
 }
