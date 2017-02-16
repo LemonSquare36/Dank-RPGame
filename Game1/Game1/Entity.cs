@@ -44,7 +44,6 @@ namespace RPGame
         float jump = 7f;
         bool canJump = true;
         protected bool alive = true;
-        protected bool levelAllowed = false;
 
 
         //sets up variables necessary to allow sprites to be animated

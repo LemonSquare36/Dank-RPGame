@@ -21,17 +21,18 @@ namespace RPGame
         {
             deadTime.Elapsed += deadTimeEvent;
             deadTime.Interval = 1500;
+
+            levelTimer.Elapsed += levelTimerEvent;
+            levelTimer.Interval = 1500;
         }
 
         Texture2D Htex;
 
         int levelKeeper = 0;
         public int health = 60;
-        public int ability = 10;
-        public int attack = 10;
-        public int level = 1;
-        private int score = 4;
+        private int score = 0;
         public bool levelAllowed = false;
+        private bool hpincrease = false;
         public int getscore()
         {
             return score;
@@ -40,6 +41,7 @@ namespace RPGame
         Rectangle HPbar = new Rectangle();
         HighScores heyscores = new HighScores();
         Timer deadTime = new Timer();
+        Timer levelTimer = new Timer();
 
         bool written = false;
 
@@ -118,6 +120,7 @@ namespace RPGame
         {
             return score;
         }
+
         public event EventHandler ChangeScreen;
         private  void deadTimeEvent(object source, ElapsedEventArgs e)
         {
@@ -125,15 +128,35 @@ namespace RPGame
             ChangeScreen?.Invoke(this, EventArgs.Empty);
         }
 
-        public void CheckLevelUp(SpriteBatch spriteBatch)
+        private void levelTimerEvent (object source, ElapsedEventArgs e)
+        {
+            levelAllowed = false;
+            levelTimer.Stop();
+        }
+        //checks to see if the player can level up and levels him up if he can
+        public void LevelUp(SpriteBatch spriteBatch)
+        {
+            if (levelAllowed)
+            {
+                spriteBatch.DrawString(font, "Level up! HP increased by 20", Placement + new Vector2(-52, -50), Color.Red);
+                if (hpincrease)
+                {
+                    health += 20;
+                    hpincrease = false;
+                }
+            }            
+        }
+
+        public void CheckLevelUp()
         {
             levelKeeper = score % 5;
-           // if ()
-            //if (levelAllowed)
-            //{
-                spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);
-                level++;
-            //}            
+            Debug.WriteLine(levelKeeper);
+            if (levelKeeper == 0)
+            {
+                levelAllowed = true;
+                hpincrease = true;
+                levelTimer.Start();
+            }
         }
     }
 }
