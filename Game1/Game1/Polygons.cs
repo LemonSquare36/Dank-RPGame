@@ -292,63 +292,65 @@ namespace RPGame
             int X = 0;
             int Y = 0;
 
-            if (check)
+            if (Movement.X <= 2)
             {
-                //Checks the verts of both polygons to find where the collision was made and with what verticies
-                foreach (Vector2 verts in getRealPosList())
+                if (check)
                 {
-                    for (int A = 1; A < Shape.getNumVerticies(); A++)
+                    //Checks the verts of both polygons to find where the collision was made and with what verticies
+                    foreach (Vector2 verts in getRealPosList())
                     {
-                        int B = A + 1;
-                        if (B == Shape.getNumVerticies())
+                        for (int A = 1; A < Shape.getNumVerticies(); A++)
                         {
-                            B = 1;
-                        }
-                        X = A;
-                        Y = B;
-                        bool Positive = true;
-                        bool isBetween = false;
-                       
-                        //Checks if the Vert is inbetween two other verts or not
-                        isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
-
-                        //Dont remember what this does but it is needed - I think its for when they are parallel
-                        if (!isBetween)
-                        {
-                            if (value == getNumVerticies() * (Shape.getNumVerticies() - 1))
+                            int B = A + 1;
+                            if (B == Shape.getNumVerticies())
                             {
-                                check = false;
-                                break;
+                                B = 1;
                             }
-                            if (value == (getNumVerticies() - 1) * (Shape.getNumVerticies() - 1))
+                            X = A;
+                            Y = B;
+                            bool Positive = true;
+                            bool isBetween = false;
+
+                            //Checks if the Vert is inbetween two other verts or not
+                            isBetween = CrossProduct(Shape.getRealPos(A), Shape.getRealPos(B), verts);
+
+                            //Dont remember what this does but it is needed - I think its for when they are parallel
+                            if (!isBetween)
                             {
+                                if (value == getNumVerticies() * (Shape.getNumVerticies() - 1))
+                                {
+                                    check = false;
+                                    break;
+                                }
+                                if (value == (getNumVerticies() - 1) * (Shape.getNumVerticies() - 1))
+                                {
+                                    value++;
+                                }
                                 value++;
                             }
-                            value++;
-                        }
 
-                        //If it is Inbetween then GET THE SLOPE
-                        if (isBetween)
-                        {
-
-                            if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
+                            //If it is Inbetween then GET THE SLOPE
+                            if (isBetween)
                             {
-                                Positive = false;
-                            }
-                            else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
-                            {
-                                Positive = false;
-                            }
+
+                                if (Shape.getRealPos(A).X < Shape.getRealPos(B).X && Shape.getRealPos(A).Y < Shape.getRealPos(B).Y)
+                                {
+                                    Positive = false;
+                                }
+                                else if (Shape.getRealPos(A).X > Shape.getRealPos(B).X && Shape.getRealPos(A).Y > Shape.getRealPos(B).Y)
+                                {
+                                    Positive = false;
+                                }
 
 
-                            Slope1 = new Vector2(Shape.getRealPos(B).X - Shape.getRealPos(A).X, Shape.getRealPos(B).Y - Shape.getRealPos(A).Y);
-                            Slope = Slope1.Y / Slope1.X;
-                            Slope1.Normalize();
+                                Slope1 = new Vector2(Shape.getRealPos(B).X - Shape.getRealPos(A).X, Shape.getRealPos(B).Y - Shape.getRealPos(A).Y);
+                                Slope = Slope1.Y / Slope1.X;
+                                Slope1.Normalize();
 
-                            Placement -= Movement;
+                                Placement -= Movement;
 
-                            //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for Positive slopes)
-                                if (Slope > -2 && Positive == true && Slope <0)
+                                //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for Positive slopes)
+                                if (Slope > -2 && Positive == true && Slope < 0)
                                 {
                                     if (Movement.X < 0 && Movement.Y > 0)
                                     {
@@ -366,16 +368,16 @@ namespace RPGame
                                     {
                                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                                     }
-                                   
+
                                 }
                                 else if (Slope < -2 && Positive == true)
                                 {
-                                    
+
                                     Placement.X -= 2;
                                 }
 
-                            //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for negative slopes)
-                            if (Slope < 2 && Positive == false)
+                                //DO MATH BASED ON SLOPE, and movement, TO PROVIDE PHYSIC (for negative slopes)
+                                if (Slope < 2 && Positive == false)
                                 {
                                     if (Movement.X > 0 && Movement.Y > 0)
                                     {
@@ -396,31 +398,36 @@ namespace RPGame
                                 }
                                 else if (Slope > 2 && Positive == true)
                                 {
-                                    
+
                                     Placement.X += 2;
                                 }
                             }
                         }
                     }
                 }
-            //If check is flase then use these functions instead
-            if (!check)
-            {
-                
+                //If check is flase then use these functions instead
+                if (!check)
+                {
 
-                        Slope1 = new Vector2(Shape.getRealPos(Y).X - Shape.getRealPos(X).X, Shape.getRealPos(Y).Y - Shape.getRealPos(X).Y);
-                        Slope = Slope1.Y / Slope1.X;
-                        if (Slope == 0)
-                        {
 
-                        }
+                    Slope1 = new Vector2(Shape.getRealPos(Y).X - Shape.getRealPos(X).X, Shape.getRealPos(Y).Y - Shape.getRealPos(X).Y);
+                    Slope = Slope1.Y / Slope1.X;
+                    if (Slope == 0)
+                    {
 
-                        else if (Slope > -2 && Slope < 0)
-                        {
-                            Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
-                        }
-                Placement -= Movement;
+                    }
+
+                    else if (Slope > -2 && Slope < 0)
+                    {
+                        Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
+                    }
+                    Placement -= Movement;
                 }
+            }
+            else
+            {
+                Movement -= Movement;
             }
         }
     }
+}
