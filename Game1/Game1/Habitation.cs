@@ -117,7 +117,8 @@ namespace RPGame
             camera.Follow(-Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
-            bool CrawlerCollision;           
+            bool CrawlerCollision;
+
 
             foreach (Polygons poly in PolyList)
             {
@@ -129,6 +130,7 @@ namespace RPGame
                     Player.FloorReset(poly.getisWall());
                 }
             }
+
             //gravity and collision for enemies
             foreach (Entity enemy in Enemies)
             {
@@ -199,12 +201,10 @@ namespace RPGame
             {
                 crawler.UpdateTexture();
             }
+            Player.Jump();
+            Player.MoveChar(Key);
 
-
-                Player.MoveChar(Key);
-                Player.Jump();
-
-                if (Player.IsMoving)
+            if (Player.IsMoving)
                     Player.Update(time);
             
         }

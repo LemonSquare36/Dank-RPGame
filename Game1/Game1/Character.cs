@@ -17,6 +17,7 @@ namespace RPGame
 {
     public class Character : Entity
     {
+        //Constructor
         public Character(List<Vector2> numbers) : base(numbers)
         {
             deadTime.Elapsed += deadTimeEvent;
@@ -83,6 +84,10 @@ namespace RPGame
                     Movement = new Vector2(Movement.X - 2f, Movement.Y);
                     IsMoving = true;
                 }
+                if (Key.IsKeyDown(Keys.Space))
+                {
+                    Movement.X += Movement.X;
+                }
                 OldPosition = Placement;
                 Placement += Movement;
             }
@@ -110,24 +115,24 @@ namespace RPGame
             spritebatch.DrawString(font, "HP", Placement + new Vector2(-384, -180), Color.Green);
             spritebatch.DrawString(font, "Score : " + score, Placement + new Vector2(-384, -150), Color.Blue);
         }
-
+        //Add 1 to player score
         public void AddScore()
         {
             score++;
         }
-
+        //Retrieve the score
         public int getScore()
         {
             return score;
         }
-
+        //Event for the timer when the player dies
         public event EventHandler ChangeScreen;
         private  void deadTimeEvent(object source, ElapsedEventArgs e)
         {
             deadTime.Stop();
             ChangeScreen?.Invoke(this, EventArgs.Empty);
         }
-
+        //Event for the timer if the player gets 5 score
         private void levelTimerEvent (object source, ElapsedEventArgs e)
         {
             levelAllowed = false;
@@ -146,7 +151,7 @@ namespace RPGame
                 }
             }            
         }
-
+        //Checks if score is  multiple of 5
         public void CheckLevelUp()
         {
             levelKeeper = score % 5;

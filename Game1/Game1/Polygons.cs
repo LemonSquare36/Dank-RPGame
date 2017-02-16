@@ -292,7 +292,7 @@ namespace RPGame
             int X = 0;
             int Y = 0;
 
-            if (Movement.X <= 2)
+            if (Movement.X <= 2 && Movement.X >= -2)
             {
                 if (check)
                 {
@@ -426,7 +426,7 @@ namespace RPGame
             }
             else
             {
-                Movement -= Movement;
+                Movement = Vector2.Zero;
             }
         }
     }
