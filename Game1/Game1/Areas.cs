@@ -54,6 +54,18 @@ namespace RPGame
             CrawlerAlien myAlien = new CrawlerAlien(NewList);
             return myAlien;
         }
+
+        protected CrawlerAlien CreateCrawlerinList(string shapeName)
+        {
+            Random rand = new Random();
+            List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
+            CrawlerAlien myAlien = new CrawlerAlien(NewList);
+            myAlien.RealPos();
+            myAlien.Load(rand.Next(-1600, 301), 50);
+            myAlien.SpriteMove(1, 4);
+            return myAlien;
+
+        }
         //Gets the Hit boxes from Shape List or Enemy List
         protected void RetrieveShapes()
         {

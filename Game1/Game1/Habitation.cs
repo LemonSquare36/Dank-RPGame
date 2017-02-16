@@ -20,6 +20,7 @@ namespace RPGame
         List<Entity> Enemies;
         List<Color> ColorList;
         Color color;
+        int EnemyNumber;
 
         //sets up points for the goop to be drawn
         List<Vector2> spawnPoints = new List<Vector2>();
@@ -40,6 +41,8 @@ namespace RPGame
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
             ColorList = new List<Color>();
+
+            EnemyNumber = 8;
 
             ColorListAdd();
             SpawnPointsAdd();
@@ -177,38 +180,25 @@ namespace RPGame
                     AlreadyCollided = true;
                     Player.FloorReset(enemy.getisWall());
                 }
-
-                // The amount of collision code at once was cuasing frame drops so the enemies do not collide with eachother.
-                /*foreach (Entity Enemy in Enemies)
-                {
-
-                    if (enemy != Enemy)
-                    {
-                        CrawlerCollision = Collision(Enemy, enemy);
-                     if (CrawlerCollision)
-                        {
-                            enemy.Rebuff(Enemy);
-                        }
-                    }
-                }*/
             }
 
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {
                 Player.AddScore();
+                //Player.CheckLevelUp(spriteBatch);
                 //move goop texture
                 SetGoopPlacement();
+                //gets a color for the goop
                 color = GetrandColor();
+                //adds a new enemy
+                AddNewEnemy();
             }
                 //Update Textures Here
-                Crawler1.UpdateTexture();
-                Crawler2.UpdateTexture();
-                Crawler3.UpdateTexture();
-                Crawler4.UpdateTexture();
-                Crawler5.UpdateTexture();
-                Crawler6.UpdateTexture();
-                Crawler7.UpdateTexture();
+            foreach (CrawlerAlien crawler in Enemies)
+            {
+                crawler.UpdateTexture();
+            }
 
 
                 Player.MoveChar(Key);
@@ -273,8 +263,8 @@ namespace RPGame
             Player = CreateChar("janitor");
 
             Crawler1 = CreateCrawler("Crawler");
-            Crawler2 = CreateCrawler("Crawler");
             Crawler3 = CreateCrawler("Crawler");
+            Crawler2 = CreateCrawler("Crawler");
             Crawler4 = CreateCrawler("Crawler");
             Crawler5 = CreateCrawler("Crawler");
             Crawler6 = CreateCrawler("Crawler");
@@ -312,13 +302,14 @@ namespace RPGame
             ColorList.Add(Color.Orange);
             ColorList.Add(Color.GreenYellow);
         }
-
+        //gets a random point for goop to spawn
         private void SetGoopPlacement()
         {
             Random rand = new Random();
             int goopIndex = rand.Next(0 ,spawnPoints.Count);
             goop.Placement = spawnPoints[goopIndex];            
         }
+        //gets a random color
         private Color GetrandColor()
         {
             Random rand = new Random();
@@ -326,7 +317,7 @@ namespace RPGame
             Color Color = ColorList[ColorSelect];
             return Color;
         }
-
+        //Spawn points for the goop
         private void SpawnPointsAdd()
         {
             spawnPoints.Add(point1);
@@ -339,6 +330,15 @@ namespace RPGame
             spawnPoints.Add(point8);
             spawnPoints.Add(point9);
             spawnPoints.Add(point10);
+        }
+        //Add a new enemy to area.
+        private void AddNewEnemy()
+        {
+            if (Player.getScore() % 5 == 0 && Player.getScore() > 0)
+            {
+                Enemies.Add(CreateCrawlerinList("Crawler"));
+                
+            }
         }
     }
 }

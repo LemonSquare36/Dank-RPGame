@@ -30,7 +30,7 @@ namespace RPGame
         public int ability = 10;
         public int attack = 10;
         public int level = 1;
-        private int score = 0;
+        private int score = 4;
         public bool levelAllowed = false;
         public int getscore()
         {
@@ -113,6 +113,11 @@ namespace RPGame
         {
             score++;
         }
+
+        public int getScore()
+        {
+            return score;
+        }
         public event EventHandler ChangeScreen;
         private  void deadTimeEvent(object source, ElapsedEventArgs e)
         {
@@ -123,10 +128,10 @@ namespace RPGame
         public void CheckLevelUp(SpriteBatch spriteBatch)
         {
             levelKeeper = score % 5;
-            if ()
+           // if ()
             //if (levelAllowed)
             //{
-                spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);.
+                spriteBatch.DrawString(font, "Congratulations! You have leveled up! HP increased by 10", Placement - new Vector2(-52, -50), Color.Red);
                 level++;
             //}            
         }
