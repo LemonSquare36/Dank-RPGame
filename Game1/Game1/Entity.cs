@@ -91,7 +91,14 @@ namespace RPGame
         {
             Movement = Vector2.Zero;
             Movement = new Vector2(Movement.X, Movement.Y + gravity);
-            Placement += Movement;
+            if (DashSpeed != Vector2.Zero)
+            {
+                Placement.Y = OldPosition.Y;
+            }
+            else
+            {
+                Placement += Movement;
+            }
 
             if (gravity != 3 && gravity < 3)
             {

@@ -35,6 +35,8 @@ namespace RPGame
         bool SpawnEnemy;
         bool enemyCollision;
         bool start;
+        bool dash;
+        bool readDash;
 
         List<Polygons> PolyList;
         //For starting the Tutorial
@@ -51,6 +53,8 @@ namespace RPGame
             SpawnEnemy = false;
             enemyCollision = false;
             start = false;
+            dash = false;
+            readDash = false;
         }
         //Load
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -106,7 +110,7 @@ namespace RPGame
             }
 
             Player.Draw(spriteBatch);
-            Player.DrawHud(spriteBatch);
+            Player.DrawHud(spriteBatch, time);
 
 
             foreach (Entity enemy in Enemies)
@@ -254,7 +258,7 @@ namespace RPGame
             {
                 spriteBatch.DrawString(font, "The green bar is your HP", new Vector2(280, 150), Color.Red);
                 spriteBatch.DrawString(font, "I know it looks funny but it wont after the tutorial is over", new Vector2(100, 200), Color.Red);
-                spriteBatch.DrawString(font, "Press S to continue", new Vector2(300 ,250), Color.Red);
+                spriteBatch.DrawString(font, "Press S to continue", new Vector2(300, 250), Color.Red);
                 if (Key.IsKeyDown(Keys.S))
                 {
                     start = true;
@@ -285,27 +289,54 @@ namespace RPGame
                         if (Key.IsKeyDown(Keys.W))
                         {
                             jump = true;
-                            goopCollision = true;
                         }
                     }
-                    //Collect the goop
                     else
                     {
-                        if (!colected)
+                        // Press Space to Continue
+                        if (!dash)
                         {
-                            spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(200, 200), Color.Red);
-
+                            spriteBatch.DrawString(font, "Space to Dash", new Vector2(300, 200), Color.Red);
+                            spriteBatch.DrawString(font, "(Due to a bug the tutorial dash only works in air)", new Vector2(150, 250), Color.Red);
+                            if (Key.IsKeyDown(Keys.Space))
+                            {
+                                dash = true;
+                            }
                         }
-                        //Enemy Spawns - Die to continue
                         else
                         {
-                            if (!SpawnEnemy)
+                            if (!readDash)
                             {
-                                enemyCollision = true;
-                                spriteBatch.DrawString(font, "The Aliens have Invaded!", new Vector2(250, 150), Color.Red);
-                                spriteBatch.DrawString(font, "Don't Let them stop you from you Janitorial duties", new Vector2(140, 200), Color.Red);
-                                spriteBatch.DrawString(font, "(Die to Continue)", new Vector2(300, 250), Color.Red);
+                                spriteBatch.DrawString(font, "The black bar that apears under you character after dashing", new Vector2(100, 150), Color.Red);
+                                spriteBatch.DrawString(font, "is the Cool Down timer of the your ability to Dash", new Vector2(120, 200), Color.Red);
+                                spriteBatch.DrawString(font, "Press S to continue", new Vector2(300, 250), Color.Red);
+                                if (Key.IsKeyDown(Keys.S))
+                                {
+                                    readDash = true;
+                                    goopCollision = true;
+                                }
+                            }
+                            //Collect the goop
+                            else
+                            {
+                                if (!colected)
+                                {
+                                    spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(200, 200), Color.Red);
 
+                                }
+                                //Enemy Spawns - Die to continue
+                                else
+                                {
+                                    if (!SpawnEnemy)
+                                    {
+                                        enemyCollision = true;
+                                        spriteBatch.DrawString(font, "The Aliens have Invaded!", new Vector2(250, 100), Color.Red);
+                                        spriteBatch.DrawString(font, "Don't Let them stop you from you Janitorial duties", new Vector2(140, 150), Color.Red);
+                                        spriteBatch.DrawString(font, "Avoid dashing into enemies or you will take massive damage", new Vector2(85, 200), Color.Red);
+                                        spriteBatch.DrawString(font, "(Die to Continue)", new Vector2(300, 250), Color.Red);
+
+                                    }
+                                }
                             }
                         }
                     }

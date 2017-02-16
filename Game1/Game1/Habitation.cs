@@ -110,10 +110,10 @@ namespace RPGame
         //allows the camera to follow the player
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager,GraphicsDevice graphicsDevice)
         {
-
+            Player.Gravity();
             Player.RealPos();
             goop.RealPos();
-            Player.Gravity();
+
             camera.Follow(-Player.getRealPos(0));
             getKey();
             bool PlayerCollision;
@@ -161,7 +161,7 @@ namespace RPGame
                 {
                     enemy.MoveRight();
                 }
-                if (distance >= -205 && distance < -45)
+                if (distance >= -205 && distance < -40)
                 {
                     enemy.MoveLeft();
                 }
@@ -241,7 +241,7 @@ namespace RPGame
             spriteBatch.DrawString(font, "Cafeteria", new Vector2(-1800, 150), Color.DarkRed);
 
             Player.Draw(spriteBatch);
-            Player.DrawHud(spriteBatch);
+            Player.DrawHud(spriteBatch, time);
 
             Player.CheckIfBeDead(spriteBatch);
 
@@ -300,7 +300,6 @@ namespace RPGame
             ColorList.Add(Color.Blue);
             ColorList.Add(Color.Green);
             ColorList.Add(Color.Red);
-            ColorList.Add(Color.Black);
             ColorList.Add(Color.Orange);
             ColorList.Add(Color.GreenYellow);
         }

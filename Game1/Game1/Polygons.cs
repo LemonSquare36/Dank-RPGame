@@ -29,6 +29,7 @@ namespace RPGame
         private List<Vector2> realPos = new List<Vector2>();
         public Vector2 Movement = Vector2.Zero;
         protected Vector2 OldPosition = new Vector2();
+        protected Vector2 DashSpeed = new Vector2();
 
         private bool isWall;
         public bool getisWall()
@@ -292,7 +293,7 @@ namespace RPGame
             int X = 0;
             int Y = 0;
 
-            if (Movement.X <= 2 && Movement.X >= -2)
+            if (DashSpeed == Vector2.Zero)
             {
                 if (check)
                 {
@@ -405,7 +406,7 @@ namespace RPGame
                         }
                     }
                 }
-                //If check is flase then use these functions instead
+                //If check is false then use these functions instead
                 if (!check)
                 {
 
@@ -426,7 +427,7 @@ namespace RPGame
             }
             else
             {
-                Movement = Vector2.Zero;
+                Placement = OldPosition;
             }
         }
     }
