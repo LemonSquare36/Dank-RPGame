@@ -18,6 +18,8 @@ namespace RPGame
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
+        List<Color> ColorList;
+        Color color;
 
         //sets up points for the goop to be drawn
         List<Vector2> spawnPoints = new List<Vector2>();
@@ -37,7 +39,12 @@ namespace RPGame
         {
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
+            ColorList = new List<Color>();
+
+            ColorListAdd();
             SpawnPointsAdd();
+
+            color = GetrandColor();
         }
         //loads assets
         public override void LoadContent(SpriteBatch spriteBatchMain)
@@ -71,9 +78,6 @@ namespace RPGame
             Crawler6.Load(-1900, 100);
             Crawler7.Load(-2100, 100);
 
-            
-
-
             #region LoadSprites
             CeilingbytheDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorByTheDoor");
             CeilingHump = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FloorHump");
@@ -93,7 +97,6 @@ namespace RPGame
 
             ListAdd();
             AlienListAdd();
-
 
             //movement for enemies
             foreach (Entity enemy in Enemies)
@@ -143,7 +146,7 @@ namespace RPGame
                     }
                 }
             }
-            //collision for enemies with player
+            //Range Detection for enemies with player
             foreach (Entity enemy in Enemies)
             {
                 enemy.IsMoving = false;
@@ -157,19 +160,26 @@ namespace RPGame
                 {
                     enemy.MoveLeft();
                 }
-
-                //PlayerCollision = Collision(Player, enemy);
-                /*if (PlayerCollision)
-                {
-                    Player.health--;
-                    Player.Rebuff(enemy);
-                    Player.FloorReset(enemy.getisWall());
-                }*/
             }
-            //collides the enemies with each other
+
+            //collides the enemies with each other and Player
+            bool AlreadyCollided = false;
             foreach (Entity enemy in Enemies)
             {
-                foreach (Entity Enemy in Enemies)
+                PlayerCollision = Collision(Player, enemy);
+                if (PlayerCollision)
+                {
+                    Player.health--;
+                    if (!AlreadyCollided)
+                    {
+                        Player.Rebuff(enemy);
+                    }
+                    AlreadyCollided = true;
+                    Player.FloorReset(enemy.getisWall());
+                }
+
+                // The amount of collision code at once was cuasing frame drops so the enemies do not collide with eachother.
+                /*foreach (Entity Enemy in Enemies)
                 {
 
                     if (enemy != Enemy)
@@ -180,7 +190,7 @@ namespace RPGame
                             enemy.Rebuff(Enemy);
                         }
                     }
-                }
+                }*/
             }
 
             PlayerCollision = Collision(Player, goop);
@@ -189,6 +199,7 @@ namespace RPGame
                 Player.AddScore();
                 //move goop texture
                 SetGoopPlacement();
+                color = GetrandColor();
             }
                 //Update Textures Here
                 Crawler1.UpdateTexture();
@@ -210,7 +221,7 @@ namespace RPGame
         //draw assets
         public override void Draw()
         {
-
+            goop.Draw(spriteBatch, color);
             #region DrawSprites
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
@@ -222,9 +233,7 @@ namespace RPGame
             spriteBatch.Draw(cCounter, new Vector2(-1850, 200), null);
             spriteBatch.Draw(cTable1, new Vector2(-1800, 280), null);
             spriteBatch.Draw(cTable2, new Vector2(-1650, 280), null);
-            spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
-
-            goop.Draw(spriteBatch);
+            spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);           
 
             #endregion
 
@@ -245,7 +254,7 @@ namespace RPGame
             Player.DrawHud(spriteBatch);
 
             Player.CheckIfBeDead(spriteBatch);
-            Player.CheckLevelUp(spriteBatch);
+           // Player.CheckLevelUp(spriteBatch);
         }
         //draws the environment
         private void MakeShapes()
@@ -293,12 +302,29 @@ namespace RPGame
             Enemies.Add(Crawler6);
             Enemies.Add(Crawler7);
         }
+        //Adds colors to colorlist
+        private void ColorListAdd()
+        {
+            ColorList.Add(Color.Blue);
+            ColorList.Add(Color.Green);
+            ColorList.Add(Color.Red);
+            ColorList.Add(Color.Black);
+            ColorList.Add(Color.Orange);
+            ColorList.Add(Color.GreenYellow);
+        }
 
-        public void SetGoopPlacement()
+        private void SetGoopPlacement()
         {
             Random rand = new Random();
-            int goopIndex = rand.Next(spawnPoints.Count);
-            goop.Placement = spawnPoints[goopIndex];
+            int goopIndex = rand.Next(0 ,spawnPoints.Count);
+            goop.Placement = spawnPoints[goopIndex];            
+        }
+        private Color GetrandColor()
+        {
+            Random rand = new Random();
+            int ColorSelect = rand.Next(0, ColorList.Count);
+            Color Color = ColorList[ColorSelect];
+            return Color;
         }
 
         private void SpawnPointsAdd()

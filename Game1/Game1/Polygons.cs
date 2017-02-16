@@ -116,6 +116,15 @@ namespace RPGame
             catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
         }
 
+        public void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            try
+            {
+                spriteBatch.Draw(texture, Placement, null, null, verticies[0], rotation, new Vector2(1, 1), color);
+            }
+            catch (Exception ex) { ErrorHandling(ex.Message, GetType().Name, ex); }
+        }
+
         //Roatates the Shape
         public void Rotate(float rotate)
         {
