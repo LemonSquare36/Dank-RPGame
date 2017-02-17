@@ -41,10 +41,14 @@ namespace RPGame
         }
         protected Vector2 MousePos()
         {
-            Vector2 worldPosition;
+            Vector2 worldPosition = Vector2.Zero;
             mouse = Mouse.GetState();
-            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
-            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
+            try
+            {
+                worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
+                worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
+            }
+            catch { }
             return worldPosition;
         }
 
