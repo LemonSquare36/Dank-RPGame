@@ -217,7 +217,7 @@ namespace RPGame
                 spriteBatch.DrawString(font, "Level up! HP increased by 20", Placement + new Vector2(-52, -50), Color.Red);
                 if (hpincrease)
                 {
-                    health += 20;
+                    health += 10;
                     hpincrease = false;
                 }
             }
