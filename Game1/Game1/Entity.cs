@@ -118,8 +118,10 @@ namespace RPGame
                 KeyboardState newState = Keyboard.GetState();
 
                 if (newState.IsKeyDown(Keys.W))
-                {
-                    IsJumping = true;
+                {                   
+                    if (air)
+                        IsJumping = true;
+
                     if (!oldState.IsKeyDown(Keys.W))
                     {
                         if (canJump)
@@ -171,7 +173,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += -1.7f;
+            Movement.X += -2f;
 
             Placement += Movement;
         }
@@ -181,7 +183,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += 1.7f;
+            Movement.X += 2f;
 
             Placement += Movement;
         }
