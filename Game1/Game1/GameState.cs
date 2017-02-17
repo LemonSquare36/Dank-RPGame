@@ -98,7 +98,7 @@ namespace RPGame
             }
             else
             {
-                CurrentScreen = scorescreen;
+                CurrentScreen = Credits;
                 CurrentScreen.Initialize();
             }
             highscores = new HighScores();

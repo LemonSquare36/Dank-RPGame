@@ -413,16 +413,12 @@ namespace RPGame
 
                     Slope1 = new Vector2(Shape.getRealPos(Y).X - Shape.getRealPos(X).X, Shape.getRealPos(Y).Y - Shape.getRealPos(X).Y);
                     Slope = Slope1.Y / Slope1.X;
-                    if (Slope == 0)
-                    {
 
-                    }
-
-                    else if (Slope > -2 && Slope < 0)
+                    if (Slope > -2 && Slope < 0)
                     {
                         Placement = new Vector2(Placement.X, Placement.Y + (Slope * 2));
                     }
-                    Placement -= Movement;
+                   Placement -= Movement;
                 }
             }
             else

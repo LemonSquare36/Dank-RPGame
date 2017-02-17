@@ -256,7 +256,7 @@ namespace RPGame
             FloorbytheDoor = CreateShape("floorbythedoor");
             FloorHump = CreateShape("floorhump");
             Mramp = CreateShape("mramp");
-            LongFloor1 = CreateShape("longfloor2");
+            LongFloor1 = CreateShape("longfloor");
             LongFloor2 = CreateShape("longfloor");
             HWall1 = CreateShape("hwall");
             HWall2 = CreateShape("hwall");
@@ -277,9 +277,9 @@ namespace RPGame
         {
             PolyList.Add(FloorbytheDoor);
             PolyList.Add(FloorHump);
+            PolyList.Add(Mramp);
             PolyList.Add(LongFloor1);
             PolyList.Add(LongFloor2);
-            PolyList.Add(Mramp);
             PolyList.Add(HWall1);
             PolyList.Add(HWall2);
         }
