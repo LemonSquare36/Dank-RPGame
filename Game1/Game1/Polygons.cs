@@ -261,27 +261,6 @@ namespace RPGame
             }
             return Placement;
         }
-        //Find the cross product used in the Physics section of my collision code
-        public bool CrossProduct(Vector2 A, Vector2 B, Vector2 C)
-        {
-            float crossProduct;
-            float dotProduct;
-            double baSquared;
-
-            crossProduct = (C.Y - A.Y) * (B.X - A.X) - (C.X - A.X) * (B.Y - A.Y);
-            if (Math.Abs(crossProduct) > 150)
-                return false;
-
-            dotProduct = ((C.X - A.X) * (B.X - A.X)) + ((C.Y - A.Y) * (B.Y - A.Y));
-            if (dotProduct < -150)
-                return false;
-
-            baSquared = Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2);
-            if (dotProduct > (float)baSquared + 150)
-                return false;
-
-            return true;
-        }
 
         //Moves the shape away from collided objects
         public void Rebuff(Polygons Shape)
@@ -327,6 +306,7 @@ namespace RPGame
                                 {
                                     value++;
                                 }
+
                                 value++;
                             }
 
@@ -346,7 +326,7 @@ namespace RPGame
 
                                 Slope1 = new Vector2(Shape.getRealPos(B).X - Shape.getRealPos(A).X, Shape.getRealPos(B).Y - Shape.getRealPos(A).Y);
                                 Slope = Slope1.Y / Slope1.X;
-                                Slope1.Normalize();
+                                
 
                                 Placement -= Movement;
 
@@ -410,9 +390,9 @@ namespace RPGame
                 if (!check)
                 {
 
-
                     Slope1 = new Vector2(Shape.getRealPos(Y).X - Shape.getRealPos(X).X, Shape.getRealPos(Y).Y - Shape.getRealPos(X).Y);
                     Slope = Slope1.Y / Slope1.X;
+
 
                     if (Slope > -2 && Slope < 0)
                     {
