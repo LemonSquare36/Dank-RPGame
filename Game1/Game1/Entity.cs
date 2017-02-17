@@ -118,8 +118,10 @@ namespace RPGame
                 KeyboardState newState = Keyboard.GetState();
 
                 if (newState.IsKeyDown(Keys.W))
-                {
-                    IsJumping = true;
+                {                   
+                    if (air)
+                        IsJumping = true;
+
                     if (!oldState.IsKeyDown(Keys.W))
                     {
                         if (canJump)
