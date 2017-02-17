@@ -559,3 +559,9 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/HPTexture.png
 
+#begin Sound/Dash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/Dash.wav
+
