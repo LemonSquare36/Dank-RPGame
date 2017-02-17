@@ -225,7 +225,7 @@ namespace RPGame
         //Checks if score is  multiple of 5
         public void CheckLevelUp()
         {
-            levelKeeper = score % 5;
+            levelKeeper = score % 10;
             Debug.WriteLine(levelKeeper);
             if (levelKeeper == 0)
             {
