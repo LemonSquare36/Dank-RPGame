@@ -15,7 +15,7 @@ namespace RPGame
          protected void LoadContent()
         {
             Dash = Main.GameContent.Load<SoundEffect>("Dash");
-            DashInstance = DashInstance.CreateInstance();
+            //DashInstance = DashInstance.CreateInstance();
             DashInstance.Volume = 1f;
             DashInstance.IsLooped = false;
         }

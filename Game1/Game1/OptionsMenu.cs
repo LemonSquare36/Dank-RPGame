@@ -52,11 +52,7 @@ namespace RPGame
         public override void Update(Camera camera, GraphicsDeviceManager graphicsManager,GraphicsDevice graphicsDevice)
         {
             //Get current mouse state
-            mouse = Mouse.GetState();
-
-            Vector2 worldPosition;
-            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
-            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
+            Vector2 worldPosition = MousePos();
 
             Sound.Update(mouse,worldPosition);
             Fullscreen.Update(mouse,worldPosition);

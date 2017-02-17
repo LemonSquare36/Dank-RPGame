@@ -46,9 +46,7 @@ namespace RPGame
 
         MainMenu mainMenu;
         OptionsMenu Options;
-        PuaseScreen Puase;
         CreditsMenu Credits;
-        FileSelectScreen fileSelect;
         HighscoreScreen scorescreen;
         #endregion
 
@@ -63,8 +61,6 @@ namespace RPGame
             #region Creating the Menus
             mainMenu = new MainMenu();
             Options = new OptionsMenu();
-            Puase = new PuaseScreen();
-            fileSelect = new FileSelectScreen();
             Credits = new CreditsMenu();
             scorescreen = new HighscoreScreen();
             #endregion
