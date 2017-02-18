@@ -134,6 +134,8 @@
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\DeadInCornerGuard.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\DeadOnFloor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorByTheDoor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorHump.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FoodCounter.png" />
@@ -143,6 +145,7 @@
     <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Table with Chairs.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\ToppledTableChairs.png" />
     <Content Include="Content\Sprites\HPTexture.png" />
     <Content Include="Content\Sprites\Janitor.png" />
     <Content Include="Content\Sprites\main_Menu_Background.png" />
