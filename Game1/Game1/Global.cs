@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -20,10 +9,9 @@ namespace RPGame
     public class Global
     {
         //gets the folders for the project
-        static string UserFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        static string errorPathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Errors");
-        string errorPath = Path.Combine(errorPathFolder, "errors.txt");
-        protected string filePathFolder = Path.Combine(UserFolder, "Source/Repos/Dank-RPGame/Game1/Game1/Shapes");
+        static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        static string errorPathFolder = Path.Combine(AppDataFolder, "RPGame/Errors");
+        string errorPath = Path.Combine(AppDataFolder, "RPGame/Errors/errors.txt");
 
 
         //Holds the fonts
@@ -37,7 +25,10 @@ namespace RPGame
         public void ErrorFileReset()
         {
             if (File.Exists(errorPath))
+            {
                 File.Delete(errorPath);
+            }
+            File.Create(errorPath);
         }
 
         //access to the errorPath folder for classes unable to derive from global
@@ -55,6 +46,11 @@ namespace RPGame
             {
                 Errors.Create();
             }
+            if (!File.Exists(errorPath))
+            {
+                var myfile = File.Create(errorPath);
+                myfile.Close();
+            }
         }
 
         //Write the errors to the Error.txt file
@@ -66,10 +62,8 @@ namespace RPGame
 
             createErrorFolder();
 
-            try
-            {
-                //Checks to see if the error was already there
-                var errorReader = new StreamReader(errorPath);
+            //Checks to see if the error was already there
+            StreamReader errorReader = new StreamReader(errorPath);
                 while (true)
                 {
                     line = errorReader.ReadLine();
@@ -87,13 +81,12 @@ namespace RPGame
                         break;
                     }
                 }
-                errorReader.Close();
-            }
-            catch { }
+            errorReader.Close();
+
             //Writes the Error to the File
             if (write)
             {
-                var errorWrite = new StreamWriter(errorPath, true);
+                StreamWriter errorWrite = new StreamWriter(errorPath);
                 errorWrite.WriteLine("{0}\r\nLine {2}\r\nError:\r\n{1}\r\n", classname, logMessage, LineNumber);
                 if (ex.InnerException != null)
                 {

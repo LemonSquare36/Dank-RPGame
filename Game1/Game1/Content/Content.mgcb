@@ -601,3 +601,9 @@
 /processorParam:Quality=Best
 /build:Sound/ButtonClick.wav
 
+#begin Sound/PlayButtonClick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/PlayButtonClick.wav
+

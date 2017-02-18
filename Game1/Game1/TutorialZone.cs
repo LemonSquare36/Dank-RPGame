@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
-using System.Diagnostics;
+
 
 namespace RPGame
 {
@@ -70,7 +63,7 @@ namespace RPGame
             TFloor.LoadContent("tfloor1", "TFloor", false);
             TFloor2.LoadContent("tfloor2", "TFloor", false);
             goop.LoadContent("goop", "goop", false);
-            goop.Placement = new Vector2(700, 450);
+            goop.Placement = new Vector2(700, 424);
 
             Crawler1.Load(100, 400);
 
@@ -92,13 +85,6 @@ namespace RPGame
         public override void Draw()
         {
 
-            Player.RealPos();
-            Twall.RealPos();
-            Twall2.RealPos();
-            TFloor.RealPos();
-            TFloor2.RealPos();
-            goop.RealPos();
-
             spriteBatch.Draw(Background, new Vector2(50, 40), null, null);
             Twall.Draw(spriteBatch);
             Twall2.Draw(spriteBatch);
@@ -113,13 +99,9 @@ namespace RPGame
             Player.DrawHud(spriteBatch, time);
 
 
-            foreach (Entity enemy in Enemies)
+            if (enemyCollision)
             {
-                if (enemyCollision)
-                {
-                    enemy.Draw(spriteBatch);
-                }
-                enemy.RealPos();
+                Crawler1.Draw(spriteBatch);
             }
 
             Player.CheckIfBeDead(spriteBatch);
@@ -135,6 +117,13 @@ namespace RPGame
         {
             bool PlayerCollision;
             bool EnemyCollision;
+
+            Player.RealPos();
+
+            if (goopCollision)
+                goop.RealPos();
+            if (enemyCollision)
+                Crawler1.RealPos();
 
             Player.Gravity();
             getKey();
@@ -201,6 +190,8 @@ namespace RPGame
                 //Collision with the player and polygons
                 foreach (Polygons poly in PolyList)
                 {
+                    poly.RealPos();
+
                     PlayerCollision = Collision(Player, poly);
                     if (PlayerCollision)
                     {
@@ -231,6 +222,7 @@ namespace RPGame
             Twall2 = CreateShape("twall");
             TFloor = CreateShape("tfloor");
             TFloor2 = CreateShape("tfloor");
+
             goop = CreateShape("goop");
 
             Player = CreateChar("janitor");
