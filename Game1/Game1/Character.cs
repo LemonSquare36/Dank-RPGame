@@ -60,6 +60,9 @@ namespace RPGame
         bool written = false;
         bool CanDash = true;
         bool isDash = false;
+        float jump = 7f;
+        bool canJump = true;
+        bool air = false;
 
         /// <summary>
         /// The Area in which you are trying to load the character into and the place; Please use clear names
@@ -89,13 +92,13 @@ namespace RPGame
                 Movement = Vector2.Zero;
                 DashSpeed = Vector2.Zero;
 
-                if (Key.IsKeyDown(Keys.D))
+                if (Key.IsKeyDown(Keys.D) || Key.IsKeyDown(Keys.Right))
                 {
                     texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleRight");
                     Movement = new Vector2(Movement.X + 2f, Movement.Y);
                     IsMoving = true;
                 }
-                if (Key.IsKeyDown(Keys.A))
+                if (Key.IsKeyDown(Keys.A) || Key.IsKeyDown(Keys.Left))
                 {
                     texture = Main.GameContent.Load<Texture2D>("Sprites/WalkCycleLeft");
                     Movement = new Vector2(Movement.X - 2f, Movement.Y);
@@ -125,6 +128,63 @@ namespace RPGame
                     Placement += Movement;
                 }
             }
+        }
+        //allows the player to perform a jump
+        public void Jump()
+        {
+            if (alive)
+            {
+                KeyboardState newState = Keyboard.GetState();
+
+                if (newState.IsKeyDown(Keys.W) || newState.IsKeyDown(Keys.Up))
+                {
+                    if (air)
+                        IsJumping = true;
+
+                    if (!oldState.IsKeyDown(Keys.W) || !oldState.IsKeyDown(Keys.Up))
+                    {
+                        if (canJump)
+                            air = true;
+
+                        canJump = false;
+                    }
+                }
+                else if (oldState.IsKeyDown(Keys.W) || oldState.IsKeyDown(Keys.Up))
+                {
+
+                }
+                oldState = newState;
+                if (air)
+                {
+                    Movement = Vector2.Zero;
+                    Movement = new Vector2(Movement.X, Movement.Y - jump);
+                    jump -= .5f;
+                    Placement += Movement;
+                }
+                if (jump < 0)
+                {
+                    air = false;
+                    jump = 10;
+                }
+            }
+        }
+        //resets the jump
+        public void jumpReset(bool isWall)
+        {
+            if (!isWall)
+            {
+                canJump = true;
+                IsJumping = false;
+            }
+
+        }
+        //Reset the floor for the cahracter
+        public void FloorReset(bool isWall)
+        {
+            GravityReset();
+
+            if (!canJump)
+                jumpReset(isWall);
         }
         //Checks if is HP is 0 and then does stuff if it is.
         public void CheckIfBeDead(SpriteBatch spriteBatch)
@@ -217,7 +277,7 @@ namespace RPGame
                 spriteBatch.DrawString(font, "Level up! HP increased by 20", Placement + new Vector2(-52, -50), Color.Red);
                 if (hpincrease)
                 {
-                    health += 20;
+                    health += 10;
                     hpincrease = false;
                 }
             }
@@ -225,7 +285,7 @@ namespace RPGame
         //Checks if score is  multiple of 5
         public void CheckLevelUp()
         {
-            levelKeeper = score % 5;
+            levelKeeper = score % 10;
             Debug.WriteLine(levelKeeper);
             if (levelKeeper == 0)
             {

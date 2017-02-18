@@ -44,10 +44,7 @@ namespace RPGame
         { 
 
             //Get current mouse state
-            mouse = Mouse.GetState();
-            Vector2 worldPosition;
-            worldPosition.X = mouse.X / (float)(Main.gameWindow.ClientBounds.Width / 800.0);
-            worldPosition.Y = mouse.Y / (float)(Main.gameWindow.ClientBounds.Height / 480.0);
+            Vector2 worldPosition = MousePos();
 
             //Update the buttons
             goToMain.Update(mouse, worldPosition);

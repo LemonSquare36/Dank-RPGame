@@ -74,11 +74,11 @@ namespace RPGame
             goop.LoadContent("goop", "goop", false);
 
             Crawler1.Load(-500, 100);
-            Crawler2.Load(-1800, 100);
+            Crawler2.Load(-1000, 100);
             Crawler3.Load(-1700, 100);
-            Crawler4.Load(-1600, 100);
-            Crawler5.Load(-2000, 100);
-            Crawler6.Load(-1900, 100);
+            Crawler4.Load(-100, 50);
+            Crawler5.Load(-1400, 100);
+            Crawler6.Load(-900, 100);
             Crawler7.Load(-2100, 100);
 
             #region LoadSprites
@@ -256,7 +256,7 @@ namespace RPGame
             FloorbytheDoor = CreateShape("floorbythedoor");
             FloorHump = CreateShape("floorhump");
             Mramp = CreateShape("mramp");
-            LongFloor1 = CreateShape("longfloor2");
+            LongFloor1 = CreateShape("longfloor");
             LongFloor2 = CreateShape("longfloor");
             HWall1 = CreateShape("hwall");
             HWall2 = CreateShape("hwall");
@@ -277,9 +277,9 @@ namespace RPGame
         {
             PolyList.Add(FloorbytheDoor);
             PolyList.Add(FloorHump);
+            PolyList.Add(Mramp);
             PolyList.Add(LongFloor1);
             PolyList.Add(LongFloor2);
-            PolyList.Add(Mramp);
             PolyList.Add(HWall1);
             PolyList.Add(HWall2);
         }
@@ -335,7 +335,7 @@ namespace RPGame
         //Add a new enemy to area.
         private void AddNewEnemy()
         {
-            if (Player.getScore() % 5 == 0 && Player.getScore() > 0)
+            if (Player.getScore() % 10 == 0 && Player.getScore() > 0)
             {
                 Enemies.Add(CreateCrawlerinList("Crawler"));
                 

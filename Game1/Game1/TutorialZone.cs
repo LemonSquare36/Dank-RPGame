@@ -70,7 +70,7 @@ namespace RPGame
             TFloor.LoadContent("tfloor1", "TFloor", false);
             TFloor2.LoadContent("tfloor2", "TFloor", false);
             goop.LoadContent("goop", "goop", false);
-            goop.Placement = new Vector2(500, 400);
+            goop.Placement = new Vector2(700, 450);
 
             Crawler1.Load(100, 400);
 
@@ -271,11 +271,12 @@ namespace RPGame
                 {
                     spriteBatch.DrawString(font, "Press A to Left", new Vector2(200, 200), Color.Red);
                     spriteBatch.DrawString(font, "Press D to Right", new Vector2(400, 200), Color.Red);
-                    if (Key.IsKeyDown(Keys.A))
+                    spriteBatch.DrawString(font, "Or the Arrow keys", new Vector2(300, 250), Color.Red);
+                    if (Key.IsKeyDown(Keys.A) || Key.IsKeyDown(Keys.Left))
                     {
                         Wleft = true;
                     }
-                    else if (Key.IsKeyDown(Keys.D))
+                    else if (Key.IsKeyDown(Keys.D) || Key.IsKeyDown(Keys.Right))
                     {
                         Wright = true;
                     }
@@ -286,7 +287,8 @@ namespace RPGame
                     if (!jump)
                     {
                         spriteBatch.DrawString(font, "Press W to Jump", new Vector2(300, 200), Color.Red);
-                        if (Key.IsKeyDown(Keys.W))
+                        spriteBatch.DrawString(font, "The Up arrow", new Vector2(320, 250), Color.Red);
+                        if (Key.IsKeyDown(Keys.W) || Key.IsKeyDown(Keys.Up))
                         {
                             jump = true;
                         }

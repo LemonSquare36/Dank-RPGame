@@ -20,7 +20,7 @@ namespace RPGame
 
         public Entity(List<Vector2> numbers) : base(numbers) { }
 
-        KeyboardState oldState;
+        protected KeyboardState oldState;
 
 
         public bool IsMoving = true;
@@ -39,10 +39,7 @@ namespace RPGame
         double StartTime = 0;
 
         float gravity = 0f;
-        bool air = false;
         float traveltime = 0;
-        float jump = 7f;
-        bool canJump = true;
         protected bool alive = true;
 
 
@@ -110,68 +107,13 @@ namespace RPGame
         {
             gravity = 0.5f;
         }
-        //allows the player to perform a jump
-        public void Jump()
-        {
-            if (alive)
-            {
-                KeyboardState newState = Keyboard.GetState();
-
-                if (newState.IsKeyDown(Keys.W))
-                {
-                    IsJumping = true;
-                    if (!oldState.IsKeyDown(Keys.W))
-                    {
-                        if (canJump)
-                            air = true;
-
-                        canJump = false;
-                    }
-                }
-                else if (oldState.IsKeyDown(Keys.W))
-                {
-
-                }
-                oldState = newState;
-                if (air)
-                {
-                    Movement = Vector2.Zero;
-                    Movement = new Vector2(Movement.X, Movement.Y - jump);
-                    jump -= .5f;
-                    Placement += Movement;
-                }
-                if (jump < 0)
-                {
-                    air = false;
-                    jump = 10;
-                }
-            }
-        }
-        //resets the jump
-        public void jumpReset(bool isWall)
-        {
-            if (!isWall)
-            {
-                canJump = true;
-                IsJumping = false;
-            }
-            
-        }
-
-        public void FloorReset(bool isWall)
-        {
-            GravityReset();
-
-            if (!canJump)
-                jumpReset(isWall);
-        }
         //movement for the enemies
         public void MoveLeft()
         {
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += -1.7f;
+            Movement.X += -1.9f;
 
             Placement += Movement;
         }
@@ -181,7 +123,7 @@ namespace RPGame
             Movement = Vector2.Zero;
 
             IsMoving = true;
-            Movement.X += 1.7f;
+            Movement.X += 1.9f;
 
             Placement += Movement;
         }
