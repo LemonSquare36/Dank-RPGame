@@ -18,12 +18,19 @@ namespace RPGame
 {
     class MenuManager : Screen
     {
-      
+        Sound snd = new Sound();
         protected MouseState mouse;
+
+        public override void Initialize()
+        {
+            snd.LoadSound("Sound/ButtonClick.wav");
+        }
 
         //ButtonCLicked leads Here
         protected void ButtonClicked(object sender, EventArgs e)
         {
+            snd.PlaySound();
+
             //Sets next screen to button name and calls the event.
             nextScreen = ((Button)sender).bName;
             OnScreenChanged();

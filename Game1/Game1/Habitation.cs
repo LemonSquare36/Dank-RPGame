@@ -14,7 +14,7 @@ namespace RPGame
         public Habitation(bool isArea) : base(isArea){ isarea = isArea; }
 
         Polygons goop, FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
-        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter;
+        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter, deadGuy1, deadGuy2, toppledTableChairs;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
@@ -90,9 +90,11 @@ namespace RPGame
             jDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Janitor Door");
             sDoor = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Stairs Door");
             cCounter = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/FoodCounter");
-            cTable1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
             cTable2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
             cTable3 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/Table with Chairs");
+            deadGuy1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/DeadInCornerGuard");
+            deadGuy2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/DeadOnFloor");
+            toppledTableChairs = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/ToppledTableChairs");
 
             #endregion
 
@@ -212,6 +214,7 @@ namespace RPGame
         public override void Draw()
         {
             goop.Draw(spriteBatch, color);
+
             #region DrawSprites
             spriteBatch.Draw(CeilingbytheDoor, new Vector2(330, -60), null);
             spriteBatch.Draw(CeilingHump, new Vector2(-265, -150), null);
@@ -221,9 +224,11 @@ namespace RPGame
             spriteBatch.Draw(jDoor, new Vector2(400, 100), null);
             spriteBatch.Draw(sDoor, new Vector2(-1000, 100), null);
             spriteBatch.Draw(cCounter, new Vector2(-1850, 200), null);
-            spriteBatch.Draw(cTable1, new Vector2(-1800, 280), null);
             spriteBatch.Draw(cTable2, new Vector2(-1650, 280), null);
-            spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);           
+            spriteBatch.Draw(cTable3, new Vector2(-1950, 280), null);
+            spriteBatch.Draw(toppledTableChairs, new Vector2(-1810, 280), null);
+            spriteBatch.Draw(deadGuy1, new Vector2(-2365, 248), null);
+            spriteBatch.Draw(deadGuy2, new Vector2(-400, 140), null);
 
             #endregion
 

@@ -129,6 +129,7 @@
     <Content Include="Content\Shapes\EnemyList.txt" />
     <Content Include="Content\Shapes\shapeList.txt" />
     <Content Include="Content\Shapes\shapeplace.txt" />
+    <Content Include="Content\Sound\ButtonClick.wav" />
     <Content Include="Content\Sprites\credits_Background.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />

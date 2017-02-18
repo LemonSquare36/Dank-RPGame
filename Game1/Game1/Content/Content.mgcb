@@ -595,3 +595,9 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Habitation Sprites/ToppledTableChairs.png
 
+#begin Sound/ButtonClick.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/ButtonClick.wav
+
