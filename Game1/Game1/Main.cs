@@ -48,10 +48,10 @@ namespace RPGame
         //Utilizes the crash manager and Initializes GameState
         protected override void Initialize()
         {
-            //CrashHandle.CrashCheck();
-            //CrashHandle.CrashFileMake();
+            CrashHandle.CrashCheck();
+            CrashHandle.CrashFileMake();
+            global.ErrorFileReset();
 
-            
 
             theGameState.Initialize();
             base.Initialize();
@@ -86,8 +86,7 @@ namespace RPGame
         }
         protected override void OnExiting(object sender, EventArgs e)
         {
-            global.ErrorFileReset();
-            // CrashHandle.CrashFileRemove();
+            CrashHandle.CrashFileRemove();
         }
         
     }
