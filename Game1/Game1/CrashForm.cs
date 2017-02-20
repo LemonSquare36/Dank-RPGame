@@ -10,11 +10,12 @@ namespace RPGame
     {
         Global global = new Global();
         CrashHandler handle = new CrashHandler();
+        //constructor
         public CrashForm()
         {
            InitializeComponent();
         }
-
+        //Sends a email that was typed to the company email
         private void Email_Click(object sender, EventArgs e)
         {
             try

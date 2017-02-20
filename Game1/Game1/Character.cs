@@ -35,7 +35,7 @@ namespace RPGame
         private bool hpincrease = false;
         int ticktimer = 0;
         int cdTicks = 1000;
-
+        //get current score
         public int getscore()
         {
             return score;

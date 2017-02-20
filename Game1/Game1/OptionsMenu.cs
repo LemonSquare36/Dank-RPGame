@@ -8,6 +8,7 @@ namespace RPGame
         Button Sound, Fullscreen, Back;
         Texture2D Sounds, SoundChecked, Fullscreens, FullscreenChecked, Backs, BackHover, Background;
 
+        //initialize
         public override void Initialize()
         {
             base.Initialize();

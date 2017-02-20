@@ -36,14 +36,14 @@ namespace RPGame
             Character myChar = new Character(NewList);
             return myChar;
         }
-
+        //Creates the crawler
         protected CrawlerAlien CreateCrawler(string shapeName)
         {
             List<Vector2> NewList = (List<Vector2>)shapeVerts[shapeName];
             CrawlerAlien myAlien = new CrawlerAlien(NewList);
             return myAlien;
         }
-
+        //Creates a crawler in  one line and adds to the lst in needs. 
         protected CrawlerAlien CreateCrawlerinList(string shapeName)
         {
             Random rand = new Random();
@@ -164,7 +164,7 @@ namespace RPGame
             }
             return 0;
         }
-
+        //Event for chaging screen from the player class
         public event EventHandler changeScreen;
         protected void OnScreenChanged(object sender, EventArgs eventArgs)
         {

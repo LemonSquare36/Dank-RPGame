@@ -8,6 +8,7 @@ namespace RPGame
         Button Test, Option, Tutorials;
         Texture2D Play, PlayHover, Options, OptionsHover, Background, Tutorial, TutorialHover;
 
+        //initialize
         public override void Initialize()
         {
             base.Initialize();

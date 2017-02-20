@@ -210,7 +210,7 @@ namespace RPGame
                 LoadContent(spriteBatch, graphicsDevice, graphicsManager);
             }
         }
-
+        //change the screen from the player class
         public void PlayerChangeScreen(object sender, EventArgs eventArgs)
         {
             CurrentScreen = scorescreen;

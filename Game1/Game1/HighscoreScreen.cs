@@ -11,6 +11,7 @@ namespace RPGame
         Button goToMain;
         Texture2D MainMenu, MainMenuHover;
 
+        //initialize
         public override void Initialize()
         {
             base.Initialize();

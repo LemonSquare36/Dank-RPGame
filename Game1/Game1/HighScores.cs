@@ -26,7 +26,7 @@ namespace RPGame
                 File.Create(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
             }
         }
-
+        //writes the new scores to the file
         public void ChangeScores(int score)
         {
             bool written = false;
@@ -62,7 +62,7 @@ namespace RPGame
             File.Move(Path.Combine((Main.GameContent.RootDirectory), "HighScores/temp.txt"), Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
         }
 
-
+        //Writes the scores in the file to the screen
         public void ScorestoScreen(SpriteBatch spriteBatch)
         {
             if (font == null)
