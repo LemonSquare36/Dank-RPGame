@@ -14,7 +14,6 @@ namespace RPGame
         public Vector2 Position { get; set; }
         public float Rotation { get; set; }
         public Vector2 Origin { get; set; }
-        bool Size = true;
         //Constructor
         public Camera()
         {

@@ -29,7 +29,6 @@ namespace RPGame
         double StartTime = 0;
 
         float gravity = 0f;
-        float traveltime = 0;
         protected bool alive = true;
 
 
