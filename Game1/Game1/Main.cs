@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
-using System.Diagnostics;
+
 
 namespace RPGame
 {
@@ -18,7 +11,7 @@ namespace RPGame
     {
         static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        CrashHandler CrashHandle = new CrashHandler();
+        Global global = new Global();
 
         //Allows other classes to load code from content manager - Convient
         private static ContentManager content;
@@ -36,6 +29,7 @@ namespace RPGame
         }
 
         GameState theGameState;
+        CrashHandler CrashHandle;
 
         //Constructor
         public Main()
@@ -45,16 +39,19 @@ namespace RPGame
             content = Content;
             window = Window;
             IsMouseVisible = true;
-            //Window.IsBorderless = true;
 
             //The class that basically runs the game
             theGameState = new GameState();
+            //Class that runs the crashhandling code
+            CrashHandle = new CrashHandler();
         }
-        //Utilizes the crash manager (Cancer) and Initializes GameState
+        //Utilizes the crash manager and Initializes GameState
         protected override void Initialize()
         {
-           // CrashHandle.CrashCheck();
+            CrashHandle.CrashCheck();
             CrashHandle.CrashFileMake();
+            global.ErrorFileReset();
+
 
             theGameState.Initialize();
             base.Initialize();
@@ -68,17 +65,11 @@ namespace RPGame
             theGameState.LoadContent(spriteBatch, GraphicsDevice, graphics);
             
         }
-        //NOt used but create when the prject was made. Kept in case a use apeared
-        protected override void UnloadContent()
-        {
-            //Unload any non ContentManager content here
-        }
         //Updates the Game
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                CrashHandle.CrashFileRemove();
                 Exit();
             }
 
@@ -93,5 +84,10 @@ namespace RPGame
             theGameState.Draw(spriteBatch);
             base.Draw(gameTime);
         }
+        protected override void OnExiting(object sender, EventArgs e)
+        {
+            CrashHandle.CrashFileRemove();
+        }
+        
     }
 }

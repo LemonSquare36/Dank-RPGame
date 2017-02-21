@@ -1,23 +1,24 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Media;
 
 namespace RPGame
 {
+
+    
     class Sound : Global
     {
-        SoundEffect Dash;
-        SoundEffectInstance DashInstance;
-        
-         protected void LoadContent()
+        SoundPlayer snd = new SoundPlayer();
+
+        //Lound the sound or music file
+        public void LoadSound(string location)
         {
-            Dash = Main.GameContent.Load<SoundEffect>("Dash");
-            //DashInstance = DashInstance.CreateInstance();
-            DashInstance.Volume = 1f;
-            DashInstance.IsLooped = false;
+            snd.SoundLocation = Path.Combine(Main.GameContent.RootDirectory, location);
+            snd.Load();
+        }
+        //Play the sound effect
+        public void PlaySound()
+        {
+            snd.Play();
         }
     }
 }

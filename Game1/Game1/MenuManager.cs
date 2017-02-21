@@ -1,29 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
-using System.IO;
-using System.Collections;
-using System.Diagnostics;
 
 namespace RPGame
 {
     class MenuManager : Screen
     {
-      
+        Sound snd = new Sound();
+        Sound PlaySnd = new Sound();
         protected MouseState mouse;
+
+        //initialize
+        public override void Initialize()
+        {
+            snd.LoadSound("Sound/ButtonClick.wav");
+            PlaySnd.LoadSound("Sound/PlayButtonClick.wav");
+        }
 
         //ButtonCLicked leads Here
         protected void ButtonClicked(object sender, EventArgs e)
         {
+            if (((Button)sender).bName == "Play" || ((Button)sender).bName == "Tutorial")
+            {
+                PlaySnd.PlaySound();
+            }
+            else
+            {
+                snd.PlaySound();
+            }
+
             //Sets next screen to button name and calls the event.
             nextScreen = ((Button)sender).bName;
             OnScreenChanged();

@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Audio;
 using System.IO;
-using System.Collections;
-using System.Diagnostics;
 
 namespace RPGame
 {
@@ -37,7 +26,7 @@ namespace RPGame
                 File.Create(Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
             }
         }
-
+        //writes the new scores to the file
         public void ChangeScores(int score)
         {
             bool written = false;
@@ -73,7 +62,7 @@ namespace RPGame
             File.Move(Path.Combine((Main.GameContent.RootDirectory), "HighScores/temp.txt"), Path.Combine((Main.GameContent.RootDirectory), "HighScores/highscores.txt"));
         }
 
-
+        //Writes the scores in the file to the screen
         public void ScorestoScreen(SpriteBatch spriteBatch)
         {
             if (font == null)

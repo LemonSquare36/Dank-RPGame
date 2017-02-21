@@ -15,7 +15,7 @@
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\jglover\Documents\Game\</PublishUrl>
+    <PublishUrl>C:\Users\Josh_Glover\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -129,10 +129,14 @@
     <Content Include="Content\Shapes\EnemyList.txt" />
     <Content Include="Content\Shapes\shapeList.txt" />
     <Content Include="Content\Shapes\shapeplace.txt" />
+    <Content Include="Content\Sound\ButtonClick.wav" />
+    <Content Include="Content\Sound\PlayButtonClick.wav" />
     <Content Include="Content\Sprites\credits_Background.png" />
     <Content Include="Content\Sprites\Floor.png" />
     <Content Include="Content\Sprites\GreenTriangle.png" />
     <Content Include="Content\Sprites\GreyPentagon.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\DeadInCornerGuard.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\DeadOnFloor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorByTheDoor.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FloorHump.png" />
     <Content Include="Content\Sprites\Habitation Sprites\FoodCounter.png" />
@@ -142,6 +146,7 @@
     <Content Include="Content\Sprites\Habitation Sprites\Mramp.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Stairs Door.png" />
     <Content Include="Content\Sprites\Habitation Sprites\Table with Chairs.png" />
+    <Content Include="Content\Sprites\Habitation Sprites\ToppledTableChairs.png" />
     <Content Include="Content\Sprites\HPTexture.png" />
     <Content Include="Content\Sprites\Janitor.png" />
     <Content Include="Content\Sprites\main_Menu_Background.png" />
@@ -153,6 +158,7 @@
     <Content Include="Content\Sprites\TutorialSprites\TWall.png" />
     <Content Include="Content\Sprites\WalkCycleLeft.png" />
     <Content Include="Content\Sprites\WalkCycleRight.png" />
+    <Content Include="Content\Hold the Usings.txt" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

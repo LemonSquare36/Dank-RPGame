@@ -16,12 +16,12 @@ namespace RPGame
         [STAThread]
         static void Main()
         {
-            //try
-            //{
+            try
+            {
                 using (var game = new Main())
                     game.Run();
-           // }
-           // catch (Exception ex) { global.ErrorHandling(ex.Message, global.GetType().Name, ex); Environment.Exit(0); }
+            }
+           catch (Exception ex) { global.ErrorHandling(ex.Message, global.GetType().Name, ex); Environment.Exit(0); }
         }
     }
 #endif
