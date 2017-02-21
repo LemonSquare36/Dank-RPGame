@@ -33,7 +33,7 @@ namespace RPGame
         Vector2 point9 = new Vector2(-1900, 315);
         Vector2 point10 = new Vector2(-2000, 315);
 
-        //Initialize
+
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
@@ -183,7 +183,7 @@ namespace RPGame
                     Player.FloorReset(enemy.getisWall());
                 }
             }
-            //collision with the goop
+
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {

@@ -10,7 +10,6 @@ namespace RPGame
         Sound PlaySnd = new Sound();
         protected MouseState mouse;
 
-        //initialize
         public override void Initialize()
         {
             snd.LoadSound("Sound/ButtonClick.wav");
