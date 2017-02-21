@@ -45,7 +45,7 @@ namespace RPGame
             {
                 using (StreamWriter writeStream = new StreamWriter(Path.Combine((Main.GameContent.RootDirectory), "HighScores/temp.txt")))
                 {
-                    int maxcount = 9;
+                    int maxcount = 10;
                     string line;
                     while ((line = readStream.ReadLine()) != null && maxcount > 0)
                     {

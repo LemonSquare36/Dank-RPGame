@@ -70,7 +70,7 @@ namespace RPGame
             TFloor.LoadContent("tfloor1", "TFloor", false);
             TFloor2.LoadContent("tfloor2", "TFloor", false);
             goop.LoadContent("goop", "goop", false);
-            goop.Placement = new Vector2(700, 450);
+            goop.Placement = new Vector2(700, 424);
 
             Crawler1.Load(100, 400);
 
@@ -298,7 +298,7 @@ namespace RPGame
                         // Press Space to Continue
                         if (!dash)
                         {
-                            spriteBatch.DrawString(font, "Space to Dash", new Vector2(300, 200), Color.Red);
+                            spriteBatch.DrawString(font, " Hold a direction and press Space to Dash", new Vector2(190, 200), Color.Red);
                             spriteBatch.DrawString(font, "(Due to a bug the tutorial dash only works in air)", new Vector2(150, 250), Color.Red);
                             if (Key.IsKeyDown(Keys.Space))
                             {
@@ -324,6 +324,7 @@ namespace RPGame
                                 if (!colected)
                                 {
                                     spriteBatch.DrawString(font, "That is goop. Collect it for score", new Vector2(200, 200), Color.Red);
+                                    spriteBatch.DrawString(font, "After collecing 10 you will level up", new Vector2(195, 250), Color.Red);
 
                                 }
                                 //Enemy Spawns - Die to continue
