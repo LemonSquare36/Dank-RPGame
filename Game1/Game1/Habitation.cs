@@ -12,13 +12,12 @@ namespace RPGame
         public Habitation(bool isArea) : base(isArea){ isarea = isArea; }
 
         Polygons goop, FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
-        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable1, cTable2, cTable3, cCounter, deadGuy1, deadGuy2, toppledTableChairs;
+        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable2, cTable3, cCounter, deadGuy1, deadGuy2, toppledTableChairs;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
         List<Color> ColorList;
         Color color;
-        int EnemyNumber;
 
         //sets up points for the goop to be drawn
         List<Vector2> spawnPoints = new List<Vector2>();
@@ -33,14 +32,12 @@ namespace RPGame
         Vector2 point9 = new Vector2(-1900, 315);
         Vector2 point10 = new Vector2(-2000, 315);
 
-        //Initialize
+
         public override void Initialize()
         {
             PolyList = new List<Polygons>();
             Enemies = new List<Entity>();
             ColorList = new List<Color>();
-
-            EnemyNumber = 8;
 
             ColorListAdd();
             SpawnPointsAdd();
@@ -183,7 +180,7 @@ namespace RPGame
                     Player.FloorReset(enemy.getisWall());
                 }
             }
-            //collision with the goop
+
             PlayerCollision = Collision(Player, goop);
             if (PlayerCollision)
             {
