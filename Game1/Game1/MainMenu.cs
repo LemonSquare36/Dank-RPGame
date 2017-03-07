@@ -13,7 +13,7 @@ namespace RPGame
         {
             base.Initialize();
         }
-        //Loads content for this class
+        //Loads content for this class 
         public override void LoadContent(SpriteBatch spirteBatchMain)
         {
             spriteBatch = spirteBatchMain;
