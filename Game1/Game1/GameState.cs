@@ -168,7 +168,7 @@ namespace RPGame
             {
                 case "Play":
                     CurrentScreen = habitation;
-                    color = Color.LightSlateGray;
+                    color = Color.Black;
 
                     break;
 

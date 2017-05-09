@@ -12,7 +12,7 @@ namespace RPGame
         public Habitation(bool isArea) : base(isArea){ isarea = isArea; }
 
         Polygons goop, FloorbytheDoor, FloorHump, LongFloor1, LongFloor2, Mramp, HWall1, HWall2;
-        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable2, cTable3, cCounter, deadGuy1, deadGuy2, toppledTableChairs;
+        Texture2D CeilingbytheDoor, CeilingHump, CeilingFloor1, CeilingFloor2, CeilingMramp, jDoor, sDoor, cTable2, cTable3, cCounter, deadGuy1, deadGuy2, toppledTableChairs, levelback, starsback;
         CrawlerAlien Crawler1, Crawler2, Crawler3, Crawler4, Crawler5, Crawler6, Crawler7;
         List<Polygons> PolyList;
         List<Entity> Enemies;
@@ -90,7 +90,8 @@ namespace RPGame
             deadGuy1 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/DeadInCornerGuard");
             deadGuy2 = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/DeadOnFloor");
             toppledTableChairs = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/ToppledTableChairs");
-
+            levelback = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/levelbackground start");
+            starsback = Main.GameContent.Load<Texture2D>("Sprites/Habitation Sprites/stars");
             #endregion
 
             Player.SpriteMove(1, 3);
@@ -208,6 +209,8 @@ namespace RPGame
         //draw assets
         public override void Draw()
         {
+            spriteBatch.Draw(starsback, new Vector2(-2800,-800), Color.White);
+            spriteBatch.Draw(levelback, new Vector2(-2380, -280), Color.White);
             goop.Draw(spriteBatch, color);
 
             #region DrawSprites
